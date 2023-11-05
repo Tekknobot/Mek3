@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://co4krvdw2jbqh"]
+
+[ext_resource type="Shader" path="res://assets/shaders/outline_shader.gdshader" id="1_16j32"]
+[ext_resource type="Texture2D" uid="uid://bwirocgjkpxsu" path="res://assets/units/R1/r1idle_1.png" id="1_i1otw"]
+[ext_resource type="Texture2D" uid="uid://byr1uuysaadqf" path="res://assets/units/R1/r1idle_2.png" id="2_wt4ie"]
+[ext_resource type="Texture2D" uid="uid://o685q54fvrsc" path="res://assets/units/R1/r1idle_3.png" id="3_sdwnl"]
+[ext_resource type="Texture2D" uid="uid://fea1mmvu86yg" path="res://assets/units/R1/r1idle_4.png" id="4_6wqlb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3ur7"]
+shader = ExtResource("1_16j32")
+shader_parameter/color = Color(1, 1, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pxi7j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_i1otw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wt4ie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sdwnl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6wqlb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_k3ur7")
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_pxi7j")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
