@@ -54,6 +54,8 @@ signal unit_used_turn
 var hovertile_type = 48
 var hovered_unit
 
+var moves_counter = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	randomize()
@@ -164,7 +166,12 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
-																				
+																
+																
+	if moves_counter == 2:
+		get_node("../TurnManager").advance_turn()
+		moves_counter = 0
+																					
 func _input(event):						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:
@@ -794,10 +801,10 @@ func _input(event):
 							
 						get_node("../TurnManager").advance_turn()
 						only_once = true
-					
+				
 					
 		# Drop unit on mouse up																					
-		elif hovertile.offset.y == -10:
+		elif hovertile.offset.y == -10:	
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)
 			
@@ -809,6 +816,11 @@ func _input(event):
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").team_1.size():
 				if get_node("../BattleManager").team_1[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").team_1[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 6:					
+					#Remove hover tiles										
+					for j in grid_height:
+						for k in grid_width:
+							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)					
+					
 					get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,0))	
 					dropped_pos = tile_pos
 					var patharray = astar_grid.get_point_path(clicked_pos, dropped_pos)
@@ -833,7 +845,7 @@ func _input(event):
 					# Remove hover cells
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
-				
+					
 					moving = false
 					hovertile.show()
 					# Set moving to false			
@@ -846,11 +858,11 @@ func _input(event):
 						for k in grid_width:
 							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 					
+					moves_counter += 1
+					
 					await get_tree().create_timer(1).timeout
 					
-				get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,0))
-			
-				
+				get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,0))		
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false:
