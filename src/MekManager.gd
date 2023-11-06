@@ -16,6 +16,7 @@ var this_position: Vector2
 @export var unit_level: int = 1
 @export var unit_attack: int = 1
 @export var unit_defence: int = 1
+@export var unit_movement: int = 3
 
 @export var unit_status: String = "Active"
 

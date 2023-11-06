@@ -1619,6 +1619,7 @@ unit_name = "Angie"
 unit_type = "Ranged"
 unit_portrait = ExtResource("160_tgnoa")
 mek_portrait = ExtResource("62_igakx")
+unit_movement = 1
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1675,6 +1676,7 @@ unit_num = 1
 unit_type = "Ranged"
 unit_portrait = ExtResource("77_7gm8x")
 mek_portrait = ExtResource("79_i3xr7")
+unit_movement = 1
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1731,6 +1733,7 @@ unit_num = 2
 unit_type = "Ranged"
 unit_portrait = ExtResource("92_6faaj")
 mek_portrait = ExtResource("95_d2q5j")
+unit_movement = 1
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1787,6 +1790,7 @@ unit_num = 3
 unit_type = "Ranged"
 unit_portrait = ExtResource("109_usjr4")
 mek_portrait = ExtResource("79_cv140")
+unit_movement = 1
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1843,6 +1847,7 @@ unit_num = 4
 unit_type = "Support"
 unit_portrait = ExtResource("126_c2ixe")
 mek_portrait = ExtResource("131_f1vf3")
+unit_movement = 2
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1899,6 +1904,7 @@ unit_num = 5
 unit_type = "Support"
 unit_portrait = ExtResource("141_qdrwe")
 mek_portrait = ExtResource("147_j5sgp")
+unit_movement = 2
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
@@ -1957,6 +1963,7 @@ unit_num = 6
 unit_type = "Support"
 unit_portrait = ExtResource("61_ndh5r")
 mek_portrait = ExtResource("167_qal85")
+unit_movement = 2
 progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
 mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
 
