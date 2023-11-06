@@ -777,7 +777,7 @@ func _input(event):
 							if get_node("../BattleManager").team_1[i].unit_movement == 1:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
 										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)
@@ -785,36 +785,36 @@ func _input(event):
 							if get_node("../BattleManager").team_1[i].unit_movement == 2:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)										
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)										
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
 										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
 								for k in surrounding_cells.size():
-									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 6, Vector2i(0, 0), 0)									
+									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)									
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)	
 							
 							if get_node("../BattleManager").team_1[i].unit_movement == 3:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)									
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)									
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
 										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 6, Vector2i(0, 0), 0)								
+									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)								
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-									set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 6, Vector2i(0, 0), 0)																																								
-									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 6, Vector2i(0, 0), 0)						
+									set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)						
 															
 			#print("Holding")
 
@@ -831,7 +831,7 @@ func _input(event):
 				
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").team_1.size():
-				if get_node("../BattleManager").team_1[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").team_1[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 6:					
+				if get_node("../BattleManager").team_1[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").team_1[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 18:					
 
 					#Remove hover tiles										
 					for j in grid_height:
