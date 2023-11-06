@@ -184,6 +184,8 @@ func _input(event):
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)
+			
+			clicked_pos = tile_pos
 						
 			# Normal Attacks
 			for h in get_node("../BattleManager").team_1.size():
@@ -191,9 +193,8 @@ func _input(event):
 
 				for i in 4:
 					for j in get_node("../BattleManager").team_2.size():
-						if surrounding_cells[i] == unitsCoord_2[j] and surrounding_cells[i] == tile_pos and get_cell_source_id(1, tile_pos) == 48:
+						if surrounding_cells[i] == unitsCoord_2[j] and surrounding_cells[i] == tile_pos and get_cell_source_id(1, tile_pos) == 48:													
 							var attack_center_pos = map_to_local(surrounding_cells[i]) + Vector2(0,0) / 2	
-							
 							if get_node("../BattleManager").team_1[right_clicked_unit].scale.x == 1 and get_node("../BattleManager").team_1[right_clicked_unit].position.x > attack_center_pos.x:
 								get_node("../BattleManager").team_1[right_clicked_unit].scale.x = 1
 								#print("1")
@@ -753,8 +754,7 @@ func _input(event):
 							
 						get_node("../TurnManager").advance_turn()
 						only_once = true
-				
-					
+						
 			#Remove hover tiles										
 			for j in grid_height:
 				for k in grid_width:
@@ -815,9 +815,7 @@ func _input(event):
 									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 6, Vector2i(0, 0), 0)																																								
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 6, Vector2i(0, 0), 0)						
-						
-																											
-			clicked_pos = tile_pos									
+															
 			#print("Holding")
 
 					
