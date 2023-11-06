@@ -195,6 +195,7 @@ func _input(event):
 			if tile_data is TileData:			
 				for i in get_node("../BattleManager").team_1.size():
 					if get_node("../TileMap").unitsCoord_1[get_node("../BattleManager").team_1[i].unit_num] == tile_pos:
+						
 						hovertile.set_offset(Vector2(0,-10))
 						get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,-10))
 						clicked_unit = get_node("../BattleManager").team_1[i].unit_num
@@ -203,11 +204,15 @@ func _input(event):
 														
 						for j in get_node("../BattleManager").team_1[i].unit_movement:
 							var surrounding_cells = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").unitsCoord_1[i])
+							
+							set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+							
 							if get_node("../BattleManager").team_1[i].unit_movement == 1:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)
 										
 							if get_node("../BattleManager").team_1[i].unit_movement == 2:
@@ -215,19 +220,22 @@ func _input(event):
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)										
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
 								for k in surrounding_cells.size():
-									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)																																								
 									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 6, Vector2i(0, 0), 0)																																								
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 6, Vector2i(0, 0), 0)									
-										
+									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)	
 							
 							if get_node("../BattleManager").team_1[i].unit_movement == 3:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)									
+									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)																																								
