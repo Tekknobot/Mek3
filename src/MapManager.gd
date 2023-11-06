@@ -190,6 +190,8 @@ func _input(event):
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)
 
+			set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+
 			if tile_data is TileData:			
 				for i in get_node("../BattleManager").team_1.size():
 					if get_node("../TileMap").unitsCoord_1[get_node("../BattleManager").team_1[i].unit_num] == tile_pos:
@@ -198,7 +200,7 @@ func _input(event):
 						clicked_unit = get_node("../BattleManager").team_1[i].unit_num
 						get_child(1).stream = map_sfx[0]
 						get_child(1).play()
-															
+														
 						for j in get_node("../BattleManager").team_1[i].unit_movement:
 							var surrounding_cells = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").unitsCoord_1[i])
 							if get_node("../BattleManager").team_1[i].unit_movement == 1:
