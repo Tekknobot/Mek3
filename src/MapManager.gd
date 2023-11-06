@@ -54,7 +54,7 @@ signal unit_used_turn
 var hovertile_type = 48
 var hovered_unit
 
-var moves_counter = 0
+var moves_counter = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -144,14 +144,17 @@ func _process(_delta):
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 		unitsCoord[i] = unit_pos
+		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 		
 	for i in get_node("../BattleManager").team_1.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").team_1[i].position)
 		unitsCoord_1[i] = unit_pos
+		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 		
 	for i in get_node("../BattleManager").team_2.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").team_2[i].position)
-		unitsCoord_2[i] = unit_pos					
+		unitsCoord_2[i] = unit_pos	
+		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)				
 
 	#Remove tiles that are off map
 	for h in 16:
@@ -166,12 +169,13 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
-																
-																
+		
+		
 	if moves_counter == 2:
 		get_node("../TurnManager").advance_turn()
 		moves_counter = 0
-																					
+	
+																				
 func _input(event):						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:
@@ -228,6 +232,9 @@ func _input(event):
 									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 6, Vector2i(0, 0), 0)															
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 6, Vector2i(0, 0), 0)																																								
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 6, Vector2i(0, 0), 0)
+				
+		
+				
 																											
 			clicked_pos = tile_pos									
 			#print("Holding")
@@ -842,6 +849,9 @@ func _input(event):
 						get_child(1).stream = map_sfx[2]
 						get_child(1).play()				
 						await get_tree().create_timer(0.35).timeout
+						
+					moves_counter += 1
+						
 					# Remove hover cells
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
@@ -856,13 +866,13 @@ func _input(event):
 					#Remove hover tiles										
 					for j in grid_height:
 						for k in grid_width:
-							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
-					
-					moves_counter += 1
+							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
 					
 					await get_tree().create_timer(1).timeout
 					
 				get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,0))		
+
+			
 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false:
