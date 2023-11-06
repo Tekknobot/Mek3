@@ -179,7 +179,13 @@ func _process(_delta):
 func _input(event):						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:										
+		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:	
+
+			#Remove hover tiles										
+			for j in grid_height:
+				for k in grid_width:
+					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+												
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)
@@ -823,6 +829,7 @@ func _input(event):
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").team_1.size():
 				if get_node("../BattleManager").team_1[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").team_1[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 6:					
+
 					#Remove hover tiles										
 					for j in grid_height:
 						for k in grid_width:
