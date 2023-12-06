@@ -46,6 +46,7 @@ func generate_tile(cell):
 		Map.set_cell(0, map_pos, -1, Vector2i(0, 0), 0)
 		Map.set_cell(0, map_pos, tile_id, Vector2i(0, 0), 0)
 		
+		
 func find_valid_tiles(cell):
 	var valid_tiles = []
 	# check all possible tiles, 0 - 15
@@ -84,7 +85,7 @@ func generate_world():
 			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
-	
+			
 	generate_roads_and_tiles()
 			
 			
