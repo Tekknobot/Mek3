@@ -110,7 +110,7 @@ func _ready():
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
 						
 		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):
 	# Tile hover
 	var mouse_pos = get_global_mouse_position()
