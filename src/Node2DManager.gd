@@ -92,7 +92,7 @@ func generate_world():
 func generate_roads_and_tiles():
 	var tile_random_id = rng.randi_range(3, 5)
 	# Tiles
-	for h in get_node("TileMap").structureArray.size() / 2:
+	for h in get_node("TileMap").structureArray.size():
 		var structure_group = get_tree().get_nodes_in_group("structure")
 		var structure_global_pos = structure_group[h].position
 		var structure_pos = Map.local_to_map(structure_global_pos)
