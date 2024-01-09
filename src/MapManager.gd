@@ -85,8 +85,7 @@ func _ready():
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y
 				get_node("../BattleManager").available_units[i].unit_team = 1
 				if i > 4:
-					get_node("../BattleManager").available_units[i].unit_team = 2	
-					
+					get_node("../BattleManager").available_units[i].unit_team = 2					
 				break
 	
 	# Check if units are on structures
