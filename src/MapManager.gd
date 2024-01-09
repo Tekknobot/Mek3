@@ -65,54 +65,8 @@ var districts = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	await get_tree().create_timer(1).timeout
-	randomize()
-	get_node("../BattleManager").available_units.shuffle()
-	
-	# Randomize units at start		
-	for i in get_node("../BattleManager").available_units.size():
-		while true:
-			var my_random_tile_x = rng.randi_range(1, 14)
-			var my_random_tile_y = rng.randi_range(1, 14)
-			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
-			var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2
-			var ontile = false
-			for j in get_node("../BattleManager").available_units.size():
-				if j != i and unitsCoord[j] == tile_pos or unitsCoord[j].x == tile_pos.x + 1 or unitsCoord[j].x == tile_pos.x - 1 or unitsCoord[j].y == tile_pos.y + 1 or unitsCoord[j].y == tile_pos.y - 1:
-					ontile = true
-			if !ontile: 
-				unitsCoord[i] = tile_pos
-				get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y
-				get_node("../BattleManager").available_units[i].unit_team = 1
-				if i > 4:
-					get_node("../BattleManager").available_units[i].unit_team = 2					
-				break
-	
 	# Check if units are on structures
-	await get_tree().create_timer(0.2).timeout
-	
-	for i in get_node("../BattleManager").available_units.size():
-		for j in structures.size():
-			var structures_pos = local_to_map(structures[j].position)
-			if unitsCoord[i] == structures_pos:
-				var tile_pos = Vector2i(unitsCoord[i].x+1, unitsCoord[i].y+1)
-				var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
-				unitsCoord[i] = tile_pos
-				get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
-				print("overlapping unit shifted")
-				
-	for i in get_node("../BattleManager").available_units.size():
-		for j in structures.size():
-			var structures_pos = local_to_map(structures[j].position)				
-			if unitsCoord[i] == structures_pos:
-				var tile_pos = Vector2i(unitsCoord[i].x+1, unitsCoord[i].y+1)
-				var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
-				unitsCoord[i] = tile_pos
-				get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
-				print("x2")
+	pass
 										
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame..

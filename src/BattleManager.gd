@@ -29,58 +29,43 @@ var S1 = preload("res://scenes/mek/S1.scn")
 var S2 = preload("res://scenes/mek/S2.scn")
 var S3 = preload("res://scenes/mek/S3.scn")
 
+var structures: Array[Area2D]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
 	get_node("../TurnManager").cpu_turn_started.connect(on_cpu_turn_started)
 	get_node("../TurnStack").turn_over.connect(on_turn_over)
 	get_node("../TurnManager").start()
-				
-	available_units = get_tree().get_nodes_in_group("mek_scenes")
 
-	var R1_inst = R1.instantiate()
-	node2D.add_child(R1_inst)
-	R1_inst.add_to_group("mek_scenes")
-
-	var R2_inst = R2.instantiate()
-	node2D.add_child(R2_inst)
-	R2_inst.add_to_group("mek_scenes")
-
-	var R3_inst = R3.instantiate()
-	node2D.add_child(R3_inst)
-	R3_inst.add_to_group("mek_scenes")
+	await get_tree().create_timer(0.1).timeout
+	spawn_meks()
+	await get_tree().create_timer(0.1).timeout
+	team_arrays()	
 	
-	var R4_inst = R4.instantiate()
-	node2D.add_child(R4_inst)
-	R4_inst.add_to_group("mek_scenes")
-			
-	var S1_inst = S1.instantiate()
-	node2D.add_child(S1_inst)
-	S1_inst.add_to_group("mek_scenes")
-
-	var S2_inst = S2.instantiate()
-	node2D.add_child(S2_inst)
-	S2_inst.add_to_group("mek_scenes")
-
-	var S3_inst = S3.instantiate()
-	node2D.add_child(S3_inst)
-	S3_inst.add_to_group("mek_scenes")
-
-	var M1_inst = M1.instantiate()
-	node2D.add_child(M1_inst)
-	M1_inst.add_to_group("mek_scenes")
-
-	var M2_inst = M2.instantiate()
-	node2D.add_child(M2_inst)
-	M2_inst.add_to_group("mek_scenes")
-
-	var M3_inst = M3.instantiate()
-	node2D.add_child(M3_inst)
-	M3_inst.add_to_group("mek_scenes")
+	randomize()
+	get_node("../BattleManager").available_units.shuffle()
 	
-	team_arrays()
+	# Randomize units at start		
+	for i in get_node("../BattleManager").available_units.size():
+		while true:
+			var my_random_tile_x = rng.randi_range(1, 14)
+			var my_random_tile_y = rng.randi_range(1, 14)
+			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
+			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
+			var ontile = false
+			for j in get_node("../BattleManager").available_units.size():
+				if j != i and get_node("../TileMap").unitsCoord[j] == tile_pos or get_node("../TileMap").unitsCoord[j].x == tile_pos.x + 1 or get_node("../TileMap").unitsCoord[j].x == tile_pos.x - 1 or get_node("../TileMap").unitsCoord[j].y == tile_pos.y + 1 or get_node("../TileMap").unitsCoord[j].y == tile_pos.y - 1:
+					ontile = true
+			if !ontile: 
+				get_node("../TileMap").unitsCoord[i] = tile_pos
+				get_node("../BattleManager").available_units[i].position = tile_center_pos
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y
+				get_node("../BattleManager").available_units[i].unit_team = 1
+				if i > 4:
+					get_node("../BattleManager").available_units[i].unit_team = 2					
+				break
 	
-		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
@@ -300,7 +285,11 @@ func get_random():
 	return random_int	
 	
 func team_arrays():
-	
+	for i in available_units.size():	
+		available_units[i].unit_team = 1
+		if i > 4:
+			available_units[i].unit_team = 2
+			
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
 			team_1.append(available_units[i])
@@ -311,11 +300,11 @@ func team_arrays():
 
 	for i in team_1.size():	
 		team_1[i].unit_num = i
-		print(team_1[i].unit_name, " Team " , team_1[i].unit_team, " Unit. ", team_1[i].unit_num)
+		#print(team_1[i].unit_name, " Team " , team_1[i].unit_team, " Unit. ", team_1[i].unit_num)
 			
 	for i in team_2.size():	
 		team_2[i].unit_num = i
-		print(team_2[i].unit_name, " Team " , team_2[i].unit_team, " Unit. ", team_2[i].unit_num)
+		#print(team_2[i].unit_name, " Team " , team_2[i].unit_team, " Unit. ", team_2[i].unit_num)
 
 	# Team 1 color
 	for i in team_1.size():
@@ -330,6 +319,48 @@ func team_arrays():
 			get_node("../BattleManager").team_2[i].unit_level = 2
 			get_node("../BattleManager").team_2[i].unit_attack = 2
 			get_node("../BattleManager").team_2[i].unit_defence = 2
-			
-			
+		
 	arrays_set = true
+	
+func spawn_meks():
+	var R1_inst = R1.instantiate()
+	node2D.add_child(R1_inst)
+	R1_inst.add_to_group("mek_scenes")
+
+	var R2_inst = R2.instantiate()
+	node2D.add_child(R2_inst)
+	R2_inst.add_to_group("mek_scenes")
+
+	var R3_inst = R3.instantiate()
+	node2D.add_child(R3_inst)
+	R3_inst.add_to_group("mek_scenes")
+	
+	var R4_inst = R4.instantiate()
+	node2D.add_child(R4_inst)
+	R4_inst.add_to_group("mek_scenes")
+			
+	var S1_inst = S1.instantiate()
+	node2D.add_child(S1_inst)
+	S1_inst.add_to_group("mek_scenes")
+
+	var S2_inst = S2.instantiate()
+	node2D.add_child(S2_inst)
+	S2_inst.add_to_group("mek_scenes")
+
+	var S3_inst = S3.instantiate()
+	node2D.add_child(S3_inst)
+	S3_inst.add_to_group("mek_scenes")
+
+	var M1_inst = M1.instantiate()
+	node2D.add_child(M1_inst)
+	M1_inst.add_to_group("mek_scenes")
+
+	var M2_inst = M2.instantiate()
+	node2D.add_child(M2_inst)
+	M2_inst.add_to_group("mek_scenes")
+
+	var M3_inst = M3.instantiate()
+	node2D.add_child(M3_inst)
+	M3_inst.add_to_group("mek_scenes")
+	
+	available_units = get_tree().get_nodes_in_group("mek_scenes")		

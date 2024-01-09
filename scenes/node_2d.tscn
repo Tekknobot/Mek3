@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=108 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -41,11 +41,8 @@
 [ext_resource type="Texture2D" uid="uid://chh0o6jjla5xv" path="res://assets/iso_tiles/roads/10.png" id="24_vs164"]
 [ext_resource type="Texture2D" uid="uid://nxs84lgj002l" path="res://assets/iso_tiles/roads/11.png" id="25_y7gc5"]
 [ext_resource type="Texture2D" uid="uid://bis7f6ahc3kwt" path="res://assets/iso_tiles/roads/12.png" id="26_hpb48"]
-[ext_resource type="Texture2D" uid="uid://cd8p8yh4pyo2q" path="res://assets/structures/buildings4.png" id="26_nvkt0"]
 [ext_resource type="Texture2D" uid="uid://bn6pokoh7454q" path="res://assets/iso_tiles/roads/13.png" id="27_q3mt1"]
-[ext_resource type="Texture2D" uid="uid://dxci88l6mj5xy" path="res://assets/structures/buildings3.png" id="27_vgocs"]
 [ext_resource type="Texture2D" uid="uid://4my7wipm2ip6" path="res://assets/iso_tiles/roads/14.png" id="28_itwov"]
-[ext_resource type="Texture2D" uid="uid://c27iejgv4gqnu" path="res://assets/structures/buildings5.png" id="28_ohhg5"]
 [ext_resource type="Texture2D" uid="uid://delt0bek4efpq" path="res://assets/iso_tiles/roads/15.png" id="29_snwtq"]
 [ext_resource type="Texture2D" uid="uid://dl0mpec2jng68" path="res://assets/iso_tiles/roads/16.png" id="35_bxxax"]
 [ext_resource type="Texture2D" uid="uid://ugl0bgj6fcfo" path="res://assets/iso_tiles/roads/17.png" id="36_dtjoj"]
@@ -59,27 +56,6 @@
 [ext_resource type="AudioStream" uid="uid://c8iscv7pk8u8f" path="res://audio/sfx/panther_growl.wav" id="53_dpbk8"]
 [ext_resource type="AudioStream" uid="uid://cfjck3texeu4k" path="res://audio/sfx/Retro Blop 07.wav" id="55_txcw8"]
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
-[ext_resource type="PackedScene" uid="uid://pi3pl1af5tf7" path="res://scenes/tower.scn" id="58_822bk"]
-[ext_resource type="Script" path="res://src/StructureManager.gd" id="58_iso5e"]
-[ext_resource type="Texture2D" uid="uid://dona3rut6wbpj" path="res://assets/structures/buildings 1_demolished.png" id="59_5udi8"]
-[ext_resource type="PackedScene" uid="uid://487xk20c0ohr" path="res://scenes/stadium.scn" id="59_iaybs"]
-[ext_resource type="Texture2D" uid="uid://b5mv26smo4f57" path="res://assets/structures/buildings 2_demolished.png" id="60_7mq1r"]
-[ext_resource type="PackedScene" uid="uid://cxrpwp5pwylxs" path="res://scenes/district.scn" id="60_6021t"]
-[ext_resource type="Texture2D" uid="uid://bnufrfddxsv04" path="res://assets/structures/buildings_demolished.png" id="61_wbp6o"]
-[ext_resource type="Texture2D" uid="uid://dwdnrniywclvb" path="res://assets/structures/buildings3_demolished.png" id="62_mcxxt"]
-[ext_resource type="Texture2D" uid="uid://6esmvse4wsb1" path="res://assets/structures/buildings4_demolished.png" id="64_v0n02"]
-[ext_resource type="Texture2D" uid="uid://wphuow3vhkms" path="res://assets/structures/buildings5_demolished.png" id="66_8i07j"]
-[ext_resource type="PackedScene" uid="uid://bm7pe7gyotf6g" path="res://scenes/building_c.scn" id="69_glyil"]
-[ext_resource type="PackedScene" uid="uid://d3yvsitpxo1ma" path="res://scenes/mek/R1.scn" id="72_bmj6r"]
-[ext_resource type="PackedScene" uid="uid://cbecpnerkry2n" path="res://scenes/mek/R2.scn" id="73_erb6r"]
-[ext_resource type="PackedScene" uid="uid://cdgp6kvplvtnd" path="res://scenes/mek/R3.scn" id="74_yu7ae"]
-[ext_resource type="PackedScene" uid="uid://clpdn1r538xj4" path="res://scenes/mek/R4.scn" id="75_i8i58"]
-[ext_resource type="PackedScene" uid="uid://3mmo2wm50618" path="res://scenes/mek/S1.scn" id="76_6rp17"]
-[ext_resource type="PackedScene" uid="uid://byoqc3a8exlvw" path="res://scenes/mek/S2.scn" id="77_o4myg"]
-[ext_resource type="PackedScene" uid="uid://u636dd812d13" path="res://scenes/mek/S3.scn" id="78_51f6u"]
-[ext_resource type="PackedScene" uid="uid://dri5vpbxm6hm8" path="res://scenes/mek/M1.scn" id="79_ja00h"]
-[ext_resource type="PackedScene" uid="uid://babefvkeiww5y" path="res://scenes/mek/M2.scn" id="80_6tm2r"]
-[ext_resource type="PackedScene" uid="uid://5k0pt1m6qmux" path="res://scenes/mek/M3.scn" id="81_1jaf4"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -379,120 +355,6 @@ _data = {
 "water": SubResource("Animation_ctgyr")
 }
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vh51c"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_k2j5t")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("59_5udi8")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_7popn"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("17_6dgxo")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("60_7mq1r")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k3m2e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_s7hel")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("61_wbp6o")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g2pqx"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("26_nvkt0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("64_v0n02")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mlb7q"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_vgocs")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("62_mcxxt")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fh453"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("28_ohhg5")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("66_8i07j")
-}],
-"loop": true,
-"name": &"demolished",
-"speed": 5.0
-}]
-
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
@@ -505,7 +367,7 @@ node2D = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
-zoom = Vector2(2.4, 2.4)
+zoom = Vector2(2.45, 2.45)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
@@ -522,7 +384,7 @@ script = ExtResource("5_h3ixq")
 camera = NodePath("../Camera2D")
 unitsAnimated2D = [null, null, null, null, null, null, null, null, null, null]
 unitsArray = [null, null, null, null, null, null, null, null, null, null]
-structureArray = [null, null, null, NodePath("../Building_A_Area2D"), NodePath("../Building_B_Area2D"), null, NodePath("../Building_D_Area2D"), NodePath("../Building_E_Area2D"), NodePath("../Building_F_Area2D"), NodePath("../Tower_2__Area2D"), NodePath("../Stadium_2_Area2D"), NodePath("../District_2 _Area2D")]
+structureArray = [null, null, null, NodePath(""), NodePath(""), null, NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 unitsCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_1 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_2 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
@@ -545,186 +407,6 @@ offset_right = -614.0
 offset_bottom = 410.0
 
 [node name="Hover_tile" parent="." instance=ExtResource("20_6l1y3")]
-
-[node name="Tower_Area2D" parent="." instance=ExtResource("58_822bk")]
-visible = false
-
-[node name="Stadium_Area2D" parent="." instance=ExtResource("59_iaybs")]
-visible = false
-
-[node name="District_Area2D" parent="." instance=ExtResource("60_6021t")]
-visible = false
-
-[node name="Tower_2__Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Tower"
-demolished_texture = ExtResource("59_5udi8")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tower_2__Area2D"]
-sprite_frames = SubResource("SpriteFrames_vh51c")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower_2__Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Tower_2__Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tower_2__Area2D"]
-
-[node name="Stadium_2_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Stadium"
-demolished_texture = ExtResource("60_7mq1r")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Stadium_2_Area2D"]
-sprite_frames = SubResource("SpriteFrames_7popn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium_2_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Stadium_2_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Stadium_2_Area2D"]
-
-[node name="District_2 _Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "District"
-demolished_texture = ExtResource("61_wbp6o")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="District_2 _Area2D"]
-sprite_frames = SubResource("SpriteFrames_k3m2e")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="District_2 _Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="District_2 _Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="District_2 _Area2D"]
-
-[node name="Building_A_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("62_mcxxt")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_A_Area2D"]
-sprite_frames = SubResource("SpriteFrames_g2pqx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_A_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_A_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_A_Area2D"]
-
-[node name="Building_B_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("64_v0n02")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_B_Area2D"]
-sprite_frames = SubResource("SpriteFrames_mlb7q")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_B_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_B_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_B_Area2D"]
-
-[node name="Building_C_Area2D" parent="." instance=ExtResource("69_glyil")]
-visible = false
-
-[node name="Building_D_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("62_mcxxt")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_D_Area2D"]
-sprite_frames = SubResource("SpriteFrames_g2pqx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_D_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_D_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_D_Area2D"]
-
-[node name="Building_E_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("64_v0n02")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_E_Area2D"]
-sprite_frames = SubResource("SpriteFrames_mlb7q")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_E_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_E_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_E_Area2D"]
-
-[node name="Building_F_Area2D" type="Area2D" parent="." groups=["structure"]]
-visible = false
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("66_8i07j")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_F_Area2D"]
-sprite_frames = SubResource("SpriteFrames_fh453")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_F_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_F_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_F_Area2D"]
-
-[node name="R1" parent="." instance=ExtResource("72_bmj6r")]
-visible = false
-unit_team = 1
-
-[node name="R2" parent="." instance=ExtResource("73_erb6r")]
-visible = false
-unit_team = 1
-
-[node name="R3" parent="." instance=ExtResource("74_yu7ae")]
-visible = false
-unit_team = 2
-
-[node name="R4" parent="." instance=ExtResource("75_i8i58")]
-visible = false
-unit_team = 2
-
-[node name="S1" parent="." instance=ExtResource("76_6rp17")]
-visible = false
-unit_team = 1
-
-[node name="S2" parent="." instance=ExtResource("77_o4myg")]
-visible = false
-unit_team = 1
-
-[node name="S3" parent="." instance=ExtResource("78_51f6u")]
-visible = false
-unit_team = 2
-
-[node name="M1" parent="." instance=ExtResource("79_ja00h")]
-visible = false
-unit_team = 1
-
-[node name="M2" parent="." instance=ExtResource("80_6tm2r")]
-visible = false
-unit_team = 2
-
-[node name="M3" parent="." instance=ExtResource("81_1jaf4")]
-visible = false
-unit_team = 2
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("200_rvj2l")
