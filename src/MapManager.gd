@@ -97,19 +97,23 @@ func _ready():
 			var structures_pos = local_to_map(structures[j].position)
 			if unitsCoord[i] == structures_pos:
 				var tile_pos = Vector2i(unitsCoord[i].x+1, unitsCoord[i].y+1)
-				if tile_pos != structures_pos:
-					var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
-					unitsCoord[i] = tile_pos
-					get_node("../BattleManager").available_units[i].position = tile_center_pos
-					get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
-					#print("placed forward")
-				elif tile_pos == structures_pos:
-					var tile_pos_2 = Vector2i(unitsCoord[i].x-1, unitsCoord[i].y-1)				
-					var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
-					unitsCoord[i] = tile_pos
-					get_node("../BattleManager").available_units[i].position = tile_center_pos
-					get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
-					#print("placed back")
+				var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
+				unitsCoord[i] = tile_pos
+				get_node("../BattleManager").available_units[i].position = tile_center_pos
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
+				print("overlapping unit shifted")
+				
+	for i in get_node("../BattleManager").available_units.size():
+		for j in structures.size():
+			var structures_pos = local_to_map(structures[j].position)				
+			if unitsCoord[i] == structures_pos:
+				var tile_pos = Vector2i(unitsCoord[i].x+1, unitsCoord[i].y+1)
+				var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
+				unitsCoord[i] = tile_pos
+				get_node("../BattleManager").available_units[i].position = tile_center_pos
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
+				print("x2")
+										
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):

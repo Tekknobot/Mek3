@@ -41,7 +41,7 @@ var districts = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
-	for i in 12: #buildings
+	for i in 24: #buildings
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
 		var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
@@ -251,6 +251,8 @@ func check_duplicates(a):
 				var a_pos = Map.local_to_map(a[j].position)	
 				var a_global = Map.map_to_local(Vector2i(a_pos.x+1, a_pos.y+1)) + Vector2(0,0) / 2	
 				a[j].position = a_global
+				var tile_pos = Vector2i(a_pos.x, a_pos.y)
+				a[j].z_index = tile_pos.x + tile_pos.y
 				break			
 			
 			
