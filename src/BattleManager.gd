@@ -60,10 +60,7 @@ func _ready():
 			if !ontile: 
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y
-				get_node("../BattleManager").available_units[i].unit_team = 1
-				if i > 4:
-					get_node("../BattleManager").available_units[i].unit_team = 2					
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
 				break
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -285,41 +282,31 @@ func get_random():
 	return random_int	
 	
 func team_arrays():
-	for i in available_units.size():	
-		available_units[i].unit_team = 1
-		if i > 4:
-			available_units[i].unit_team = 2
-			
+	for i in available_units.size():
+		available_units[i].unit_num = i
+		
+	for i in available_units.size():
+		if i <= 4:
+			available_units[i].unit_team = 1
+		else:
+			available_units[i].unit_team = 2			
+	
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
-			team_1.append(available_units[i])
-					
-	for i in available_units.size():		
-		if available_units[i].unit_team == 2:
-			team_2.append(available_units[i])
-
-	for i in team_1.size():	
-		team_1[i].unit_num = i
-		#print(team_1[i].unit_name, " Team " , team_1[i].unit_team, " Unit. ", team_1[i].unit_num)
+			# Team color
+			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
+			get_node("../BattleManager").available_units[i].unit_level = 2
+			get_node("../BattleManager").available_units[i].unit_attack = 2
+			get_node("../BattleManager").available_units[i].unit_defence = 2
 			
-	for i in team_2.size():	
-		team_2[i].unit_num = i
-		#print(team_2[i].unit_name, " Team " , team_2[i].unit_team, " Unit. ", team_2[i].unit_num)
-
-	# Team 1 color
-	for i in team_1.size():
-		if get_node("../BattleManager").team_1[i].unit_team == 1:
-			#get_node("../BattleManager").team_1[i].get_child(0).modulate = Color8(255, 255, 0)
-			pass
+		elif available_units[i].unit_team == 2:
+				# Team color
+				get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
+				get_node("../BattleManager").available_units[i].unit_level = 2
+				get_node("../BattleManager").available_units[i].unit_attack = 2
+				get_node("../BattleManager").available_units[i].unit_defence = 2
 			
-	# Team 2 color
-	for i in team_2.size():
-		if get_node("../BattleManager").team_2[i].unit_team == 2:
-			get_node("../BattleManager").team_2[i].get_child(0).modulate = Color8(255, 110, 255)
-			get_node("../BattleManager").team_2[i].unit_level = 2
-			get_node("../BattleManager").team_2[i].unit_attack = 2
-			get_node("../BattleManager").team_2[i].unit_defence = 2
-		
+										
 	arrays_set = true
 	
 func spawn_meks():
