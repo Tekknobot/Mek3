@@ -16,20 +16,76 @@ var team_2_group
 
 var arrays_set = false
 
+@export var node2D: Node2D
+
+var M1 = preload("res://scenes/mek/M1.scn")
+var M2 = preload("res://scenes/mek/M2.scn")
+var M3 = preload("res://scenes/mek/M3.scn")
+var R1 = preload("res://scenes/mek/R1.scn")
+var R2 = preload("res://scenes/mek/R2.scn")
+var R3 = preload("res://scenes/mek/R3.scn")
+var R4 = preload("res://scenes/mek/R4.scn")
+var S1 = preload("res://scenes/mek/S1.scn")
+var S2 = preload("res://scenes/mek/S2.scn")
+var S3 = preload("res://scenes/mek/S3.scn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
 	get_node("../TurnManager").cpu_turn_started.connect(on_cpu_turn_started)
 	get_node("../TurnStack").turn_over.connect(on_turn_over)
 	get_node("../TurnManager").start()
-
-	available_units = get_tree().get_nodes_in_group("mek")
+				
+	available_units = get_tree().get_nodes_in_group("mek_scenes")
 	await get_tree().create_timer(0.1).timeout
 	team_arrays()
+
+	var R1_inst = R1.instantiate()
+	node2D.add_child(R1_inst)
+	R1_inst.add_to_group("mek_scenes")
+	#var R1_pos = Vector2i(0, 0)
+	#var R1_center_pos = get_node("../TileMap").map_to_local(R1_pos) + Vector2(0,0) / 2	
+	#R1_inst.position = R1_center_pos
+
+	var R2_inst = R2.instantiate()
+	node2D.add_child(R2_inst)
+	R2_inst.add_to_group("mek_scenes")
+
+	var R3_inst = R3.instantiate()
+	node2D.add_child(R3_inst)
+	R3_inst.add_to_group("mek_scenes")
+	
+	var R4_inst = R4.instantiate()
+	node2D.add_child(R4_inst)
+	R4_inst.add_to_group("mek_scenes")
+			
+	var S1_inst = S1.instantiate()
+	node2D.add_child(S1_inst)
+	S1_inst.add_to_group("mek_scenes")
+
+	var S2_inst = S2.instantiate()
+	node2D.add_child(S2_inst)
+	S2_inst.add_to_group("mek_scenes")
+
+	var S3_inst = S3.instantiate()
+	node2D.add_child(S3_inst)
+	S3_inst.add_to_group("mek_scenes")
+
+	var M1_inst = M1.instantiate()
+	node2D.add_child(M1_inst)
+	M1_inst.add_to_group("mek_scenes")
+
+	var M2_inst = M2.instantiate()
+	node2D.add_child(M2_inst)
+	M2_inst.add_to_group("mek_scenes")
+
+	var M3_inst = M3.instantiate()
+	node2D.add_child(M3_inst)
+	M3_inst.add_to_group("mek_scenes")
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	available_units = get_tree().get_nodes_in_group("mek")	
+	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 	
 	team_1_group = get_tree().get_nodes_in_group("Team 1: Inactive")
 	if team_1_group.size() == 5:
@@ -69,7 +125,7 @@ func on_cpu_turn_started() -> void:
 	get_node("../TileMap").moving = true	
 	
 	# Pick Mek
-	available_units = get_tree().get_nodes_in_group("mek")
+	available_units = get_tree().get_nodes_in_group("mek_scenes")
 	
 	random_unit = rng.randi_range(0, team_1.size()-1)
 	random_user = rng.randi_range(0, team_2.size()-1)	

@@ -79,7 +79,7 @@ func _ready():
 			for j in get_node("../BattleManager").available_units.size():
 				if j != i and unitsCoord[j] == tile_pos or unitsCoord[j].x == tile_pos.x + 1 or unitsCoord[j].x == tile_pos.x - 1 or unitsCoord[j].y == tile_pos.y + 1 or unitsCoord[j].y == tile_pos.y - 1:
 					ontile = true
-			if !ontile:
+			if !ontile: 
 				unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y

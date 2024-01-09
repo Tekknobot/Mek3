@@ -1,4 +1,4 @@
-[gd_scene load_steps=324 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=138 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -20,233 +20,70 @@
 [ext_resource type="Texture2D" uid="uid://c0k15snymmjhr" path="res://assets/iso_tiles/spacebase/spacebase_default_6.png" id="10_ca67m"]
 [ext_resource type="Texture2D" uid="uid://d2hi70r47mggn" path="res://assets/iso_tiles/ui/tile_walkable.png" id="11_tvddf"]
 [ext_resource type="Texture2D" uid="uid://cfl4nfo4qqdrl" path="res://assets/iso_tiles/roads/0.png" id="13_pioao"]
-[ext_resource type="Script" path="res://src/MekManager.gd" id="14_rf3si"]
 [ext_resource type="Texture2D" uid="uid://bk2maey3lf38k" path="res://assets/iso_tiles/bublegum/default.png" id="14_wds7k"]
-[ext_resource type="Texture2D" uid="uid://bwirocgjkpxsu" path="res://assets/units/R1/r1idle_1.png" id="15_hhvw0"]
 [ext_resource type="Texture2D" uid="uid://dpotybhyqri5q" path="res://assets/iso_tiles/bublegum/default_2.png" id="15_i2jx5"]
-[ext_resource type="Shader" path="res://assets/shaders/outline_shader.gdshader" id="15_novbe"]
 [ext_resource type="Texture2D" uid="uid://cm0kclf057nyb" path="res://assets/iso_tiles/roads/1.png" id="15_s8o81"]
 [ext_resource type="Texture2D" uid="uid://cm3mqsqudnlvs" path="res://assets/iso_tiles/bublegum/default_3.png" id="16_81ix8"]
 [ext_resource type="Texture2D" uid="uid://3lc5sbh0yih7" path="res://assets/structures/buildings 1.png" id="16_k2j5t"]
 [ext_resource type="Texture2D" uid="uid://csjud3cq0y75y" path="res://assets/iso_tiles/roads/2.png" id="16_q8f5l"]
-[ext_resource type="Texture2D" uid="uid://byr1uuysaadqf" path="res://assets/units/R1/r1idle_2.png" id="16_uaw8l"]
 [ext_resource type="Texture2D" uid="uid://brf0rek5d3nbm" path="res://assets/structures/buildings 2.png" id="17_6dgxo"]
 [ext_resource type="Texture2D" uid="uid://c0mv0i0825o0t" path="res://assets/iso_tiles/roads/3.png" id="17_b2g6g"]
-[ext_resource type="Texture2D" uid="uid://o685q54fvrsc" path="res://assets/units/R1/r1idle_3.png" id="17_nc3sx"]
 [ext_resource type="Texture2D" uid="uid://cl3acln8xbq5s" path="res://assets/iso_tiles/roads/4.png" id="18_5f3rp"]
 [ext_resource type="Texture2D" uid="uid://6gt46uq18kaq" path="res://assets/structures/buildings.png" id="18_s7hel"]
-[ext_resource type="Texture2D" uid="uid://fea1mmvu86yg" path="res://assets/units/R1/r1idle_4.png" id="18_tjtdp"]
 [ext_resource type="Texture2D" uid="uid://rktlakqso06f" path="res://assets/iso_tiles/ui/tile_hover_white.png" id="19_iaujy"]
-[ext_resource type="Texture2D" uid="uid://b61dicya7hgfl" path="res://assets/units/R2/r2idle_1.png" id="19_jvr2c"]
 [ext_resource type="Texture2D" uid="uid://bkvnogg4wsrgi" path="res://assets/iso_tiles/roads/6.png" id="19_k87ne"]
 [ext_resource type="PackedScene" uid="uid://c33sobm1ty4l1" path="res://prefab/tiles/hover_tile.tscn" id="20_6l1y3"]
-[ext_resource type="Texture2D" uid="uid://di45gky2kgyu4" path="res://assets/units/R2/r2idle_2.png" id="20_bkcit"]
 [ext_resource type="Texture2D" uid="uid://o27kmh5f0ln0" path="res://assets/iso_tiles/roads/7.png" id="20_d613f"]
 [ext_resource type="Texture2D" uid="uid://56t0bjdw3rny" path="res://assets/iso_tiles/ui/tile_hover_black.png" id="20_fjagj"]
 [ext_resource type="Texture2D" uid="uid://c5r2gu0tsqdkl" path="res://assets/iso_tiles/roads/8.png" id="21_f1ojk"]
 [ext_resource type="Texture2D" uid="uid://dyigrwo5qmh4a" path="res://assets/iso_tiles/ui/tile_hover_blue.png" id="21_oeo3k"]
-[ext_resource type="Texture2D" uid="uid://bayakjgp0okas" path="res://assets/units/R2/r2idle_3.png" id="21_t3ba0"]
-[ext_resource type="Texture2D" uid="uid://ckfr4o2ci6oqv" path="res://assets/units/R2/r2idle_4.png" id="22_h1087"]
 [ext_resource type="Texture2D" uid="uid://c72swbik2wmnp" path="res://assets/iso_tiles/roads/9.png" id="23_m8ef8"]
-[ext_resource type="Texture2D" uid="uid://dppikiqq4cq5t" path="res://assets/units/R3/r3idle_1.png" id="23_wooqh"]
-[ext_resource type="Texture2D" uid="uid://bepr4mm23ju4q" path="res://assets/units/R3/r3idle_2.png" id="24_5u7xi"]
 [ext_resource type="Texture2D" uid="uid://chh0o6jjla5xv" path="res://assets/iso_tiles/roads/10.png" id="24_vs164"]
-[ext_resource type="Texture2D" uid="uid://2t1vywr7nu36" path="res://assets/units/R3/r3idle_3.png" id="25_s7kuo"]
 [ext_resource type="Texture2D" uid="uid://nxs84lgj002l" path="res://assets/iso_tiles/roads/11.png" id="25_y7gc5"]
 [ext_resource type="Texture2D" uid="uid://bis7f6ahc3kwt" path="res://assets/iso_tiles/roads/12.png" id="26_hpb48"]
 [ext_resource type="Texture2D" uid="uid://cd8p8yh4pyo2q" path="res://assets/structures/buildings4.png" id="26_nvkt0"]
-[ext_resource type="Texture2D" uid="uid://cbae7ywls723w" path="res://assets/units/R3/r3idle_4.png" id="26_q82x6"]
-[ext_resource type="Texture2D" uid="uid://d3eww0s8b5mm7" path="res://assets/units/S1/s1idle_1.png" id="27_cus6i"]
 [ext_resource type="Texture2D" uid="uid://bn6pokoh7454q" path="res://assets/iso_tiles/roads/13.png" id="27_q3mt1"]
 [ext_resource type="Texture2D" uid="uid://dxci88l6mj5xy" path="res://assets/structures/buildings3.png" id="27_vgocs"]
-[ext_resource type="Texture2D" uid="uid://diqi7e4dc63ej" path="res://assets/units/S2/s2idle_1.png" id="27_xhg42"]
-[ext_resource type="Texture2D" uid="uid://dusf3ub62oqof" path="res://assets/units/R4/r4idle_1.png" id="27_yqrix"]
-[ext_resource type="Texture2D" uid="uid://cdk1yacvea8uu" path="res://assets/units/R4/r4idle_2.png" id="28_ga7ne"]
-[ext_resource type="Texture2D" uid="uid://cffecse8so3b6" path="res://assets/units/S2/s2idle_2.png" id="28_iegjd"]
 [ext_resource type="Texture2D" uid="uid://4my7wipm2ip6" path="res://assets/iso_tiles/roads/14.png" id="28_itwov"]
 [ext_resource type="Texture2D" uid="uid://c27iejgv4gqnu" path="res://assets/structures/buildings5.png" id="28_ohhg5"]
-[ext_resource type="Texture2D" uid="uid://dc0axpsadj7vq" path="res://assets/units/S1/s1idle_2.png" id="28_x41fa"]
-[ext_resource type="Texture2D" uid="uid://brg82dulq7eut" path="res://assets/units/S2/s2idle_3.png" id="29_2fmu2"]
-[ext_resource type="Texture2D" uid="uid://c7wi8m1x1ob84" path="res://assets/units/R4/r4idle_3.png" id="29_026cw"]
-[ext_resource type="Texture2D" uid="uid://cdedeu24s45kk" path="res://assets/units/S1/s1idle_3.png" id="29_b3mdo"]
 [ext_resource type="Texture2D" uid="uid://delt0bek4efpq" path="res://assets/iso_tiles/roads/15.png" id="29_snwtq"]
-[ext_resource type="Texture2D" uid="uid://c5ipow7tuw2qk" path="res://assets/units/S1/s1idle_4.png" id="30_2w4v8"]
-[ext_resource type="Texture2D" uid="uid://d4inlv1eiaok6" path="res://assets/units/R4/r4idle_4.png" id="30_40n3o"]
-[ext_resource type="Texture2D" uid="uid://biqe58lx2pjjy" path="res://assets/units/S2/s2idle_4.png" id="30_kj6py"]
-[ext_resource type="Texture2D" uid="uid://bx5ysmaauy1qu" path="res://assets/units/S2/s2idle_5.png" id="31_mrfc4"]
-[ext_resource type="Texture2D" uid="uid://bjcqu81tbyi5m" path="res://assets/units/S2/s2idle_6.png" id="32_dtqos"]
-[ext_resource type="Texture2D" uid="uid://bgqjtpy6uef7p" path="res://assets/units/R1/r1move_1.png" id="32_t4kxi"]
-[ext_resource type="Texture2D" uid="uid://coo87uak125m" path="res://assets/units/S3/s3idle_1.png" id="33_dwq7o"]
-[ext_resource type="Texture2D" uid="uid://xix6st17q5fi" path="res://assets/units/R1/r1move_2.png" id="33_ftg88"]
-[ext_resource type="Texture2D" uid="uid://b1mboq67wn7j3" path="res://assets/units/S3/s3idle_2.png" id="34_ch6uw"]
-[ext_resource type="Texture2D" uid="uid://bbxj03ludesqq" path="res://assets/units/R1/r1move_3.png" id="34_lshab"]
 [ext_resource type="Texture2D" uid="uid://dl0mpec2jng68" path="res://assets/iso_tiles/roads/16.png" id="35_bxxax"]
-[ext_resource type="Texture2D" uid="uid://b2vau65x7etdc" path="res://assets/units/S3/s3idle_3.png" id="35_iu0qx"]
-[ext_resource type="Texture2D" uid="uid://cdannckcabvam" path="res://assets/units/R1/r1move_4.png" id="35_up2kh"]
-[ext_resource type="Texture2D" uid="uid://q0rlpk4a0vqy" path="res://assets/units/S3/s3idle_4.png" id="36_0qnlt"]
 [ext_resource type="Texture2D" uid="uid://ugl0bgj6fcfo" path="res://assets/iso_tiles/roads/17.png" id="36_dtjoj"]
 [ext_resource type="Texture2D" uid="uid://cuf7qotnb45lt" path="res://assets/iso_tiles/roads/18.png" id="37_d2yjk"]
 [ext_resource type="Texture2D" uid="uid://6xil7xbbe3vx" path="res://assets/iso_tiles/ui/tile_hover_red.png" id="38_p2fqq"]
-[ext_resource type="Texture2D" uid="uid://bwqjwcct4jq6s" path="res://assets/units/R2/r2walk_1.png" id="40_f6v4d"]
-[ext_resource type="Texture2D" uid="uid://cl7u3u1kkka7d" path="res://assets/units/R2/r2walk_2.png" id="41_nai6q"]
-[ext_resource type="Texture2D" uid="uid://c4dh1e8vwe724" path="res://assets/units/R2/r2walk_3.png" id="42_wblun"]
-[ext_resource type="Texture2D" uid="uid://dveey5trtgyq8" path="res://assets/units/R2/r2walk_4.png" id="43_mmseo"]
-[ext_resource type="Texture2D" uid="uid://bedrjpys37gnq" path="res://assets/units/M1/m1idle_1.png" id="45_056xh"]
-[ext_resource type="Texture2D" uid="uid://cgvo5o4g8t7i7" path="res://assets/units/M1/m1idle_2.png" id="46_ndkcp"]
-[ext_resource type="Texture2D" uid="uid://bf0om5jfkhhdw" path="res://assets/units/M1/m1idle_3.png" id="47_noi3w"]
-[ext_resource type="Texture2D" uid="uid://bq7lfiuu8jnu1" path="res://assets/units/R3/r3walk_1.png" id="48_5idhf"]
 [ext_resource type="AudioStream" uid="uid://dj3d7h858nj8j" path="res://audio/sfx/Retro Beeep 06.wav" id="48_p3eoj"]
-[ext_resource type="Texture2D" uid="uid://dsuegaaab5s07" path="res://assets/units/M1/m1idle_4.png" id="48_vxq25"]
-[ext_resource type="Texture2D" uid="uid://dfrankfy0q8v1" path="res://assets/units/M2/m2idle_1.png" id="49_4c31a"]
 [ext_resource type="AudioStream" uid="uid://nifpkejfxi50" path="res://audio/sfx/Retro Blop StereoUP 09.wav" id="49_c461k"]
-[ext_resource type="Texture2D" uid="uid://1fr7pjvhj084" path="res://assets/units/R3/r3walk_2.png" id="49_x2gpm"]
-[ext_resource type="Texture2D" uid="uid://cqfxsxnennjlk" path="res://assets/units/R3/r3walk_3.png" id="50_7n2n1"]
-[ext_resource type="Texture2D" uid="uid://ctgeoajj8ahcq" path="res://assets/units/M2/m2idle_2.png" id="50_bc4vx"]
 [ext_resource type="AudioStream" uid="uid://c7wah0i8xrgkm" path="res://audio/sfx/Retro FootStep 03.wav" id="50_odnt0"]
-[ext_resource type="Texture2D" uid="uid://b0kvs4aph853g" path="res://assets/units/M2/m2idle_3.png" id="51_eae12"]
-[ext_resource type="Texture2D" uid="uid://dvhux7lfb0mlx" path="res://assets/units/R3/r3walk_4.png" id="51_qi7dl"]
 [ext_resource type="AudioStream" uid="uid://bfx7t85alyu3y" path="res://audio/sfx/Retro Magic 06.wav" id="51_rba5x"]
-[ext_resource type="Texture2D" uid="uid://bolcqe5ve082f" path="res://assets/units/M2/m2idle_4.png" id="52_hlggk"]
 [ext_resource type="AudioStream" uid="uid://b00ewitnpxw0b" path="res://audio/sfx/Retro Weapon Electric 05.wav" id="52_tcha0"]
-[ext_resource type="Texture2D" uid="uid://112bdiuhp7vx" path="res://assets/units/M2/m2idle_5.png" id="53_af7ab"]
 [ext_resource type="AudioStream" uid="uid://c8iscv7pk8u8f" path="res://audio/sfx/panther_growl.wav" id="53_dpbk8"]
-[ext_resource type="Texture2D" uid="uid://bei81n7th7l8x" path="res://assets/units/M3/m3idle_1.png" id="54_0o0eh"]
-[ext_resource type="Texture2D" uid="uid://l0qujgarum6w" path="res://assets/units/R1/r1atk_1.png" id="54_0sstk"]
-[ext_resource type="Texture2D" uid="uid://bpytolodhbpaq" path="res://assets/units/R1/r1atk_2.png" id="55_iu4gg"]
-[ext_resource type="Texture2D" uid="uid://dxofi2qnped61" path="res://assets/units/M3/m3idle_2.png" id="55_o07a5"]
 [ext_resource type="AudioStream" uid="uid://cfjck3texeu4k" path="res://audio/sfx/Retro Blop 07.wav" id="55_txcw8"]
-[ext_resource type="Texture2D" uid="uid://6c43y6ys5585" path="res://assets/units/R1/r1atk_3.png" id="56_adhjb"]
-[ext_resource type="Texture2D" uid="uid://cx6x8vfu8j6bq" path="res://assets/units/M3/m3idle_3.png" id="56_vurao"]
-[ext_resource type="Texture2D" uid="uid://brbjtcpjphxqf" path="res://assets/units/R4/r4walk_1.png" id="56_xosj4"]
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
-[ext_resource type="Texture2D" uid="uid://dljrhfrgdgmpf" path="res://assets/units/M3/m3idle_4.png" id="57_5iowt"]
-[ext_resource type="Texture2D" uid="uid://hj3b4pqxb88s" path="res://assets/units/R1/r1atk_4.png" id="57_abi5d"]
-[ext_resource type="Texture2D" uid="uid://cqu2bbw2pe101" path="res://assets/units/R4/r4walk_2.png" id="57_m4i6s"]
 [ext_resource type="PackedScene" uid="uid://pi3pl1af5tf7" path="res://scenes/tower.scn" id="58_822bk"]
-[ext_resource type="Texture2D" uid="uid://cv1jgk4jiukw3" path="res://assets/units/R4/r4walk_3.png" id="58_dba0d"]
 [ext_resource type="Script" path="res://src/StructureManager.gd" id="58_iso5e"]
-[ext_resource type="Texture2D" uid="uid://ci73201d0belf" path="res://assets/units/R1/r1atk_5.png" id="58_rkokc"]
 [ext_resource type="Texture2D" uid="uid://dona3rut6wbpj" path="res://assets/structures/buildings 1_demolished.png" id="59_5udi8"]
-[ext_resource type="Texture2D" uid="uid://dyfsjcjsr45qx" path="res://assets/units/R4/r4walk_4.png" id="59_hmut7"]
 [ext_resource type="PackedScene" uid="uid://487xk20c0ohr" path="res://scenes/stadium.scn" id="59_iaybs"]
-[ext_resource type="Texture2D" uid="uid://ccyxxyuwvdhko" path="res://assets/units/R1/r1atk_6.png" id="59_o7bdy"]
 [ext_resource type="Texture2D" uid="uid://b5mv26smo4f57" path="res://assets/structures/buildings 2_demolished.png" id="60_7mq1r"]
 [ext_resource type="PackedScene" uid="uid://cxrpwp5pwylxs" path="res://scenes/district.scn" id="60_6021t"]
-[ext_resource type="Texture2D" uid="uid://flgbmwf56qbu" path="res://assets/portraits/l0_por01.png" id="61_ndh5r"]
 [ext_resource type="Texture2D" uid="uid://bnufrfddxsv04" path="res://assets/structures/buildings_demolished.png" id="61_wbp6o"]
-[ext_resource type="Texture2D" uid="uid://ddxvf3fg5l4qo" path="res://assets/portraits/mek_portraits/r1.png" id="62_igakx"]
 [ext_resource type="Texture2D" uid="uid://dwdnrniywclvb" path="res://assets/structures/buildings3_demolished.png" id="62_mcxxt"]
-[ext_resource type="AudioStream" uid="uid://bcjbc1m7ri1vm" path="res://audio/sfx/Retro PowerUP StereoUP 05.wav" id="64_6mywk"]
-[ext_resource type="Texture2D" uid="uid://7sp4hgmjxy2s" path="res://assets/units/S1/s1move_1.png" id="64_7ylhe"]
 [ext_resource type="Texture2D" uid="uid://6esmvse4wsb1" path="res://assets/structures/buildings4_demolished.png" id="64_v0n02"]
-[ext_resource type="Texture2D" uid="uid://bqk754jipguri" path="res://assets/units/R2/r2atk_1.png" id="65_427yu"]
-[ext_resource type="AudioStream" uid="uid://dma683kmsqil1" path="res://audio/sfx/Retro PickUp 10.wav" id="65_llwce"]
-[ext_resource type="Texture2D" uid="uid://djldu2dcfrs8v" path="res://assets/units/S1/s1move_2.png" id="65_rhjpq"]
 [ext_resource type="Texture2D" uid="uid://wphuow3vhkms" path="res://assets/structures/buildings5_demolished.png" id="66_8i07j"]
-[ext_resource type="Texture2D" uid="uid://c34ld2lu1m4ip" path="res://assets/units/R2/r2atk_2.png" id="66_406yg"]
-[ext_resource type="Texture2D" uid="uid://bfs5ipishpx05" path="res://assets/units/S1/s1move_3.png" id="66_uaxo2"]
-[ext_resource type="Texture2D" uid="uid://da4q0jgfnldae" path="res://assets/units/R2/r2atk_3.png" id="67_kyl3a"]
-[ext_resource type="Texture2D" uid="uid://bckfu4i16j3e4" path="res://assets/units/S1/s1move_4.png" id="67_tdjmx"]
-[ext_resource type="Texture2D" uid="uid://dholnt7jejqop" path="res://assets/units/R2/r2atk_4.png" id="68_sn2n0"]
 [ext_resource type="PackedScene" uid="uid://bm7pe7gyotf6g" path="res://scenes/building_c.scn" id="69_glyil"]
-[ext_resource type="Texture2D" uid="uid://1xlh4e44dkg4" path="res://assets/units/R2/r2atk_5.png" id="69_odh28"]
-[ext_resource type="Texture2D" uid="uid://33ulqg2m7d30" path="res://assets/units/R2/r2atk_6.png" id="70_j1xtl"]
-[ext_resource type="Texture2D" uid="uid://cgh5h07dqxull" path="res://assets/units/S2/s2move_1.png" id="74_ehwyy"]
-[ext_resource type="Texture2D" uid="uid://shoc0177lwm3" path="res://assets/units/S2/s2move_2.png" id="75_ndg2x"]
-[ext_resource type="Texture2D" uid="uid://dw2ug3tkglkue" path="res://assets/units/S2/s2move_3.png" id="76_u6mah"]
-[ext_resource type="Texture2D" uid="uid://b5bdfdh1qt7kq" path="res://assets/portraits/l0_por02.png" id="77_7gm8x"]
-[ext_resource type="Texture2D" uid="uid://qu7gg1h2cp06" path="res://assets/units/S2/s2move_4.png" id="77_xqhwa"]
-[ext_resource type="Texture2D" uid="uid://blfirg2jk3f2h" path="res://assets/units/S2/s2move_5.png" id="78_hb5li"]
-[ext_resource type="Texture2D" uid="uid://b7bomr4y7edpn" path="res://assets/units/R3/r3atk_1.png" id="79_0vkwj"]
-[ext_resource type="Texture2D" uid="uid://bygvhthawhht8" path="res://assets/portraits/mek_portraits/r4.png" id="79_cv140"]
-[ext_resource type="Texture2D" uid="uid://du3scrmgdo0uq" path="res://assets/portraits/mek_portraits/r2.png" id="79_i3xr7"]
-[ext_resource type="Texture2D" uid="uid://chc7j7pogxqnj" path="res://assets/units/S2/s2move_6.png" id="79_j1c1m"]
-[ext_resource type="Texture2D" uid="uid://bdxeahimu1iad" path="res://assets/units/R3/r3atk_2.png" id="80_re34x"]
-[ext_resource type="Texture2D" uid="uid://cfr00hqom8jcp" path="res://assets/units/R3/r3atk_3.png" id="81_gw07b"]
-[ext_resource type="Texture2D" uid="uid://ddksxhsae0sbo" path="res://assets/units/R3/r3atk_4.png" id="82_hytd5"]
-[ext_resource type="Texture2D" uid="uid://0op36n36x5u2" path="res://assets/units/R3/r3atk_5.png" id="83_vposv"]
-[ext_resource type="Texture2D" uid="uid://eni54parby0p" path="res://assets/units/S3/s3move_1.png" id="84_04pty"]
-[ext_resource type="Texture2D" uid="uid://b4nuskpfrkt2u" path="res://assets/units/R3/r3atk_6.png" id="84_nlvab"]
-[ext_resource type="Texture2D" uid="uid://bxeyykgmspbpi" path="res://assets/units/S3/s3move_2.png" id="85_j8mbc"]
-[ext_resource type="Texture2D" uid="uid://dclbvcwwukfw0" path="res://assets/units/R3/r3atk_7.png" id="85_ndjde"]
-[ext_resource type="Texture2D" uid="uid://tpq4aa044b5a" path="res://assets/units/R3/r3atk_8.png" id="86_30jek"]
-[ext_resource type="Texture2D" uid="uid://dbg536511mvmv" path="res://assets/units/S3/s3move_3.png" id="86_v1aot"]
-[ext_resource type="Texture2D" uid="uid://28bgfwxbcdrk" path="res://assets/units/S3/s3move_4.png" id="87_i5djw"]
-[ext_resource type="Texture2D" uid="uid://gqlqs845wp2q" path="res://assets/portraits/l0_por03.png" id="92_6faaj"]
-[ext_resource type="Texture2D" uid="uid://dfukoee0luo5y" path="res://assets/units/M1/m1move_1.png" id="92_27agj"]
-[ext_resource type="Texture2D" uid="uid://b3jrtotkeeelh" path="res://assets/units/M1/m1move_2.png" id="93_w6otk"]
-[ext_resource type="Texture2D" uid="uid://c8ku360hp3ei1" path="res://assets/units/M1/m1move_3.png" id="94_qttdv"]
-[ext_resource type="Texture2D" uid="uid://d3s67lch382rk" path="res://assets/portraits/mek_portraits/r3.png" id="95_d2q5j"]
-[ext_resource type="Texture2D" uid="uid://bp2l2jxuyobla" path="res://assets/units/R4/r4atk_1.png" id="95_mku2u"]
-[ext_resource type="Texture2D" uid="uid://c7w2d5pgml0xc" path="res://assets/units/M1/m1move_4.png" id="95_tsux5"]
-[ext_resource type="Texture2D" uid="uid://g54iuqty87t3" path="res://assets/units/R4/r4atk_2.png" id="96_bnp6d"]
-[ext_resource type="Texture2D" uid="uid://w5q2bjogo6i1" path="res://assets/units/R4/r4atk_3.png" id="97_vy325"]
-[ext_resource type="Texture2D" uid="uid://dab8nefwd7lol" path="res://assets/units/R4/r4atk_4.png" id="98_yd43p"]
-[ext_resource type="Texture2D" uid="uid://di5vc1gbk5gsk" path="res://assets/units/R4/r4atk_5.png" id="99_yxcog"]
-[ext_resource type="Texture2D" uid="uid://bvyocgscptuc4" path="res://assets/units/R4/r4atk_6.png" id="100_4umaa"]
-[ext_resource type="Texture2D" uid="uid://bfkjuf8veoer0" path="res://assets/units/M2/m2move_1.png" id="101_fh6pp"]
-[ext_resource type="Texture2D" uid="uid://bl1n7p1n65kad" path="res://assets/units/R4/r4atk_7.png" id="101_mwi86"]
-[ext_resource type="Texture2D" uid="uid://5wnkr10phy8g" path="res://assets/units/M2/m2move_2.png" id="102_hldbj"]
-[ext_resource type="Texture2D" uid="uid://d3lyhp2sp0rij" path="res://assets/units/R4/r4atk_8.png" id="102_n2ct4"]
-[ext_resource type="Texture2D" uid="uid://do37t2fjakevx" path="res://assets/units/M2/m2move_3.png" id="103_1hcpa"]
-[ext_resource type="Texture2D" uid="uid://cc61xhor8x1jr" path="res://assets/units/M2/m2move_4.png" id="104_70ech"]
-[ext_resource type="Texture2D" uid="uid://cdc3ujx5uibrc" path="res://assets/units/M3/m3move_1.png" id="109_him20"]
-[ext_resource type="Texture2D" uid="uid://lfmluokjn1j6" path="res://assets/portraits/l0_por04.png" id="109_usjr4"]
-[ext_resource type="Texture2D" uid="uid://bk23xirallya1" path="res://assets/units/M3/m3move_2.png" id="110_shtea"]
-[ext_resource type="Texture2D" uid="uid://drpksbm8pbxmn" path="res://assets/units/M3/m3move_3.png" id="111_22ga5"]
-[ext_resource type="Texture2D" uid="uid://c2bmj7l0jm5cv" path="res://assets/units/S1/s1atk_1.png" id="111_p8swa"]
-[ext_resource type="Texture2D" uid="uid://dm16x402c37fc" path="res://assets/units/S1/s1atk_2.png" id="112_13ker"]
-[ext_resource type="Texture2D" uid="uid://6b4dvvumlxkm" path="res://assets/units/M3/m3move_4.png" id="112_m50g6"]
-[ext_resource type="Texture2D" uid="uid://b1weqtbexlvgy" path="res://assets/units/S1/s1atk_3.png" id="113_ytqye"]
-[ext_resource type="Texture2D" uid="uid://bvosfytkpt4cs" path="res://assets/units/S1/s1atk_4.png" id="114_vuts8"]
-[ext_resource type="Texture2D" uid="uid://1cj476lgvuc5" path="res://assets/units/S1/s1atk_5.png" id="115_y64j7"]
-[ext_resource type="Texture2D" uid="uid://5lc7yhwc7s1t" path="res://assets/units/S1/s1atk_6.png" id="116_vm4w1"]
-[ext_resource type="Texture2D" uid="uid://cn5vlsu6fhy3e" path="res://assets/units/S2/s2atk_1.png" id="125_ko52x"]
-[ext_resource type="Texture2D" uid="uid://c6cxqlyfmnl1a" path="res://assets/portraits/l0_por05.png" id="126_c2ixe"]
-[ext_resource type="Texture2D" uid="uid://drlso5mo2e1i3" path="res://assets/units/S2/s2atk_2.png" id="126_j41en"]
-[ext_resource type="Texture2D" uid="uid://cb2a0alordymn" path="res://assets/units/S2/s2atk_3.png" id="127_vo2sn"]
-[ext_resource type="Texture2D" uid="uid://brgg56j7qfb3w" path="res://assets/units/S2/s2atk_4.png" id="128_cwode"]
-[ext_resource type="Texture2D" uid="uid://cd4ffqh3ptk57" path="res://assets/units/S2/s2atk_5.png" id="129_w3434"]
-[ext_resource type="Texture2D" uid="uid://b83kmd180xowj" path="res://assets/units/S2/s2atk_6.png" id="130_pcctq"]
-[ext_resource type="Texture2D" uid="uid://ee7tubyv5eqr" path="res://assets/portraits/mek_portraits/s1.png" id="131_f1vf3"]
-[ext_resource type="Texture2D" uid="uid://c6nugp4n3dm8a" path="res://assets/portraits/l0_por06.png" id="141_qdrwe"]
-[ext_resource type="Texture2D" uid="uid://wgjgunwiek6p" path="res://assets/units/S3/s3atk_1.png" id="143_t2o8v"]
-[ext_resource type="Texture2D" uid="uid://dbujxpkuicjgi" path="res://assets/units/S3/s3atk_2.png" id="144_u54io"]
-[ext_resource type="Texture2D" uid="uid://b3juykek6qnsa" path="res://assets/units/S3/s3atk_3.png" id="145_b8ylp"]
-[ext_resource type="Texture2D" uid="uid://dhdcxwmei7c4p" path="res://assets/units/S3/s3atk_4.png" id="146_h51ab"]
-[ext_resource type="Texture2D" uid="uid://beu8s26b4wob0" path="res://assets/portraits/mek_portraits/s2.png" id="147_j5sgp"]
-[ext_resource type="Texture2D" uid="uid://surw757ckmsm" path="res://assets/units/S3/s3atk_5.png" id="147_srfv5"]
-[ext_resource type="Texture2D" uid="uid://cletvp8e0bss0" path="res://assets/units/S3/s3atk_6.png" id="148_v1t5j"]
-[ext_resource type="Texture2D" uid="uid://dpcs3qp8kvyhg" path="res://assets/units/M1/m1atk_1.png" id="157_cwuh5"]
-[ext_resource type="Texture2D" uid="uid://o02m6vb346nv" path="res://assets/units/M1/m1atk_2.png" id="158_rghne"]
-[ext_resource type="Texture2D" uid="uid://g6ajll1v8i1c" path="res://assets/units/M1/m1atk_3.png" id="159_wgxf0"]
-[ext_resource type="Texture2D" uid="uid://utnmb2ip3tym" path="res://assets/units/M1/m1atk_4.png" id="160_27u6p"]
-[ext_resource type="Texture2D" uid="uid://dd7tye4sh84h7" path="res://assets/portraits/l0_por07.png" id="160_tgnoa"]
-[ext_resource type="Texture2D" uid="uid://bsjtdxk1jmq46" path="res://assets/units/M1/m1atk_5.png" id="161_2on2s"]
-[ext_resource type="Texture2D" uid="uid://fw3gn5e3wao5" path="res://assets/units/M1/m1atk_6.png" id="162_pjyd4"]
-[ext_resource type="Texture2D" uid="uid://dq186teoe0ijt" path="res://assets/units/M2/m2atk_1.png" id="165_0nrcv"]
-[ext_resource type="Texture2D" uid="uid://438x4jswdvrt" path="res://assets/units/M2/m2atk_2.png" id="166_3k2no"]
-[ext_resource type="Texture2D" uid="uid://c5prwavn4i2jg" path="res://assets/units/M2/m2atk_3.png" id="167_2tyas"]
-[ext_resource type="Texture2D" uid="uid://b4xbvy5vgjg60" path="res://assets/portraits/mek_portraits/s3.png" id="167_qal85"]
-[ext_resource type="Texture2D" uid="uid://18v83bjveihg" path="res://assets/units/M2/m2atk_4.png" id="168_cmnma"]
-[ext_resource type="Texture2D" uid="uid://cslspqxa8ioir" path="res://assets/units/M2/m2atk_5.png" id="169_frjkr"]
-[ext_resource type="Texture2D" uid="uid://di2cknms535c8" path="res://assets/units/M2/m2atk_6.png" id="170_xm34r"]
-[ext_resource type="Texture2D" uid="uid://b51r4y38hvqvj" path="res://assets/portraits/l0_por08.png" id="175_e5mdk"]
-[ext_resource type="Texture2D" uid="uid://c3k5axfya2j1u" path="res://assets/portraits/mek_portraits/m1.png" id="183_40qw8"]
-[ext_resource type="Texture2D" uid="uid://bsn35pxed5rf4" path="res://assets/units/M3/m3atk_1.png" id="186_m06xv"]
-[ext_resource type="Texture2D" uid="uid://4s1v35g8u00g" path="res://assets/units/M3/m3atk_2.png" id="187_87avc"]
-[ext_resource type="Texture2D" uid="uid://bqnuyhkjp68sm" path="res://assets/units/M3/m3atk_3.png" id="188_qwj0w"]
-[ext_resource type="Texture2D" uid="uid://bpui45rvs6qom" path="res://assets/units/M3/m3atk_4.png" id="189_qlc2e"]
-[ext_resource type="Texture2D" uid="uid://cjekcculitr8w" path="res://assets/units/M3/m3atk_5.png" id="190_iuq7o"]
-[ext_resource type="Texture2D" uid="uid://baqqcegbtc66a" path="res://assets/portraits/l0_por09.png" id="190_ukij7"]
-[ext_resource type="Texture2D" uid="uid://ufrjjb3tsblv" path="res://assets/units/M3/m3atk_6.png" id="191_coynu"]
-[ext_resource type="Texture2D" uid="uid://btf4f8qdcsdtl" path="res://assets/portraits/mek_portraits/m2.png" id="199_t4gef"]
+[ext_resource type="PackedScene" uid="uid://d3yvsitpxo1ma" path="res://scenes/mek/R1.scn" id="72_bmj6r"]
+[ext_resource type="PackedScene" uid="uid://cbecpnerkry2n" path="res://scenes/mek/R2.scn" id="73_erb6r"]
+[ext_resource type="PackedScene" uid="uid://cdgp6kvplvtnd" path="res://scenes/mek/R3.scn" id="74_yu7ae"]
+[ext_resource type="PackedScene" uid="uid://clpdn1r538xj4" path="res://scenes/mek/R4.scn" id="75_i8i58"]
+[ext_resource type="PackedScene" uid="uid://3mmo2wm50618" path="res://scenes/mek/S1.scn" id="76_6rp17"]
+[ext_resource type="PackedScene" uid="uid://byoqc3a8exlvw" path="res://scenes/mek/S2.scn" id="77_o4myg"]
+[ext_resource type="PackedScene" uid="uid://u636dd812d13" path="res://scenes/mek/S3.scn" id="78_51f6u"]
+[ext_resource type="PackedScene" uid="uid://dg846ifg16cib" path="res://scenes/mek/M1.scn" id="79_ja00h"]
+[ext_resource type="PackedScene" uid="uid://babefvkeiww5y" path="res://scenes/mek/M2.scn" id="80_6tm2r"]
+[ext_resource type="PackedScene" uid="uid://5k0pt1m6qmux" path="res://scenes/mek/M3.scn" id="81_1jaf4"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
-[ext_resource type="Texture2D" uid="uid://ct5fmcph4qs8w" path="res://assets/portraits/l0_por10.png" id="206_e427o"]
 [ext_resource type="AudioStream" uid="uid://wk8q65oxnp26" path="res://audio/atmosphere/skyline.wav" id="210_8duua"]
-[ext_resource type="Texture2D" uid="uid://cdmjshsx0e8bl" path="res://assets/portraits/mek_portraits/m3.png" id="216_5mq2j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_awpv3"]
 texture = ExtResource("8_dbvr3")
@@ -656,743 +493,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7hgn"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0687l"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("54_0sstk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("55_iu4gg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("56_adhjb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("57_abi5d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("58_rkokc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("59_o7bdy")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_hhvw0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_uaw8l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_nc3sx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_tjtdp")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("32_t4kxi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_ftg88")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_lshab")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_up2kh")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ysxro"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdokx"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-border_color = Color(0, 0, 0, 1)
-shadow_color = Color(1, 1, 1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_d38m7"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nereb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("65_427yu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("66_406yg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("67_kyl3a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("68_sn2n0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("69_odh28")
-}, {
-"duration": 1.0,
-"texture": ExtResource("70_j1xtl")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_jvr2c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_bkcit")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_t3ba0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_h1087")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("40_f6v4d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("41_nai6q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("42_wblun")
-}, {
-"duration": 1.0,
-"texture": ExtResource("43_mmseo")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dy3fm"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_j4fyl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("79_0vkwj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("80_re34x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("81_gw07b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("82_hytd5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("83_vposv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("84_nlvab")
-}, {
-"duration": 1.0,
-"texture": ExtResource("85_ndjde")
-}, {
-"duration": 1.0,
-"texture": ExtResource("86_30jek")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 24.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_wooqh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_5u7xi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_s7kuo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_q82x6")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("48_5idhf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_x2gpm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_7n2n1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_qi7dl")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltkee"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_jw2pv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("95_mku2u")
-}, {
-"duration": 1.0,
-"texture": ExtResource("96_bnp6d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("97_vy325")
-}, {
-"duration": 1.0,
-"texture": ExtResource("98_yd43p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("99_yxcog")
-}, {
-"duration": 1.0,
-"texture": ExtResource("100_4umaa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("101_mwi86")
-}, {
-"duration": 1.0,
-"texture": ExtResource("102_n2ct4")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_yqrix")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_ga7ne")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_026cw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_40n3o")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("56_xosj4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("57_m4i6s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("58_dba0d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("59_hmut7")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hh7vm"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xbywk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("111_p8swa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("112_13ker")
-}, {
-"duration": 1.0,
-"texture": ExtResource("113_ytqye")
-}, {
-"duration": 1.0,
-"texture": ExtResource("114_vuts8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("115_y64j7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("116_vm4w1")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_cus6i")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_x41fa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_b3mdo")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_2w4v8")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("64_7ylhe")
-}, {
-"duration": 1.0,
-"texture": ExtResource("65_rhjpq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("66_uaxo2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("67_tdjmx")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tcj72"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3pm7p"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("125_ko52x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("126_j41en")
-}, {
-"duration": 1.0,
-"texture": ExtResource("127_vo2sn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("128_cwode")
-}, {
-"duration": 1.0,
-"texture": ExtResource("129_w3434")
-}, {
-"duration": 1.0,
-"texture": ExtResource("130_pcctq")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_xhg42")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_iegjd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_2fmu2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_kj6py")
-}, {
-"duration": 1.0,
-"texture": ExtResource("31_mrfc4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_dtqos")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("74_ehwyy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("75_ndg2x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("76_u6mah")
-}, {
-"duration": 1.0,
-"texture": ExtResource("77_xqhwa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("78_hb5li")
-}, {
-"duration": 1.0,
-"texture": ExtResource("79_j1c1m")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nd8qg"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g37i7"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_3vkou"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("143_t2o8v")
-}, {
-"duration": 1.0,
-"texture": ExtResource("144_u54io")
-}, {
-"duration": 1.0,
-"texture": ExtResource("145_b8ylp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("146_h51ab")
-}, {
-"duration": 1.0,
-"texture": ExtResource("147_srfv5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("148_v1t5j")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("33_dwq7o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("34_ch6uw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("35_iu0qx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_0qnlt")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("84_04pty")
-}, {
-"duration": 1.0,
-"texture": ExtResource("85_j8mbc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("86_v1aot")
-}, {
-"duration": 1.0,
-"texture": ExtResource("87_i5djw")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7c6j"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ucyfv"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("157_cwuh5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("158_rghne")
-}, {
-"duration": 1.0,
-"texture": ExtResource("159_wgxf0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("160_27u6p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("161_2on2s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("162_pjyd4")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("45_056xh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_ndkcp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("47_noi3w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_vxq25")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("92_27agj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("93_w6otk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("94_qttdv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("95_tsux5")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trxu3"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n7ckd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("165_0nrcv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("166_3k2no")
-}, {
-"duration": 1.0,
-"texture": ExtResource("167_2tyas")
-}, {
-"duration": 1.0,
-"texture": ExtResource("168_cmnma")
-}, {
-"duration": 1.0,
-"texture": ExtResource("169_frjkr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("170_xm34r")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("49_4c31a")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_bc4vx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_eae12")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_hlggk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("53_af7ab")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("101_fh6pp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("102_hldbj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("103_1hcpa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("104_70ech")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8ldc"]
-shader = ExtResource("15_novbe")
-shader_parameter/color = Color(1, 1, 0, 1)
-shader_parameter/width = 2.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = true
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_xta3j"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("186_m06xv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("187_87avc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("188_qwj0w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("189_qlc2e")
-}, {
-"duration": 1.0,
-"texture": ExtResource("190_iuq7o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("191_coynu")
-}],
-"loop": true,
-"name": &"attack",
-"speed": 16.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("54_0o0eh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("55_o07a5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("56_vurao")
-}, {
-"duration": 1.0,
-"texture": ExtResource("57_5iowt")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("109_him20")
-}, {
-"duration": 1.0,
-"texture": ExtResource("110_shtea")
-}, {
-"duration": 1.0,
-"texture": ExtResource("111_22ga5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("112_m50g6")
-}],
-"loop": true,
-"name": &"move",
-"speed": 8.0
-}]
-
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 
-[node name="BattleManager" type="Node2D" parent="."]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D")]
 script = ExtResource("201_3h84r")
+node2D = NodePath("..")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
-zoom = Vector2(2.4, 2.4)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
@@ -1407,8 +519,8 @@ layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("5_h3ixq")
 camera = NodePath("../Camera2D")
-unitsAnimated2D = [NodePath("../R1_Area2D/AnimatedSprite2D"), NodePath("../R2_Area2D/AnimatedSprite2D"), NodePath("../R3_Area2D/AnimatedSprite2D"), NodePath("../R4_Area2D/AnimatedSprite2D"), NodePath("../S1_Area2D/AnimatedSprite2D"), NodePath("../S2_Area2D/AnimatedSprite2D"), NodePath("../S3_Area2D/AnimatedSprite2D"), NodePath("../M1_Area2D/AnimatedSprite2D"), NodePath("../M2_Area2D/AnimatedSprite2D"), NodePath("../M3_Area2D/AnimatedSprite2D")]
-unitsArray = [NodePath("../R1_Area2D"), NodePath("../R2_Area2D"), NodePath("../R3_Area2D"), NodePath("../R4_Area2D"), NodePath("../S1_Area2D"), NodePath("../S2_Area2D"), NodePath("../S3_Area2D"), NodePath("../M1_Area2D"), NodePath("../M2_Area2D"), NodePath("../M3_Area2D")]
+unitsAnimated2D = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+unitsArray = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
 structureArray = [null, null, null, NodePath("../Building_A_Area2D"), NodePath("../Building_B_Area2D"), null, NodePath("../Building_D_Area2D"), NodePath("../Building_E_Area2D"), NodePath("../Building_F_Area2D"), NodePath("../Tower_2__Area2D"), NodePath("../Stadium_2_Area2D"), NodePath("../District_2 _Area2D")]
 unitsCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_1 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
@@ -1434,12 +546,16 @@ offset_bottom = 410.0
 [node name="Hover_tile" parent="." instance=ExtResource("20_6l1y3")]
 
 [node name="Tower_Area2D" parent="." instance=ExtResource("58_822bk")]
+visible = false
 
 [node name="Stadium_Area2D" parent="." instance=ExtResource("59_iaybs")]
+visible = false
 
 [node name="District_Area2D" parent="." instance=ExtResource("60_6021t")]
+visible = false
 
 [node name="Tower_2__Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Tower"
@@ -1455,6 +571,7 @@ sprite_frames = SubResource("SpriteFrames_vh51c")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Tower_2__Area2D"]
 
 [node name="Stadium_2_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Stadium"
@@ -1470,6 +587,7 @@ sprite_frames = SubResource("SpriteFrames_7popn")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Stadium_2_Area2D"]
 
 [node name="District_2 _Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "District"
@@ -1485,6 +603,7 @@ sprite_frames = SubResource("SpriteFrames_k3m2e")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="District_2 _Area2D"]
 
 [node name="Building_A_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Building"
@@ -1500,6 +619,7 @@ sprite_frames = SubResource("SpriteFrames_g2pqx")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_A_Area2D"]
 
 [node name="Building_B_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Building"
@@ -1515,8 +635,10 @@ sprite_frames = SubResource("SpriteFrames_mlb7q")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_B_Area2D"]
 
 [node name="Building_C_Area2D" parent="." instance=ExtResource("69_glyil")]
+visible = false
 
 [node name="Building_D_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Building"
@@ -1532,6 +654,7 @@ sprite_frames = SubResource("SpriteFrames_g2pqx")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_D_Area2D"]
 
 [node name="Building_E_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Building"
@@ -1547,6 +670,7 @@ sprite_frames = SubResource("SpriteFrames_mlb7q")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_E_Area2D"]
 
 [node name="Building_F_Area2D" type="Area2D" parent="." groups=["structure"]]
+visible = false
 position = Vector2(209, -373)
 script = ExtResource("58_iso5e")
 structure_type = "Building"
@@ -1561,575 +685,35 @@ sprite_frames = SubResource("SpriteFrames_fh453")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_F_Area2D"]
 
-[node name="R1_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-153, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Angie"
-unit_type = "Ranged"
-unit_portrait = ExtResource("160_tgnoa")
-mek_portrait = ExtResource("62_igakx")
-unit_movement = 1
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
+[node name="R1_Area2D" parent="." instance=ExtResource("72_bmj6r")]
+visible = false
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="R1_Area2D"]
-material = SubResource("ShaderMaterial_e7hgn")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_0687l")
-animation = &"attack"
-autoplay = "default"
+[node name="R2_Area2D" parent="." instance=ExtResource("73_erb6r")]
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="R1_Area2D"]
+[node name="R3_Area2D" parent="." instance=ExtResource("74_yu7ae")]
+visible = false
 
-[node name="RayCast2D" type="RayCast2D" parent="R1_Area2D"]
+[node name="R4_Area2D" parent="." instance=ExtResource("75_i8i58")]
+visible = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="R1_Area2D"]
+[node name="S1_Area2D" parent="." instance=ExtResource("76_6rp17")]
+visible = false
 
-[node name="WhiteBorder" type="ColorRect" parent="R1_Area2D"]
-offset_left = -33.0
-offset_top = -90.0
-offset_right = 13.0
-offset_bottom = -78.0
+[node name="S2_Area2D" parent="." instance=ExtResource("77_o4myg")]
+visible = false
 
-[node name="BlackBorder" type="ColorRect" parent="R1_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
+[node name="S3_Area2D" parent="." instance=ExtResource("78_51f6u")]
+visible = false
 
-[node name="ProgressBar" type="ProgressBar" parent="R1_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
+[node name="M1_Area2D" parent="." instance=ExtResource("79_ja00h")]
+visible = false
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="R1_Area2D"]
+[node name="M2_Area2D" parent="." instance=ExtResource("80_6tm2r")]
+visible = false
 
-[node name="R2_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-233, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Marvette"
-unit_num = 1
-unit_type = "Ranged"
-unit_portrait = ExtResource("77_7gm8x")
-mek_portrait = ExtResource("79_i3xr7")
-unit_movement = 1
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="R2_Area2D"]
-material = SubResource("ShaderMaterial_d38m7")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_nereb")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="R2_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="R2_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="R2_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="R2_Area2D"]
-offset_left = -12.0
-offset_top = -90.0
-offset_right = 34.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="R2_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="R2_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="R2_Area2D"]
-
-[node name="R3_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-302, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Warheather"
-unit_num = 2
-unit_type = "Ranged"
-unit_portrait = ExtResource("92_6faaj")
-mek_portrait = ExtResource("95_d2q5j")
-unit_movement = 1
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="R3_Area2D"]
-material = SubResource("ShaderMaterial_dy3fm")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_j4fyl")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="R3_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="R3_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="R3_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="R3_Area2D"]
-offset_left = -20.0
-offset_top = -90.0
-offset_right = 26.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="R3_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="R3_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="R3_Area2D"]
-
-[node name="R4_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-367, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Tank"
-unit_num = 3
-unit_type = "Ranged"
-unit_portrait = ExtResource("109_usjr4")
-mek_portrait = ExtResource("79_cv140")
-unit_movement = 1
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="R4_Area2D"]
-material = SubResource("ShaderMaterial_ltkee")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_jw2pv")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="R4_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="R4_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="R4_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="R4_Area2D"]
-offset_left = -26.0
-offset_top = -90.0
-offset_right = 20.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="R4_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="R4_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="R4_Area2D"]
-
-[node name="S1_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-444, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Rogersan"
-unit_num = 4
-unit_type = "Support"
-unit_portrait = ExtResource("126_c2ixe")
-mek_portrait = ExtResource("131_f1vf3")
-unit_movement = 2
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="S1_Area2D"]
-material = SubResource("ShaderMaterial_hh7vm")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_xbywk")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="S1_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="S1_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="S1_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="S1_Area2D"]
-offset_left = -21.0
-offset_top = -90.0
-offset_right = 25.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="S1_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="S1_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="S1_Area2D"]
-
-[node name="S2_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-515, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Dutch"
-unit_num = 5
-unit_type = "Support"
-unit_portrait = ExtResource("141_qdrwe")
-mek_portrait = ExtResource("147_j5sgp")
-unit_movement = 2
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="S2_Area2D"]
-material = SubResource("ShaderMaterial_tcj72")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_3pm7p")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="S2_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="S2_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="S2_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="S2_Area2D"]
-offset_left = -19.0
-offset_top = -90.0
-offset_right = 27.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="S2_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="S2_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="S2_Area2D"]
-
-[node name="S3_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-material = SubResource("ShaderMaterial_nd8qg")
-use_parent_material = true
-position = Vector2(-591, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Spiderbot"
-unit_num = 6
-unit_type = "Support"
-unit_portrait = ExtResource("61_ndh5r")
-mek_portrait = ExtResource("167_qal85")
-unit_movement = 2
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="S3_Area2D"]
-material = SubResource("ShaderMaterial_g37i7")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_3vkou")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="S3_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="S3_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="S3_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="S3_Area2D"]
-offset_left = -19.0
-offset_top = -90.0
-offset_right = 27.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="S3_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="S3_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="S3_Area2D"]
-
-[node name="M1_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-655, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Slash"
-unit_num = 7
-unit_type = "Melee"
-unit_portrait = ExtResource("175_e5mdk")
-mek_portrait = ExtResource("183_40qw8")
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="M1_Area2D"]
-material = SubResource("ShaderMaterial_s7c6j")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_ucyfv")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="M1_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="M1_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="M1_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="M1_Area2D"]
-offset_left = -25.0
-offset_top = -90.0
-offset_right = 21.0
-offset_bottom = -78.0
-
-[node name="BlackBorder" type="ColorRect" parent="M1_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="M1_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="M1_Area2D"]
-
-[node name="M2_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-position = Vector2(-730, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Pantherbot"
-unit_num = 8
-unit_type = "Melee"
-unit_portrait = ExtResource("190_ukij7")
-mek_portrait = ExtResource("199_t4gef")
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="M2_Area2D"]
-material = SubResource("ShaderMaterial_trxu3")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_n7ckd")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="M2_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="M2_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="M2_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="M2_Area2D"]
-offset_left = -14.0
-offset_top = -74.0
-offset_right = 32.0
-offset_bottom = -62.0
-
-[node name="BlackBorder" type="ColorRect" parent="M2_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="M2_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="M2_Area2D"]
-
-[node name="M3_Area2D" type="Area2D" parent="." node_paths=PackedStringArray("progressbar") groups=["mek"]]
-material = SubResource("ShaderMaterial_nd8qg")
-use_parent_material = true
-position = Vector2(-797, -379)
-script = ExtResource("14_rf3si")
-unit_name = "Russ"
-unit_num = 9
-unit_type = "Melee"
-unit_portrait = ExtResource("206_e427o")
-mek_portrait = ExtResource("216_5mq2j")
-progressbar = NodePath("WhiteBorder/BlackBorder/ProgressBar")
-mek_sfx = Array[AudioStream]([ExtResource("64_6mywk"), ExtResource("65_llwce")])
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="M3_Area2D"]
-material = SubResource("ShaderMaterial_c8ldc")
-use_parent_material = true
-sprite_frames = SubResource("SpriteFrames_xta3j")
-animation = &"attack"
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="M3_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="M3_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="M3_Area2D"]
-
-[node name="WhiteBorder" type="ColorRect" parent="M3_Area2D"]
-offset_left = -20.0
-offset_top = -86.0
-offset_right = 26.0
-offset_bottom = -74.0
-
-[node name="BlackBorder" type="ColorRect" parent="M3_Area2D/WhiteBorder"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 10.0
-color = Color(0, 0, 0, 1)
-
-[node name="ProgressBar" type="ProgressBar" parent="M3_Area2D/WhiteBorder/BlackBorder"]
-modulate = Color(0, 1, 0, 1)
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 129.0
-offset_bottom = 15.0
-scale = Vector2(0.3, 0.3)
-theme_override_styles/background = SubResource("StyleBoxTexture_ysxro")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kdokx")
-max_value = 5.0
-step = 1.0
-value = 5.0
-fill_mode = 1
-show_percentage = false
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="M3_Area2D"]
+[node name="M3_Area2D" parent="." instance=ExtResource("81_1jaf4")]
+visible = false
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("200_rvj2l")
