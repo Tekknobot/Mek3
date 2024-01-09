@@ -48,6 +48,7 @@ var moving = false
 signal unit_used_turn
 
 @export var only_once : bool = true
+@export var only_once_structures : bool = true
 
 @export var map_sfx: Array[AudioStream]
 
@@ -55,6 +56,12 @@ var hovertile_type = 48
 var hovered_unit
 
 var moves_counter = 0;
+
+var structures: Array[Area2D]
+var buildings = []
+var towers = []
+var stadiums = []
+var districts = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -82,23 +89,6 @@ func _ready():
 					
 				break
 	
-	# Randomize structures at start	
-	for i in totalstructures:
-		while true:
-			var my_random_tile_x = rng.randi_range(1, 14)
-			var my_random_tile_y = rng.randi_range(1, 14)
-			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
-			var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
-			var ontile = false
-			for j in totalstructures:
-				if j != i and structureCoord[j] == tile_pos or structureCoord[j].x == tile_pos.x + 1 or structureCoord[j].x == tile_pos.x - 1 or structureCoord[j].y == tile_pos.y + 1 or structureCoord[j].y == tile_pos.y - 1:
-					ontile = true
-			if !ontile:
-				structureCoord[i] = tile_pos
-				structureArray[i].position = tile_center_pos
-				structureArray[i].z_index = tile_pos.x + tile_pos.y
-				break
-	
 	# Check if units are on structures
 	for i in get_node("../BattleManager").available_units.size():
 		for j in structureCoord.size():
@@ -108,7 +98,7 @@ func _ready():
 				unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y		
-						
+							
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):
@@ -129,16 +119,29 @@ func _process(_delta):
 		for i in get_node("../BattleManager").team_2.size():
 			if tile_pos == unitsCoord_2[i]:		
 				hovered_unit = i
-		
 
 	astar_grid.size = Vector2i(16, 16)
 	astar_grid.cell_size = Vector2(1, 1)
 	astar_grid.default_compute_heuristic = 1
 	astar_grid.diagonal_mode = 1
 	astar_grid.update()
+
+	buildings = get_tree().get_nodes_in_group("buildings")
+	towers = get_tree().get_nodes_in_group("towers")
+	stadiums = get_tree().get_nodes_in_group("stadiums")
+	districts = get_tree().get_nodes_in_group("districts")
+
+	if only_once_structures == true:
+		only_once_structures = false
+		structures.append_array(buildings)
+		structures.append_array(towers)
+		structures.append_array(stadiums)
+		structures.append_array(districts)
+
+	print(structures.size())
 		
-	for i in totalstructures:
-		var structure_pos = local_to_map(structureArray[i].position)
+	for i in structures.size():
+		var structure_pos = local_to_map(structures[i].position)
 		astar_grid.set_point_solid(structure_pos, true)	
 	
 	for i in get_node("../BattleManager").available_units.size():
@@ -832,7 +835,6 @@ func _input(event):
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").team_1.size():
 				if get_node("../BattleManager").team_1[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").team_1[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 18:					
-
 					#Remove hover tiles										
 					for j in grid_height:
 						for k in grid_width:
@@ -844,6 +846,7 @@ func _input(event):
 					get_node("../BattleManager").team_1[i].get_child(0).play("move")
 					hovertile.hide()
 					moving = true
+					
 					# Find path and set hover cells
 					for h in patharray.size():
 						await get_tree().create_timer(0.01).timeout
@@ -859,25 +862,29 @@ func _input(event):
 						get_child(1).stream = map_sfx[2]
 						get_child(1).play()				
 						await get_tree().create_timer(0.35).timeout
-						
-					moves_counter += 1
-						
+					
 					# Remove hover cells
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
 					
 					moving = false
+					
 					hovertile.show()
 					# Set moving to false			
 					var unit_pos = local_to_map(get_node("../BattleManager").team_1[i].position)
 					get_node("../BattleManager").team_1[i].z_index = unit_pos.x + unit_pos.y													
 					get_node("../BattleManager").team_1[i].get_child(0).play("default")
-
+					
 					#Remove hover tiles										
 					for j in grid_height:
 						for k in grid_width:
 							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
 					
+					var just_moved = true
+					if just_moved == true:
+						moves_counter += 1
+						just_moved = false
+						
 					await get_tree().create_timer(1).timeout
 					
 				get_node("../BattleManager").team_1[i].get_child(0).set_offset(Vector2(0,0))		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=320 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=324 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -122,13 +122,16 @@
 [ext_resource type="Texture2D" uid="uid://dljrhfrgdgmpf" path="res://assets/units/M3/m3idle_4.png" id="57_5iowt"]
 [ext_resource type="Texture2D" uid="uid://hj3b4pqxb88s" path="res://assets/units/R1/r1atk_4.png" id="57_abi5d"]
 [ext_resource type="Texture2D" uid="uid://cqu2bbw2pe101" path="res://assets/units/R4/r4walk_2.png" id="57_m4i6s"]
+[ext_resource type="PackedScene" uid="uid://pi3pl1af5tf7" path="res://scenes/tower.scn" id="58_822bk"]
 [ext_resource type="Texture2D" uid="uid://cv1jgk4jiukw3" path="res://assets/units/R4/r4walk_3.png" id="58_dba0d"]
 [ext_resource type="Script" path="res://src/StructureManager.gd" id="58_iso5e"]
 [ext_resource type="Texture2D" uid="uid://ci73201d0belf" path="res://assets/units/R1/r1atk_5.png" id="58_rkokc"]
 [ext_resource type="Texture2D" uid="uid://dona3rut6wbpj" path="res://assets/structures/buildings 1_demolished.png" id="59_5udi8"]
 [ext_resource type="Texture2D" uid="uid://dyfsjcjsr45qx" path="res://assets/units/R4/r4walk_4.png" id="59_hmut7"]
+[ext_resource type="PackedScene" uid="uid://487xk20c0ohr" path="res://scenes/stadium.scn" id="59_iaybs"]
 [ext_resource type="Texture2D" uid="uid://ccyxxyuwvdhko" path="res://assets/units/R1/r1atk_6.png" id="59_o7bdy"]
 [ext_resource type="Texture2D" uid="uid://b5mv26smo4f57" path="res://assets/structures/buildings 2_demolished.png" id="60_7mq1r"]
+[ext_resource type="PackedScene" uid="uid://cxrpwp5pwylxs" path="res://scenes/district.scn" id="60_6021t"]
 [ext_resource type="Texture2D" uid="uid://flgbmwf56qbu" path="res://assets/portraits/l0_por01.png" id="61_ndh5r"]
 [ext_resource type="Texture2D" uid="uid://bnufrfddxsv04" path="res://assets/structures/buildings_demolished.png" id="61_wbp6o"]
 [ext_resource type="Texture2D" uid="uid://ddxvf3fg5l4qo" path="res://assets/portraits/mek_portraits/r1.png" id="62_igakx"]
@@ -145,6 +148,7 @@
 [ext_resource type="Texture2D" uid="uid://da4q0jgfnldae" path="res://assets/units/R2/r2atk_3.png" id="67_kyl3a"]
 [ext_resource type="Texture2D" uid="uid://bckfu4i16j3e4" path="res://assets/units/S1/s1move_4.png" id="67_tdjmx"]
 [ext_resource type="Texture2D" uid="uid://dholnt7jejqop" path="res://assets/units/R2/r2atk_4.png" id="68_sn2n0"]
+[ext_resource type="PackedScene" uid="uid://bm7pe7gyotf6g" path="res://scenes/building_c.scn" id="69_glyil"]
 [ext_resource type="Texture2D" uid="uid://1xlh4e44dkg4" path="res://assets/units/R2/r2atk_5.png" id="69_odh28"]
 [ext_resource type="Texture2D" uid="uid://33ulqg2m7d30" path="res://assets/units/R2/r2atk_6.png" id="70_j1xtl"]
 [ext_resource type="Texture2D" uid="uid://cgh5h07dqxull" path="res://assets/units/S2/s2move_1.png" id="74_ehwyy"]
@@ -1377,8 +1381,9 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile")]
 script = ExtResource("1_fooa0")
+hovertile = NodePath("Hover_tile")
 
 [node name="BattleManager" type="Node2D" parent="."]
 script = ExtResource("201_3h84r")
@@ -1404,7 +1409,7 @@ script = ExtResource("5_h3ixq")
 camera = NodePath("../Camera2D")
 unitsAnimated2D = [NodePath("../R1_Area2D/AnimatedSprite2D"), NodePath("../R2_Area2D/AnimatedSprite2D"), NodePath("../R3_Area2D/AnimatedSprite2D"), NodePath("../R4_Area2D/AnimatedSprite2D"), NodePath("../S1_Area2D/AnimatedSprite2D"), NodePath("../S2_Area2D/AnimatedSprite2D"), NodePath("../S3_Area2D/AnimatedSprite2D"), NodePath("../M1_Area2D/AnimatedSprite2D"), NodePath("../M2_Area2D/AnimatedSprite2D"), NodePath("../M3_Area2D/AnimatedSprite2D")]
 unitsArray = [NodePath("../R1_Area2D"), NodePath("../R2_Area2D"), NodePath("../R3_Area2D"), NodePath("../R4_Area2D"), NodePath("../S1_Area2D"), NodePath("../S2_Area2D"), NodePath("../S3_Area2D"), NodePath("../M1_Area2D"), NodePath("../M2_Area2D"), NodePath("../M3_Area2D")]
-structureArray = [NodePath("../Tower_Area2D"), NodePath("../Stadium_Area2D"), NodePath("../District_Area2D"), NodePath("../Building_A_Area2D"), NodePath("../Building_B_Area2D"), NodePath("../Building_C_Area2D"), NodePath("../Building_D_Area2D"), NodePath("../Building_E_Area2D"), NodePath("../Building_F_Area2D"), NodePath("../Tower_2__Area2D"), NodePath("../Stadium_2_Area2D"), NodePath("../District_2 _Area2D")]
+structureArray = [null, null, null, NodePath("../Building_A_Area2D"), NodePath("../Building_B_Area2D"), null, NodePath("../Building_D_Area2D"), NodePath("../Building_E_Area2D"), NodePath("../Building_F_Area2D"), NodePath("../Tower_2__Area2D"), NodePath("../Stadium_2_Area2D"), NodePath("../District_2 _Area2D")]
 unitsCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_1 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_2 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
@@ -1428,50 +1433,11 @@ offset_bottom = 410.0
 
 [node name="Hover_tile" parent="." instance=ExtResource("20_6l1y3")]
 
-[node name="Tower_Area2D" type="Area2D" parent="." groups=["structure"]]
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Tower"
-demolished_texture = ExtResource("59_5udi8")
+[node name="Tower_Area2D" parent="." instance=ExtResource("58_822bk")]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Tower_Area2D"]
-sprite_frames = SubResource("SpriteFrames_vh51c")
+[node name="Stadium_Area2D" parent="." instance=ExtResource("59_iaybs")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Tower_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tower_Area2D"]
-
-[node name="Stadium_Area2D" type="Area2D" parent="." groups=["structure"]]
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Stadium"
-demolished_texture = ExtResource("60_7mq1r")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Stadium_Area2D"]
-sprite_frames = SubResource("SpriteFrames_7popn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Stadium_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Stadium_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Stadium_Area2D"]
-
-[node name="District_Area2D" type="Area2D" parent="." groups=["structure"]]
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "District"
-demolished_texture = ExtResource("61_wbp6o")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="District_Area2D"]
-sprite_frames = SubResource("SpriteFrames_k3m2e")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="District_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="District_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="District_Area2D"]
+[node name="District_Area2D" parent="." instance=ExtResource("60_6021t")]
 
 [node name="Tower_2__Area2D" type="Area2D" parent="." groups=["structure"]]
 position = Vector2(209, -373)
@@ -1548,20 +1514,7 @@ sprite_frames = SubResource("SpriteFrames_mlb7q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_B_Area2D"]
 
-[node name="Building_C_Area2D" type="Area2D" parent="." groups=["structure"]]
-position = Vector2(209, -373)
-script = ExtResource("58_iso5e")
-structure_type = "Building"
-demolished_texture = ExtResource("66_8i07j")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Building_C_Area2D"]
-sprite_frames = SubResource("SpriteFrames_fh453")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Building_C_Area2D"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Building_C_Area2D"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Building_C_Area2D"]
+[node name="Building_C_Area2D" parent="." instance=ExtResource("69_glyil")]
 
 [node name="Building_D_Area2D" type="Area2D" parent="." groups=["structure"]]
 position = Vector2(209, -373)
