@@ -90,9 +90,12 @@ func _ready():
 				break
 	
 	# Check if units are on structures
+	await get_tree().create_timer(0.1).timeout
+	
 	for i in get_node("../BattleManager").available_units.size():
-		for j in structureCoord.size():
-			if unitsCoord[i] == structureCoord[j]:
+		for j in structures.size():
+			var structures_pos = local_to_map(structures[j].position)
+			if unitsCoord[i] == structures_pos:
 				var tile_pos = Vector2i(unitsCoord[i].x+1, unitsCoord[i].y+1)
 				var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2	
 				unitsCoord[i] = tile_pos
