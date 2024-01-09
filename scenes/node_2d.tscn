@@ -77,7 +77,7 @@
 [ext_resource type="PackedScene" uid="uid://3mmo2wm50618" path="res://scenes/mek/S1.scn" id="76_6rp17"]
 [ext_resource type="PackedScene" uid="uid://byoqc3a8exlvw" path="res://scenes/mek/S2.scn" id="77_o4myg"]
 [ext_resource type="PackedScene" uid="uid://u636dd812d13" path="res://scenes/mek/S3.scn" id="78_51f6u"]
-[ext_resource type="PackedScene" uid="uid://dg846ifg16cib" path="res://scenes/mek/M1.scn" id="79_ja00h"]
+[ext_resource type="PackedScene" uid="uid://dri5vpbxm6hm8" path="res://scenes/mek/M1.scn" id="79_ja00h"]
 [ext_resource type="PackedScene" uid="uid://babefvkeiww5y" path="res://scenes/mek/M2.scn" id="80_6tm2r"]
 [ext_resource type="PackedScene" uid="uid://5k0pt1m6qmux" path="res://scenes/mek/M3.scn" id="81_1jaf4"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
@@ -505,6 +505,7 @@ node2D = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
+zoom = Vector2(2.4, 2.4)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
@@ -519,8 +520,8 @@ layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("5_h3ixq")
 camera = NodePath("../Camera2D")
-unitsAnimated2D = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
-unitsArray = [NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath(""), NodePath("")]
+unitsAnimated2D = [null, null, null, null, null, null, null, null, null, null]
+unitsArray = [null, null, null, null, null, null, null, null, null, null]
 structureArray = [null, null, null, NodePath("../Building_A_Area2D"), NodePath("../Building_B_Area2D"), null, NodePath("../Building_D_Area2D"), NodePath("../Building_E_Area2D"), NodePath("../Building_F_Area2D"), NodePath("../Tower_2__Area2D"), NodePath("../Stadium_2_Area2D"), NodePath("../District_2 _Area2D")]
 unitsCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 unitsCoord_1 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
@@ -685,35 +686,45 @@ sprite_frames = SubResource("SpriteFrames_fh453")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Building_F_Area2D"]
 
-[node name="R1_Area2D" parent="." instance=ExtResource("72_bmj6r")]
+[node name="R1" parent="." instance=ExtResource("72_bmj6r")]
 visible = false
+unit_team = 1
 
-[node name="R2_Area2D" parent="." instance=ExtResource("73_erb6r")]
+[node name="R2" parent="." instance=ExtResource("73_erb6r")]
 visible = false
+unit_team = 1
 
-[node name="R3_Area2D" parent="." instance=ExtResource("74_yu7ae")]
+[node name="R3" parent="." instance=ExtResource("74_yu7ae")]
 visible = false
+unit_team = 2
 
-[node name="R4_Area2D" parent="." instance=ExtResource("75_i8i58")]
+[node name="R4" parent="." instance=ExtResource("75_i8i58")]
 visible = false
+unit_team = 2
 
-[node name="S1_Area2D" parent="." instance=ExtResource("76_6rp17")]
+[node name="S1" parent="." instance=ExtResource("76_6rp17")]
 visible = false
+unit_team = 1
 
-[node name="S2_Area2D" parent="." instance=ExtResource("77_o4myg")]
+[node name="S2" parent="." instance=ExtResource("77_o4myg")]
 visible = false
+unit_team = 1
 
-[node name="S3_Area2D" parent="." instance=ExtResource("78_51f6u")]
+[node name="S3" parent="." instance=ExtResource("78_51f6u")]
 visible = false
+unit_team = 2
 
-[node name="M1_Area2D" parent="." instance=ExtResource("79_ja00h")]
+[node name="M1" parent="." instance=ExtResource("79_ja00h")]
 visible = false
+unit_team = 1
 
-[node name="M2_Area2D" parent="." instance=ExtResource("80_6tm2r")]
+[node name="M2" parent="." instance=ExtResource("80_6tm2r")]
 visible = false
+unit_team = 2
 
-[node name="M3_Area2D" parent="." instance=ExtResource("81_1jaf4")]
+[node name="M3" parent="." instance=ExtResource("81_1jaf4")]
 visible = false
+unit_team = 2
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("200_rvj2l")

@@ -43,6 +43,7 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
+	await get_tree().create_timer(1).timeout
 	# Face towards moving direction
 	last_position = this_position
 	this_position = self.position
@@ -124,7 +125,6 @@ func _process(_delta):
 		var unit_global_pos = self.position
 		var unit_pos = get_node("../TileMap").local_to_map(unit_global_pos)
 		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
-
 		
 	# Z Index Layering
 	if self.unit_team == 1:

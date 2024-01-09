@@ -37,15 +37,10 @@ func _ready():
 	get_node("../TurnManager").start()
 				
 	available_units = get_tree().get_nodes_in_group("mek_scenes")
-	await get_tree().create_timer(0.1).timeout
-	team_arrays()
 
 	var R1_inst = R1.instantiate()
 	node2D.add_child(R1_inst)
 	R1_inst.add_to_group("mek_scenes")
-	#var R1_pos = Vector2i(0, 0)
-	#var R1_center_pos = get_node("../TileMap").map_to_local(R1_pos) + Vector2(0,0) / 2	
-	#R1_inst.position = R1_center_pos
 
 	var R2_inst = R2.instantiate()
 	node2D.add_child(R2_inst)
@@ -82,6 +77,9 @@ func _ready():
 	var M3_inst = M3.instantiate()
 	node2D.add_child(M3_inst)
 	M3_inst.add_to_group("mek_scenes")
+	
+	team_arrays()
+	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -302,6 +300,7 @@ func get_random():
 	return random_int	
 	
 func team_arrays():
+	
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
 			team_1.append(available_units[i])
@@ -312,11 +311,11 @@ func team_arrays():
 
 	for i in team_1.size():	
 		team_1[i].unit_num = i
-		#print(team_1[i].unit_name, " Team " , team_1[i].unit_team, " Unit. ", team_1[i].unit_num)
+		print(team_1[i].unit_name, " Team " , team_1[i].unit_team, " Unit. ", team_1[i].unit_num)
 			
 	for i in team_2.size():	
 		team_2[i].unit_num = i
-		#print(team_2[i].unit_name, " Team " , team_2[i].unit_team, " Unit. ", team_2[i].unit_num)
+		print(team_2[i].unit_name, " Team " , team_2[i].unit_team, " Unit. ", team_2[i].unit_num)
 
 	# Team 1 color
 	for i in team_1.size():
