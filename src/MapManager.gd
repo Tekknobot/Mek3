@@ -180,7 +180,6 @@ func _process(_delta):
 	if moves_counter == 2:
 		get_node("../TurnManager").advance_turn()
 		moves_counter = 0
-	
 																				
 func _input(event):						
 	# Click and drag to move unit	

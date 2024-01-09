@@ -197,7 +197,7 @@ func generate_roads_and_tiles():
 			move(random_key)	
 			
 	# Roads		
-	for h in 2:
+	for h in 3:
 		var structure_group = get_tree().get_nodes_in_group("towers")
 		var structure_global_pos = structure_group[h].position
 		var structure_pos = Map.local_to_map(structure_global_pos)
@@ -248,7 +248,9 @@ func check_duplicates(a):
 				is_dupe = true
 				found_dupe = true
 				print("duplicate")
-				a[j].free()
+				var a_pos = Map.local_to_map(a[j].position)	
+				var a_global = Map.map_to_local(Vector2i(a_pos.x+1, a_pos.y+1)) + Vector2(0,0) / 2	
+				a[j].position = a_global
 				break			
 			
 			
