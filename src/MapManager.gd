@@ -90,7 +90,7 @@ func _ready():
 				break
 	
 	# Check if units are on structures
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.2).timeout
 	
 	for i in get_node("../BattleManager").available_units.size():
 		for j in structures.size():
@@ -187,11 +187,14 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
-		
+			
+	for i in structures.size():
+		var structure_pos = local_to_map(structures[i].position)
+		structureCoord[i] = structure_pos
 		
 	if moves_counter == 2:
-		get_node("../TurnManager").advance_turn()
 		moves_counter = 0
+		get_node("../TurnManager").advance_turn()
 																				
 func _input(event):						
 	# Click and drag to move unit	
@@ -948,7 +951,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_1 == true:
-									for k in structureArray.size():
+									for k in structures.size():
 										if tile_pos.x-j >= 0:
 											set_cell(1, Vector2i(tile_pos.x-j, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x-j, tile_pos.y):
@@ -960,7 +963,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_2 == true:											
-									for k in structureArray.size():																						
+									for k in structures.size():																						
 										if tile_pos.y+j <= 15:
 											set_cell(1, Vector2i(tile_pos.x, tile_pos.y+j), hovertile_type, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y+j):
@@ -972,7 +975,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_3 == true:											
-									for k in structureArray.size():																													
+									for k in structures.size():																													
 										if tile_pos.x+j <= 15:
 											set_cell(1, Vector2i(tile_pos.x+j, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x+j, tile_pos.y):
@@ -984,7 +987,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_4 == true:											
-									for k in structureArray.size():																											
+									for k in structures.size():																											
 										if tile_pos.y-j >= 0:									
 											set_cell(1, Vector2i(tile_pos.x, tile_pos.y-j), hovertile_type, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y-j):

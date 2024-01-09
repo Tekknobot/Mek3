@@ -135,15 +135,15 @@ func _process(_delta):
 		get_node("../TileMap").unitsCoord_2[unit_num] = tile_pos
 		get_node("../BattleManager").team_2[unit_num].z_index = tile_pos.x + tile_pos.y
 	
-	#Structure collisions			
-	for i in get_node("../TileMap").totaltiles:
-		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		if unit_center_pos == get_node("../TileMap").structureCoord[i]:
-			var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2			
-			for j in get_node("../TileMap").structureArray.size():
-				if get_node("../TileMap").structureArray[j].position == unit_cell_center_pos:
-					unit_min = 0	
-					get_node("../TileMap").structureArray[j].get_child(0).play("demolished")	
+	##Structure collisions			
+	#for i in get_node("../TileMap").totaltiles:
+		#var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
+		#if unit_center_pos == get_node("../TileMap").structureCoord[i]:
+			#var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2			
+			#for j in get_node("../TileMap").structureArray.size():
+				#if get_node("../TileMap").structureArray[j].position == unit_cell_center_pos:
+					#unit_min = 0	
+					#get_node("../TileMap").structureArray[j].get_child(0).play("demolished")	
 			
 	# Check for Team Mek collisions	
 	for i in get_node("../BattleManager").team_1.size():
