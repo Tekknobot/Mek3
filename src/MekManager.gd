@@ -63,7 +63,7 @@ func _process(_delta):
 	
 	#Mouse hover
 	if flag_coroutine == false:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 		flag_coroutine = true
 
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
