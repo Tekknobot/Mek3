@@ -25,6 +25,7 @@ var this_position: Vector2
 var flag_coroutine = false
 
 @export var only_once : bool = true
+
 var audio_flag = true
 
 var hovered_unit: int
@@ -134,7 +135,7 @@ func _process(_delta):
 	#if self.unit_team == 2:
 		#get_node("../TileMap").unitsCoord_2[unit_num] = tile_pos
 		#get_node("../BattleManager").team_2[unit_num].z_index = tile_pos.x + tile_pos.y
-	
+						
 	#Structure collisions			
 	for i in get_node("../TileMap").totaltiles:
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
