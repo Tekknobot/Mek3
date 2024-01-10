@@ -151,7 +151,7 @@ func _process(_delta):
 		var structure_pos = local_to_map(structures[i].position)
 		structureCoord[i] = structure_pos
 	
-	print(moves_counter)	
+	#print(moves_counter)	
 	if moves_counter >= 2:
 		moves_counter = 0
 		get_node("../TurnManager").advance_turn()
@@ -318,7 +318,7 @@ func _input(event):
 						get_child(1).play()	
 						
 						
-						await setLinePointsToBezierCurve(line_2d, right_clicked_unit.position, Vector2(0,-150), Vector2(0,-150), get_node("../BattleManager").available_units[h].position)
+						await setLinePointsToBezierCurve(line_2d, right_clicked_unit.position, Vector2(0,-100), Vector2(0,-100), get_node("../BattleManager").available_units[h].position)
 													
 						if right_clicked_pos.y < clicked_pos.y and right_clicked_unit.position.x > attack_center_pos.x:
 							
@@ -632,7 +632,7 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	curve.add_point(b, preB, Vector2.ZERO)
 	line.points = curve.get_baked_points()	
 	
-	
+	sprite_2d.show()
 	sprite_2d.position = line.points[0] 
 	for i in line.points.size():
 		await get_tree().create_timer(0.005).timeout
@@ -640,12 +640,14 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 											
 	get_child(1).stream = map_sfx[4]
 	get_child(1).play()	
-
+	
+	sprite_2d.hide()
 	var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 	var explosion_instance = explosion.instantiate()
 	var explosion_pos = get_node("../TileMap").map_to_local(sprite_2d.position) + Vector2(0,0) / 2
-			
+	
+	var tile_pos = get_node("../TileMap").local_to_map(sprite_2d.position)		
 	explosion_instance.set_name("explosion")
 	get_parent().add_child(explosion_instance)
 	explosion_instance.position = sprite_2d.position	
-	explosion_instance.z_index = 100		
+	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 1			

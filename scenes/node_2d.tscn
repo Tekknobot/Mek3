@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=113 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -57,6 +57,9 @@
 [ext_resource type="AudioStream" uid="uid://cfjck3texeu4k" path="res://audio/sfx/Retro Blop 07.wav" id="55_txcw8"]
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
 [ext_resource type="Texture2D" uid="uid://cpfmjgqkc544n" path="res://assets/vfx/explosion/explosion_2.png" id="61_1hmiq"]
+[ext_resource type="Script" path="res://src/ProjectileManager.gd" id="62_85rtn"]
+[ext_resource type="Texture2D" uid="uid://cm5a6pwt0s6ur" path="res://assets/vfx/projectile1.png" id="63_gsnkf"]
+[ext_resource type="Texture2D" uid="uid://cplpvs53m3d8p" path="res://assets/vfx/projectile2.png" id="64_6ii5t"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -356,6 +359,20 @@ _data = {
 "water": SubResource("Animation_ctgyr")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqcni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_gsnkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_6ii5t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 16.0
+}]
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
@@ -423,7 +440,7 @@ autoplay = true
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
-default_color = Color(1, 1, 1, 0.196078)
+default_color = Color(1, 1, 1, 0)
 
 [node name="postA" type="Node2D" parent="."]
 position = Vector2(-57, 168)
@@ -434,5 +451,10 @@ position = Vector2(53, 170)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -211)
 texture = ExtResource("61_1hmiq")
+script = ExtResource("62_85rtn")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="Sprite2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+sprite_frames = SubResource("SpriteFrames_sqcni")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
