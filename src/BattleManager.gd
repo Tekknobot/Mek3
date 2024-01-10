@@ -11,8 +11,8 @@ var random_user = 0
 var team_1 = []
 var team_2 = []
 
-var team_1_group
-var team_2_group
+var score_1
+var score_2
 
 var arrays_set = false
 
@@ -65,18 +65,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
-	
-	team_1_group = get_tree().get_nodes_in_group("Team 1: Inactive")
-	if team_1_group.size() == 5:
-		await get_tree().create_timer(2).timeout
-		print("CPU WINS!")
-		get_tree().reload_current_scene();
-		
-	team_2_group = get_tree().get_nodes_in_group("Team 2: Inactive")
-	if team_2_group.size() == 5:
-		await get_tree().create_timer(2).timeout
-		get_tree().reload_current_scene()	
-		print("USER WINS!")
 
 func _input(event):
 	if event is InputEventKey:

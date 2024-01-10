@@ -157,7 +157,7 @@ func _process(_delta):
 	for i in meks.size():
 		var unit_center_pos = get_node("../BattleManager").available_units[i].position
 		var unit_pos = get_node("../TileMap").local_to_map(unit_center_pos)		
-		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15  and self.unit_team == 2:
+		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
 			meks[i].unit_min = 0					
 			
 	#Check health
@@ -171,9 +171,9 @@ func _process(_delta):
 		explosion_instance.set_name("explosion")
 		get_parent().add_child(explosion_instance)
 		explosion_instance.position = self.position	
-		explosion_instance.z_index = explosion_pos.x + explosion_pos.y
+		explosion_instance.z_index = 100
 		self.unit_status = "Inactive"
-		self.add_to_group("Team 2: Inactive")
+		self.add_to_group("Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
 		#get_node("../BattleManager").team_2.pop_at(unit_num)
 		#self.queue_free()
