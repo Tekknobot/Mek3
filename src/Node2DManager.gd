@@ -51,6 +51,7 @@ func _ready():
 		add_child(building_inst)
 		building_inst.add_to_group("buildings")		
 		building_inst.z_index = tile_pos.x + tile_pos.y
+		building_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))
 		
 
 	for i in 3: #stadiums
@@ -63,7 +64,8 @@ func _ready():
 		add_child(stadium_inst)	
 		stadium_inst.add_to_group("stadiums")	
 		stadium_inst.z_index = tile_pos.x + tile_pos.y
-		
+		stadium_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
+	
 	for i in 3: #towers
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
@@ -74,7 +76,8 @@ func _ready():
 		add_child(tower_inst)	
 		tower_inst.add_to_group("towers")	
 		tower_inst.z_index = tile_pos.x + tile_pos.y
-		
+		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
+			
 	for i in 3: #districts
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
@@ -85,6 +88,7 @@ func _ready():
 		add_child(district_inst)
 		district_inst.add_to_group("districts")		
 		district_inst.z_index = tile_pos.x + tile_pos.y				
+		district_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
 		
 	buildings = get_tree().get_nodes_in_group("buildings")
 	towers = get_tree().get_nodes_in_group("towers")

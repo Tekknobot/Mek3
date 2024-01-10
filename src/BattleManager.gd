@@ -70,7 +70,6 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			on_turn_over()
-
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
 				
@@ -135,7 +134,8 @@ func on_cpu_turn_started() -> void:
 		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 		get_node("../TileMap").get_child(1).play()	
 		await get_tree().create_timer(0.35).timeout
-	
+		
+	get_node("../TileMap").moves_counter += 1
 	for j in 16:
 		for k in 16:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
@@ -149,6 +149,7 @@ func on_cpu_turn_started() -> void:
 	for j in get_node("../BattleManager").available_units.size():
 		for i in 4:
 			if get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_user].position) == surrounding_cells[i]:
+				get_node("../TileMap").moves_counter += 1
 				var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_unit].position)) + Vector2(0,0) / 2	
 				
 				if available_units[random_user].scale.x == 1 and available_units[random_user].position.x > attack_center_pos.x:
@@ -220,7 +221,6 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)							
 						#print("B")
 						print('CPU moved')
-						on_turn_over()
 						return
 				
 				if i == 2:
@@ -238,7 +238,6 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)
 						#print("C")
 						print('CPU moved')
-						on_turn_over()
 						return
 				
 				if i == 3:
@@ -256,7 +255,6 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)
 						#print("D")
 						print('CPU moved')
-						on_turn_over()
 						return
 				return																		
 			

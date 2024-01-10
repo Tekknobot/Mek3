@@ -145,8 +145,9 @@ func _process(_delta):
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
 		structureCoord[i] = structure_pos
-		
-	if moves_counter == 2:
+	
+	print(moves_counter)	
+	if moves_counter >= 2:
 		moves_counter = 0
 		get_node("../TurnManager").advance_turn()
 																				
@@ -851,11 +852,7 @@ func _input(event):
 						for k in grid_width:
 							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
 					
-					var just_moved = true
-					if just_moved == true:
-						moves_counter += 1
-						just_moved = false
-						
+					moves_counter += 1	
 					await get_tree().create_timer(1).timeout
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))		
