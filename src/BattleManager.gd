@@ -62,6 +62,16 @@ func _ready():
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
 				break									
+
+	# Check if units are on structures
+	for i in get_node("../BattleManager").available_units.size():
+		for j in structures.size():
+			if available_units[i] == structures[j]:
+				var tile_pos = Vector2i(available_units[i].x+1, available_units[i].y+1)
+				var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2	
+				available_units[i] = tile_center_pos
+				get_node("../BattleManager").available_units[i].position = tile_center_pos
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
