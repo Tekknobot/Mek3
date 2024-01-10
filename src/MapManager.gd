@@ -319,6 +319,7 @@ func _input(event):
 						
 						
 						await setLinePointsToBezierCurve(line_2d, right_clicked_unit.position, Vector2(0,-100), Vector2(0,-100), get_node("../BattleManager").available_units[h].position)
+						get_node("../BattleManager").available_units[h].get_child(0).set_offset(Vector2(0,0))
 													
 						if right_clicked_pos.y < clicked_pos.y and right_clicked_unit.position.x > attack_center_pos.x:
 							

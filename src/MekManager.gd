@@ -162,7 +162,7 @@ func _process(_delta):
 	for i in meks.size():
 		var unit_center_pos = get_node("../BattleManager").available_units[i].position
 		var unit_pos = get_node("../TileMap").local_to_map(unit_center_pos)		
-		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
+		if unit_pos.x < 0 or unit_pos.x >= 15 or unit_pos.y < 0 or unit_pos.y >= 15:
 			meks[i].unit_min = 0					
 			
 	#Check health
