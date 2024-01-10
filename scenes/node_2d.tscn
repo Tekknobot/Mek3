@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=109 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -56,6 +56,7 @@
 [ext_resource type="AudioStream" uid="uid://c8iscv7pk8u8f" path="res://audio/sfx/panther_growl.wav" id="53_dpbk8"]
 [ext_resource type="AudioStream" uid="uid://cfjck3texeu4k" path="res://audio/sfx/Retro Blop 07.wav" id="55_txcw8"]
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
+[ext_resource type="Texture2D" uid="uid://cpfmjgqkc544n" path="res://assets/vfx/explosion/explosion_2.png" id="61_1hmiq"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -419,3 +420,19 @@ script = ExtResource("202_u6wjo")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("210_8duua")
 autoplay = true
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 4.0
+default_color = Color(1, 0, 0, 1)
+
+[node name="postA" type="Node2D" parent="."]
+position = Vector2(-57, 168)
+
+[node name="preB" type="Node2D" parent="."]
+position = Vector2(53, 170)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -211)
+texture = ExtResource("61_1hmiq")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Sprite2D"]

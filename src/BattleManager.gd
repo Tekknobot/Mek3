@@ -31,6 +31,7 @@ var S3 = preload("res://scenes/mek/S3.scn")
 
 var structures: Array[Area2D]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -60,11 +61,22 @@ func _ready():
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
-				break									
-				
+				break
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
+
+func draw_circle_arc(center, radius, angle_from, angle_to, color):
+	var nb_points = 32
+	var points_arc = PackedVector2Array()
+
+	for i in range(nb_points+1):
+		var angle_point = deg_to_rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
+		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
+
+	for index_point in range(nb_points):
+		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
 
 func _input(event):
 	if event is InputEventKey:
@@ -340,3 +352,4 @@ func spawn_meks():
 	M3_inst.add_to_group("mek_scenes")
 	
 	available_units = get_tree().get_nodes_in_group("mek_scenes")		
+	
