@@ -53,8 +53,9 @@ func _ready():
 			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
 			var ontile = false
 			for j in node2D.structures.size():
-				if node2D.structures[j].position == tile_center_pos:
-					ontile = true					
+				for k in get_node("../BattleManager").available_units.size():
+					if k != i and get_node("../TileMap").unitsCoord[k] == tile_pos or node2D.structures[j].position == tile_center_pos:		
+						ontile = true					
 			if !ontile: 
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
