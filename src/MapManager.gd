@@ -639,4 +639,13 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 		sprite_2d.position = line.points[i]				
 											
 	get_child(1).stream = map_sfx[4]
-	get_child(1).play()		
+	get_child(1).play()	
+
+	var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
+	var explosion_instance = explosion.instantiate()
+	var explosion_pos = get_node("../TileMap").map_to_local(sprite_2d.position) + Vector2(0,0) / 2
+			
+	explosion_instance.set_name("explosion")
+	get_parent().add_child(explosion_instance)
+	explosion_instance.position = sprite_2d.position	
+	explosion_instance.z_index = 100		
