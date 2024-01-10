@@ -38,9 +38,27 @@ var xp_requirements = 5
 
 var unique_used = false
 
+var structures: Array[Area2D]
+var buildings = []
+var towers = []
+var stadiums = []
+var districts = []
+
+var meks = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	buildings = get_tree().get_nodes_in_group("buildings")
+	towers = get_tree().get_nodes_in_group("towers")
+	stadiums = get_tree().get_nodes_in_group("stadiums")
+	districts = get_tree().get_nodes_in_group("districts")
+	
+	meks = get_tree().get_nodes_in_group("mek_scenes")
+	
+	structures.append_array(buildings)
+	structures.append_array(towers)
+	structures.append_array(stadiums)
+	structures.append_array(districts)	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
@@ -119,113 +137,44 @@ func _process(_delta):
 		var unit_global_pos = self.position
 		var unit_pos = get_node("../TileMap").local_to_map(unit_global_pos)
 		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
-
-	if self.position == Vector2(1000,1000):
-		return
-	else:		
-		var unit_global_pos = self.position
-		var unit_pos = get_node("../TileMap").local_to_map(unit_global_pos)
-		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
-		
-	## Z Index Layering
-	#if self.unit_team == 1:
-		#get_node("../TileMap").unitsCoord_1[unit_num] = tile_pos
-		#get_node("../BattleManager").team_1[unit_num].z_index = tile_pos.x + tile_pos.y
-	#
-	#if self.unit_team == 2:
-		#get_node("../TileMap").unitsCoord_2[unit_num] = tile_pos
-		#get_node("../BattleManager").team_2[unit_num].z_index = tile_pos.x + tile_pos.y
 						
 	#Structure collisions			
-	for i in get_node("../TileMap").totaltiles:
+	for i in structures.size():
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		if unit_center_pos == get_node("../TileMap").structureCoord[i]:
-			var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2			
-			for j in get_node("../TileMap").structures.size():
-				if get_node("../TileMap").structures[j].position == unit_cell_center_pos:
-					unit_min = 0	
-					get_node("../TileMap").structures[j].get_child(0).play("demolished")	
-			
-	# Check for Team Mek collisions	
-	for i in get_node("../BattleManager").team_1.size():
-		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		var unit_pos_1 = get_node("../TileMap").local_to_map(get_node("../BattleManager").team_1[i].position)
-		if unit_center_pos == unit_pos_1 and self.unit_num != get_node("../BattleManager").team_1[i].unit_num:
-			unit_min = 0		
-			
-	for i in get_node("../BattleManager").team_2.size():
-		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		var unit_pos_2 = get_node("../TileMap").local_to_map(get_node("../BattleManager").team_2[i].position)		
-		if unit_center_pos == unit_pos_2 and self.unit_num != get_node("../BattleManager").team_2[i].unit_num:
-			unit_min = 0		
+		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
+		if unit_center_pos == structure_pos:
+			self.unit_min = 0		
+			get_node("../TileMap").structures[i].get_child(0).play("demolished")
 
-	# Check for Oppostie Team collisions	
-	for i in get_node("../BattleManager").team_1.size():
-		for j in get_node("../BattleManager").team_2.size():
-			var unit_center_pos_1 = get_node("../TileMap").local_to_map(get_node("../BattleManager").team_1[i].position)
-			var unit_center_pos_2 = get_node("../TileMap").local_to_map(get_node("../BattleManager").team_2[j].position)		
-			if unit_center_pos_1 == unit_center_pos_2:
-				get_node("../BattleManager").team_1[i].unit_min = 0		
-				get_node("../BattleManager").team_2[j].unit_min = 0
-																							
-	#Check if bumped off map
-	if self.unit_team == 2:
-		var unit_center_pos = get_node("../BattleManager").available_units[unit_num].position
-		var unit_pos = get_node("../TileMap").local_to_map(unit_center_pos)		
-		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15  and self.unit_team == 2:
-			unit_min = 0	
-
-	if self.unit_team == 1:
-		var unit_center_pos = get_node("../BattleManager").available_units[unit_num].position
-		var unit_pos = get_node("../TileMap").local_to_map(unit_center_pos)		
-		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15 and self.unit_team == 1:
-			unit_min = 0
+	# Check for Mek collisions	
+	for i in meks.size():
+		for j in meks.size():
+			if j != i and self.position == meks[j].position:
+				self.unit_min = 0	
+				meks[j].unit_min = 0
 			
 	#Check health
-	if self.unit_min <= 0 and self.unit_team == 2 and only_once:
+	if self.unit_min <= 0 and only_once:
 		only_once = false
-		var unit_center_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[unit_num].position)		
+		var unit_center_pos = self.position		
 		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
 		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 		var explosion_instance = explosion.instantiate()
-		var explosion_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
+		var explosion_pos = get_node("../TileMap").map_to_local(unit_cell_center_pos) + Vector2(0,0) / 2
 		explosion_instance.set_name("explosion")
 		get_parent().add_child(explosion_instance)
-		explosion_instance.position = unit_cell_center_pos
+		explosion_instance.position = self.position	
 		explosion_instance.z_index = explosion_pos.x + explosion_pos.y
-		get_node("../BattleManager").available_units[unit_num].unit_status = "Inactive"
-		get_node("../BattleManager").available_units[unit_num].add_to_group("Team 2: Inactive")
+		self.unit_status = "Inactive"
+		self.add_to_group("Team 2: Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
 		#get_node("../BattleManager").team_2.pop_at(unit_num)
 		#self.queue_free()
-		get_node("../BattleManager").available_units[unit_num].hide()
+		self.hide()
 		await get_tree().create_timer(0.7).timeout
-		get_node("../BattleManager").available_units[unit_num].position = Vector2(1000,1000)	
-		print(get_node("../BattleManager").available_units[unit_num].unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
+		self.position = Vector2(1000,1000)	
+		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
 				
-		
-	if self.unit_min <= 0 and self.unit_team == 1 and only_once: 
-		only_once = false
-		var unit_center_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[unit_num].position)		
-		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
-		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
-		var explosion_instance = explosion.instantiate()
-		var explosion_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
-		explosion_instance.set_name("explosion")
-		get_node("../TileMap").add_child(explosion_instance)
-		get_parent().add_child(explosion_instance)
-		explosion_instance.position = unit_cell_center_pos
-		explosion_instance.z_index = explosion_pos.x + explosion_pos.y
-		get_node("../BattleManager").available_units[unit_num].unit_status = "Inactive"
-		get_node("../BattleManager").available_units[unit_num].add_to_group("Team 1: Inactive")
-		get_node("../Camera2D").shake(1, 50, 8)
-		#get_node("../BattleManager").team_1.pop_at(unit_num)
-		#self.queue_free()
-		get_node("../BattleManager").available_units[unit_num].hide()
-		await get_tree().create_timer(0.7).timeout
-		get_node("../BattleManager").available_units[unit_num].position = Vector2(1000,1000)	
-		print(get_node("../BattleManager").available_units[unit_num].unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
-		
 		
 	if self.xp >= self.xp_requirements:
 		self.xp_requirements += 5
