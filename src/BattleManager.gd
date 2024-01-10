@@ -54,10 +54,16 @@ func _ready():
 			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
 			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
 			var ontile = false
+			var onstructure = false
 			for j in get_node("../BattleManager").available_units.size():
 				if j != i and get_node("../TileMap").unitsCoord[j] == tile_pos or get_node("../TileMap").unitsCoord[j].x == tile_pos.x + 1 or get_node("../TileMap").unitsCoord[j].x == tile_pos.x - 1 or get_node("../TileMap").unitsCoord[j].y == tile_pos.y + 1 or get_node("../TileMap").unitsCoord[j].y == tile_pos.y - 1:
+					for k in node2D.structures.size():
+						var structure_pos = get_node("../TileMap").map_to_local(node2D.structures[k].position) + Vector2(0,0) / 2
+						var structure_coord = get_node("../TileMap").local_to_map(structure_pos)
+						if structure_coord == tile_pos:
+							onstructure = true			
 					ontile = true
-			if !ontile: 
+			if !ontile or !onstructure: 
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
