@@ -142,6 +142,7 @@ func _process(_delta):
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
 
+	# Emitter
 						
 	#Structure collisions			
 	for i in structures.size():
