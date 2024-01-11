@@ -67,17 +67,6 @@ func _ready():
 func _process(delta):
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 
-func draw_circle_arc(center, radius, angle_from, angle_to, color):
-	var nb_points = 32
-	var points_arc = PackedVector2Array()
-
-	for i in range(nb_points+1):
-		var angle_point = deg_to_rad(angle_from + i * (angle_to-angle_from) / nb_points - 90)
-		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
-
-	for index_point in range(nb_points):
-		draw_line(points_arc[index_point], points_arc[index_point + 1], color)
-
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
@@ -146,8 +135,7 @@ func on_cpu_turn_started() -> void:
 		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 		get_node("../TileMap").get_child(1).play()	
 		await get_tree().create_timer(0.35).timeout
-		
-	get_node("../TileMap").moves_counter += 1
+
 	for j in 16:
 		for k in 16:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
