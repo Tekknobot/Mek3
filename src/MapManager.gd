@@ -220,7 +220,7 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)										
-										get_node("../TurnManager").advance_turn()
+										get_node("../TurnManager").cpu_turn_started.emit()
 							if i == 1:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -237,7 +237,7 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)								
-										get_node("../TurnManager").advance_turn()
+										get_node("../TurnManager").cpu_turn_started.emit()
 							if i == 2:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -254,7 +254,7 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)					
-										get_node("../TurnManager").advance_turn()									
+										get_node("../TurnManager").cpu_turn_started.emit()									
 							if i == 3:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -271,7 +271,7 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)			
-										get_node("../TurnManager").advance_turn()
+										get_node("../TurnManager").cpu_turn_started.emit()
 							return	
 																							
 			# Ranged Attack
@@ -329,7 +329,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").advance_turn()
+							get_node("../TurnManager").cpu_turn_started.emit()
 							
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
@@ -345,7 +345,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)				
-							get_node("../TurnManager").advance_turn()
+							get_node("../TurnManager").cpu_turn_started.emit()
 							
 						if right_clicked_pos.x > clicked_pos.x and right_clicked_unit.position.x > attack_center_pos.x:	
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2										
@@ -361,7 +361,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").advance_turn()
+							get_node("../TurnManager").cpu_turn_started.emit()
 														
 						if right_clicked_pos.x < clicked_pos.x and right_clicked_unit.position.x < attack_center_pos.x:
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
@@ -378,7 +378,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").advance_turn()
+							get_node("../TurnManager").cpu_turn_started.emit()
 							
 						only_once = true
 												
@@ -523,7 +523,7 @@ func _input(event):
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
 					
-					get_node("../TurnManager").advance_turn()
+					get_node("../TurnManager").cpu_turn_started.emit()
 	
 					moving = false
 					

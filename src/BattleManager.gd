@@ -98,16 +98,16 @@ func on_cpu_turn_started() -> void:
 	random_user = rng.randi_range(0, available_units.size()-1)	
 	
 	if get_node("../BattleManager").available_units[random_unit].unit_team != 1:
-		on_cpu_turn_started()
+		get_node("../TurnManager").cpu_turn_started.emit()
 		return
 	
 	if get_node("../BattleManager").available_units[random_user].unit_team != 2:
-		on_cpu_turn_started()
+		get_node("../TurnManager").cpu_turn_started.emit()
 		return
 			
-	if get_node("../BattleManager").available_units[random_unit].unit_status == "Inactive":
+	if get_node("../BattleManager").available_units[random_unit].unit_status == "Inactive" or get_node("../BattleManager").available_units[random_user].unit_status == "Inactive":
 		print("Try UNIT again.")
-		on_cpu_turn_started()
+		get_node("../TurnManager").cpu_turn_started.emit()
 		return
 				
 	var cpu_tile_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_user].position)
