@@ -459,7 +459,39 @@ func _input(event):
 									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)						
-															
+
+							if get_node("../BattleManager").available_units[i].unit_movement == 4:
+								for k in surrounding_cells.size():
+									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)									
+									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
+								for k in surrounding_cells.size():
+									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+									set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)								
+								for k in surrounding_cells.size():
+									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+									set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)															
+								for k in surrounding_cells.size():
+									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+									set_cell(1, Vector2i(surrounding_cells[k].x+3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x-3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+3), 18, Vector2i(0, 0), 0)																																								
+									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-3), 18, Vector2i(0, 0), 0)	
+									
+								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+								set_cell(1, Vector2i(unit_pos.x+2, unit_pos.y+2), 18, Vector2i(0, 0), 0)																																								
+								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y-2), 18, Vector2i(0, 0), 0)															
+								set_cell(1, Vector2i(unit_pos.x+2, unit_pos.y-2), 18, Vector2i(0, 0), 0)																																								
+								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+2), 18, Vector2i(0, 0), 0)		
+
 			#print("Holding")
 
 					
