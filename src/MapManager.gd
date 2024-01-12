@@ -312,7 +312,6 @@ func _input(event):
 						get_child(1).stream = map_sfx[3]
 						get_child(1).play()	
 						
-						
 						await setLinePointsToBezierCurve(line_2d, right_clicked_unit.get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[h].get_node("Emitter").global_position)
 						get_node("../BattleManager").available_units[h].get_child(0).set_offset(Vector2(0,0))
 													
@@ -324,13 +323,13 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].position = tile_center_pos	
 							var unit_pos = local_to_map(get_node("../BattleManager").available_units[h].position)										
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y	
-							
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
+							get_node("../TurnManager").advance_turn()
 							
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
@@ -340,13 +339,13 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].position = tile_center_pos	
 							var unit_pos = local_to_map(get_node("../BattleManager").available_units[h].position)										
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y
-
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)										
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)				
+							get_node("../TurnManager").advance_turn()
 							
 						if right_clicked_pos.x > clicked_pos.x and right_clicked_unit.position.x > attack_center_pos.x:	
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2										
@@ -356,13 +355,13 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].position = tile_center_pos	
 							var unit_pos = local_to_map(get_node("../BattleManager").available_units[h].position)										
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y
-
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)	
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
+							get_node("../TurnManager").advance_turn()
 														
 						if right_clicked_pos.x < clicked_pos.x and right_clicked_unit.position.x < attack_center_pos.x:
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
@@ -379,8 +378,8 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-
-						get_node("../TurnManager").advance_turn()
+							get_node("../TurnManager").advance_turn()
+							
 						only_once = true
 												
 			#Remove hover tiles										
@@ -524,10 +523,7 @@ func _input(event):
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
 					
-					moves_counter += 1
-					if moves_counter >= 2:
-						get_node("../TurnManager").advance_turn()
-						moves_counter = 0
+					get_node("../TurnManager").advance_turn()
 	
 					moving = false
 					
