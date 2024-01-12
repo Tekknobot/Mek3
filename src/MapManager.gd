@@ -653,7 +653,7 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	sprite_2d.show()
 	sprite_2d.position = line.points[0] 
 	for i in line.points.size():
-		await get_tree().create_timer(0.005).timeout
+		await get_tree().create_timer(0).timeout
 		sprite_2d.position = line.points[i]				
 											
 	get_child(1).stream = map_sfx[4]

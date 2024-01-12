@@ -62,7 +62,7 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.1).timeout
 	# Face towards moving direction
 	last_position = this_position
 	this_position = self.position
