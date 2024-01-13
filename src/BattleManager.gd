@@ -109,10 +109,7 @@ func on_cpu_turn_started() -> void:
 			available_units[i].add_to_group("USER_Team")
 				
 	CPU_units = get_tree().get_nodes_in_group("CPU_Team")
-	USER_units = get_tree().get_nodes_in_group("USER_Team")
-	
-	random_user_unit = rng.randi_range(0, USER_units.size()-1)
-	random_cpu_unit = rng.randi_range(0, CPU_units.size()-1)	
+	USER_units = get_tree().get_nodes_in_group("USER_Team")	
 
 	for i in USER_units.size():				
 		var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[i].position)
@@ -184,13 +181,38 @@ func on_cpu_turn_started() -> void:
 			if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18:
 				print("Praise Jesus!")
 
+				var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
+				var target_random_cell = rng.randi_range(0, 3)
+				# Find Path
+				var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
+				
+				# Set hover cells
+				for h in patharray.size():
+					await get_tree().create_timer(0.01).timeout
+					get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
+				
+				get_node("../TileMap").hovertile.hide()
+				get_node("../BattleManager").CPU_units[i].get_child(0).play("move")
+				
+				# Move unit		
+				for h in patharray.size():
+					var tile_center_pos = get_node("../TileMap").map_to_local(patharray[h]) + Vector2(0,0) / 2
+					var tween = create_tween()
+					var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[i].position)
+					get_node("../BattleManager").CPU_units[i].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
+					tween.tween_property(get_node("../BattleManager").CPU_units[i], "position", tile_center_pos, 0.35)				
+					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
+					get_node("../TileMap").get_child(1).play()	
+					await get_tree().create_timer(0.35).timeout
+			
+			
 		#Erase hover tiles
 		await get_tree().create_timer(1).timeout
 		for j in 16:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 
-
+		get_node("../BattleManager").CPU_units[i].get_child(0).play("default")
 
 
 func on_turn_over() -> void:
