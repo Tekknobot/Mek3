@@ -4,9 +4,11 @@ var rng = RandomNumberGenerator.new()
 var _int = [0, 1, 2, 3, 4, 5, 6 ,7, 8, 9]
 var _int_full = []
 var available_units = []
+var CPU_units = []
+var USER_units = []
 
-var random_unit = 0
-var random_user = 0
+var random_user_unit = 0
+var random_cpu_unit = 0
 
 var team_1 = []
 var team_2 = []
@@ -31,6 +33,8 @@ var S3 = preload("res://scenes/mek/S3.scn")
 
 var structures: Array[Area2D]
 
+var stored_cells = []
+var team_two = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,7 +74,7 @@ func _process(delta):
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
-			on_turn_over()
+			get_node("../TurnManager").cpu_turn_started.emit()
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
 				
@@ -83,6 +87,13 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:
+	available_units = get_tree().get_nodes_in_group("mek_scenes")
+		
+	if get_node("../BattleManager").available_units[random_cpu_unit].unit_status == "Inactive" or get_node("../BattleManager").available_units[random_user_unit].unit_status == "Inactive":
+		print("Try UNIT again.")
+		get_node("../TurnManager").cpu_turn_started.emit()
+		return
+
 	#Remove hover tiles										
 	for j in 16:
 		for k in 16:
@@ -91,173 +102,97 @@ func on_cpu_turn_started() -> void:
 	print('CPU turn')
 	get_node("../TileMap").moving = true	
 	
-	# Pick Mek
-	available_units = get_tree().get_nodes_in_group("mek_scenes")
+	for i in available_units.size():
+		if available_units[i].unit_team == 2:
+			available_units[i].add_to_group("CPU_Team")
+		if available_units[i].unit_team == 1:
+			available_units[i].add_to_group("USER_Team")
+				
+	CPU_units = get_tree().get_nodes_in_group("CPU_Team")
+	USER_units = get_tree().get_nodes_in_group("USER_Team")
 	
-	random_unit = rng.randi_range(0, available_units.size()-1)
-	random_user = rng.randi_range(0, available_units.size()-1)	
-	
-	if get_node("../BattleManager").available_units[random_unit].unit_team != 1:
-		get_node("../TurnManager").cpu_turn_started.emit()
-		return
-	
-	if get_node("../BattleManager").available_units[random_user].unit_team != 2:
-		get_node("../TurnManager").cpu_turn_started.emit()
-		return
+	random_user_unit = rng.randi_range(0, USER_units.size()-1)
+	random_cpu_unit = rng.randi_range(0, CPU_units.size()-1)	
+
+	for i in USER_units.size():				
+		var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[i].position)
+		var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
+		var random_cell = rng.randi_range(0, 3)				
+		if get_node("../BattleManager").CPU_units[i].unit_movement == 1:
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)
+				if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)						
+		if get_node("../BattleManager").CPU_units[i].unit_movement == 2:
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)									
+		if get_node("../BattleManager").CPU_units[i].unit_movement == 3:
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)														
+				if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
 			
-	if get_node("../BattleManager").available_units[random_unit].unit_status == "Inactive" or get_node("../BattleManager").available_units[random_user].unit_status == "Inactive":
-		print("Try UNIT again.")
-		get_node("../TurnManager").cpu_turn_started.emit()
-		return
-				
-	var cpu_tile_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_user].position)
-	var user_tile_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_unit].position)
-	var surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_tile_pos)
-	var random_cell = rng.randi_range(0, 3)
-	# Find Path
-	var patharray = get_node("../TileMap").astar_grid.get_point_path(cpu_tile_pos, surrounding_cells[random_cell])
-	
-	# Set hover cells
-	for h in patharray.size():
-		await get_tree().create_timer(0.01).timeout
-		get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
-	
-	get_node("../TileMap").hovertile.hide()
-	get_node("../BattleManager").available_units[random_user].get_child(0).play("move")
-
-	# Move unit		
-	for h in patharray.size():
-		var tile_center_pos = get_node("../TileMap").map_to_local(patharray[h]) + Vector2(0,0) / 2
-		var tween = create_tween()
-		var random_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_user].position)
-		get_node("../BattleManager").available_units[random_user].z_index = random_unit_pos.x + random_unit_pos.y		
-		tween.tween_property(get_node("../BattleManager").available_units[random_user], "position", tile_center_pos, 0.35)				
-		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
-		get_node("../TileMap").get_child(1).play()	
-		await get_tree().create_timer(0.35).timeout
-
-	for j in 16:
-		for k in 16:
-			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
-	
-	get_node("../TileMap").hovertile.show()
-	get_node("../TileMap").moving = false
-	get_node("../BattleManager").available_units[random_user].get_child(0).play("default")
-	get_node("../Control").only_once = true	
-
-	# Attacks
-	for j in get_node("../BattleManager").available_units.size():
-		for i in 4:
-			if get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_user].position) == surrounding_cells[i]:
-				get_node("../TileMap").moves_counter += 1
-				var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_unit].position)) + Vector2(0,0) / 2	
-				
-				if available_units[random_user].scale.x == 1 and available_units[random_user].position.x > attack_center_pos.x:
-					available_units[random_user].scale.x = 1
-					#print("1")
-				elif available_units[random_user].scale.x == -1 and available_units[random_user].position.x < attack_center_pos.x:
-					available_units[random_user].scale.x = -1
-					#print("2")	
-				if available_units[random_user].scale.x == -1 and available_units[random_user].position.x > attack_center_pos.x:
-					available_units[random_user].scale.x = 1
-					#print("3")
-				elif available_units[random_user].scale.x == 1 and available_units[random_user].position.x < attack_center_pos.x:
-					available_units[random_user].scale.x = -1
-					#print("4")																																				
-																															
-				
-				get_node("../BattleManager").available_units[random_user].get_child(0).play("attack")
-				
-				var sfx
-				
-				if get_node("../BattleManager").available_units[random_user].unit_name == "Panther":
-					sfx = 5
-				else:
-					sfx = 4
-					
-				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[sfx]
-				get_node("../TileMap").get_child(1).play()		
-								
-				await get_tree().create_timer(0.5).timeout
-				get_node("../BattleManager").available_units[random_user].get_child(0).play("default")
-							
-				var _bumpedvector = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[random_unit].position)
-				
-				get_node("../Camera2D").shake(0.5, 30, 3)
-				
-				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
-				get_node("../TileMap").get_child(1).play()	
-				
-				if i == 0:
-					var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
-					#for k in team_1.size():
-					if surrounding_cells[i] == surrounding_cells[random_cell]:
-						get_node("../BattleManager").available_units[random_unit].position = tile_center_pos
-						var unit_pos = get_node("../TileMap").local_to_map(available_units[random_unit].position)
-						available_units[random_unit].position = tile_center_pos											
-						available_units[random_unit].z_index = unit_pos.x + unit_pos.y
-						var tween: Tween = create_tween()
-						tween.tween_property(available_units[random_unit], "modulate:v", 1, 0.50).from(5)
-						get_node("../BattleManager").available_units[random_user].xp += 1										
-						get_node("../BattleManager").available_units[random_unit].unit_min -= get_node("../BattleManager").available_units[random_user].unit_level
-						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)
-						#print("A")
-						print('CPU moved')
-						on_turn_over()
-						return
-				
-				if i == 1:
-					var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
-					#for k in team_1.size():
-					if surrounding_cells[i] == surrounding_cells[random_cell]:
-						get_node("../BattleManager").available_units[random_unit].position = tile_center_pos								
-						var unit_pos = get_node("../TileMap").local_to_map(available_units[random_unit].position)
-						available_units[random_unit].position = tile_center_pos											
-						available_units[random_unit].z_index = unit_pos.x + unit_pos.y
-						var tween: Tween = create_tween()
-						tween.tween_property(available_units[random_unit], "modulate:v", 1, 0.50).from(5)						
-						get_node("../BattleManager").available_units[random_user].xp += 1										
-						get_node("../BattleManager").available_units[random_unit].unit_min -= get_node("../BattleManager").available_units[random_user].unit_level
-						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)							
-						#print("B")
-						print('CPU moved')
-						return
-				
-				if i == 2:
-					var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
-					#for k in team_1.size():
-					if surrounding_cells[i] == surrounding_cells[random_cell]:
-						get_node("../BattleManager").available_units[random_unit].position = tile_center_pos								
-						var unit_pos = get_node("../TileMap").local_to_map(available_units[random_unit].position)
-						available_units[random_unit].position = tile_center_pos											
-						available_units[random_unit].z_index = unit_pos.x + unit_pos.y
-						var tween: Tween = create_tween()
-						tween.tween_property(available_units[random_unit], "modulate:v", 1, 0.50).from(5)
-						get_node("../BattleManager").available_units[random_user].xp += 1										
-						get_node("../BattleManager").available_units[random_unit].unit_min -= get_node("../BattleManager").available_units[random_user].unit_level
-						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)
-						#print("C")
-						print('CPU moved')
-						return
-				
-				if i == 3:
-					var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
-					#for k in team_1.size():
-					if surrounding_cells[i] == surrounding_cells[random_cell]:
-						get_node("../BattleManager").available_units[random_unit].position = tile_center_pos								
-						var unit_pos = get_node("../TileMap").local_to_map(available_units[random_unit].position)
-						available_units[random_unit].position = tile_center_pos											
-						available_units[random_unit].z_index = unit_pos.x + unit_pos.y	
-						var tween: Tween = create_tween()
-						tween.tween_property(available_units[random_unit], "modulate:v", 1, 0.50).from(5)
-						get_node("../BattleManager").available_units[random_user].xp += 1										
-						get_node("../BattleManager").available_units[random_unit].unit_min -= get_node("../BattleManager").available_units[random_user].unit_level
-						get_node("../BattleManager").available_units[random_unit].progressbar.set_value(get_node("../BattleManager").available_units[random_unit].unit_min)
-						#print("D")
-						print('CPU moved')
-						return
-				return																		
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)													
 			
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)						
+		if get_node("../BattleManager").CPU_units[i].unit_movement == 4:
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)									
+				if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
+					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)								
+			
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)																			
+			
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)																			
+			
+			for k in surrounding_cells.size():
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+3), 18, Vector2i(0, 0), 0)																																								
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-3), 18, Vector2i(0, 0), 0)	
+			
+			get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)																																								
+			get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)															
+			get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)																																								
+			get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
+		
+		for m in USER_units.size():
+			var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
+			if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18:
+				print("Praise Jesus!")
+
+		#Erase hover tiles
+		await get_tree().create_timer(1).timeout
+		for j in 16:
+			for k in 16:
+				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+
+
+
+
 func on_turn_over() -> void:
 	get_node("../TurnManager").advance_turn()
 	
