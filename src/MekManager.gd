@@ -135,7 +135,6 @@ func _process(_delta):
 	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
 	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 
-
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
 
@@ -147,8 +146,8 @@ func _process(_delta):
 		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
 		if unit_center_pos == structure_pos:
 			self.unit_min = 0		
-			get_node("../TileMap").structures[i].get_child(0).play("demolished")
-
+			get_node("../TileMap").structures[i].get_child(0).play("demolished")	
+			
 	# Check for Mek collisions	
 	for i in meks.size():
 		for j in meks.size():
@@ -178,10 +177,8 @@ func _process(_delta):
 		self.unit_status = "Inactive"
 		self.add_to_group("Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
-		#get_node("../BattleManager").team_2.pop_at(unit_num)
-		#self.queue_free()
 		self.hide()
-		await get_tree().create_timer(0.7).timeout
+		await get_tree().create_timer(1).timeout
 		self.position = Vector2(1000,1000)	
 		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
 				
@@ -208,5 +205,4 @@ func _process(_delta):
 
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max
-
-
+	

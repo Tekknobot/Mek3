@@ -279,8 +279,7 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
-						on_turn_over()
-						return
+						break
 					
 					if i == 1:
 						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
@@ -295,8 +294,7 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
-						on_turn_over()
-						return
+						break
 					
 					if i == 2:
 						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
@@ -311,8 +309,7 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
-						on_turn_over()
-						return
+						break
 					
 					if i == 3:
 						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
@@ -326,10 +323,10 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
-						print('CPU moved')
-						on_turn_over()
-						return
-					return		
+						print('CPU moved')	
+						break
+					on_turn_over()	
+					return	 	
 
 func on_turn_over() -> void:
 	get_node("../TurnManager").advance_turn()
