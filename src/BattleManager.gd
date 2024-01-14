@@ -244,7 +244,7 @@ func on_cpu_turn_started() -> void:
 						#print("4"z)																																				
 																																
 					
-					CPU_units[n].get_child(0).play("attack") #hello
+					CPU_units[n].get_child(0).play("attack")
 					
 					var sfx
 					
@@ -265,6 +265,71 @@ func on_cpu_turn_started() -> void:
 					
 					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
 					get_node("../TileMap").get_child(1).play()
+
+					if i == 0:
+						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
+						USER_units[j].position = tile_center_pos
+						var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+						USER_units[j].position = tile_center_pos											
+						USER_units[j].z_index = unit_pos.x + unit_pos.y
+						var tween: Tween = create_tween()
+						tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+						get_node("../BattleManager").CPU_units[n].xp += 1										
+						get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+						#print("A")
+						print('CPU moved')
+						on_turn_over()
+						return
+					
+					if i == 1:
+						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
+						USER_units[j].position = tile_center_pos
+						var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+						USER_units[j].position = tile_center_pos											
+						USER_units[j].z_index = unit_pos.x + unit_pos.y
+						var tween: Tween = create_tween()
+						tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+						get_node("../BattleManager").CPU_units[n].xp += 1										
+						get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+						#print("A")
+						print('CPU moved')
+						on_turn_over()
+						return
+					
+					if i == 2:
+						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
+						USER_units[j].position = tile_center_pos
+						var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+						USER_units[j].position = tile_center_pos											
+						USER_units[j].z_index = unit_pos.x + unit_pos.y
+						var tween: Tween = create_tween()
+						tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+						get_node("../BattleManager").CPU_units[n].xp += 1										
+						get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+						#print("A")
+						print('CPU moved')
+						on_turn_over()
+						return
+					
+					if i == 3:
+						var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
+						USER_units[j].position = tile_center_pos
+						var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+						USER_units[j].position = tile_center_pos											
+						USER_units[j].z_index = unit_pos.x + unit_pos.y
+						var tween: Tween = create_tween()
+						tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+						get_node("../BattleManager").CPU_units[n].xp += 1										
+						get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+						#print("A")
+						print('CPU moved')
+						on_turn_over()
+						return
+					return		
 
 func on_turn_over() -> void:
 	get_node("../TurnManager").advance_turn()
