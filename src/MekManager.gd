@@ -145,43 +145,23 @@ func _process(_delta):
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
 		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
 		if unit_center_pos == structure_pos:
-			self.unit_min = 0		
+			self.unit_min = 0	
+			check_health()	
 			get_node("../TileMap").structures[i].get_child(0).play("demolished")	
 			
 	# Check for Mek collisions	
 	for i in meks.size():
-		for j in meks.size():
-			if j != i and self.position == meks[j].position:
-				self.unit_min = 0	
-				meks[j].unit_min = 0
+		if meks[i] != self and self.position == meks[i].position:
+			check_health()
+			self.unit_min = 0	
 				
 	# Check is off map
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_center_position = get_node("../BattleManager").available_units[i].position
 		var unit_position = get_node("../TileMap").local_to_map(unit_center_position)		
 		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
-			get_node("../BattleManager").available_units[i].unit_min = 0					
-			
-	#Check health
-	if self.unit_min <= 0 and only_once:
-		only_once = false
-		var unit_center_pos = self.position		
-		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
-		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
-		var explosion_instance = explosion.instantiate()
-		var explosion_pos = get_node("../TileMap").map_to_local(unit_cell_center_pos) + Vector2(0,0) / 2
-		explosion_instance.set_name("explosion")
-		get_parent().add_child(explosion_instance)
-		explosion_instance.position = self.position	
-		explosion_instance.z_index = 100
-		self.unit_status = "Inactive"
-		self.add_to_group("Inactive")
-		get_node("../Camera2D").shake(0.5, 50, 8)
-		self.hide()
-		await get_tree().create_timer(1).timeout
-		self.position = Vector2(1000,1000)	
-		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
-				
+			check_health()
+			get_node("../BattleManager").available_units[i].unit_min = 0											
 		
 	if self.xp >= self.xp_requirements:
 		self.xp_requirements += 5
@@ -206,3 +186,24 @@ func _process(_delta):
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max
 	
+func check_health():
+	#Check health
+	if self.unit_min <= 0 and only_once:
+		only_once = false
+		var unit_center_pos = self.position		
+		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
+		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
+		var explosion_instance = explosion.instantiate()
+		var explosion_pos = get_node("../TileMap").map_to_local(unit_cell_center_pos) + Vector2(0,0) / 2
+		explosion_instance.set_name("explosion")
+		get_parent().add_child(explosion_instance)
+		explosion_instance.position = self.position	
+		explosion_instance.z_index = 100
+		self.unit_status = "Inactive"
+		self.add_to_group("Inactive")
+		get_node("../Camera2D").shake(0.5, 50, 8)
+		self.hide()
+		await get_tree().create_timer(1).timeout
+		self.position = Vector2(1000,1000)	
+		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
+			

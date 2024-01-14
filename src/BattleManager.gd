@@ -88,7 +88,7 @@ func on_user_turn_started() -> void:
 	
 func on_cpu_turn_started() -> void:
 	available_units = get_tree().get_nodes_in_group("mek_scenes")
-		
+			
 	if get_node("../BattleManager").available_units[random_cpu_unit].unit_status == "Inactive" or get_node("../BattleManager").available_units[random_user_unit].unit_status == "Inactive":
 		print("Try UNIT again.")
 		get_node("../TurnManager").cpu_turn_started.emit()
@@ -347,8 +347,10 @@ func team_arrays():
 	for i in available_units.size():
 		if i <= 4:
 			available_units[i].unit_team = 1
+			available_units[i].unit_status = "Active"
 		else:
-			available_units[i].unit_team = 2			
+			available_units[i].unit_team = 2
+			available_units[i].unit_status = "Active"			
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
