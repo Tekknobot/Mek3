@@ -244,7 +244,7 @@ func on_cpu_turn_started() -> void:
 						#print("4"z)																																				
 																																
 					
-					CPU_units[n].get_child(0).play("attack")
+					CPU_units[n].get_child(0).play("attack") #hello
 					
 					var sfx
 					
