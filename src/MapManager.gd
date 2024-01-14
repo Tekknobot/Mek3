@@ -150,6 +150,10 @@ func _process(_delta):
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
 		structureCoord[i] = structure_pos
+	
+	if moves_counter >= 5:
+		moves_counter = 0
+		get_node("../TurnManager").cpu_turn_started.emit()
 																				
 func _input(event):						
 	# Click and drag to move unit	
@@ -220,7 +224,8 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)										
-										get_node("../TurnManager").cpu_turn_started.emit()
+										#get_node("../TurnManager").cpu_turn_started.emit()
+										moves_counter += 1
 							if i == 1:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -237,7 +242,8 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)								
-										get_node("../TurnManager").cpu_turn_started.emit()
+										#get_node("../TurnManager").cpu_turn_started.emit()
+										moves_counter += 1
 							if i == 2:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -254,7 +260,8 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)					
-										get_node("../TurnManager").cpu_turn_started.emit()									
+										#get_node("../TurnManager").cpu_turn_started.emit()
+										moves_counter += 1									
 							if i == 3:
 								var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
 								for k in get_node("../BattleManager").available_units.size():
@@ -271,7 +278,8 @@ func _input(event):
 										get_node("../BattleManager").available_units[k].unit_min -= get_node("../BattleManager").available_units[h].unit_level
 										get_node("../BattleManager").available_units[h].xp += 1
 										get_node("../BattleManager").available_units[k].progressbar.set_value(get_node("../BattleManager").available_units[k].unit_min)			
-										get_node("../TurnManager").cpu_turn_started.emit()
+										#get_node("../TurnManager").cpu_turn_started.emit()
+										moves_counter += 1
 							return	
 																							
 			# Ranged Attack
@@ -329,7 +337,8 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").cpu_turn_started.emit()
+							#get_node("../TurnManager").cpu_turn_started.emit()
+							moves_counter += 1
 							
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
@@ -345,7 +354,8 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)				
-							get_node("../TurnManager").cpu_turn_started.emit()
+							#get_node("../TurnManager").cpu_turn_started.emit()
+							moves_counter += 1
 							
 						if right_clicked_pos.x > clicked_pos.x and right_clicked_unit.position.x > attack_center_pos.x:	
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2										
@@ -361,7 +371,8 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").cpu_turn_started.emit()
+							#get_node("../TurnManager").cpu_turn_started.emit()
+							moves_counter += 1
 														
 						if right_clicked_pos.x < clicked_pos.x and right_clicked_unit.position.x < attack_center_pos.x:
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
@@ -378,7 +389,8 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
-							get_node("../TurnManager").cpu_turn_started.emit()
+							#get_node("../TurnManager").cpu_turn_started.emit()
+							moves_counter += 1
 							
 						only_once = true
 												
@@ -391,7 +403,7 @@ func _input(event):
 			if tile_data is TileData:			
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
-					if unit_pos == tile_pos:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].unit_min > 0:
 						hovertile.set_offset(Vector2(0,-10))
 						get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,-10))
 						clicked_unit = get_node("../BattleManager").available_units[i].unit_num
@@ -523,8 +535,9 @@ func _input(event):
 					for h in patharray.size():
 						set_cell(1, patharray[h], -1, Vector2i(0, 0), 0)
 					
-					get_node("../TurnManager").cpu_turn_started.emit()
-	
+					#get_node("../TurnManager").cpu_turn_started.emit()
+					moves_counter += 1
+					
 					moving = false
 					
 					hovertile.show()
@@ -561,7 +574,7 @@ func _input(event):
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 
-					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].get_child(0).use_parent_material == false:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].get_child(0).use_parent_material == false and get_node("../BattleManager").available_units[i].unit_min > 0:
 						right_clicked_unit = get_node("../BattleManager").available_units[i]
 						unit_type = get_node("../BattleManager").available_units[i].unit_type
 						get_node("../BattleManager").available_units[i].position = hovertile.position
