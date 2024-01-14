@@ -111,9 +111,10 @@ func on_cpu_turn_started() -> void:
 	CPU_units = get_tree().get_nodes_in_group("CPU_Team")
 	USER_units = get_tree().get_nodes_in_group("USER_Team")	
 
-	for n in USER_units.size():				
+	for n in CPU_units.size():				
 		var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 		var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
+		
 		var random_cell = rng.randi_range(0, 3)				
 		if get_node("../BattleManager").CPU_units[n].unit_movement == 1:
 			for k in surrounding_cells.size():
@@ -180,6 +181,11 @@ func on_cpu_turn_started() -> void:
 				var target_random_cell = rng.randi_range(0, 3)
 				# Find Path
 				var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
+
+				#Erase hover tiles
+				for j in 16:
+					for k in 16:
+						get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 				
 				# Set hover cells
 				for h in patharray.size():
@@ -198,21 +204,31 @@ func on_cpu_turn_started() -> void:
 					tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
 					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 					get_node("../TileMap").get_child(1).play()	
-					await get_tree().create_timer(0.35).timeout
-			
+					await get_tree().create_timer(0.35).timeout		
+		
+		get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+		
+		await get_tree().create_timer(1).timeout
 			
 		#Erase hover tiles
 		for j in 16:
 			for k in 16:
-				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
+		get_node("../TileMap").hovertile.show()
 
+		get_node("../TileMap").hovertile.show()
+		get_node("../TileMap").moving = false
 		get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+		get_node("../Control").only_once = true	
 
-		for m in USER_units.size():
-			#Attacks
-			for p in 4:
-				if get_node("../TileMap").local_to_map(USER_units[m].position) == surrounding_cells[p]:
-					var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(USER_units[m].position)) + Vector2(0,0) / 2	
+		# Attacks
+		for j in USER_units.size():
+			var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
+			var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
+			for i in 4:
+				if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+					get_node("../TileMap").moves_counter += 1
+					var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
 					
 					if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
 						CPU_units[n].scale.x = 1
@@ -225,14 +241,14 @@ func on_cpu_turn_started() -> void:
 						#print("3")
 					elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
 						CPU_units[n].scale.x = -1
-						#print("4")																																				
+						#print("4"z)																																				
 																																
 					
 					CPU_units[n].get_child(0).play("attack")
 					
 					var sfx
 					
-					if CPU_units[n].unit_name == "Pantherbot":
+					if CPU_units[n].unit_name == "Panther":
 						sfx = 5
 					else:
 						sfx = 4
@@ -243,14 +259,12 @@ func on_cpu_turn_started() -> void:
 					await get_tree().create_timer(0.5).timeout
 					CPU_units[n].get_child(0).play("default")
 								
-					var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[n].position)
+					var _bumpedvector = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
 					
 					get_node("../Camera2D").shake(0.5, 30, 3)
 					
 					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
-					get_node("../TileMap").get_child(1).play()	
-					return	
-			
+					get_node("../TileMap").get_child(1).play()
 
 func on_turn_over() -> void:
 	get_node("../TurnManager").advance_turn()

@@ -131,12 +131,9 @@ func _process(_delta):
 		#hovered_unit = unit_num
 		
 	
-	if self.position == Vector2(1000,1000):
-		return
-	else:
-		var unit_global_pos = self.position
-		var unit_pos = get_node("../TileMap").local_to_map(unit_global_pos)
-		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+	var unit_global_position = self.position
+	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
+	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 
 
 	# Z index layering
@@ -161,8 +158,8 @@ func _process(_delta):
 				
 	# Check is off map
 	for i in get_node("../BattleManager").available_units.size():
-		var unit_center_pos = get_node("../BattleManager").available_units[i].position
-		var unit_pos = get_node("../TileMap").local_to_map(unit_center_pos)		
+		var unit_center_position = get_node("../BattleManager").available_units[i].position
+		var unit_position = get_node("../TileMap").local_to_map(unit_center_position)		
 		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
 			get_node("../BattleManager").available_units[i].unit_min = 0					
 			
