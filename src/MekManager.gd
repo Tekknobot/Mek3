@@ -79,6 +79,9 @@ func _process(_delta):
 	var mouse_pos = get_global_mouse_position()
 	var mouse_local_pos = get_node("../TileMap").local_to_map(mouse_pos)
 	var tile_pos = get_node("../TileMap").local_to_map(self.position)	
+
+	#A star
+	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
 	
 	#Mouse hover
 	if flag_coroutine == false:
@@ -129,9 +132,6 @@ func _process(_delta):
 		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
 		get_node("../Control").get_child(17).show()
 		#hovered_unit = unit_num
-
-	#A star
-	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
 	
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y

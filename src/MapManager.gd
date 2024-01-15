@@ -123,7 +123,7 @@ func _process(_delta):
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 		unitsCoord[i] = unit_pos
-		#get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 		
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
@@ -431,8 +431,7 @@ func _input(event):
 									set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)
 									if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
 										set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
-										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)
-										
+										set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)										
 							if get_node("../BattleManager").available_units[i].unit_movement == 2:
 								for k in surrounding_cells.size():
 									set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
