@@ -19,10 +19,16 @@ signal user_turn_started
 signal user_turn_ended
 signal cpu_turn_started
 
+var available_units = []
+
 func start() -> void:
 	self.turn = USER_TURN
 
-func advance_turn() -> void:
+func advance_turn() -> void:	
 	print('advancing turn')
+	
+	for i in available_units.size():
+		available_units[i].check_health()	
+	
 	# if value is 0, set to 1. if value is 1, set to 0 - binary operation
 	self.turn = int(self.turn + 1) & 1

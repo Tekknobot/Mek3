@@ -129,39 +129,9 @@ func _process(_delta):
 		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
 		get_node("../Control").get_child(17).show()
 		#hovered_unit = unit_num
-		
-	
-	var unit_global_position = self.position
-	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
-	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
-
-	# Emitter
-						
-	#Structure collisions			
-	for i in structures.size():
-		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
-		if unit_center_pos == structure_pos:
-			self.unit_min = 0	
-			check_health()	
-			get_node("../TileMap").structures[i].get_child(0).play("demolished")	
-			
-	# Check for Mek collisions	
-	for i in meks.size():
-		if meks[i] != self and self.position == meks[i].position:
-			check_health()
-			self.unit_min = 0	
-				
-	# Check is off map
-	for i in get_node("../BattleManager").available_units.size():
-		var unit_center_position = get_node("../BattleManager").available_units[i].position
-		var unit_position = get_node("../TileMap").local_to_map(unit_center_position)		
-		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
-			check_health()
-			get_node("../BattleManager").available_units[i].unit_min = 0											
 		
 	if self.xp >= self.xp_requirements:
 		self.xp_requirements += 5
@@ -186,7 +156,39 @@ func _process(_delta):
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max
 	
+	self.progressbar.set_value(self.unit_min)
+	
 func check_health():
+	var unit_global_position = self.position
+	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
+	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+						
+	#Structure collisions			
+	for i in structures.size():
+		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
+		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
+		if unit_center_pos == structure_pos:
+			self.unit_min = 0		
+			get_node("../TileMap").structures[i].get_child(0).play("demolished")	
+			#check_health()
+			break
+			
+	# Check for Mek collisions	
+	for i in meks.size():
+		if meks[i] != self and self.position == meks[i].position:
+			self.unit_min = 0
+			#check_health()	
+			break
+				
+	# Check is off map
+	for i in get_node("../BattleManager").available_units.size():
+		var unit_center_position = get_node("../BattleManager").available_units[i].position
+		var unit_position = get_node("../TileMap").local_to_map(unit_center_position)		
+		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
+			self.unit_min = 0
+			#check_health()											
+			break
+				
 	#Check health
 	if self.unit_min <= 0 and only_once:
 		only_once = false

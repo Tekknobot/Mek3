@@ -87,13 +87,16 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:
-	available_units = get_tree().get_nodes_in_group("mek_scenes")
+	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 			
 	if get_node("../BattleManager").available_units[random_cpu_unit].unit_status == "Inactive" or get_node("../BattleManager").available_units[random_user_unit].unit_status == "Inactive":
 		print("Try UNIT again.")
 		get_node("../TurnManager").cpu_turn_started.emit()
 		return
 
+	for i in available_units.size():
+		available_units[i].check_health()
+		
 	#Remove hover tiles										
 	for j in 16:
 		for k in 16:
@@ -279,6 +282,8 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
+						check_health_now()
+						await get_tree().create_timer(1).timeout
 						break
 					
 					if i == 1:
@@ -294,6 +299,8 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
+						check_health_now()
+						await get_tree().create_timer(1).timeout
 						break
 					
 					if i == 2:
@@ -309,6 +316,8 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')
+						check_health_now()
+						await get_tree().create_timer(1).timeout
 						break
 					
 					if i == 3:
@@ -324,8 +333,11 @@ func on_cpu_turn_started() -> void:
 						get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 						#print("A")
 						print('CPU moved')	
-						break
-					on_turn_over()	
+						check_health_now()
+						await get_tree().create_timer(1).timeout
+						break	
+						
+					on_turn_over()													
 					return	 	
 
 func on_turn_over() -> void:
@@ -412,4 +424,8 @@ func spawn_meks():
 	M3_inst.add_to_group("mek_scenes")
 	
 	available_units = get_tree().get_nodes_in_group("mek_scenes")		
-	
+
+
+func check_health_now():
+	for z in available_units.size():
+		available_units[z].check_health()		
