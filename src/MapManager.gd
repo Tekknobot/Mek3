@@ -123,17 +123,17 @@ func _process(_delta):
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 		unitsCoord[i] = unit_pos
-		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+		#get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 		
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 		unitsCoord_1[i] = unit_pos
-		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+		#get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 		
 	for i in get_node("../BattleManager").available_units.size():
 		var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 		unitsCoord_2[i] = unit_pos	
-		get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)				
+		#get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)				
 
 	#Remove tiles that are off map
 	for h in 16:

@@ -130,6 +130,9 @@ func _process(_delta):
 		get_node("../Control").get_child(17).show()
 		#hovered_unit = unit_num
 
+	#A star
+	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
+	
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
 		
@@ -177,6 +180,7 @@ func check_health():
 	for i in meks.size():
 		if meks[i] != self and self.position == meks[i].position:
 			self.unit_min = 0
+			meks[i].unit_min = 0
 			#check_health()	
 			break
 				
