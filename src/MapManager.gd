@@ -156,6 +156,8 @@ func _process(_delta):
 	if moves_counter >= 5:
 		moves_counter = 0
 		get_node("../TurnManager").cpu_turn_started.emit()
+
+	get_node("../Control").get_child(18).text = str(moves_counter) + " / 5"
 																				
 func _input(event):						
 	# Click and drag to move unit	
