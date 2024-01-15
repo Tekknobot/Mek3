@@ -201,7 +201,7 @@ func _input(event):
 							
 							var sfx
 							
-							if right_clicked_unit.unit_name == "Panther":
+							if right_clicked_unit.unit_name == "Pantherbot":
 								sfx = 5
 							else:
 								sfx = 3
