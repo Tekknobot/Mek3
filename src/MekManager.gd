@@ -86,11 +86,12 @@ func _process(_delta):
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
 
-	if moved == true:
+	if moved == true and unit_team == 1:
 		get_child(7).show()
 	else:
 		get_child(7).hide()
-	if attacked == true:
+		
+	if attacked == true and unit_team == 1:
 		get_child(8).show()	
 	else:
 		get_child(8).hide()	
