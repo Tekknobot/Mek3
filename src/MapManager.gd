@@ -599,11 +599,53 @@ func _input(event):
 							set_cell(1, Vector2i(tile_pos.x, tile_pos.y+1), hovertile_type, Vector2i(0, 0), 0)
 
 						if unit_type == "Support":
-							set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)	
-							set_cell(1, Vector2i(tile_pos.x-1, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
-							set_cell(1, Vector2i(tile_pos.x+1, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
-							set_cell(1, Vector2i(tile_pos.x, tile_pos.y-1), hovertile_type, Vector2i(0, 0), 0)
-							set_cell(1, Vector2i(tile_pos.x, tile_pos.y+1), hovertile_type, Vector2i(0, 0), 0)
+							var hoverflag_1 = true															
+							for j in 3:	
+								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+								if hoverflag_1 == true:
+									for k in structures.size():
+										if tile_pos.x-j >= 0:
+											set_cell(1, Vector2i(tile_pos.x-j, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
+											if structureCoord[k] == Vector2i(tile_pos.x-j, tile_pos.y):
+												hoverflag_1 = false
+												set_cell(1, Vector2i(tile_pos.x-j, tile_pos.y), -1, Vector2i(0, 0), 0)	
+												break	
+									
+							var hoverflag_2 = true										
+							for j in 3:	
+								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+								if hoverflag_2 == true:											
+									for k in structures.size():																						
+										if tile_pos.y+j <= 15:
+											set_cell(1, Vector2i(tile_pos.x, tile_pos.y+j), hovertile_type, Vector2i(0, 0), 0)
+											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y+j):
+												hoverflag_2 = false
+												set_cell(1, Vector2i(tile_pos.x, tile_pos.y+j), -1, Vector2i(0, 0), 0)
+												break
+
+							var hoverflag_3 = true	
+							for j in 3:	
+								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+								if hoverflag_3 == true:											
+									for k in structures.size():																													
+										if tile_pos.x+j <= 15:
+											set_cell(1, Vector2i(tile_pos.x+j, tile_pos.y), hovertile_type, Vector2i(0, 0), 0)
+											if structureCoord[k] == Vector2i(tile_pos.x+j, tile_pos.y):
+												hoverflag_3 = false
+												set_cell(1, Vector2i(tile_pos.x+j, tile_pos.y), -1, Vector2i(0, 0), 0)
+												break
+
+							var hoverflag_4 = true	
+							for j in 3:	
+								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
+								if hoverflag_4 == true:											
+									for k in structures.size():																											
+										if tile_pos.y-j >= 0:									
+											set_cell(1, Vector2i(tile_pos.x, tile_pos.y-j), hovertile_type, Vector2i(0, 0), 0)
+											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y-j):
+												hoverflag_4 = false
+												set_cell(1, Vector2i(tile_pos.x, tile_pos.y-j), -1, Vector2i(0, 0), 0)
+												break
 
 						if unit_type == "Ranged":
 							var hoverflag_1 = true															
