@@ -314,7 +314,8 @@ func _input(event):
 						
 						right_clicked_unit.get_child(0).play("attack")	
 						
-						right_clicked_unit.attacked = true	
+						if right_clicked_unit.unit_team == 1:
+							right_clicked_unit.attacked = true	
 						
 						await get_tree().create_timer(0.5).timeout
 						right_clicked_unit.get_child(0).play("default")		
