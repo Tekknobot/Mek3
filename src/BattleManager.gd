@@ -36,6 +36,11 @@ var structures: Array[Area2D]
 var stored_cells = []
 var team_two = []
 
+@onready var line_2d = $"../Line2D"
+@onready var post_a = $"../postA"
+@onready var pre_b = $"../preB"
+@onready var sprite_2d = $"../Sprite2D"
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -115,17 +120,122 @@ func on_cpu_turn_started() -> void:
 	CPU_units = get_tree().get_nodes_in_group("CPU_Team")
 	USER_units = get_tree().get_nodes_in_group("USER_Team")	
 
+
+	# CPU Check Attack Range
+	for n in CPU_units.size():
+		var cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
+
+		var current_unit = get_node("../BattleManager").CPU_units[n]
+		var unit_type = get_node("../BattleManager").CPU_units[n].unit_type
+		#get_node("../BattleManager").available_units[i].position = hovertile.position
+			
+		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+		get_node("../TileMap").get_child(1).play()							
+			
+		if unit_type == "Melee":
+			get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)	
+			get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-1, cpu_pos.y), 48, Vector2i(0, 0), 0)
+			get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+1, cpu_pos.y), 48, Vector2i(0, 0), 0)
+			get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-1), 48, Vector2i(0, 0), 0)
+			get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+1), 48, Vector2i(0, 0), 0)
+
+		if unit_type == "Support":
+			var hoverflag_1 = true															
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_1 == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)						
+					
+			var hoverflag_2 = true										
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_2 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
+
+			var hoverflag_3 = true	
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_3 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+
+			var hoverflag_4 = true	
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_4 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
+
+		if unit_type == "Ranged":
+			var hoverflag_1 = true															
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_1 == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							hoverflag_1 = false
+
+							
+			var hoverflag_2 = true										
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_2 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							hoverflag_2 = false
+														
+			var hoverflag_3 = true	
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_3 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)	
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							hoverflag_3 = false
+							 									
+			var hoverflag_4 = true	
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_4 == true:											
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)	
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							hoverflag_4 = false
+										 						
+		await get_tree().create_timer(1).timeout
+
+		#Erase hover tiles
+		for j in 16:
+			for k in 16:
+				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+
+	# CPU Movement range
 	for n in CPU_units.size():				
 		var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 		var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
-		
+	
 		var random_cell = rng.randi_range(0, 3)				
 		if get_node("../BattleManager").CPU_units[n].unit_movement == 1:
 			for k in surrounding_cells.size():
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)
 				if surrounding_cells[k].x <= -1 or surrounding_cells[k].y >= 16 or surrounding_cells[k].x >= 16 or surrounding_cells[k].y <= -1:
-					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)						
-					
+					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y), -1, Vector2i(0, 0), 0)											
 					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 					get_node("../TileMap").get_child(1).play()		
 		
@@ -138,8 +248,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-1, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+1), 18, Vector2i(0, 0), 0)																																								
-				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)									
-				
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-1), 18, Vector2i(0, 0), 0)													
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()
 		
@@ -157,8 +266,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-2, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+2), 18, Vector2i(0, 0), 0)																																								
-				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)						
-				
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-2), 18, Vector2i(0, 0), 0)										
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()
 		
@@ -181,8 +289,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x+3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)																																								
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x-3, surrounding_cells[k].y), 18, Vector2i(0, 0), 0)															
 				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y+3), 18, Vector2i(0, 0), 0)																																								
-				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-3), 18, Vector2i(0, 0), 0)	
-				
+				get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-3), 18, Vector2i(0, 0), 0)					
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()	
 			
@@ -231,7 +338,6 @@ func on_cpu_turn_started() -> void:
 		for j in 16:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
-		get_node("../TileMap").hovertile.show()
 
 		get_node("../TileMap").hovertile.show()
 		get_node("../TileMap").moving = false
@@ -437,7 +543,34 @@ func spawn_meks():
 	
 	available_units = get_tree().get_nodes_in_group("mek_scenes")		
 
-
 func check_health_now():
 	for z in available_units.size():
 		available_units[z].check_health()		
+
+func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
+	line.set_joint_mode(2)
+	var curve := Curve2D.new()
+	curve.add_point(a, Vector2.ZERO, postA)
+	curve.add_point(b, preB, Vector2.ZERO)
+	line.points = curve.get_baked_points()	
+	
+	get_node("../TileMap").sprite_2d.show()
+	get_node("../TileMap").sprite_2d.position = line.points[0] 
+	for i in line.points.size():
+		await get_tree().create_timer(0).timeout
+		get_node("../TileMap").sprite_2d.position = line.points[i]				
+											
+	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[4]
+	get_node("../TileMap").get_child(1).play()	
+	
+	get_node("../TileMap").sprite_2d.hide()
+	var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
+	var explosion_instance = explosion.instantiate()
+	var explosion_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").sprite_2d.position) + Vector2(0,0) / 2
+	
+	var tile_pos = get_node("../TileMap").local_to_map(get_node("../TileMap").sprite_2d.position)		
+	explosion_instance.set_name("explosion")
+	get_parent().add_child(explosion_instance)
+	explosion_instance.position = get_node("../TileMap").sprite_2d.position	
+	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 1
+	get_node("../Camera2D").shake(1, 30, 3)			
