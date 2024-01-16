@@ -286,6 +286,8 @@ func _input(event):
 										#get_node("../TurnManager").cpu_turn_started.emit()
 										moves_counter += 1
 										get_node("../BattleManager").check_health_now()
+										
+							get_node("../BattleManager").available_units[h].attacked = true			
 							return	
 																							
 			# Ranged Attack
