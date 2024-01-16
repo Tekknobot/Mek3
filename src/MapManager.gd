@@ -347,7 +347,7 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-							right_clicked_unit.attacked = true
+
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
 							get_node("../TileMap").get_node("../BattleManager").available_units[h].position = clicked_pos
@@ -365,8 +365,7 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-							right_clicked_unit.attacked = true
-							
+	
 						if right_clicked_pos.x > clicked_pos.x and right_clicked_unit.position.x > attack_center_pos.x:	
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2										
 							get_node("../TileMap").get_node("../BattleManager").available_units[h].position = clicked_pos
@@ -384,8 +383,7 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-							get_node("../BattleManager").available_units[h].attacked = true
-							right_clicked_unit.attacked = true							
+						
 						if right_clicked_pos.x < clicked_pos.x and right_clicked_unit.position.x < attack_center_pos.x:
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
 							get_node("../TileMap").get_node("../BattleManager").available_units[h].position = clicked_pos
@@ -403,8 +401,6 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-							get_node("../BattleManager").available_units[h].attacked = true
-							right_clicked_unit.attacked = true
 							
 						only_once = true
 												
