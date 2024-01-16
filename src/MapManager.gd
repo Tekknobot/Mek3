@@ -314,7 +314,7 @@ func _input(event):
 						
 						right_clicked_unit.get_child(0).play("attack")	
 						
-						get_node("../BattleManager").available_units[h].attacked = true	
+						right_clicked_unit.attacked = true	
 						
 						await get_tree().create_timer(0.5).timeout
 						right_clicked_unit.get_child(0).play("default")		
