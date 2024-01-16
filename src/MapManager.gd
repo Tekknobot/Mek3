@@ -113,8 +113,6 @@ func _process(_delta):
 		structures.append_array(towers)
 		structures.append_array(stadiums)
 		structures.append_array(districts)
-
-	#print(structures.size())
 		
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
@@ -154,8 +152,8 @@ func _process(_delta):
 		structureCoord[i] = structure_pos
 	
 	if moves_counter >= 5:
-		moves_counter = 0
-		get_node("../TurnManager").cpu_turn_started.emit()
+		moves_counter = 0	
+		get_node("../TurnManager").cpu_turn_started.emit()			
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 5"
 																				
@@ -295,7 +293,7 @@ func _input(event):
 				for h in get_node("../BattleManager").available_units.size():					
 					var clicked_center_pos = map_to_local(clicked_pos) + Vector2(0,0) / 2
 						
-					if clicked_center_pos == get_node("../BattleManager").available_units[h].position and get_cell_source_id(1, tile_pos) == 48 and right_clicked_unit.unit_type == "Ranged":
+					if clicked_center_pos == get_node("../BattleManager").available_units[h].position and get_cell_source_id(1, tile_pos) == 48 and right_clicked_unit.unit_type == "Ranged" and get_node("../BattleManager").available_units[h].attacked == false:
 						only_once = false
 						
 						var attack_center_pos = map_to_local(clicked_pos) + Vector2(0,0) / 2	
@@ -314,8 +312,7 @@ func _input(event):
 						
 						right_clicked_unit.get_child(0).play("attack")	
 						
-						#get_child(1).stream = map_sfx[4]
-						#get_child(1).play()	
+						get_node("../BattleManager").available_units[h].attacked = true	
 						
 						await get_tree().create_timer(0.5).timeout
 						right_clicked_unit.get_child(0).play("default")		
@@ -348,7 +345,7 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-							
+							right_clicked_unit.attacked = true
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
 							get_node("../TileMap").get_node("../BattleManager").available_units[h].position = clicked_pos
@@ -366,6 +363,7 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
+							right_clicked_unit.attacked = true
 							
 						if right_clicked_pos.x > clicked_pos.x and right_clicked_unit.position.x > attack_center_pos.x:	
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2										
@@ -384,7 +382,8 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
-														
+							get_node("../BattleManager").available_units[h].attacked = true
+							right_clicked_unit.attacked = true							
 						if right_clicked_pos.x < clicked_pos.x and right_clicked_unit.position.x < attack_center_pos.x:
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
 							get_node("../TileMap").get_node("../BattleManager").available_units[h].position = clicked_pos
@@ -393,7 +392,6 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].position = tile_center_pos	
 							var unit_pos = local_to_map(get_node("../BattleManager").available_units[h].position)										
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y		
-
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
 							await get_tree().create_timer(1).timeout
@@ -403,6 +401,8 @@ func _input(event):
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
 							get_node("../BattleManager").check_health_now()
+							get_node("../BattleManager").available_units[h].attacked = true
+							right_clicked_unit.attacked = true
 							
 						only_once = true
 												
@@ -415,7 +415,7 @@ func _input(event):
 			if tile_data is TileData:			
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
-					if unit_pos == tile_pos:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].moved == false:
 						hovertile.set_offset(Vector2(0,-10))
 						get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,-10))
 						clicked_unit = get_node("../BattleManager").available_units[i].unit_num
@@ -497,9 +497,6 @@ func _input(event):
 								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y-2), 18, Vector2i(0, 0), 0)															
 								set_cell(1, Vector2i(unit_pos.x+2, unit_pos.y-2), 18, Vector2i(0, 0), 0)																																								
 								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+2), 18, Vector2i(0, 0), 0)		
-
-			#print("Holding")
-
 					
 		# Drop unit on mouse up																					
 		elif hovertile.offset.y == -10:	
@@ -513,7 +510,8 @@ func _input(event):
 				
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").available_units.size():
-				if get_node("../BattleManager").available_units[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").available_units[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 18:										
+				if get_node("../BattleManager").available_units[i].get_child(0).offset == (Vector2(0,-10)) and get_node("../BattleManager").available_units[i].unit_team == 1 and get_cell_source_id(1, tile_pos) == 18 and get_node("../BattleManager").available_units[i].moved == false:										
+					get_node("../BattleManager").available_units[i].moved = true
 					#Remove hover tiles										
 					for j in grid_height:
 						for k in grid_width:
@@ -524,7 +522,6 @@ func _input(event):
 					var patharray = astar_grid.get_point_path(clicked_pos, dropped_pos)
 					get_node("../BattleManager").available_units[i].get_child(0).play("move")
 					hovertile.hide()
-					moving = true
 					
 					# Find path and set hover cells
 					for h in patharray.size():
@@ -550,7 +547,6 @@ func _input(event):
 					#get_node("../TurnManager").cpu_turn_started.emit()
 					moves_counter += 1
 					get_node("../BattleManager").check_health_now()
-					moving = false
 					
 					hovertile.show()
 					# Set moving to false			
@@ -586,7 +582,7 @@ func _input(event):
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 
-					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].get_child(0).use_parent_material == false:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].get_child(0).use_parent_material == false and get_node("../BattleManager").available_units[i].attacked == false:
 						right_clicked_unit = get_node("../BattleManager").available_units[i]
 						unit_type = get_node("../BattleManager").available_units[i].unit_type
 						get_node("../BattleManager").available_units[i].position = hovertile.position

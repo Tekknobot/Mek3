@@ -87,6 +87,12 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:
+	
+	for i in get_node("../BattleManager").available_units.size():
+		get_node("../BattleManager").available_units[i].moved = false
+		get_node("../BattleManager").available_units[i].attacked = false
+		get_node("../TileMap").moves_counter = 0
+			
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 	
 	for i in available_units.size():
@@ -344,10 +350,10 @@ func on_cpu_turn_started() -> void:
 						await get_tree().create_timer(1).timeout
 						break	
 						
-					on_turn_over()													
+					on_turn_over()																	
 					return	 	
 
-func on_turn_over() -> void:
+func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()
 	
 func get_random():

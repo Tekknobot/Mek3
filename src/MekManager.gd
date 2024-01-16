@@ -46,6 +46,9 @@ var districts = []
 
 var meks = []
 
+var moved = false
+var attacked = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	buildings = get_tree().get_nodes_in_group("buildings")
