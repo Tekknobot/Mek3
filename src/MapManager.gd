@@ -583,7 +583,7 @@ func _input(event):
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 
-					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].get_child(0).use_parent_material == false and get_node("../BattleManager").available_units[i].attacked == false:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].attacked == false:
 						right_clicked_unit = get_node("../BattleManager").available_units[i]
 						unit_type = get_node("../BattleManager").available_units[i].unit_type
 						get_node("../BattleManager").available_units[i].position = hovertile.position
