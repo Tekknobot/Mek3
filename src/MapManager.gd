@@ -151,11 +151,11 @@ func _process(_delta):
 		var structure_pos = local_to_map(structures[i].position)
 		structureCoord[i] = structure_pos
 	
-	if moves_counter >= 5:
+	if moves_counter >= 10:
 		moves_counter = 0	
 		get_node("../TurnManager").cpu_turn_started.emit()			
 
-	get_node("../Control").get_child(18).text = str(moves_counter) + " / 5"
+	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
 																				
 func _input(event):						
 	# Click and drag to move unit	
