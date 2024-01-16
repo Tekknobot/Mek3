@@ -85,7 +85,16 @@ func _process(_delta):
 
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
-	
+
+	if moved == true:
+		get_child(7).show()
+	else:
+		get_child(7).hide()
+	if attacked == true:
+		get_child(8).show()	
+	else:
+		get_child(8).hide()	
+		
 	#Mouse hover
 	if flag_coroutine == false:
 		await get_tree().create_timer(0).timeout
