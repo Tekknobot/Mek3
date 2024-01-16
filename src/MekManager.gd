@@ -85,16 +85,25 @@ func _process(_delta):
 
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
+	
+	if moved == true and attacked == true and unit_team == 1:
+		modulate = Color8(110, 110, 110)	
 
 	if moved == true and unit_team == 1:
-		get_child(7).show()
+		#get_child(7).show()
+		pass
 	else:
 		get_child(7).hide()
+		modulate = Color8(255, 255, 255)
 		
 	if attacked == true and unit_team == 1:
-		get_child(8).show()	
+		#get_child(8).show()
+		pass	
 	else:
 		get_child(8).hide()	
+		modulate = Color8(255, 255, 255)
+	
+	
 		
 	#Mouse hover
 	if flag_coroutine == false:

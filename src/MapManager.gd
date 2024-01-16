@@ -287,7 +287,7 @@ func _input(event):
 										moves_counter += 1
 										get_node("../BattleManager").check_health_now()
 										
-							get_node("../BattleManager").available_units[h].attacked = true			
+							get_node("../BattleManager").available_units[h].attacked = true 			
 							return	
 																							
 			# Ranged Attack
