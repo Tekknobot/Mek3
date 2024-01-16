@@ -173,11 +173,12 @@ func on_cpu_turn_started() -> void:
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_1 = false
-
+							
 							
 			var hoverflag_2 = true										
 			for j in 15:	
@@ -187,10 +188,12 @@ func on_cpu_turn_started() -> void:
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_2 = false
+							
 														
 			var hoverflag_3 = true	
 			for j in 15:	
@@ -200,11 +203,13 @@ func on_cpu_turn_started() -> void:
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_3 = false
-							 									
+							 
+																
 			var hoverflag_4 = true	
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
@@ -213,10 +218,12 @@ func on_cpu_turn_started() -> void:
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48:
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")				
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)
-							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_4 = false
+							
 										 						
 		await get_tree().create_timer(1).timeout
 
