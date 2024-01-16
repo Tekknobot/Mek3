@@ -120,7 +120,7 @@ func _process(_delta):
 			get_node("../Control").get_child(3).texture = self.unit_portrait
 			get_node("../Control").get_child(4).text = unit_name
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
-			get_node("../Control").get_child(6).text = "HP " + str(unit_min)
+			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
 			get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
 			get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
 			get_node("../Control").get_child(9).value = self.unit_min
@@ -144,7 +144,7 @@ func _process(_delta):
 		get_node("../Control").get_child(3).texture = self.unit_portrait
 		get_node("../Control").get_child(4).text = unit_name
 		get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
-		get_node("../Control").get_child(6).text = "HP " + str(unit_min)
+		get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
 		get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
 		get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
 		get_node("../Control").get_child(9).value = self.unit_min
