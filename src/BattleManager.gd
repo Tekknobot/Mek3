@@ -176,8 +176,23 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+							var _newvector = Vector2i(_bumpedvector.x-1, _bumpedvector.y)
+							var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+							
+							get_node("../BattleManager").USER_units[m].position = _finalvector
+							var tween: Tween = create_tween()
+							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+							
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							CPU_units[n].xp += 1
+							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+							
 							hoverflag_1 = false
-							CPU_units[n].attacked = true							
+							CPU_units[n].attacked = true
+							get_node("../BattleManager").check_health_now()
+							await get_tree().create_timer(0.5).timeout
+														
 			await get_tree().create_timer(0.1).timeout	
 			structure_flag1_ranged = true													
 			for j in 15:	
@@ -198,9 +213,24 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+
+							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+							var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y+1)
+							var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+							
+							get_node("../BattleManager").USER_units[m].position = _finalvector
+							var tween: Tween = create_tween()
+							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							CPU_units[n].xp += 1
+							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+							
 							hoverflag_2 = false
 							CPU_units[n].attacked = true
-					#structure_flag2 = true
+							get_node("../BattleManager").check_health_now()
+							await get_tree().create_timer(0.5).timeout
+							
 			await get_tree().create_timer(0.1).timeout	
 			structure_flag2_ranged = true											
 			for j in 15:	
@@ -221,9 +251,24 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							
+							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+							var _newvector = Vector2i(_bumpedvector.x+1, _bumpedvector.y)
+							var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+							
+							get_node("../BattleManager").USER_units[m].position = _finalvector
+							var tween: Tween = create_tween()
+							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							CPU_units[n].xp += 1
+							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+							
 							hoverflag_3 = false
 							CPU_units[n].attacked = true
-					#structure_flag3 = true
+							get_node("../BattleManager").check_health_now()
+							await get_tree().create_timer(0.5).timeout
+							
 			await get_tree().create_timer(0.1).timeout	
 			structure_flag3_ranged = true													
 			for j in 15:	
@@ -244,9 +289,25 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+
+							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+							var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y-1)
+							var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+							
+							get_node("../BattleManager").USER_units[m].position = _finalvector
+							var tween: Tween = create_tween()
+							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							CPU_units[n].xp += 1
+							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+							
+
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
-												 						
+							get_node("../BattleManager").check_health_now()
+							await get_tree().create_timer(0.5).timeout		
+										 						
 			structure_flag4_ranged = true
 				
 		await get_tree().create_timer(1).timeout
