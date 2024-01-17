@@ -563,8 +563,12 @@ func _input(event):
 						
 					await get_tree().create_timer(1).timeout
 					
-				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))		
-
+				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
+						
+				for h in get_node("../BattleManager").available_units.size():
+					get_node("../BattleManager").available_units[h].moved = false
+					get_node("../BattleManager").available_units[h].attacked = false
+					get_node("../TileMap").moves_counter = 0 
 			
 
 	if event is InputEventMouseButton:
