@@ -33,10 +33,15 @@ var S3 = preload("res://scenes/mek/S3.scn")
 
 #var structures: Array[Area2D]
 
-var structure_flag1 = true
-var structure_flag2 = true
-var structure_flag3 = true
-var structure_flag4 = true
+var structure_flag1_ranged = true
+var structure_flag2_ranged = true
+var structure_flag3_ranged = true
+var structure_flag4_ranged = true
+
+var structure_flag1_support = true
+var structure_flag2_support = true
+var structure_flag3_support = true
+var structure_flag4_support = true
 
 var stored_cells = []
 var team_two = []
@@ -102,6 +107,16 @@ func on_cpu_turn_started() -> void:
 		get_node("../BattleManager").available_units[i].moved = false
 		get_node("../BattleManager").available_units[i].attacked = false
 		get_node("../TileMap").moves_counter = 0
+		
+	get_node("../BattleManager").structure_flag1_ranged = true
+	get_node("../BattleManager").structure_flag2_ranged = true
+	get_node("../BattleManager").structure_flag3_ranged = true
+	get_node("../BattleManager").structure_flag4_ranged = true
+	
+	get_node("../BattleManager").structure_flag1_support = true
+	get_node("../BattleManager").structure_flag2_support = true
+	get_node("../BattleManager").structure_flag3_support = true
+	get_node("../BattleManager").structure_flag4_support = true		
 			
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 	
@@ -145,43 +160,18 @@ func on_cpu_turn_started() -> void:
 			get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+1), 48, Vector2i(0, 0), 0)
 
 		if unit_type == "Support":
-			var hoverflag_1 = true															
-			for j in 3:	
-				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_1 == true:
-					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)						
-					
-			var hoverflag_2 = true										
-			for j in 3:	
-				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_2 == true:											
-					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
-
-			var hoverflag_3 = true	
-			for j in 3:	
-				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_3 == true:											
-					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
-
-			var hoverflag_4 = true	
-			for j in 3:	
-				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_4 == true:											
-					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
-
-		if unit_type == "Ranged":
 			var hoverflag_1 = true																
-			for j in 15:	
+			for j in 3:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_1 == true and structure_flag1 == true:
+				if hoverflag_1 == true and structure_flag1_support == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0.1).timeout
+					await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x-j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
 						print(set_cell, structure_pos)
 						if set_cell == structure_pos:
-							structure_flag1 = false
+							structure_flag1_support = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
@@ -190,21 +180,112 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_1 = false
-							CPU_units[n].attacked = true
-							
+							CPU_units[n].attacked = true							
 			await get_tree().create_timer(0.5).timeout				
 			var hoverflag_2 = true										
-			for j in 15:	
+			for j in 3:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_2 == true and structure_flag2 == true:
+				if hoverflag_2 == true and structure_flag2_support == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0.1).timeout
+					await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y+j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
 						print(set_cell, structure_pos)
 						if set_cell == structure_pos:
-							structure_flag2 = false
+							structure_flag2_support = false
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							hoverflag_2 = false
+							CPU_units[n].attacked = true
+					#structure_flag2 = true
+			await get_tree().create_timer(0.5).timeout												
+			var hoverflag_3 = true	
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_3 == true and structure_flag3_support == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+					await get_tree().create_timer(0).timeout
+					for h in node2D.structures.size():
+						var set_cell = Vector2i(cpu_pos.x+j, cpu_pos.y)
+						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+						print(set_cell, structure_pos)
+						if set_cell == structure_pos:
+							structure_flag3_support = false
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							hoverflag_3 = false
+							CPU_units[n].attacked = true
+					#structure_flag3 = true
+			await get_tree().create_timer(0.5).timeout														
+			var hoverflag_4 = true	
+			for j in 3:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_4 == true and structure_flag4_support == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
+					await get_tree().create_timer(0).timeout
+					for h in node2D.structures.size():
+						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y-j)
+						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+						print(set_cell, structure_pos)
+						if set_cell == structure_pos:
+							structure_flag4_support = false
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							hoverflag_4 = false
+							CPU_units[n].attacked = true
+					#structure_flag4 = true					 						
+	
+		if unit_type == "Ranged":
+			var hoverflag_1 = true																
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_1 == true and structure_flag1_ranged == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+					await get_tree().create_timer(0).timeout
+					for h in node2D.structures.size():
+						var set_cell = Vector2i(cpu_pos.x-j, cpu_pos.y)
+						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+						print(set_cell, structure_pos)
+						if set_cell == structure_pos:
+							structure_flag1_ranged = false
+					for m in USER_units.size():
+						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+							await get_tree().create_timer(0.7).timeout
+							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							hoverflag_1 = false
+							CPU_units[n].attacked = true							
+			await get_tree().create_timer(0.5).timeout				
+			var hoverflag_2 = true										
+			for j in 15:	
+				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+				if hoverflag_2 == true and structure_flag2_ranged == true:
+					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
+					await get_tree().create_timer(0).timeout
+					for h in node2D.structures.size():
+						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y+j)
+						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+						print(set_cell, structure_pos)
+						if set_cell == structure_pos:
+							structure_flag2_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
@@ -219,15 +300,15 @@ func on_cpu_turn_started() -> void:
 			var hoverflag_3 = true	
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_3 == true and structure_flag3 == true:
+				if hoverflag_3 == true and structure_flag3_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0.1).timeout
+					await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x+j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
 						print(set_cell, structure_pos)
 						if set_cell == structure_pos:
-							structure_flag3 = false
+							structure_flag3_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
@@ -242,15 +323,15 @@ func on_cpu_turn_started() -> void:
 			var hoverflag_4 = true	
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
-				if hoverflag_4 == true and structure_flag4 == true:
+				if hoverflag_4 == true and structure_flag4_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0.1).timeout
+					await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y-j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
 						print(set_cell, structure_pos)
 						if set_cell == structure_pos:
-							structure_flag4 = false
+							structure_flag4_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
@@ -261,6 +342,8 @@ func on_cpu_turn_started() -> void:
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
 					#structure_flag4 = true					 						
+		
+		
 		await get_tree().create_timer(1).timeout
 
 		#Erase hover tiles

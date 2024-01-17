@@ -569,6 +569,16 @@ func _input(event):
 					get_node("../BattleManager").available_units[h].moved = false
 					get_node("../BattleManager").available_units[h].attacked = false
 					get_node("../TileMap").moves_counter = 0 
+					
+					get_node("../BattleManager").structure_flag1 = true
+					get_node("../BattleManager").structure_flag2 = true
+					get_node("../BattleManager").structure_flag3 = true
+					get_node("../BattleManager").structure_flag4 = true
+					
+					get_node("../BattleManager").structure_flag1_support = true
+					get_node("../BattleManager").structure_flag2_support = true
+					get_node("../BattleManager").structure_flag3_support = true
+					get_node("../BattleManager").structure_flag4_support = true
 			
 
 	if event is InputEventMouseButton:
