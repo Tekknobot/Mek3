@@ -109,7 +109,9 @@ func _process(_delta):
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_1:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)			
 			get_tree().reload_current_scene()		
+			
 		if event.pressed and event.keycode == KEY_2:
 			generate_world()																	
 
