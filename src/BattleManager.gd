@@ -178,7 +178,8 @@ func on_cpu_turn_started() -> void:
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_1 = false
 							CPU_units[n].attacked = true							
-			await get_tree().create_timer(0.1).timeout														
+			await get_tree().create_timer(0.1).timeout	
+			structure_flag1_ranged = true													
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_2 == true and structure_flag2_ranged == true:
@@ -200,7 +201,8 @@ func on_cpu_turn_started() -> void:
 							hoverflag_2 = false
 							CPU_units[n].attacked = true
 					#structure_flag2 = true
-			await get_tree().create_timer(0.1).timeout												
+			await get_tree().create_timer(0.1).timeout	
+			structure_flag2_ranged = true											
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_3 == true and structure_flag3_ranged == true:
@@ -222,7 +224,8 @@ func on_cpu_turn_started() -> void:
 							hoverflag_3 = false
 							CPU_units[n].attacked = true
 					#structure_flag3 = true
-			await get_tree().create_timer(0.1).timeout														
+			await get_tree().create_timer(0.1).timeout	
+			structure_flag3_ranged = true													
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_4 == true and structure_flag4_ranged == true:
@@ -243,19 +246,15 @@ func on_cpu_turn_started() -> void:
 							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
-					#structure_flag4 = true					 						
-
+												 						
+			structure_flag4_ranged = true
+				
 		await get_tree().create_timer(1).timeout
-
+		
 		#Erase hover tiles
 		for j in 16:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
-
-		for k in get_node("../BattleManager").available_units.size():
-			get_node("../BattleManager").available_units[k].moved = false
-			get_node("../BattleManager").available_units[k].attacked = false
-			get_node("../TileMap").moves_counter = 0
 
 		if get_node("../BattleManager").CPU_units[n].attacked == false:
 			# CPU Movement range				
@@ -501,6 +500,11 @@ func on_cpu_turn_started() -> void:
 						on_turn_over()																						
 						return	 	
 
+		for k in get_node("../BattleManager").available_units.size():
+			get_node("../BattleManager").available_units[k].moved = false
+			get_node("../BattleManager").available_units[k].attacked = false
+			get_node("../TileMap").moves_counter = 0
+			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
 	
@@ -616,5 +620,5 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	explosion_instance.set_name("explosion")
 	get_parent().add_child(explosion_instance)
 	explosion_instance.position = get_node("../TileMap").sprite_2d.position	
-	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 1
+	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 100
 	get_node("../Camera2D").shake(1, 30, 3)			

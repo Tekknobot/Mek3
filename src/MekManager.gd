@@ -226,7 +226,7 @@ func check_health():
 		explosion_instance.set_name("explosion")
 		get_parent().add_child(explosion_instance)
 		explosion_instance.position = self.position	
-		explosion_instance.z_index = 100
+		explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 100
 		self.unit_status = "Inactive"
 		self.add_to_group("Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
