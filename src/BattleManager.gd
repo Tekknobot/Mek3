@@ -156,7 +156,7 @@ func on_cpu_turn_started() -> void:
 			
 		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 		get_node("../TileMap").get_child(1).play()							
-			
+	
 		if unit_type == "Ranged":																
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
@@ -194,6 +194,7 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.5).timeout
 														
 			await get_tree().create_timer(0.1).timeout	
+			hoverflag_1 = true
 			structure_flag1_ranged = true													
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
@@ -231,7 +232,8 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").check_health_now()
 							await get_tree().create_timer(0.5).timeout
 							
-			await get_tree().create_timer(0.1).timeout	
+			await get_tree().create_timer(0.1).timeout
+			hoverflag_2 = true	
 			structure_flag2_ranged = true											
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
@@ -269,7 +271,8 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").check_health_now()
 							await get_tree().create_timer(0.5).timeout
 							
-			await get_tree().create_timer(0.1).timeout	
+			await get_tree().create_timer(0.1).timeout
+			hoverflag_3 = true	
 			structure_flag3_ranged = true													
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
@@ -306,8 +309,9 @@ func on_cpu_turn_started() -> void:
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
-							await get_tree().create_timer(0.5).timeout		
-										 						
+							await get_tree().create_timer(0.5).timeout
+									
+			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
 				
 		await get_tree().create_timer(1).timeout
