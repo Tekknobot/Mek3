@@ -349,7 +349,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
 							#get_node("../TurnManager").cpu_turn_started.emit()
 							moves_counter += 1
-							get_node("../BattleManager").check_health_now()
+							 
 
 						if right_clicked_pos.y > clicked_pos.y and right_clicked_unit.position.x < attack_center_pos.x:								
 							var tile_center_pos = map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2

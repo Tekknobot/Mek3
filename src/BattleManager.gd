@@ -107,6 +107,8 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:
+	get_node("../Control").get_child(19).text = "CPU TURN"
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].moved = false
@@ -145,19 +147,17 @@ func on_cpu_turn_started() -> void:
 	CPU_units = get_tree().get_nodes_in_group("CPU_Team")
 	USER_units = get_tree().get_nodes_in_group("USER_Team")	
 
-
 	# CPU Check Attack Range
 	for n in CPU_units.size():
 		var cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 
 		var current_unit = get_node("../BattleManager").CPU_units[n]
 		var unit_type = get_node("../BattleManager").CPU_units[n].unit_type
-		#get_node("../BattleManager").available_units[i].position = hovertile.position
-			
-		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
-		get_node("../TileMap").get_child(1).play()							
+		#get_node("../BattleManager").available_units[i].position = hovertile.position							
 	
-		if unit_type == "Ranged":																
+		if unit_type == "Ranged" and CPU_units[n].unit_status == "Active":	
+			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+			get_node("../TileMap").get_child(1).play()																		
 			for j in 15:	
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_1 == true and structure_flag1_ranged == true:
@@ -305,7 +305,6 @@ func on_cpu_turn_started() -> void:
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
-
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
@@ -321,7 +320,7 @@ func on_cpu_turn_started() -> void:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 
-		if get_node("../BattleManager").CPU_units[n].attacked == false:
+		if get_node("../BattleManager").CPU_units[n].attacked == false and CPU_units[n].unit_status == "Active":
 			# CPU Movement range				
 			var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 			var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
@@ -561,14 +560,17 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").available_units[k].moved = false
 							get_node("../BattleManager").available_units[k].attacked = false
 							get_node("../TileMap").moves_counter = 0						
-							
-						on_turn_over()																						
+																													
 						return	 	
 
 		for k in get_node("../BattleManager").available_units.size():
 			get_node("../BattleManager").available_units[k].moved = false
 			get_node("../BattleManager").available_units[k].attacked = false
 			get_node("../TileMap").moves_counter = 0
+			
+	get_node("../Control").get_child(19).text = "USER TURN"
+	get_node("../Hover_tile").show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
@@ -591,10 +593,12 @@ func team_arrays():
 			available_units[i].unit_team = 1
 			available_units[i].unit_status = "Active"
 			available_units[i].unit_type = "Ranged"	
+			available_units[i].unit_movement = 4
 		else:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
-			available_units[i].unit_type = "Ranged"			
+			available_units[i].unit_type = "Ranged"	
+			available_units[i].unit_movement = 4		
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
