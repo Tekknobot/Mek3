@@ -162,7 +162,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_1 == true and structure_flag1_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0).timeout
+					#await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x-j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
@@ -183,7 +183,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_2 == true and structure_flag2_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0).timeout
+					#await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y+j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
@@ -205,7 +205,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_3 == true and structure_flag3_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0).timeout
+					#await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x+j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
@@ -227,7 +227,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 				if hoverflag_4 == true and structure_flag4_ranged == true:
 					get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
-					await get_tree().create_timer(0).timeout
+					#await get_tree().create_timer(0).timeout
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y-j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
