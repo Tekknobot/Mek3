@@ -166,7 +166,7 @@ func _process(_delta):
 			var unit_loc = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[i].position)
 			for j in surrounding_cells.size():
 				if unit_loc == surrounding_cells[j]:
-					print("Objective complete!")
+					#print("Objective complete!")
 					get_node("../Arrow").hide()
 					get_node("../Arrow_green").position = get_node("../Arrow").position
 																				
