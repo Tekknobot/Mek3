@@ -51,6 +51,7 @@ signal unit_used_turn
 @export var only_once_structures : bool = true
 
 @export var map_sfx: Array[AudioStream]
+@export var node2D: Node2D
 
 var hovertile_type = 48
 var hovered_unit
@@ -69,12 +70,13 @@ var districts = []
 @onready var sprite_2d = $"../Sprite2D"
 
 var camera_target: int
+var obj_loc 
+var surrounding_cells
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	# Check if units are on structures
-	pass
-										
+	pass										
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):
@@ -156,6 +158,17 @@ func _process(_delta):
 		get_node("../TurnManager").cpu_turn_started.emit()			
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
+
+	surrounding_cells = get_node("../TileMap").get_surrounding_cells(node2D.objective_1_location)
+			
+	for i in get_node("../BattleManager").available_units.size():
+		if get_node("../BattleManager").available_units[i].unit_team == 1:
+			var unit_loc = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[i].position)
+			for j in surrounding_cells.size():
+				if unit_loc == surrounding_cells[j]:
+					print("Objective complete!")
+					get_node("../Arrow").hide()
+					get_node("../Arrow_green").position = get_node("../Arrow").position
 																				
 func _input(event):						
 	# Click and drag to move unit	

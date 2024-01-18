@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=119 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -60,6 +60,10 @@
 [ext_resource type="Script" path="res://src/ProjectileManager.gd" id="62_85rtn"]
 [ext_resource type="Texture2D" uid="uid://cm5a6pwt0s6ur" path="res://assets/vfx/projectile1.png" id="63_gsnkf"]
 [ext_resource type="Texture2D" uid="uid://cplpvs53m3d8p" path="res://assets/vfx/projectile2.png" id="64_6ii5t"]
+[ext_resource type="Texture2D" uid="uid://c287eneqoypop" path="res://assets/ui/arrows/arrow-bw1.png" id="65_6xasx"]
+[ext_resource type="Texture2D" uid="uid://cn037vv53whr5" path="res://assets/ui/arrows/arrow-bw2.png" id="66_2tq64"]
+[ext_resource type="Texture2D" uid="uid://brdrydcpmcui2" path="res://assets/ui/arrows/arrow-green1.png" id="67_55oh6"]
+[ext_resource type="Texture2D" uid="uid://cvt2t3mm3dqxq" path="res://assets/ui/arrows/arrow-green2.png" id="68_6ssq6"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -373,9 +377,38 @@ animations = [{
 "speed": 16.0
 }]
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ul8b5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("65_6xasx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_2tq64")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sovcq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("67_55oh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_6ssq6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile", "arrow")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
+arrow = NodePath("Arrow")
 
 [node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D")]
 script = ExtResource("201_3h84r")
@@ -389,7 +422,7 @@ zoom = Vector2(2.45, 2.45)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
-[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("camera", "unitsAnimated2D", "unitsArray", "structureArray", "hovertile")]
+[node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("camera", "unitsAnimated2D", "unitsArray", "structureArray", "hovertile", "node2D")]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_3kugw")
 format = 2
@@ -409,6 +442,7 @@ unitsCoord_2 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), 
 structureCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 hovertile = NodePath("../Hover_tile")
 map_sfx = Array[AudioStream]([ExtResource("48_p3eoj"), ExtResource("49_c461k"), ExtResource("50_odnt0"), ExtResource("51_rba5x"), ExtResource("52_tcha0"), ExtResource("53_dpbk8"), ExtResource("55_txcw8")])
+node2D = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TileMap"]
 libraries = {
@@ -450,7 +484,7 @@ position = Vector2(-57, 168)
 position = Vector2(53, 170)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -211)
+position = Vector2(0, -1506)
 texture = ExtResource("61_1hmiq")
 script = ExtResource("62_85rtn")
 
@@ -459,3 +493,24 @@ sprite_frames = SubResource("SpriteFrames_sqcni")
 autoplay = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+
+[node name="Arrow" type="Area2D" parent="."]
+position = Vector2(0, -1506)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Arrow"]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_ul8b5")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow"]
+
+[node name="Arrow_green" type="Area2D" parent="."]
+z_index = 100
+position = Vector2(0, -1506)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Arrow_green"]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_sovcq")
+autoplay = "default"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow_green"]

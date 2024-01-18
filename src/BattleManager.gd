@@ -170,6 +170,20 @@ func on_cpu_turn_started() -> void:
 						if set_cell == structure_pos:
 							structure_flag1_ranged = false
 					for m in USER_units.size():
+						
+						if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > USER_units[m].position.x:
+							CPU_units[n].scale.x = 1
+							#print("1")
+						elif CPU_units[n].scale.x == -1 and CPU_units[n].position.x < USER_units[m].position.x:
+							CPU_units[n].scale.x = -1
+							#print("2")	
+						if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > USER_units[m].position.x:
+							CPU_units[n].scale.x = 1
+							#print("3")
+						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < USER_units[m].position.x:
+							CPU_units[n].scale.x = -1
+							#print("4")
+														
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
 						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	

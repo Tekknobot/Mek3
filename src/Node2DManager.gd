@@ -15,6 +15,7 @@ var moves = {N: Vector2i(0, -1),
 			
 @onready var Map = $TileMap
 @export var hovertile: Sprite2D
+@export var arrow: Area2D
 @export var structureCoord: Array[Vector2i]
 
 var map_pos = Vector2(0,0)
@@ -38,6 +39,8 @@ var towers = []
 var stadiums = []
 var districts = []
 
+var objective_1_location
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
@@ -51,8 +54,11 @@ func _ready():
 		add_child(building_inst)
 		building_inst.add_to_group("buildings")		
 		building_inst.z_index = tile_pos.x + tile_pos.y
-		building_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
-
+		building_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))
+		arrow.position = Vector2(building_inst.position.x, building_inst.position.y-68)
+		arrow.z_index = (tile_pos.x + tile_pos.y)+1		
+		objective_1_location = tile_pos
+		
 	for i in 3: #stadiums
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
