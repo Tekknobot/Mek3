@@ -577,6 +577,11 @@ func on_cpu_turn_started() -> void:
 																													
 						return	 	
 					
+					for k in get_node("../BattleManager").available_units.size():
+						get_node("../BattleManager").available_units[k].moved = false
+						get_node("../BattleManager").available_units[k].attacked = false
+						get_node("../TileMap").moves_counter = 0	
+										
 					get_node("../BattleManager").check_health_now()
 			
 	for k in get_node("../BattleManager").available_units.size():
