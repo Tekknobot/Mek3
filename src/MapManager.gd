@@ -73,8 +73,6 @@ var camera_target: int
 var obj_loc 
 var surrounding_cells
 
-var user_total
-
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	# Check if units are on structures

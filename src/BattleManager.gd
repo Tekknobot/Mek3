@@ -107,7 +107,8 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:
-	get_node("../Control").get_child(19).text = "CPU TURN"
+	get_node("../Control").get_child(19).text = "CPU Moving..."
+	get_node("../Control").get_child(18).hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	for i in get_node("../BattleManager").available_units.size():
@@ -588,6 +589,7 @@ func on_cpu_turn_started() -> void:
 	get_node("../Control").get_child(19).text = "USER TURN"
 	get_node("../Hover_tile").show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_node("../Control").get_child(18).show()
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
