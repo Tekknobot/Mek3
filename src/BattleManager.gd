@@ -514,6 +514,7 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").CPU_units[n].attacked = true
+							get_node("../BattleManager").check_health_now()
 							break
 						
 						if i == 1:
@@ -532,6 +533,7 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").CPU_units[n].attacked = true
+							get_node("../BattleManager").check_health_now()
 							break
 						
 						if i == 2:
@@ -550,6 +552,7 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").CPU_units[n].attacked = true
+							get_node("../BattleManager").check_health_now()
 							break
 						
 						if i == 3:
@@ -568,23 +571,23 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").CPU_units[n].attacked = true
-							break		
-						
-						for k in get_node("../BattleManager").available_units.size():
-							get_node("../BattleManager").available_units[k].moved = false
-							get_node("../BattleManager").available_units[k].attacked = false
-							get_node("../TileMap").moves_counter = 0						
+							get_node("../BattleManager").check_health_now()
+							break							
 																													
 						return	 	
+					
+					get_node("../BattleManager").check_health_now()
 			
-	get_node("../Control").get_child(19).text = "USER TURN"
-	get_node("../Hover_tile").show()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
 	for k in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[k].moved = false
 		get_node("../BattleManager").available_units[k].attacked = false
 		get_node("../TileMap").moves_counter = 0
+
+	get_node("../BattleManager").check_health_now()
+
+	get_node("../Control").get_child(19).text = "USER TURN"
+	get_node("../Hover_tile").show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	

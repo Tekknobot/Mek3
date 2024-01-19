@@ -86,8 +86,8 @@ func _process(_delta):
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
 	
-	if moved == true and attacked == true:
-		modulate = Color8(110, 110, 110)	
+	#if moved == true and attacked == true:
+		#modulate = Color8(110, 110, 110)	
 
 	if moved == true:
 		get_child(7).show()
@@ -98,6 +98,7 @@ func _process(_delta):
 		
 	if attacked == true:
 		get_child(8).show()
+		modulate = Color8(110, 110, 110)
 		pass	
 	else:
 		get_child(8).hide()	

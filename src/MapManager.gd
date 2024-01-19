@@ -301,9 +301,12 @@ func _input(event):
 										get_node("../BattleManager").check_health_now()
 							
 							if get_node("../BattleManager").available_units[h].unit_team == 1:			
-								get_node("../BattleManager").available_units[h].attacked = true 	
+								get_node("../BattleManager").available_units[h].attacked = true 
+								get_node("../BattleManager").available_units[h].moved = true	
 										
 							return	
+			
+			get_node("../BattleManager").check_health_now()
 																							
 			# Ranged Attack
 			if only_once:
@@ -330,6 +333,7 @@ func _input(event):
 						right_clicked_unit.get_child(0).play("attack")	
 						
 						if right_clicked_unit.unit_team == 1:
+							right_clicked_unit.attacked = true	
 							right_clicked_unit.attacked = true	
 						
 						await get_tree().create_timer(0.5).timeout
@@ -361,6 +365,7 @@ func _input(event):
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
 							#get_node("../TurnManager").cpu_turn_started.emit()
+							get_node("../BattleManager").check_health_now()
 							moves_counter += 1
 							 
 
@@ -419,6 +424,8 @@ func _input(event):
 							get_node("../BattleManager").check_health_now()
 							
 						only_once = true
+			
+			get_node("../BattleManager").check_health_now()
 												
 			#Remove hover tiles										
 			for j in grid_height:
@@ -429,7 +436,7 @@ func _input(event):
 			if tile_data is TileData:			
 				for i in get_node("../BattleManager").available_units.size():
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
-					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].moved == false:
+					if unit_pos == tile_pos and get_node("../BattleManager").available_units[i].moved == false and get_node("../BattleManager").available_units[i].attacked == false:
 						hovertile.set_offset(Vector2(0,-10))
 						get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,-10))
 						clicked_unit = get_node("../BattleManager").available_units[i].unit_num
