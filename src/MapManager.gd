@@ -159,6 +159,7 @@ func _process(_delta):
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
 
+	#Arrow objective
 	surrounding_cells = get_node("../TileMap").get_surrounding_cells(node2D.objective_1_location)
 			
 	for i in get_node("../BattleManager").available_units.size():
