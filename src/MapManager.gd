@@ -73,6 +73,8 @@ var camera_target: int
 var obj_loc 
 var surrounding_cells
 
+var user_total
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	# Check if units are on structures
@@ -152,7 +154,7 @@ func _process(_delta):
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
 		structureCoord[i] = structure_pos
-	
+			
 	if moves_counter >= 10:
 		moves_counter = 0	
 		get_node("../TurnManager").cpu_turn_started.emit()			
