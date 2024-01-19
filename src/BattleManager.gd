@@ -576,15 +576,15 @@ func on_cpu_turn_started() -> void:
 							get_node("../TileMap").moves_counter = 0						
 																													
 						return	 	
-
-		for k in get_node("../BattleManager").available_units.size():
-			get_node("../BattleManager").available_units[k].moved = false
-			get_node("../BattleManager").available_units[k].attacked = false
-			get_node("../TileMap").moves_counter = 0
 			
 	get_node("../Control").get_child(19).text = "USER TURN"
 	get_node("../Hover_tile").show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+	for k in get_node("../BattleManager").available_units.size():
+		get_node("../BattleManager").available_units[k].moved = false
+		get_node("../BattleManager").available_units[k].attacked = false
+		get_node("../TileMap").moves_counter = 0
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	

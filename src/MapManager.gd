@@ -167,7 +167,7 @@ func _process(_delta):
 			for j in surrounding_cells.size():
 				if unit_loc == surrounding_cells[j]:
 					#print("Objective complete!")
-					get_node("../Arrow").hide()
+					get_node("../Arrow").hide() 
 					get_node("../Arrow_green").position = get_node("../Arrow").position
 																				
 func _input(event):						
