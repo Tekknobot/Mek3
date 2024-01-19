@@ -327,6 +327,11 @@ func on_cpu_turn_started() -> void:
 									
 			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
+
+		for k in get_node("../BattleManager").available_units.size():
+			get_node("../BattleManager").available_units[k].moved = false
+			get_node("../BattleManager").available_units[k].attacked = false
+			get_node("../TileMap").moves_counter = 0
 				
 		await get_tree().create_timer(1).timeout
 		
