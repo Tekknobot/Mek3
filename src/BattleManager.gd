@@ -209,6 +209,12 @@ func on_cpu_turn_started() -> void:
 							hoverflag_1 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
+							
+							for k in get_node("../BattleManager").USER_units.size():
+								get_node("../BattleManager").USER_units[k].moved = false
+								get_node("../BattleManager").USER_units[k].attacked = false
+								get_node("../TileMap").moves_counter = 0	
+														
 							await get_tree().create_timer(0.5).timeout
 														
 			await get_tree().create_timer(0.1).timeout	
@@ -248,6 +254,12 @@ func on_cpu_turn_started() -> void:
 							hoverflag_2 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
+							
+							for k in get_node("../BattleManager").USER_units.size():
+								get_node("../BattleManager").USER_units[k].moved = false
+								get_node("../BattleManager").USER_units[k].attacked = false
+								get_node("../TileMap").moves_counter = 0	
+																
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
@@ -287,6 +299,12 @@ func on_cpu_turn_started() -> void:
 							hoverflag_3 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
+							
+							for k in get_node("../BattleManager").USER_units.size():
+								get_node("../BattleManager").USER_units[k].moved = false
+								get_node("../BattleManager").USER_units[k].attacked = false
+								get_node("../TileMap").moves_counter = 0	
+																
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
@@ -326,8 +344,19 @@ func on_cpu_turn_started() -> void:
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
+							
+							for k in get_node("../BattleManager").USER_units.size():
+								get_node("../BattleManager").USER_units[k].moved = false
+								get_node("../BattleManager").USER_units[k].attacked = false
+								get_node("../TileMap").moves_counter = 0	
+																
 							await get_tree().create_timer(0.5).timeout
-									
+
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0
+																
 			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
 
@@ -666,9 +695,9 @@ func team_arrays():
 		if available_units[i].unit_team == 1:
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
-			get_node("../BattleManager").available_units[i].unit_level = 2
-			get_node("../BattleManager").available_units[i].unit_attack = 2
-			get_node("../BattleManager").available_units[i].unit_defence = 2
+			get_node("../BattleManager").available_units[i].unit_level = 1
+			get_node("../BattleManager").available_units[i].unit_attack = 1
+			get_node("../BattleManager").available_units[i].unit_defence = 1
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
