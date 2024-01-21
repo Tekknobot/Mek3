@@ -421,10 +421,11 @@ func on_cpu_turn_started() -> void:
 					# Find Path
 					var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
-					##Erase hover tiles
-					#for j in 16:
-						#for k in 16:
-							#get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+					await get_tree().create_timer(1).timeout
+					#Erase hover tiles
+					for j in 16:
+						for k in 16:
+							get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 					
 					# Set hover cells
 					for h in patharray.size():

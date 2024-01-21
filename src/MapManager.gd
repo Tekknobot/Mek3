@@ -148,12 +148,6 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
-	for h in 16:
-		for i in 16:
-			set_cell(1, Vector2i(-16-h, i), -1, Vector2i(0, 0), 0)
-	for h in 16:
-		for i in 16:
-			set_cell(1, Vector2i(h, -16-i), -1, Vector2i(0, 0), 0)
 			
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
@@ -309,6 +303,11 @@ func _input(event):
 							if get_node("../BattleManager").available_units[h].unit_team == 1:			
 								get_node("../BattleManager").available_units[h].attacked = true 
 								get_node("../BattleManager").available_units[h].moved = true	
+
+							#Remove hover tiles										
+							for l in grid_height:
+								for k in grid_width:
+									set_cell(1, Vector2i(l,k), -1, Vector2i(0, 0), 0)
 										
 							return				
 			
@@ -579,8 +578,7 @@ func _input(event):
 					for j in grid_height:
 						for k in grid_width:
 							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
-					
-						
+											
 					await get_tree().create_timer(1).timeout
 					
 					get_node("../Hover_tile").show()
