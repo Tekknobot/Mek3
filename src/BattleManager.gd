@@ -263,6 +263,12 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
+
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0
+							
 			hoverflag_2 = true	
 			structure_flag2_ranged = true											
 			for j in 15:	
@@ -308,6 +314,12 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
+
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0
+							
 			hoverflag_3 = true	
 			structure_flag3_ranged = true													
 			for j in 15:	
@@ -351,7 +363,8 @@ func on_cpu_turn_started() -> void:
 								get_node("../TileMap").moves_counter = 0	
 																
 							await get_tree().create_timer(0.5).timeout
-
+			await get_tree().create_timer(0.1).timeout
+			
 			for k in get_node("../BattleManager").USER_units.size():
 				get_node("../BattleManager").USER_units[k].moved = false
 				get_node("../BattleManager").USER_units[k].attacked = false
@@ -646,10 +659,10 @@ func on_cpu_turn_started() -> void:
 										
 					get_node("../BattleManager").check_health_now() 
 			
-	for k in get_node("../BattleManager").available_units.size():
-		get_node("../BattleManager").available_units[k].moved = false
-		get_node("../BattleManager").available_units[k].attacked = false
-		get_node("../TileMap").moves_counter = 0
+			for k in get_node("../BattleManager").available_units.size():
+				get_node("../BattleManager").available_units[k].moved = false
+				get_node("../BattleManager").available_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0
 
 	for k in get_node("../BattleManager").USER_units.size():
 		get_node("../BattleManager").USER_units[k].moved = false
