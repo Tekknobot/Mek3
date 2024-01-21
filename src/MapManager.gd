@@ -180,8 +180,7 @@ func _process(_delta):
 func _input(event):						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:	
-									
+		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:		
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)
@@ -311,7 +310,7 @@ func _input(event):
 								get_node("../BattleManager").available_units[h].attacked = true 
 								get_node("../BattleManager").available_units[h].moved = true	
 										
-							return	
+							return				
 			
 			get_node("../BattleManager").check_health_now()
 																							
@@ -431,7 +430,7 @@ func _input(event):
 							get_node("../BattleManager").check_health_now()
 							
 						only_once = true
-			
+								
 			get_node("../BattleManager").check_health_now()
 			
 			#Place hover tiles		
@@ -519,8 +518,8 @@ func _input(event):
 								set_cell(1, Vector2i(unit_pos.x+2, unit_pos.y+2), 18, Vector2i(0, 0), 0)																																								
 								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y-2), 18, Vector2i(0, 0), 0)															
 								set_cell(1, Vector2i(unit_pos.x+2, unit_pos.y-2), 18, Vector2i(0, 0), 0)																																								
-								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+2), 18, Vector2i(0, 0), 0)		
-					
+								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+2), 18, Vector2i(0, 0), 0)			
+									
 		# Drop unit on mouse up																					
 		elif hovertile.offset.y == -10:	
 			var mouse_pos = get_global_mouse_position()
@@ -540,6 +539,10 @@ func _input(event):
 					var patharray = astar_grid.get_point_path(clicked_pos, dropped_pos)
 					get_node("../BattleManager").available_units[i].get_child(0).play("move")
 					hovertile.hide()
+
+					get_node("../Hover_tile").hide()
+					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 					
 					# Find path and set hover cells
 					for h in patharray.size():
@@ -579,6 +582,9 @@ func _input(event):
 					
 						
 					await get_tree().create_timer(1).timeout
+					
+					get_node("../Hover_tile").show()
+					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)					
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
 			
@@ -754,3 +760,8 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	explosion_instance.position = sprite_2d.position	
 	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 1
 	get_node("../Camera2D").shake(1, 30, 3)			
+
+	#Remove hover tiles										
+	for j in grid_height:
+		for k in grid_width:
+			set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
