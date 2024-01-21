@@ -427,11 +427,6 @@ func _input(event):
 						only_once = true
 			
 			get_node("../BattleManager").check_health_now()
-												
-			#Remove hover tiles										
-			for j in grid_height:
-				for k in grid_width:
-					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 			
 			#Place hover tiles		
 			if tile_data is TileData:			
@@ -586,7 +581,11 @@ func _input(event):
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
 			
-
+				#Remove hover tiles										
+				for j in grid_height:
+					for k in grid_width:
+						set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+					
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false:
 			#Remove hover tiles										
