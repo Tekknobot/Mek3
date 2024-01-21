@@ -106,6 +106,7 @@ func _ready():
 	structures.append_array(districts)
 	
 	check_duplicates(structures)		
+	
 	generate_world()																			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -260,10 +261,14 @@ func check_duplicates(a):
 				found_dupe = true
 				print("duplicate")
 				var a_pos = Map.local_to_map(a[j].position)	
-				var a_global = Map.map_to_local(Vector2i(a_pos.x+1, a_pos.y+1)) + Vector2(0,0) / 2	
+				var a_global = Map.map_to_local(Vector2i(a_pos.x, a_pos.y)) + Vector2(0,0) / 2	
 				a[j].position = a_global
 				var tile_pos = Vector2i(a_pos.x, a_pos.y)
-				a[j].z_index = tile_pos.x + tile_pos.y
+				a[j].z_index = (tile_pos.x + tile_pos.y)+100
+				#a[j].get_child(0).modulate = Color8(0, 0, 0)	
+				#await get_tree().create_timer(1).timeout
+				#a[j].queue_free()	
+				a[j].get_child(0).modulate.a = 0	
 				break			
 			
 			
