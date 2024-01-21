@@ -86,6 +86,9 @@ func _ready():
 				get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
 				break
+				
+	await get_tree().create_timer(1).timeout
+	on_cpu_turn_started()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -167,7 +170,7 @@ func on_cpu_turn_started() -> void:
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x-j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
-						print(set_cell, structure_pos)
+						#print(set_cell, structure_pos)
 						if set_cell == structure_pos:
 							structure_flag1_ranged = false
 					for m in USER_units.size():
@@ -219,7 +222,7 @@ func on_cpu_turn_started() -> void:
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y+j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
-						print(set_cell, structure_pos)
+						#print(set_cell, structure_pos)
 						if set_cell == structure_pos:
 							structure_flag2_ranged = false
 					for m in USER_units.size():
@@ -258,7 +261,7 @@ func on_cpu_turn_started() -> void:
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x+j, cpu_pos.y)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
-						print(set_cell, structure_pos)
+						#print(set_cell, structure_pos)
 						if set_cell == structure_pos:
 							structure_flag3_ranged = false
 					for m in USER_units.size():
@@ -297,7 +300,7 @@ func on_cpu_turn_started() -> void:
 					for h in node2D.structures.size():
 						var set_cell = Vector2i(cpu_pos.x, cpu_pos.y-j)
 						var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
-						print(set_cell, structure_pos)
+						#print(set_cell, structure_pos)
 						if set_cell == structure_pos:
 							structure_flag4_ranged = false
 					for m in USER_units.size():
