@@ -158,19 +158,7 @@ func _process(_delta):
 		get_node("../TurnManager").cpu_turn_started.emit()			
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
-
-	#Arrow objective
-	surrounding_cells = get_node("../TileMap").get_surrounding_cells(node2D.objective_1_location)
-			
-	for i in get_node("../BattleManager").available_units.size():
-		if get_node("../BattleManager").available_units[i].unit_team == 1:
-			var unit_loc = get_node("../TileMap").local_to_map(get_node("../BattleManager").available_units[i].position)
-			for j in surrounding_cells.size():
-				if unit_loc == surrounding_cells[j]:
-					#print("Objective complete!")
-					get_node("../Arrow").hide() 
-					get_node("../Arrow_green").position = get_node("../Arrow").position
-																				
+																		#
 func _input(event):						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:
