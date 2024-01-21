@@ -240,4 +240,4 @@ func check_health():
 		#Remove hover tiles										
 		for l in 16:
 			for k in 16:
-				get_node("../TileMap").set_cell(1, Vector2i(l,k), -1, Vector2i(0, 0), 0)
+				get_node("../TileMap").set_cell(1, Vector2i(l,k), -1, Vector2i(0, 0), 0)			
