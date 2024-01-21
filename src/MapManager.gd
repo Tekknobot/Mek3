@@ -148,6 +148,12 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(-16-h, i), -1, Vector2i(0, 0), 0)
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(h, -16-i), -1, Vector2i(0, 0), 0)
 			
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
@@ -518,12 +524,7 @@ func _input(event):
 		# Drop unit on mouse up																					
 		elif hovertile.offset.y == -10:	
 			var mouse_pos = get_global_mouse_position()
-			var tile_pos = local_to_map(mouse_pos)
-			
-			if tile_pos == unitsCoord[clicked_unit]:
-				hovertile.set_offset(Vector2(0,0))
-				get_node("../BattleManager").available_units[clicked_unit].get_child(0).set_offset(Vector2(0,0))					
-				return				
+			var tile_pos = local_to_map(mouse_pos)	
 				
 			hovertile.set_offset(Vector2(0,0))
 			for i in get_node("../BattleManager").available_units.size():
@@ -581,10 +582,10 @@ func _input(event):
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
 			
-				#Remove hover tiles										
-				for j in grid_height:
-					for k in grid_width:
-						set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+			#Remove hover tiles										
+			for j in grid_height:
+				for k in grid_width:
+					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 					
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false:
