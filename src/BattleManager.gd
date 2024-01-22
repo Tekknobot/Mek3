@@ -98,6 +98,7 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
 			get_node("../TurnManager").cpu_turn_started.emit()
+			
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
 				
@@ -383,7 +384,10 @@ func on_cpu_turn_started() -> void:
 			await get_tree().create_timer(1).timeout
 			
 		elif CPU_units[n].unit_status == "Inactive":
-			pass
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0	
 			
 		#Erase hover tiles
 		for j in 16:
@@ -570,14 +574,14 @@ func on_cpu_turn_started() -> void:
 							print('CPU moved')
 							check_health_now()
 							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
 							for k in get_node("../BattleManager").USER_units.size():
 								get_node("../BattleManager").USER_units[k].moved = false
 								get_node("../BattleManager").USER_units[k].attacked = false
 								get_node("../TileMap").moves_counter = 0								
-														
+							
+							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
 						if i == 1:
@@ -595,14 +599,14 @@ func on_cpu_turn_started() -> void:
 							print('CPU moved')
 							check_health_now()
 							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
 							for k in get_node("../BattleManager").USER_units.size():
 								get_node("../BattleManager").USER_units[k].moved = false
 								get_node("../BattleManager").USER_units[k].attacked = false
 								get_node("../TileMap").moves_counter = 0								
-														
+							
+							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
 						if i == 2:
@@ -620,14 +624,14 @@ func on_cpu_turn_started() -> void:
 							print('CPU moved')
 							check_health_now()
 							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
 							for k in get_node("../BattleManager").USER_units.size():
 								get_node("../BattleManager").USER_units[k].moved = false
 								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0								
-														
+								get_node("../TileMap").moves_counter = 0	
+															
+							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
 						if i == 3:
@@ -645,7 +649,6 @@ func on_cpu_turn_started() -> void:
 							print('CPU moved')	
 							check_health_now()
 							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
 							for k in get_node("../BattleManager").USER_units.size():
@@ -653,22 +656,22 @@ func on_cpu_turn_started() -> void:
 								get_node("../BattleManager").USER_units[k].attacked = false
 								get_node("../TileMap").moves_counter = 0								
 							
+							get_node("../BattleManager").CPU_units[n].attacked = true
 							break							
-																													
-						return	 	
+																											 	
  
 		elif CPU_units[n].unit_status == "Inactive":
-			pass					
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0					
 							
 	for k in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[k].moved = false
 		get_node("../BattleManager").available_units[k].attacked = false
 		get_node("../TileMap").moves_counter = 0
-
-	for k in get_node("../BattleManager").USER_units.size():
-		get_node("../BattleManager").USER_units[k].moved = false
-		get_node("../BattleManager").USER_units[k].attacked = false
-		get_node("../TileMap").moves_counter = 0
+		
+	get_node("../TileMap").hovertile.offset.y = 0	
 
 	get_node("../BattleManager").check_health_now()
 	
