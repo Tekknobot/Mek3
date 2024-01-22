@@ -261,11 +261,11 @@ func check_duplicates(a):
 				var a_global = Map.map_to_local(Vector2i(a_pos.x, a_pos.y)) + Vector2(0,0) / 2	
 				a[j].position = a_global
 				var tile_pos = Vector2i(a_pos.x, a_pos.y)
-				a[j].z_index = (tile_pos.x + tile_pos.y)-1
-				a[j].get_child(0).modulate = Color8(0, 0, 0)	
-				await get_tree().create_timer(1).timeout
+				a[j].z_index = (tile_pos.x + tile_pos.y)-100
+				#a[j].get_child(0).modulate = Color8(0, 0, 0)	
+				#await get_tree().create_timer(1).timeout
 				#a[j].queue_free()	
 				a[j].get_child(0).modulate.a = 0	
-				break			
+				#break			
 			
 			
