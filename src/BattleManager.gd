@@ -218,6 +218,12 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.5).timeout
 														
 			await get_tree().create_timer(0.1).timeout	
+			
+			for k in get_node("../BattleManager").USER_units.size():
+				get_node("../BattleManager").USER_units[k].moved = false
+				get_node("../BattleManager").USER_units[k].attacked = false
+				get_node("../TileMap").moves_counter = 0
+			
 			hoverflag_1 = true
 			structure_flag1_ranged = true													
 			for j in 15:	
@@ -363,6 +369,7 @@ func on_cpu_turn_started() -> void:
 								get_node("../TileMap").moves_counter = 0	
 																
 							await get_tree().create_timer(0.5).timeout
+							
 			await get_tree().create_timer(0.1).timeout
 			
 			for k in get_node("../BattleManager").USER_units.size():
@@ -372,14 +379,12 @@ func on_cpu_turn_started() -> void:
 																
 			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
-
-		for k in get_node("../BattleManager").USER_units.size():
-			get_node("../BattleManager").USER_units[k].moved = false
-			get_node("../BattleManager").USER_units[k].attacked = false
-			get_node("../TileMap").moves_counter = 0
 				
-		await get_tree().create_timer(1).timeout
-		
+			await get_tree().create_timer(1).timeout
+			
+		elif CPU_units[n].unit_status == "Inactive":
+			pass
+			
 		#Erase hover tiles
 		for j in 16:
 			for k in 16:
@@ -651,9 +656,10 @@ func on_cpu_turn_started() -> void:
 							break							
 																													
 						return	 	
-										
-					get_node("../BattleManager").check_health_now() 
-			
+ 
+		elif CPU_units[n].unit_status == "Inactive":
+			pass					
+							
 	for k in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[k].moved = false
 		get_node("../BattleManager").available_units[k].attacked = false
@@ -665,7 +671,7 @@ func on_cpu_turn_started() -> void:
 		get_node("../TileMap").moves_counter = 0
 
 	get_node("../BattleManager").check_health_now()
-
+	
 	get_node("../Control").get_child(19).text = "USER TURN"
 	get_node("../Hover_tile").show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
