@@ -141,7 +141,7 @@ func on_cpu_turn_started() -> void:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 	
 	print('CPU turn')
-	get_node("../TileMap").moving = true	
+	#get_node("../TileMap").moving = true	
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 2:
@@ -210,21 +210,11 @@ func on_cpu_turn_started() -> void:
 							hoverflag_1 = false
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0	
-														
+			
 							await get_tree().create_timer(0.5).timeout
 														
 			await get_tree().create_timer(0.1).timeout	
-			
-			for k in get_node("../BattleManager").USER_units.size():
-				get_node("../BattleManager").USER_units[k].moved = false
-				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0
-			
+
 			hoverflag_1 = true
 			structure_flag1_ranged = true													
 			for j in 15:	
@@ -262,20 +252,10 @@ func on_cpu_turn_started() -> void:
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0	
-																
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
-
-			for k in get_node("../BattleManager").USER_units.size():
-				get_node("../BattleManager").USER_units[k].moved = false
-				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0
-							
+			
 			hoverflag_2 = true	
 			structure_flag2_ranged = true											
 			for j in 15:	
@@ -313,19 +293,9 @@ func on_cpu_turn_started() -> void:
 							CPU_units[n].attacked = true
 							get_node("../BattleManager").check_health_now()
 							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0	
-																
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
-
-			for k in get_node("../BattleManager").USER_units.size():
-				get_node("../BattleManager").USER_units[k].moved = false
-				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0
 							
 			hoverflag_3 = true	
 			structure_flag3_ranged = true													
@@ -362,32 +332,16 @@ func on_cpu_turn_started() -> void:
 							
 							hoverflag_4 = false
 							CPU_units[n].attacked = true
-							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0	
+							get_node("../BattleManager").check_health_now()	
 																
 							await get_tree().create_timer(0.5).timeout
 							
 			await get_tree().create_timer(0.1).timeout
-			
-			for k in get_node("../BattleManager").USER_units.size():
-				get_node("../BattleManager").USER_units[k].moved = false
-				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0
 																
 			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
 				
 			await get_tree().create_timer(1).timeout
-			
-		elif CPU_units[n].unit_status == "Inactive":
-			for k in get_node("../BattleManager").USER_units.size():
-				get_node("../BattleManager").USER_units[k].moved = false
-				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0	
 			
 		#Erase hover tiles
 		for j in 16:
@@ -575,12 +529,6 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0								
-							
 							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
@@ -600,12 +548,6 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0								
-							
 							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
@@ -625,12 +567,6 @@ func on_cpu_turn_started() -> void:
 							check_health_now()
 							await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0	
-															
 							get_node("../BattleManager").CPU_units[n].attacked = true							
 							break
 						
@@ -649,13 +585,7 @@ func on_cpu_turn_started() -> void:
 							print('CPU moved')	
 							check_health_now()
 							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").check_health_now()
-							
-							for k in get_node("../BattleManager").USER_units.size():
-								get_node("../BattleManager").USER_units[k].moved = false
-								get_node("../BattleManager").USER_units[k].attacked = false
-								get_node("../TileMap").moves_counter = 0								
-							
+							get_node("../BattleManager").check_health_now()														
 							get_node("../BattleManager").CPU_units[n].attacked = true
 							break							
 																											 	
