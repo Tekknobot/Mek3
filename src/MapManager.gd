@@ -159,9 +159,15 @@ func _process(_delta):
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
 																		#
-func _input(event):						
+func _input(event):	
+	if event is InputEventKey:	
+		if event.pressed and event.keycode == KEY_3:
+			for i in structures.size():
+				get_node("../TileMap").structures[i].get_child(0).play("demolished")
+				get_node("../TileMap").structures[i].get_child(0).modulate = Color8(255, 255, 255) 	
+						
 	# Click and drag to move unit	
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton:			
 		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:		
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
@@ -221,7 +227,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y	
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
-							await get_tree().create_timer(1).timeout
+							#await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
@@ -240,7 +246,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)										
-							await get_tree().create_timer(1).timeout
+							#await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)				
@@ -258,7 +264,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)	
-							await get_tree().create_timer(1).timeout
+							#await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
@@ -276,7 +282,7 @@ func _input(event):
 							get_node("../BattleManager").available_units[h].z_index = unit_pos.x + unit_pos.y		
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
-							await get_tree().create_timer(1).timeout
+							#await get_tree().create_timer(1).timeout
 							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
