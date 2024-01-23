@@ -195,13 +195,7 @@ func _input(event):
 							right_clicked_unit.scale.x = 1
 						
 						elif right_clicked_unit.scale.x == 1 and right_clicked_unit.position.x < attack_center_pos.x:
-							right_clicked_unit.scale.x = -1																																				
-						
-						if right_clicked_unit.scale.x == -1 and right_clicked_unit.position.x > attack_center_pos.x:
-							right_clicked_unit.scale.x = -1
-						
-						elif right_clicked_unit.scale.x == 1 and right_clicked_unit.position.x < attack_center_pos.x:
-							right_clicked_unit.scale.x = 1		
+							right_clicked_unit.scale.x = -1																																					
 												
 						right_clicked_unit.get_child(0).play("attack")	
 						

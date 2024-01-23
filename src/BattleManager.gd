@@ -487,13 +487,7 @@ func on_cpu_turn_started() -> void:
 							#print("3")
 						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
 							CPU_units[n].scale.x = -1
-							#print("4"z)																																				
-						if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > attack_center_pos.x:
-							CPU_units[n].scale.x = -1
-							#print("5")
-						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
-							CPU_units[n].scale.x = 1
-							#print("6")																																		
+							#print("4"z)																																																																			
 						
 						CPU_units[n].get_child(0).play("attack")
 						
