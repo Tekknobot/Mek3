@@ -113,7 +113,8 @@ func on_user_turn_started() -> void:
 func on_cpu_turn_started() -> void:
 	get_node("../Control").get_child(19).text = "CPU Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	get_node("../TileMap").hovertile.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].moved = false
@@ -440,7 +441,6 @@ func on_cpu_turn_started() -> void:
 						await get_tree().create_timer(0.01).timeout
 						get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
 					
-					get_node("../TileMap").hovertile.hide()
 					get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
 					
 					# Move unit		
@@ -464,7 +464,6 @@ func on_cpu_turn_started() -> void:
 				for k in 16:
 					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
-			get_node("../TileMap").hovertile.show()
 			get_node("../TileMap").moving = false
 			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
 			get_node("../Control").only_once = true	
@@ -489,7 +488,12 @@ func on_cpu_turn_started() -> void:
 						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
 							CPU_units[n].scale.x = -1
 							#print("4"z)																																				
-																																	
+						if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > attack_center_pos.x:
+							CPU_units[n].scale.x = -1
+							#print("5")
+						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
+							CPU_units[n].scale.x = 1
+							#print("6")																																		
 						
 						CPU_units[n].get_child(0).play("attack")
 						
@@ -606,9 +610,9 @@ func on_cpu_turn_started() -> void:
 	get_node("../BattleManager").check_health_now()
 	
 	get_node("../Control").get_child(19).text = "USER TURN"
-	get_node("../Hover_tile").show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_node("../Control").get_child(18).show() # moves count
+	get_node("../Hover_tile").show()
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
