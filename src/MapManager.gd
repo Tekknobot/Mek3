@@ -399,10 +399,8 @@ func _input(event):
 					dropped_pos = tile_pos
 					var patharray = astar_grid.get_point_path(clicked_pos, dropped_pos)
 					get_node("../BattleManager").available_units[i].get_child(0).play("move")
+					
 					hovertile.hide()
-
-					get_node("../Hover_tile").hide()
-					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 					
 					# Find path and set hover cells
@@ -430,7 +428,7 @@ func _input(event):
 					moves_counter += 1
 					get_node("../BattleManager").check_health_now()
 					
-					hovertile.show()
+					
 					# Set moving to false			
 					var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 					get_node("../BattleManager").available_units[i].z_index = unit_pos.x + unit_pos.y													
@@ -443,7 +441,7 @@ func _input(event):
 											
 					await get_tree().create_timer(1).timeout
 					
-					get_node("../Hover_tile").show()
+					hovertile.show()
 					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)					
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
