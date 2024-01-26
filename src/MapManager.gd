@@ -148,6 +148,20 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h, 16+i), -1, Vector2i(0, 0), 0)
+	
+	#Remove tiles that are on the corner grids off map
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(-h-1, -i-1), -1, Vector2i(0, 0), 0)
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(h+16, -i-1), -1, Vector2i(0, 0), 0)
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(-h-1, i+16), -1, Vector2i(0, 0), 0)
+	for h in 16:
+		for i in 16:
+			set_cell(1, Vector2i(h+16, i+16), -1, Vector2i(0, 0), 0)	
 			
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
@@ -159,6 +173,7 @@ func _process(_delta):
 
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
 																		#
+
 func _input(event):	
 	if event is InputEventKey:	
 		if event.pressed and event.keycode == KEY_3:
@@ -589,7 +604,6 @@ func _input(event):
 				set_cell(1, Vector2i(tile_pos.x+1, tile_pos.y), -1, Vector2i(0, 0), 0)
 			if tile_pos.y == 15:
 				set_cell(1, Vector2i(tile_pos.x, tile_pos.y+1), -1, Vector2i(0, 0), 0)	
-
 
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	line.set_joint_mode(2)

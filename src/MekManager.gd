@@ -103,8 +103,7 @@ func _process(_delta):
 	else:
 		get_child(8).hide()	
 		modulate = Color8(255, 255, 255)
-	
-	
+		
 		
 	#Mouse hover
 	if flag_coroutine == false:
@@ -155,7 +154,8 @@ func _process(_delta):
 		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
 		get_node("../Control").get_child(17).show()
 		#hovered_unit = unit_num
-	
+
+		
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
 		

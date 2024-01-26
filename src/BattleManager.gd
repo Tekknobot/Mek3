@@ -88,7 +88,7 @@ func _ready():
 				break
 				
 	await get_tree().create_timer(1).timeout
-	on_cpu_turn_started()
+	#on_cpu_turn_started()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
