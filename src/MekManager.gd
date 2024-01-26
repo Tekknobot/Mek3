@@ -36,8 +36,6 @@ var xp_requirements = 5
 
 @export var mek_sfx: Array[AudioStream]
 
-var unique_used = false
-
 var structures: Array[Area2D]
 var buildings = []
 var towers = []
@@ -128,12 +126,7 @@ func _process(_delta):
 			get_node("../Control").get_child(10).max_value = self.xp_requirements			
 			get_node("../Control").get_child(13).texture = self.mek_portrait
 			get_node("../Control").get_child(13).modulate = Color8(255, 255, 255) #mek portrait
-			hovered_unit = self.unit_num
-			if self.unique_used == false:
-				get_node("../Control").get_child(17).show()
-			else:
-				get_node("../Control").get_child(17).hide()
-			
+			hovered_unit = self.unit_num			
 	else:
 		audio_flag = true
 		self.get_child(0).set_use_parent_material(true)
@@ -152,7 +145,6 @@ func _process(_delta):
 		get_node("../Control").get_child(10).max_value = self.xp_requirements		
 		get_node("../Control").get_child(13).texture = self.mek_portrait
 		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
-		get_node("../Control").get_child(17).show()
 		#hovered_unit = unit_num
 
 		
