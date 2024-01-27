@@ -100,7 +100,7 @@ func _input(event):
 			get_node("../TurnManager").cpu_turn_started.emit()
 			
 		if event.pressed and event.keycode == KEY_ESCAPE:
-			get_tree().quit()
+			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 				
 func on_user_turn_started() -> void:
 	print("USER turn")
