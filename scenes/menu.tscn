@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://2onkcuuq5m8a"]
+
+[ext_resource type="FontFile" uid="uid://0210e4fa4y75" path="res://assets/fonts/vermin_vibes_1989.ttf" id="1_ou8pb"]
+[ext_resource type="Texture2D" uid="uid://dxy8tjdjpfh1p" path="res://assets/ui/menu/logo.png" id="2_dbshm"]
+[ext_resource type="Texture2D" uid="uid://bedrjpys37gnq" path="res://assets/units/M1/m1idle_1.png" id="2_gue8e"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -68.0
+offset_right = 32.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gue8e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.5
+offset_top = -110.5
+offset_right = 197.5
+offset_bottom = 110.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_dbshm")
+expand_mode = 5
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ou8pb")
+theme_override_font_sizes/font_size = 72
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ou8pb")
+theme_override_font_sizes/font_size = 72
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ou8pb")
+theme_override_font_sizes/font_size = 72
+text = "Quit"
