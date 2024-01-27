@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=120 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -64,6 +64,7 @@
 [ext_resource type="Texture2D" uid="uid://cn037vv53whr5" path="res://assets/ui/arrows/arrow-bw2.png" id="66_2tq64"]
 [ext_resource type="Texture2D" uid="uid://brdrydcpmcui2" path="res://assets/ui/arrows/arrow-green1.png" id="67_55oh6"]
 [ext_resource type="Texture2D" uid="uid://cvt2t3mm3dqxq" path="res://assets/ui/arrows/arrow-green2.png" id="68_6ssq6"]
+[ext_resource type="Script" path="res://src/AttackManager.gd" id="69_f7tns"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -514,3 +515,7 @@ sprite_frames = SubResource("SpriteFrames_sovcq")
 autoplay = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow_green"]
+
+[node name="AttackManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D")]
+script = ExtResource("69_f7tns")
+node2D = NodePath("..")

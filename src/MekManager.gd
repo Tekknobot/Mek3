@@ -47,6 +47,8 @@ var meks = []
 var moved = false
 var attacked = false
 
+var mek_coord: Vector2i
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	buildings = get_tree().get_nodes_in_group("buildings")
@@ -147,6 +149,8 @@ func _process(_delta):
 		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
 		#hovered_unit = unit_num
 
+	#Mek Coordinates
+	mek_coord = get_node("../TileMap").local_to_map(self.position)
 		
 	# Z index layering
 	self.z_index = tile_pos.x + tile_pos.y
