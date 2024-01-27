@@ -465,8 +465,7 @@ func on_cpu_turn_started() -> void:
 					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
 			get_node("../TileMap").moving = false
-			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")
-			get_node("../Control").only_once = true	
+			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
 			# Attacks
 			for j in USER_units.size():

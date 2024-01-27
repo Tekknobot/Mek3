@@ -135,7 +135,7 @@ func _process(_delta):
 
 	if tile_pos == mouse_local_pos and self.unit_team == 2:
 		audio_flag = false	
-		get_node("../Control").show()
+		get_node("../Control").hide()
 		get_node("../Control").get_child(3).texture = self.unit_portrait
 		get_node("../Control").get_child(4).text = unit_name
 		get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
