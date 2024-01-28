@@ -14,7 +14,6 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_pw3mg")
 
 [node name="TextureRect" type="TextureRect" parent="."]
