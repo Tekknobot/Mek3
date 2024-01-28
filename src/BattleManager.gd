@@ -690,7 +690,7 @@ func spawn():
 			var ontile = false
 			for j in node2D.structures.size():
 				for k in get_node("../BattleManager").available_units.size():
-					if k != i and get_node("../TileMap").unitsCoord[k] == tile_pos or node2D.structures[j].position == tile_center_pos:		
+					if k != i and get_node("../BattleManager").available_units[k].position == tile_center_pos or node2D.structures[j].position == tile_center_pos:		
 						ontile = true				
 			if !ontile: 
 				await get_tree().create_timer(0.5).timeout
