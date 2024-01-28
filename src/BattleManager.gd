@@ -19,6 +19,7 @@ var score_2
 var arrays_set = false
 
 @export var node2D: Node2D
+@export var spawn_button: Button
 
 var M1 = preload("res://scenes/mek/M1.scn")
 var M2 = preload("res://scenes/mek/M2.scn")
@@ -43,11 +44,6 @@ var structure_flag2_ranged = true
 var structure_flag3_ranged = true
 var structure_flag4_ranged = true
 
-var structure_flag1_support = true
-var structure_flag2_support = true
-var structure_flag3_support = true
-var structure_flag4_support = true
-
 var stored_cells = []
 var team_two = []
 
@@ -56,39 +52,14 @@ var team_two = []
 @onready var pre_b = $"../preB"
 @onready var sprite_2d = $"../Sprite2D"
 
+var spawning = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
 	get_node("../TurnManager").cpu_turn_started.connect(on_cpu_turn_started)
 	get_node("../TurnStack").turn_over.connect(on_turn_over)
 	get_node("../TurnManager").start()
-
-	await get_tree().create_timer(0).timeout
-	spawn_meks()
-	
-	await get_tree().create_timer(0).timeout
-	team_arrays()	
-	
-	# Randomize units at start	
-	for i in get_node("../BattleManager").available_units.size():
-		while true:
-			var my_random_tile_x = rng.randi_range(1, 14)
-			var my_random_tile_y = rng.randi_range(1, 14)
-			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
-			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
-			var ontile = false
-			for j in node2D.structures.size():
-				for k in get_node("../BattleManager").available_units.size():
-					if k != i and get_node("../TileMap").unitsCoord[k] == tile_pos or node2D.structures[j].position == tile_center_pos:		
-						ontile = true					
-			if !ontile: 
-				get_node("../TileMap").unitsCoord[i] = tile_pos
-				get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
-				break
-				
-	await get_tree().create_timer(1).timeout
-	#on_cpu_turn_started()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -101,6 +72,9 @@ func _input(event):
 			
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().change_scene_to_file("res://scenes/menu.tscn")
+			
+		if event.pressed and event.keycode == KEY_R:
+			spawn()		
 				
 func on_user_turn_started() -> void:
 	print("USER turn")
@@ -125,11 +99,6 @@ func on_cpu_turn_started() -> void:
 	get_node("../BattleManager").structure_flag2_ranged = true
 	get_node("../BattleManager").structure_flag3_ranged = true
 	get_node("../BattleManager").structure_flag4_ranged = true
-	
-	get_node("../BattleManager").structure_flag1_support = true
-	get_node("../BattleManager").structure_flag2_support = true
-	get_node("../BattleManager").structure_flag3_support = true
-	get_node("../BattleManager").structure_flag4_support = true		
 			
 	available_units = get_tree().get_nodes_in_group("mek_scenes")	
 	
@@ -699,6 +668,46 @@ func check_health_now():
 	for z in available_units.size():
 		available_units[z].check_health()		
 
+func spawn():
+	spawning = true
+	spawn_button.hide()
+	get_node("../TileMap").hovertile.hide()
+	
+	await get_tree().create_timer(0).timeout
+	spawn_meks()
+	
+	await get_tree().create_timer(0).timeout
+	team_arrays()	
+	
+	# Randomize units at start	
+	for i in get_node("../BattleManager").available_units.size():
+		while true:
+			var my_random_tile_x = rng.randi_range(1, 14)
+			var my_random_tile_y = rng.randi_range(1, 14)
+			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
+			var units
+			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
+			var ontile = false
+			for j in node2D.structures.size():
+				for k in get_node("../BattleManager").available_units.size():
+					if k != i and get_node("../TileMap").unitsCoord[k] == tile_pos or node2D.structures[j].position == tile_center_pos:		
+						ontile = true				
+			if !ontile: 
+				await get_tree().create_timer(0.5).timeout
+				get_node("../TileMap").unitsCoord[i] = tile_pos
+				get_node("../BattleManager").available_units[i].position = Vector2(tile_center_pos.x, tile_center_pos.y-500)
+				var tween: Tween = create_tween()
+				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1)
+				#get_node("../BattleManager").available_units[i].position = tile_center_pos
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
+				break
+				
+	#await get_tree().create_timer(0).timeout
+	#on_cpu_turn_started()	
+	get_node("../TileMap").hovertile.show()
+	await get_tree().create_timer(2).timeout
+	spawning = false
+
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	line.set_joint_mode(2)
 	var curve := Curve2D.new()
@@ -726,3 +735,4 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	explosion_instance.position = get_node("../TileMap").sprite_2d.position	
 	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 100
 	get_node("../Camera2D").shake(1, 30, 3)			
+

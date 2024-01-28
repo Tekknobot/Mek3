@@ -268,4 +268,6 @@ func check_duplicates(a):
 				#a[j].get_child(0).modulate.a = 0	
 				#break			
 			
-			
+func reload_scene():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)			
+	get_tree().reload_current_scene()				

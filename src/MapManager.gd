@@ -53,8 +53,6 @@ signal unit_used_turn
 @export var map_sfx: Array[AudioStream]
 @export var node2D: Node2D
 
-var hovered_unit
-
 var moves_counter = 0;
 
 var structures: Array[Area2D]
@@ -90,12 +88,6 @@ func _process(_delta):
 		hovertile.position = tile_center_pos
 		hovertile.z_index = tile_pos.x + tile_pos.y
 		#print(tile_pos);
-		for i in get_node("../BattleManager").available_units.size():
-			if tile_pos == unitsCoord_1[i]:		
-				hovered_unit = i
-		for i in get_node("../BattleManager").available_units.size():
-			if tile_pos == unitsCoord_2[i]:		
-				hovered_unit = i
 
 	astar_grid.size = Vector2i(16, 16)
 	astar_grid.cell_size = Vector2(1, 1)
@@ -182,7 +174,7 @@ func _input(event):
 						
 	# Click and drag to move unit	
 	if event is InputEventMouseButton:			
-		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false:		
+		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false and get_node("../BattleManager").spawning == false:		
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)

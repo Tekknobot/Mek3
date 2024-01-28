@@ -412,9 +412,10 @@ script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
+spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
@@ -520,3 +521,30 @@ autoplay = "default"
 
 [node name="AttackManager" type="Node2D" parent="."]
 script = ExtResource("69_f7tns")
+
+[node name="FloatingMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -583.0
+offset_top = -111.0
+offset_right = -449.0
+offset_bottom = -56.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FloatingMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GenerateButton" type="Button" parent="FloatingMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "RESET MAP"
+alignment = 0
+
+[node name="SpawnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
+layout_mode = 2
+text = "SPAWN MEKS"
+alignment = 0
+
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
