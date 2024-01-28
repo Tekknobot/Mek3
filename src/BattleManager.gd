@@ -685,7 +685,6 @@ func spawn():
 			var my_random_tile_x = rng.randi_range(1, 14)
 			var my_random_tile_y = rng.randi_range(1, 14)
 			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
-			var units
 			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
 			var ontile = false
 			for j in node2D.structures.size():
@@ -699,7 +698,8 @@ func spawn():
 				var tween: Tween = create_tween()
 				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1)
 				#get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y					
+				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y	
+				tween.connect("finished", on_tween_finished)				
 				break
 				
 	#await get_tree().create_timer(0).timeout
@@ -736,3 +736,6 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 100
 	get_node("../Camera2D").shake(1, 30, 3)			
 
+func on_tween_finished():
+	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+	get_node("../TileMap").get_child(1).play()	
