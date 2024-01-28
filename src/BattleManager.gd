@@ -696,7 +696,8 @@ func spawn():
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = Vector2(tile_center_pos.x, tile_center_pos.y-500)
 				var tween: Tween = create_tween()
-				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1)
+				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
 				#get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y	
 				tween.connect("finished", on_tween_finished)				
@@ -737,5 +738,5 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 	get_node("../Camera2D").shake(1, 30, 3)			
 
 func on_tween_finished():
-	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[8]
 	get_node("../TileMap").get_child(1).play()	
