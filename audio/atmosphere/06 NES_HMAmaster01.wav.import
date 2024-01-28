@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://1w2kw5une5cv"
+path="res://.godot/imported/06 NES_HMAmaster01.wav-59cb848c271c51e77357b0ec49523e52.sample"
+
+[deps]
+
+source_file="res://audio/atmosphere/06 NES_HMAmaster01.wav"
+dest_files=["res://.godot/imported/06 NES_HMAmaster01.wav-59cb848c271c51e77357b0ec49523e52.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

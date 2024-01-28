@@ -20,6 +20,7 @@ var arrays_set = false
 
 @export var node2D: Node2D
 @export var spawn_button: Button
+@export var score: Button
 
 var M1 = preload("res://scenes/mek/M1.scn")
 var M2 = preload("res://scenes/mek/M2.scn")
@@ -54,6 +55,10 @@ var team_two = []
 
 var spawning = false
 
+var inactive_total_cpu = 0
+var inactive_total_user = 0
+var audio_flag = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -63,7 +68,30 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	available_units = get_tree().get_nodes_in_group("mek_scenes")	
+	inactive_total_cpu = get_tree().get_nodes_in_group("CPU Inactive")
+	inactive_total_user = get_tree().get_nodes_in_group("USER Inactive")
+	
+	score.text = str(inactive_total_cpu.size()) + " / " + str(inactive_total_user.size())
+	
+	if inactive_total_cpu.size() >= 5 and audio_flag == false:
+		get_node("../ALL_CLEAR").show()
+		var tween: Tween = create_tween()
+		tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
+		get_node("../TileMap").get_child(1).play()	
+		get_node("../ALL_CLEAR").get_child(1).text = "ALL CLEARED!"		
+		print("YOU WIN!")
+		audio_flag = true
+
+	if inactive_total_user.size() >= 5 and audio_flag == false:
+		get_node("../ALL_CLEAR").show()
+		var tween: Tween = create_tween()
+		tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
+		get_node("../TileMap").get_child(1).play()	
+		get_node("../ALL_CLEAR").get_child(1).text = "CPU WINNER!"			
+		print("YOU WIN!")
+		audio_flag = true
 
 func _input(event):
 	if event is InputEventKey:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=127 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -58,6 +58,7 @@
 [ext_resource type="AudioStream" uid="uid://dma683kmsqil1" path="res://audio/sfx/Retro PickUp 10.wav" id="56_hvj22"]
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
 [ext_resource type="AudioStream" uid="uid://dpnk3b7wyew7q" path="res://audio/sfx/Mecha TURN ON - OFF 14.wav" id="57_l4end"]
+[ext_resource type="AudioStream" uid="uid://1w2kw5une5cv" path="res://audio/atmosphere/06 NES_HMAmaster01.wav" id="58_yo17a"]
 [ext_resource type="Texture2D" uid="uid://cpfmjgqkc544n" path="res://assets/vfx/explosion/explosion_2.png" id="61_1hmiq"]
 [ext_resource type="Script" path="res://src/ProjectileManager.gd" id="62_85rtn"]
 [ext_resource type="Texture2D" uid="uid://cm5a6pwt0s6ur" path="res://assets/vfx/projectile1.png" id="63_gsnkf"]
@@ -67,6 +68,9 @@
 [ext_resource type="Texture2D" uid="uid://brdrydcpmcui2" path="res://assets/ui/arrows/arrow-green1.png" id="67_55oh6"]
 [ext_resource type="Texture2D" uid="uid://cvt2t3mm3dqxq" path="res://assets/ui/arrows/arrow-green2.png" id="68_6ssq6"]
 [ext_resource type="Script" path="res://src/AttackManager.gd" id="69_f7tns"]
+[ext_resource type="Texture2D" uid="uid://ch7ttvimlhbhr" path="res://assets/ui/uiwidget/all-clear.png" id="72_j1wmd"]
+[ext_resource type="FontFile" uid="uid://0210e4fa4y75" path="res://assets/fonts/vermin_vibes_1989.ttf" id="72_rewkb"]
+[ext_resource type="FontFile" uid="uid://cjn22bf3h6axc" path="res://assets/fonts/HighWayChase1980.ttf" id="73_kib7c"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -408,15 +412,29 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c0q6x"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+emission_shape = 3
+emission_box_extents = Vector3(850, 750, 1)
+direction = Vector3(-1, 1, 2.08165e-12)
+spread = 0.0
+initial_velocity_min = 40.0
+initial_velocity_max = 40.0
+gravity = Vector3(2.08165e-12, 18, 2.08165e-12)
+scale_min = 4.0
+scale_max = 4.0
+
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile", "arrow")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "score")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
 spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
+score = NodePath("../FloatingMenu/VBoxContainer/Score")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
@@ -445,7 +463,7 @@ unitsCoord_1 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), 
 unitsCoord_2 = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 structureCoord = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0), Vector2i(0, 0)])
 hovertile = NodePath("../Hover_tile")
-map_sfx = Array[AudioStream]([ExtResource("48_p3eoj"), ExtResource("49_c461k"), ExtResource("50_odnt0"), ExtResource("51_rba5x"), ExtResource("52_tcha0"), ExtResource("53_dpbk8"), ExtResource("55_txcw8"), ExtResource("56_hvj22"), ExtResource("57_l4end")])
+map_sfx = Array[AudioStream]([ExtResource("48_p3eoj"), ExtResource("49_c461k"), ExtResource("50_odnt0"), ExtResource("51_rba5x"), ExtResource("52_tcha0"), ExtResource("53_dpbk8"), ExtResource("55_txcw8"), ExtResource("56_hvj22"), ExtResource("57_l4end"), ExtResource("58_yo17a")])
 node2D = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TileMap"]
@@ -526,9 +544,9 @@ script = ExtResource("69_f7tns")
 [node name="FloatingMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -583.0
+offset_left = -515.0
 offset_top = -111.0
-offset_right = -449.0
+offset_right = -381.0
 offset_bottom = -56.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FloatingMenu"]
@@ -539,15 +557,58 @@ offset_bottom = 40.0
 [node name="GenerateButton" type="Button" parent="FloatingMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("73_kib7c")
 theme_override_font_sizes/font_size = 16
-text = "RESET MAP"
+text = "RESET"
 alignment = 0
 
 [node name="SpawnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
 theme_override_font_sizes/font_size = 16
-text = "SPAWN MEKS"
+text = "SPAWN"
 alignment = 0
+
+[node name="Score" type="Button" parent="FloatingMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
+text = "0 - 0"
+alignment = 0
+
+[node name="ParticleSystem" type="Node2D" parent="."]
+visible = false
+position = Vector2(0, -74)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParticleSystem"]
+z_index = 500
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_c0q6x")
+lifetime = 5.0
+
+[node name="ALL_CLEAR" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1177.0
+offset_top = -154.0
+offset_right = 1217.0
+offset_bottom = -114.0
+scale = Vector2(2, 2)
+
+[node name="TextureRect" type="TextureRect" parent="ALL_CLEAR"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("72_j1wmd")
+
+[node name="TextEdit" type="TextEdit" parent="ALL_CLEAR"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 217.0
+offset_bottom = 65.0
+theme_override_fonts/font = ExtResource("72_rewkb")
+theme_override_font_sizes/font_size = 32
+text = "ALL CLEARED!"
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]

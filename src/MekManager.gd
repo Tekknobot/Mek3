@@ -227,12 +227,16 @@ func check_health():
 		explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 100
 		self.unit_status = "Inactive"
 		self.add_to_group("Inactive")
+		if self.unit_team == 1:
+			self.add_to_group("USER Inactive")
+		elif self.unit_team == 2:
+			self.add_to_group("CPU Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
 		self.hide()
 		await get_tree().create_timer(1).timeout
 		self.position = Vector2(1000,1000)	
 		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
-			
+
 
 		#Remove hover tiles										
 		for l in 16:
