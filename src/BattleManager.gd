@@ -466,7 +466,7 @@ func on_cpu_turn_started() -> void:
 				for k in 16:
 					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
-			get_node("../TileMap").moving = false
+			#get_node("../TileMap").moving = false
 			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
 			# Attacks
@@ -610,6 +610,7 @@ func on_cpu_turn_started() -> void:
 	get_node("../Hover_tile").show()
 	
 	turn_button.show()
+	get_node("../TileMap").moving = false
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
@@ -742,6 +743,7 @@ func spawn():
 	get_node("../TileMap").hovertile.show()
 	await get_tree().create_timer(2).timeout
 	on_cpu_turn_started()
+	get_node("../TileMap").moving = true
 	spawning = false
 
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
@@ -777,5 +779,6 @@ func on_tween_finished():
 	get_node("../TileMap").get_child(1).play()	
 
 func end_turn():
+	get_node("../TileMap").moving = true
 	turn_button.hide()
 	get_node("../TurnManager").cpu_turn_started.emit()

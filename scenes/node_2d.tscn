@@ -596,9 +596,9 @@ lifetime = 5.0
 [node name="ALL_CLEAR" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1177.0
+offset_left = 1975.0
 offset_top = -154.0
-offset_right = 1217.0
+offset_right = 2015.0
 offset_bottom = -114.0
 scale = Vector2(2, 2)
 
