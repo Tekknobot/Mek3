@@ -20,6 +20,7 @@ var arrays_set = false
 
 @export var node2D: Node2D
 @export var spawn_button: Button
+@export var turn_button: Button
 @export var score: Button
 
 var M1 = preload("res://scenes/mek/M1.scn")
@@ -58,6 +59,9 @@ var spawning = false
 var inactive_total_cpu = 0
 var inactive_total_user = 0
 var audio_flag = false
+
+var cpu_turn = false
+var user_turn = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,6 +103,7 @@ func _input(event):
 			get_node("../TurnManager").cpu_turn_started.emit()
 			
 		if event.pressed and event.keycode == KEY_ESCAPE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 			
 		if event.pressed and event.keycode == KEY_R:
@@ -603,6 +608,8 @@ func on_cpu_turn_started() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_node("../Control").get_child(18).show() # moves count
 	get_node("../Hover_tile").show()
+	
+	turn_button.show()
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
@@ -731,10 +738,10 @@ func spawn():
 				tween.connect("finished", on_tween_finished)				
 				break
 				
-	#await get_tree().create_timer(0).timeout
-	#on_cpu_turn_started()	
+	#await get_tree().create_timer(0).timeout	
 	get_node("../TileMap").hovertile.show()
 	await get_tree().create_timer(2).timeout
+	on_cpu_turn_started()
 	spawning = false
 
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
@@ -768,3 +775,7 @@ func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: 
 func on_tween_finished():
 	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[8]
 	get_node("../TileMap").get_child(1).play()	
+
+func end_turn():
+	turn_button.hide()
+	get_node("../TurnManager").cpu_turn_started.emit()

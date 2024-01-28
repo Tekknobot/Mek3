@@ -430,10 +430,11 @@ script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "score")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "turn_button", "score")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
 spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
+turn_button = NodePath("../FloatingMenu/VBoxContainer/TurnButton")
 score = NodePath("../FloatingMenu/VBoxContainer/Score")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
@@ -569,6 +570,13 @@ theme_override_font_sizes/font_size = 16
 text = "SPAWN"
 alignment = 0
 
+[node name="TurnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
+text = "TURN"
+alignment = 0
+
 [node name="Score" type="Button" parent="FloatingMenu/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
@@ -612,3 +620,4 @@ text = "ALL CLEARED!"
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
