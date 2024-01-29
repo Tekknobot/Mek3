@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=126 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -59,7 +59,6 @@
 [ext_resource type="PackedScene" uid="uid://bikq51f5ge76w" path="res://scenes/control.scn" id="56_yg7y2"]
 [ext_resource type="AudioStream" uid="uid://dpnk3b7wyew7q" path="res://audio/sfx/Mecha TURN ON - OFF 14.wav" id="57_l4end"]
 [ext_resource type="AudioStream" uid="uid://1w2kw5une5cv" path="res://audio/atmosphere/06 NES_HMAmaster01.wav" id="58_yo17a"]
-[ext_resource type="Texture2D" uid="uid://cpfmjgqkc544n" path="res://assets/vfx/explosion/explosion_2.png" id="61_1hmiq"]
 [ext_resource type="Script" path="res://src/ProjectileManager.gd" id="62_85rtn"]
 [ext_resource type="Texture2D" uid="uid://bbblj7e83bbk" path="res://assets/vfx/projectile1.png" id="63_gsnkf"]
 [ext_resource type="Texture2D" uid="uid://d0wq1j8tyj561" path="res://assets/vfx/projectile2.png" id="64_6ii5t"]
@@ -509,7 +508,6 @@ position = Vector2(53, 170)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1506)
-texture = ExtResource("61_1hmiq")
 script = ExtResource("62_85rtn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
@@ -519,6 +517,7 @@ autoplay = "default"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 
 [node name="Arrow" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -1506)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Arrow"]
@@ -529,6 +528,7 @@ autoplay = "default"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Arrow"]
 
 [node name="Arrow_green" type="Area2D" parent="."]
+visible = false
 z_index = 100
 position = Vector2(0, -1506)
 

@@ -66,6 +66,7 @@ var cpu_turn = false
 var user_turn = false
 
 var cpu_pos
+var user_within = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -121,7 +122,7 @@ func on_user_turn_started() -> void:
 	await get_tree().create_timer(0.1).timeout
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
-func on_cpu_turn_started() -> void:			
+func on_cpu_turn_started() -> void:		
 	get_node("../Control").get_child(19).text = "CPU Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
@@ -355,7 +356,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 		
 		# CPU Movement range
-		if get_node("../BattleManager").CPU_units[n].attacked == false and CPU_units[n].unit_status == "Active":						
+		if get_node("../BattleManager").CPU_units[n].attacked == false and CPU_units[n].unit_status == "Active":					
 			var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 			var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
 		
@@ -427,6 +428,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)																																								
 				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
 			
+			
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and USER_units[m].unit_status == "Active":
@@ -462,7 +464,7 @@ func on_cpu_turn_started() -> void:
 					get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 					
 					await get_tree().create_timer(1).timeout
-					get_node("../BattleManager").CPU_units[n].moved = true
+					get_node("../BattleManager").CPU_units[n].moved = true	
 						
 					#Erase hover tiles
 					for j in 16:
@@ -591,8 +593,8 @@ func on_cpu_turn_started() -> void:
 									break	
 															
 					break		
-																											 	
-				elif get_node("../TileMap").get_cell_source_id(1, user_pos) == -1 and USER_units[m].unit_status == "Active":
+																												 	
+				if get_node("../TileMap").get_cell_source_id(1, user_pos) != 18 and USER_units[m].unit_status == "Active":
 					var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 					var target_random_cell = rng.randi_range(0, 3)
 					# Find Path
@@ -758,7 +760,7 @@ func on_cpu_turn_started() -> void:
 									break	
 															
 					break
-					
+				
 			#Check range again	
 			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
 			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
@@ -953,18 +955,21 @@ func on_cpu_turn_started() -> void:
 				for k in get_node("../BattleManager").USER_units.size():
 					get_node("../BattleManager").USER_units[k].moved = false
 					get_node("../BattleManager").USER_units[k].attacked = false
-					get_node("../TileMap").moves_counter = 0				
+					get_node("../TileMap").moves_counter = 0
+									
 					
 		elif CPU_units[n].unit_status == "Inactive":
 			for k in get_node("../BattleManager").USER_units.size():
 				get_node("../BattleManager").USER_units[k].moved = false
 				get_node("../BattleManager").USER_units[k].attacked = false
-				get_node("../TileMap").moves_counter = 0					
+				get_node("../TileMap").moves_counter = 0	
+								
 							
 	for k in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[k].moved = false
 		get_node("../BattleManager").available_units[k].attacked = false
 		get_node("../TileMap").moves_counter = 0
+		
 		
 	get_node("../TileMap").hovertile.offset.y = 0	
 
