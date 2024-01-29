@@ -408,7 +408,7 @@ func _input(event):
 					get_node("../BattleManager").available_units[i].get_child(0).play("move")
 					
 					hovertile.hide()
-					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+					moving = true
 					
 					# Find path and set hover cells
 					for h in patharray.size():
@@ -449,7 +449,7 @@ func _input(event):
 					await get_tree().create_timer(1).timeout
 					
 					hovertile.show()
-					Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)					
+					moving = false					
 					
 				get_node("../BattleManager").available_units[i].get_child(0).set_offset(Vector2(0,0))
 			
