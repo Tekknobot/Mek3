@@ -744,7 +744,7 @@ func spawn():
 	await get_tree().create_timer(2).timeout	
 	get_node("../TileMap").moving = true
 	spawning = false
-	#on_cpu_turn_started()
+	on_cpu_turn_started()
 	get_node("../TileMap").moving = false
 
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):

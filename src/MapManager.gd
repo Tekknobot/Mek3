@@ -69,6 +69,7 @@ var districts = []
 var camera_target: int
 var obj_loc 
 var surrounding_cells
+var users_active
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -156,15 +157,15 @@ func _process(_delta):
 			
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
-		structureCoord[i] = structure_pos
-			
-	if moves_counter >= 10:
-		moves_counter = 0	
-		get_node("../TurnManager").cpu_turn_started.emit()			
+		structureCoord[i] = structure_pos		
 
-	get_node("../Control").get_child(18).text = str(moves_counter) + " / 10"
-																		#
-
+	for i in get_node("../BattleManager").available_units.size():
+		if get_node("../BattleManager").available_units[i].unit_team == 1 and get_node("../BattleManager").available_units[i].unit_status == "Active":
+			get_node("../BattleManager").available_units[i].add_to_group("USER Active")
+		
+	users_active = get_tree().get_nodes_in_group("USER Active")		
+	get_node("../Control").get_child(18).text = str(moves_counter) + " / " + str((users_active.size()-get_node("../BattleManager").inactive_total_user.size())*2)																	#
+		
 func _input(event):	
 	if event is InputEventKey:	
 		if event.pressed and event.keycode == KEY_3:

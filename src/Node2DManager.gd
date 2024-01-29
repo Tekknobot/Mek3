@@ -79,6 +79,8 @@ func _ready():
 		tower_inst.add_to_group("towers")	
 		tower_inst.z_index = tile_pos.x + tile_pos.y
 		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
+		#arrow.position = Vector2(tile_center_pos.x-5, tile_center_pos.y-109) 
+		#arrow.z_index = 100
 			
 	for i in 3: #districts
 		var my_random_tile_x = rng.randi_range(1, 14)

@@ -237,7 +237,6 @@ func check_health():
 		self.position = Vector2(1000,1000)	
 		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
 
-
 		#Remove hover tiles										
 		for l in 16:
 			for k in 16:
