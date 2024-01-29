@@ -65,6 +65,8 @@ var audio_flag = false
 var cpu_turn = false
 var user_turn = false
 
+var user_within = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -427,7 +429,7 @@ func on_cpu_turn_started() -> void:
 			
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
-				if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18:
+				if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and USER_units[m].unit_status == "Active":
 					var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 					var target_random_cell = rng.randi_range(0, 3)
 					# Find Path
@@ -456,139 +458,307 @@ func on_cpu_turn_started() -> void:
 						get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 						get_node("../TileMap").get_child(1).play()	
 						await get_tree().create_timer(0.35).timeout		
-			
-			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
-			
-			await get_tree().create_timer(1).timeout
-			get_node("../BattleManager").CPU_units[n].moved = true
-				
-			#Erase hover tiles
-			for j in 16:
-				for k in 16:
-					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
+												
+					get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+					
+					await get_tree().create_timer(1).timeout
+					get_node("../BattleManager").CPU_units[n].moved = true
+						
+					#Erase hover tiles
+					for j in 16:
+						for k in 16:
+							get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
-			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+					get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
-			# Attacks
-			for j in USER_units.size():
-				var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
-				var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
-				for i in 4:
-					if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
-						var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
-						
-						if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
-							CPU_units[n].scale.x = 1
-							#print("1")
-						elif CPU_units[n].scale.x == -1 and CPU_units[n].position.x < attack_center_pos.x:
-							CPU_units[n].scale.x = -1
-							#print("2")	
-						if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > attack_center_pos.x:
-							CPU_units[n].scale.x = 1
-							#print("3")
-						elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
-							CPU_units[n].scale.x = -1
-							#print("4"z)																																																																			
-						
-						CPU_units[n].get_child(0).play("attack")
-						
-						var sfx
-						
-						if CPU_units[n].unit_name == "Pantherbot":
-							sfx = 5
-						else:
-							sfx = 4
-							
-						get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[sfx]
-						get_node("../TileMap").get_child(1).play()		
-										
-						await get_tree().create_timer(0.5).timeout
-						CPU_units[n].get_child(0).play("default")
+					# Attacks
+					for j in USER_units.size():
+						var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
+						var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
+						for i in 4:
+							if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
+								
+								if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
+									CPU_units[n].scale.x = 1
+									#print("1")
+								elif CPU_units[n].scale.x == -1 and CPU_units[n].position.x < attack_center_pos.x:
+									CPU_units[n].scale.x = -1
+									#print("2")	
+								if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > attack_center_pos.x:
+									CPU_units[n].scale.x = 1
+									#print("3")
+								elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
+									CPU_units[n].scale.x = -1
+									#print("4"z)																																																																			
+								
+								CPU_units[n].get_child(0).play("attack")
+								
+								var sfx
+								
+								if CPU_units[n].unit_name == "Pantherbot":
+									sfx = 5
+								else:
+									sfx = 4
 									
-						var _bumpedvector = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
-						
-						get_node("../Camera2D").shake(0.5, 30, 3)
-						
-						get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
-						get_node("../TileMap").get_child(1).play()
+								get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[sfx]
+								get_node("../TileMap").get_child(1).play()		
+												
+								await get_tree().create_timer(0.5).timeout
+								CPU_units[n].get_child(0).play("default")
+											
+								var _bumpedvector = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
+								
+								get_node("../Camera2D").shake(0.5, 30, 3)
+								
+								get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
+								get_node("../TileMap").get_child(1).play()
 
-						if i == 0:
-							var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
-							USER_units[j].position = tile_center_pos
-							var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
-							USER_units[j].position = tile_center_pos											
-							USER_units[j].z_index = unit_pos.x + unit_pos.y
-							var tween: Tween = create_tween()
-							tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
-							get_node("../BattleManager").CPU_units[n].xp += 1										
-							get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
-							get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
-							#print("A")
-							print('CPU moved')
-							check_health_now()
-							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").check_health_now()
-							get_node("../BattleManager").CPU_units[n].attacked = true							
-							break
-						
-						if i == 1:
-							var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
-							USER_units[j].position = tile_center_pos
-							var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
-							USER_units[j].position = tile_center_pos											
-							USER_units[j].z_index = unit_pos.x + unit_pos.y
-							var tween: Tween = create_tween()
-							tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
-							get_node("../BattleManager").CPU_units[n].xp += 1										
-							get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
-							get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
-							#print("A")
-							print('CPU moved')
-							check_health_now()
-							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").check_health_now()
-							get_node("../BattleManager").CPU_units[n].attacked = true							
-							break
-						
-						if i == 2:
-							var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
-							USER_units[j].position = tile_center_pos
-							var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
-							USER_units[j].position = tile_center_pos											
-							USER_units[j].z_index = unit_pos.x + unit_pos.y
-							var tween: Tween = create_tween()
-							tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
-							get_node("../BattleManager").CPU_units[n].xp += 1										
-							get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
-							get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
-							#print("A")
-							print('CPU moved')
-							check_health_now()
-							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").check_health_now()
-							get_node("../BattleManager").CPU_units[n].attacked = true							
-							break
-						
-						if i == 3:
-							var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
-							USER_units[j].position = tile_center_pos
-							var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
-							USER_units[j].position = tile_center_pos											
-							USER_units[j].z_index = unit_pos.x + unit_pos.y
-							var tween: Tween = create_tween()
-							tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
-							get_node("../BattleManager").CPU_units[n].xp += 1										
-							get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
-							get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
-							#print("A")
-							print('CPU moved')	
-							check_health_now()
-							await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").check_health_now()														
-							get_node("../BattleManager").CPU_units[n].attacked = true
-							break							
+								if i == 0:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 1:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 2:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 3:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')	
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()														
+									get_node("../BattleManager").CPU_units[n].attacked = true
+									break	
+															
+					break		
 																											 	
- 
+				elif get_node("../TileMap").get_cell_source_id(1, user_pos) == -1 and USER_units[m].unit_status == "Active":
+					var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
+					var target_random_cell = rng.randi_range(0, 3)
+					# Find Path
+					var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
+
+					await get_tree().create_timer(1).timeout
+					#Erase hover tiles
+					for j in 16:
+						for k in 16:
+							get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+					
+					# Set hover cells
+					for h in patharray.size():
+						await get_tree().create_timer(0.01).timeout
+						get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
+						if h == 4:
+							break
+					
+					get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
+					
+					# Move unit		
+					for h in patharray.size():
+						var tile_center_pos = get_node("../TileMap").map_to_local(patharray[h]) + Vector2(0,0) / 2
+						var tween = create_tween()
+						var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
+						get_node("../BattleManager").CPU_units[n].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
+						tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
+						get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
+						get_node("../TileMap").get_child(1).play()	
+						await get_tree().create_timer(0.35).timeout		
+						if h == 4:
+							break		
+											
+					get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+					
+					await get_tree().create_timer(1).timeout
+					get_node("../BattleManager").CPU_units[n].moved = true
+						
+					#Erase hover tiles
+					for j in 16:
+						for k in 16:
+							get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
+
+					get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+
+					# Attacks
+					for j in USER_units.size():
+						var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
+						var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
+						for i in 4:
+							if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
+								
+								if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
+									CPU_units[n].scale.x = 1
+									#print("1")
+								elif CPU_units[n].scale.x == -1 and CPU_units[n].position.x < attack_center_pos.x:
+									CPU_units[n].scale.x = -1
+									#print("2")	
+								if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > attack_center_pos.x:
+									CPU_units[n].scale.x = 1
+									#print("3")
+								elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < attack_center_pos.x:
+									CPU_units[n].scale.x = -1
+									#print("4"z)																																																																			
+								
+								CPU_units[n].get_child(0).play("attack")
+								
+								var sfx
+								
+								if CPU_units[n].unit_name == "Pantherbot":
+									sfx = 5
+								else:
+									sfx = 4
+									
+								get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[sfx]
+								get_node("../TileMap").get_child(1).play()		
+												
+								await get_tree().create_timer(0.5).timeout
+								CPU_units[n].get_child(0).play("default")
+											
+								var _bumpedvector = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
+								
+								get_node("../Camera2D").shake(0.5, 30, 3)
+								
+								get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[3]
+								get_node("../TileMap").get_child(1).play()
+
+								if i == 0:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x-1, _bumpedvector.y)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 1:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y-1)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 2:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x+1, _bumpedvector.y)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()
+									get_node("../BattleManager").CPU_units[n].attacked = true							
+									break
+								
+								if i == 3:
+									var tile_center_pos = get_node("../TileMap").map_to_local(Vector2i(_bumpedvector.x, _bumpedvector.y+1)) + Vector2(0,0) / 2
+									USER_units[j].position = tile_center_pos
+									var unit_pos = get_node("../TileMap").local_to_map(USER_units[j].position)
+									USER_units[j].position = tile_center_pos											
+									USER_units[j].z_index = unit_pos.x + unit_pos.y
+									var tween: Tween = create_tween()
+									tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
+									get_node("../BattleManager").CPU_units[n].xp += 1										
+									get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+									get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
+									#print("A")
+									print('CPU moved')	
+									check_health_now()
+									await get_tree().create_timer(1).timeout
+									get_node("../BattleManager").check_health_now()														
+									get_node("../BattleManager").CPU_units[n].attacked = true
+									break	
+															
+					break
+					
 		elif CPU_units[n].unit_status == "Inactive":
 			for k in get_node("../BattleManager").USER_units.size():
 				get_node("../BattleManager").USER_units[k].moved = false
