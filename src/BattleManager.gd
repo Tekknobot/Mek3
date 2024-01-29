@@ -421,14 +421,14 @@ func on_cpu_turn_started() -> void:
 					get_node("../TileMap").set_cell(1, Vector2i(surrounding_cells[k].x, surrounding_cells[k].y-3), 18, Vector2i(0, 0), 0)					
 					get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 					get_node("../TileMap").get_child(1).play()	
-				
-				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)																																								
-				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)															
-				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)																																								
-				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
+					
+					#Fill remaining tiles
+					get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)																																								
+					get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)															
+					get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)																																								
+					get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
 			
 			for m in USER_units.size():
-				await get_tree().create_timer(0.1).timeout
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and USER_units[m].unit_status == "Active":
 					var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
