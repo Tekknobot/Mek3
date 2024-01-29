@@ -353,9 +353,9 @@ func on_cpu_turn_started() -> void:
 		for j in 16:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
-
-		if get_node("../BattleManager").CPU_units[n].attacked == false and CPU_units[n].unit_status == "Active":
-			# CPU Movement range				
+		
+		# CPU Movement range
+		if get_node("../BattleManager").CPU_units[n].attacked == false and CPU_units[n].unit_status == "Active":						
 			var unit_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 			var surrounding_cells = get_node("../TileMap").get_surrounding_cells(unit_target_pos)
 		
@@ -428,6 +428,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
 			
 			for m in USER_units.size():
+				await get_tree().create_timer(0.1).timeout
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and USER_units[m].unit_status == "Active":
 					var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
@@ -948,6 +949,12 @@ func on_cpu_turn_started() -> void:
 				for j in 16:
 					for k in 16:
 						get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
+
+			elif CPU_units[n].unit_status == "Inactive":
+				for k in get_node("../BattleManager").USER_units.size():
+					get_node("../BattleManager").USER_units[k].moved = false
+					get_node("../BattleManager").USER_units[k].attacked = false
+					get_node("../TileMap").moves_counter = 0				
 					
 		elif CPU_units[n].unit_status == "Inactive":
 			for k in get_node("../BattleManager").USER_units.size():
@@ -1074,7 +1081,8 @@ func spawn():
 	
 	await get_tree().create_timer(0).timeout
 	team_arrays()	
-	
+
+	await get_tree().create_timer(0).timeout	
 	# Randomize units at start	
 	for i in get_node("../BattleManager").available_units.size():
 		while true:
