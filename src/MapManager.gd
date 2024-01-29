@@ -174,8 +174,8 @@ func _input(event):
 				get_node("../TileMap").structures[i].get_child(0).modulate = Color8(255, 255, 255) 	
 						
 	# Click and drag to move unit	
-	if event is InputEventMouseButton:			
-		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0 and moving == false and get_node("../BattleManager").spawning == false:		
+	if event is InputEventMouseButton and moving == false and get_node("../BattleManager").spawning == false:			
+		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0:		
 			var mouse_pos = get_global_mouse_position()
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)

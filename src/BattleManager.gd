@@ -34,6 +34,8 @@ var S1 = preload("res://scenes/mek/S1.scn")
 var S2 = preload("res://scenes/mek/S2.scn")
 var S3 = preload("res://scenes/mek/S3.scn")
 
+var mek_array = [M1, M2, M3, R1, R2, R3, R4, S1, S2, S3]
+
 #var structures: Array[Area2D]
 
 var hoverflag_1 = true
@@ -103,7 +105,7 @@ func _input(event):
 			get_node("../TurnManager").cpu_turn_started.emit()
 			
 		if event.pressed and event.keycode == KEY_ESCAPE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			get_tree().change_scene_to_file("res://scenes/menu.tscn")
 			
 		if event.pressed and event.keycode == KEY_R:
@@ -121,7 +123,7 @@ func on_cpu_turn_started() -> void:
 	get_node("../Control").get_child(19).text = "CPU Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].moved = false
@@ -143,8 +145,7 @@ func on_cpu_turn_started() -> void:
 		for k in 16:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 	
-	print('CPU turn')
-	#get_node("../TileMap").moving = true	
+	print('CPU turn')	
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 2:
@@ -466,7 +467,6 @@ func on_cpu_turn_started() -> void:
 				for k in 16:
 					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
-			#get_node("../TileMap").moving = false
 			get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
 			# Attacks
@@ -605,7 +605,7 @@ func on_cpu_turn_started() -> void:
 	get_node("../BattleManager").check_health_now()
 	
 	get_node("../Control").get_child(19).text = "USER TURN"
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_node("../Control").get_child(18).show() # moves count
 	get_node("../Hover_tile").show()
 	
@@ -639,7 +639,7 @@ func team_arrays():
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
 			available_units[i].unit_movement = 4		
-	
+		
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
 			# Team color
@@ -654,7 +654,7 @@ func team_arrays():
 				get_node("../BattleManager").available_units[i].unit_level = 2
 				get_node("../BattleManager").available_units[i].unit_attack = 2
 				get_node("../BattleManager").available_units[i].unit_defence = 2
-									
+														
 	arrays_set = true
 	
 func spawn_meks():
@@ -696,9 +696,9 @@ func spawn_meks():
 
 	var M3_inst = M3.instantiate()
 	node2D.add_child(M3_inst)
-	M3_inst.add_to_group("mek_scenes")
+	M3_inst.add_to_group("mek_scenes")		
 	
-	available_units = get_tree().get_nodes_in_group("mek_scenes")		
+	available_units = get_tree().get_nodes_in_group("mek_scenes")
 
 func check_health_now():
 	for z in available_units.size():
@@ -742,10 +742,9 @@ func spawn():
 	#await get_tree().create_timer(0).timeout	
 	get_node("../TileMap").hovertile.show()
 	await get_tree().create_timer(2).timeout	
-	get_node("../TileMap").moving = true
 	spawning = false
 	on_cpu_turn_started()
-	get_node("../TileMap").moving = false
+	get_node("../TileMap").moving = true
 
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	line.set_joint_mode(2)
