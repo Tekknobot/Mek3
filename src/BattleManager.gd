@@ -65,7 +65,7 @@ var audio_flag = false
 var cpu_turn = false
 var user_turn = false
 
-var user_within = false
+var cpu_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -121,7 +121,7 @@ func on_user_turn_started() -> void:
 	await get_tree().create_timer(0.1).timeout
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
-func on_cpu_turn_started() -> void:
+func on_cpu_turn_started() -> void:			
 	get_node("../Control").get_child(19).text = "CPU Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
@@ -160,7 +160,7 @@ func on_cpu_turn_started() -> void:
 
 	# CPU Check Attack Range
 	for n in CPU_units.size():
-		var cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
+		cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 
 		var current_unit = get_node("../BattleManager").CPU_units[n]
 		var unit_type = get_node("../BattleManager").CPU_units[n].unit_type
@@ -758,6 +758,196 @@ func on_cpu_turn_started() -> void:
 									break	
 															
 					break
+					
+			#Check range again	
+			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
+			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
+				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+				get_node("../TileMap").get_child(1).play()																		
+				for j in 15:	
+					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+					if hoverflag_1 == true and structure_flag1_ranged == true:
+						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+						#await get_tree().create_timer(0).timeout
+						for h in node2D.structures.size():
+							var set_cell = Vector2i(cpu_pos.x-j, cpu_pos.y)
+							var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+							#print(set_cell, structure_pos)
+							if set_cell == structure_pos:
+								structure_flag1_ranged = false
+						for m in USER_units.size():
+							
+							if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > USER_units[m].position.x:
+								CPU_units[n].scale.x = 1
+								#print("1")
+							elif CPU_units[n].scale.x == -1 and CPU_units[n].position.x < USER_units[m].position.x:
+								CPU_units[n].scale.x = -1
+								#print("2")	
+							if CPU_units[n].scale.x == -1 and CPU_units[n].position.x > USER_units[m].position.x:
+								CPU_units[n].scale.x = 1
+								#print("3")
+							elif CPU_units[n].scale.x == 1 and CPU_units[n].position.x < USER_units[m].position.x:
+								CPU_units[n].scale.x = -1
+								#print("4")
+															
+							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+								await get_tree().create_timer(0.7).timeout
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+								var _newvector = Vector2i(_bumpedvector.x-1, _bumpedvector.y)
+								var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+								
+								get_node("../BattleManager").USER_units[m].position = _finalvector
+								var tween: Tween = create_tween()
+								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+								
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								CPU_units[n].xp += 1
+								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+								
+								hoverflag_1 = false
+								CPU_units[n].attacked = true
+								get_node("../BattleManager").check_health_now()
+				
+								await get_tree().create_timer(0.5).timeout
+															
+				await get_tree().create_timer(0.1).timeout	
+
+				hoverflag_1 = true
+				structure_flag1_ranged = true													
+				for j in 15:	
+					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+					if hoverflag_2 == true and structure_flag2_ranged == true:
+						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y+j), 48, Vector2i(0, 0), 0)
+						#await get_tree().create_timer(0).timeout
+						for h in node2D.structures.size():
+							var set_cell = Vector2i(cpu_pos.x, cpu_pos.y+j)
+							var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+							#print(set_cell, structure_pos)
+							if set_cell == structure_pos:
+								structure_flag2_ranged = false
+						for m in USER_units.size():
+							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+								await get_tree().create_timer(0.7).timeout
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+
+								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+								var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y+1)
+								var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+								
+								get_node("../BattleManager").USER_units[m].position = _finalvector
+								var tween: Tween = create_tween()
+								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								CPU_units[n].xp += 1
+								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+								
+								hoverflag_2 = false
+								CPU_units[n].attacked = true
+								get_node("../BattleManager").check_health_now()
+								
+								await get_tree().create_timer(0.5).timeout
+								
+				await get_tree().create_timer(0.1).timeout
+				
+				hoverflag_2 = true	
+				structure_flag2_ranged = true											
+				for j in 15:	
+					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+					if hoverflag_3 == true and structure_flag3_ranged == true:
+						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
+						#await get_tree().create_timer(0).timeout
+						for h in node2D.structures.size():
+							var set_cell = Vector2i(cpu_pos.x+j, cpu_pos.y)
+							var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+							#print(set_cell, structure_pos)
+							if set_cell == structure_pos:
+								structure_flag3_ranged = false
+						for m in USER_units.size():
+							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+								await get_tree().create_timer(0.7).timeout
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								
+								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+								var _newvector = Vector2i(_bumpedvector.x+1, _bumpedvector.y)
+								var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+								
+								get_node("../BattleManager").USER_units[m].position = _finalvector
+								var tween: Tween = create_tween()
+								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								CPU_units[n].xp += 1
+								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+								
+								hoverflag_3 = false
+								CPU_units[n].attacked = true
+								get_node("../BattleManager").check_health_now()
+								
+								await get_tree().create_timer(0.5).timeout
+								
+				await get_tree().create_timer(0.1).timeout
+								
+				hoverflag_3 = true	
+				structure_flag3_ranged = true													
+				for j in 15:	
+					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
+					if hoverflag_4 == true and structure_flag4_ranged == true:
+						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x, cpu_pos.y-j), 48, Vector2i(0, 0), 0)
+						#await get_tree().create_timer(0).timeout
+						for h in node2D.structures.size():
+							var set_cell = Vector2i(cpu_pos.x, cpu_pos.y-j)
+							var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[h].position)
+							#print(set_cell, structure_pos)
+							if set_cell == structure_pos:
+								structure_flag4_ranged = false
+						for m in USER_units.size():
+							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
+								await get_tree().create_timer(0.7).timeout
+								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
+								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+
+								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
+								var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y-1)
+								var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
+								
+								get_node("../BattleManager").USER_units[m].position = _finalvector
+								var tween: Tween = create_tween()
+								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
+
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								CPU_units[n].xp += 1
+								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
+								
+								hoverflag_4 = false
+								CPU_units[n].attacked = true
+								get_node("../BattleManager").check_health_now()	
+																	
+								await get_tree().create_timer(0.5).timeout
+								
+				await get_tree().create_timer(0.1).timeout
+																	
+				hoverflag_4 = true							 						
+				structure_flag4_ranged = true
+					
+				await get_tree().create_timer(1).timeout
+				
+				#Remove hover tiles										
+				for j in 16:
+					for k in 16:
+						get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
 					
 		elif CPU_units[n].unit_status == "Inactive":
 			for k in get_node("../BattleManager").USER_units.size():
