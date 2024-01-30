@@ -38,7 +38,7 @@ func death_from_above():
 				await SetLinePoints(line_2d, Vector2(mek_position.x, mek_position.y-550), Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[i].global_position)										
 				var tween: Tween = create_tween()
 				tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)														
-				get_node("../BattleManager").available_units[i].unit_min -= get_node("../BattleManager").available_units[i].unit_level
+				get_node("../BattleManager").available_units[i].unit_min -= 2
 				get_node("../BattleManager").available_units[i].progressbar.set_value(get_node("../BattleManager").available_units[i].unit_min)
 				get_node("../BattleManager").available_units[i].check_health()
 
@@ -52,7 +52,7 @@ func group_health():
 			await get_tree().create_timer(0.5).timeout
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)														
-			get_node("../BattleManager").available_units[i].unit_min += 1
+			get_node("../BattleManager").available_units[i].unit_min += 2
 			get_node("../BattleManager").available_units[i].progressbar.set_value(get_node("../BattleManager").available_units[i].unit_min)
 			get_node("../BattleManager").available_units[i].check_health()						
 			
