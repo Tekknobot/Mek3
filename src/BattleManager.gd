@@ -592,10 +592,9 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break																
-						break																																								 	
+						break																																								 						
 					else:
-						user_within = true
-						break
+						user_within == true
 				else:
 					pass
 					
