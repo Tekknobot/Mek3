@@ -438,7 +438,7 @@ func on_cpu_turn_started() -> void:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
-						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[0])
+						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
 						await get_tree().create_timer(1).timeout
 						#Erase hover tiles
@@ -612,7 +612,7 @@ func on_cpu_turn_started() -> void:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
-						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[0])
+						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
 						await get_tree().create_timer(1).timeout
 						#Erase hover tiles
