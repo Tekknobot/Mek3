@@ -34,7 +34,7 @@ func death_from_above():
 			get_node("../TileMap").set_cell(1, get_node("../BattleManager").available_units[i].mek_coord, 48, Vector2i(0, 0), 0)
 			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 			get_node("../TileMap").get_child(1).play()					
-			await setLinePointsToBezierCurve(line_2d, Vector2(mek_position.x, mek_position.y-250), Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[i].global_position)										
+			await SetLinePoints(line_2d, Vector2(mek_position.x, mek_position.y-250), Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[i].global_position)										
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)														
 			get_node("../BattleManager").available_units[i].unit_min -= 1
@@ -77,7 +77,7 @@ func seek_and_destroy():
 		
 		seeker.hide()
 								
-func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
+func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	line.set_joint_mode(2)
 	var curve := Curve2D.new()
 	curve.add_point(a, Vector2.ZERO, postA)

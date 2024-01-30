@@ -202,7 +202,7 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 							var _newvector = Vector2i(_bumpedvector.x-1, _bumpedvector.y)
 							var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
@@ -242,7 +242,7 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 
 							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 							var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y+1)
@@ -283,7 +283,7 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 							
 							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 							var _newvector = Vector2i(_bumpedvector.x+1, _bumpedvector.y)
@@ -324,7 +324,7 @@ func on_cpu_turn_started() -> void:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-							await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+							await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 
 							var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 							var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y-1)
@@ -818,7 +818,7 @@ func on_cpu_turn_started() -> void:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 								var _newvector = Vector2i(_bumpedvector.x-1, _bumpedvector.y)
 								var _finalvector = get_node("../TileMap").map_to_local(_newvector) + Vector2(0,0) / 2
@@ -858,7 +858,7 @@ func on_cpu_turn_started() -> void:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 
 								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 								var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y+1)
@@ -899,7 +899,7 @@ func on_cpu_turn_started() -> void:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 								
 								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 								var _newvector = Vector2i(_bumpedvector.x+1, _bumpedvector.y)
@@ -940,7 +940,7 @@ func on_cpu_turn_started() -> void:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
-								await setLinePointsToBezierCurve(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
+								await SetLinePoints(line_2d, CPU_units[n].get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").USER_units[m].get_node("Emitter").global_position)							
 
 								var _bumpedvector = get_node("../TileMap").local_to_map(USER_units[m].position)
 								var _newvector = Vector2i(_bumpedvector.x, _bumpedvector.y-1)
@@ -1139,7 +1139,7 @@ func spawn():
 	on_cpu_turn_started()
 	get_node("../TileMap").moving = true
 	
-func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
+func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
 	var _a = get_node("../TileMap").local_to_map(a)
 	var _b = get_node("../TileMap").local_to_map(b)

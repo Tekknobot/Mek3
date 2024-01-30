@@ -221,7 +221,7 @@ func _input(event):
 						get_child(1).stream = map_sfx[3]
 						get_child(1).play()	
 						
-						await setLinePointsToBezierCurve(line_2d, right_clicked_unit.get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[h].get_node("Emitter").global_position)
+						await SetLinePoints(line_2d, right_clicked_unit.get_node("Emitter").global_position, Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[h].get_node("Emitter").global_position)
 						get_node("../BattleManager").available_units[h].get_child(0).set_offset(Vector2(0,0))
 													
 						if right_clicked_pos.y < clicked_pos.y and right_clicked_unit.position.x > attack_center_pos.x:	
@@ -597,7 +597,7 @@ func _input(event):
 			if tile_pos.y == 15:
 				set_cell(1, Vector2i(tile_pos.x, tile_pos.y+1), -1, Vector2i(0, 0), 0)	
 
-func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
+func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
 	var _a = get_node("../TileMap").local_to_map(a)
 	var _b = get_node("../TileMap").local_to_map(b)
