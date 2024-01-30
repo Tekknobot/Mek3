@@ -606,7 +606,7 @@ func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: V
 	get_node("../TileMap").get_child(1).play()		
 	
 	get_node("../Seeker").position = a
-	get_node("../Seeker").z_index = get_node("../Seeker").position.x + get_node("../Seeker").position.y
+	get_node("../Seeker").z_index = (get_node("../Seeker").position.x + get_node("../Seeker").position.y) + 1000
 	var tween: Tween = create_tween()
 	tween.tween_property(get_node("../Seeker"), "position", b, 1).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)	
 	await get_tree().create_timer(1).timeout
