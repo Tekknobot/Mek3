@@ -509,6 +509,7 @@ position = Vector2(-57, 168)
 position = Vector2(53, 170)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -1506)
 script = ExtResource("62_85rtn")
 
