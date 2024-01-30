@@ -621,7 +621,7 @@ theme_override_font_sizes/font_size = 32
 text = "ALL CLEARED!"
 
 [node name="Seeker" parent="." instance=ExtResource("75_4l3ce")]
-visible = false
+position = Vector2(0, -215)
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]

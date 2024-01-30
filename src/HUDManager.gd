@@ -27,19 +27,20 @@ func _input(event):
 			seek_and_destroy()
 
 func death_from_above():
-	get_node("../Control").get_child(14).hide()
-	for i in get_node("../BattleManager").available_units.size():
-		if get_node("../BattleManager").available_units[i].unit_team == 2 and get_node("../BattleManager").available_units[i].unit_status == "Active":
-			var mek_position = get_node("../TileMap").map_to_local(get_node("../BattleManager").available_units[i].mek_coord) + Vector2(0,0) / 2
-			get_node("../TileMap").set_cell(1, get_node("../BattleManager").available_units[i].mek_coord, 48, Vector2i(0, 0), 0)
-			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
-			get_node("../TileMap").get_child(1).play()					
-			await SetLinePoints(line_2d, Vector2(mek_position.x, mek_position.y-250), Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[i].global_position)										
-			var tween: Tween = create_tween()
-			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)														
-			get_node("../BattleManager").available_units[i].unit_min -= 1
-			get_node("../BattleManager").available_units[i].progressbar.set_value(get_node("../BattleManager").available_units[i].unit_min)
-			get_node("../BattleManager").available_units[i].check_health()
+	if get_node("../TileMap").moving == false:
+		get_node("../Control").get_child(14).hide()
+		for i in get_node("../BattleManager").available_units.size():
+			if get_node("../BattleManager").available_units[i].unit_team == 2 and get_node("../BattleManager").available_units[i].unit_status == "Active":
+				var mek_position = get_node("../TileMap").map_to_local(get_node("../BattleManager").available_units[i].mek_coord) + Vector2(0,0) / 2
+				get_node("../TileMap").set_cell(1, get_node("../BattleManager").available_units[i].mek_coord, 48, Vector2i(0, 0), 0)
+				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
+				get_node("../TileMap").get_child(1).play()					
+				await SetLinePoints(line_2d, Vector2(mek_position.x, mek_position.y-550), Vector2(0,0), Vector2(0,0), get_node("../BattleManager").available_units[i].global_position)										
+				var tween: Tween = create_tween()
+				tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)														
+				get_node("../BattleManager").available_units[i].unit_min -= get_node("../BattleManager").available_units[i].unit_level
+				get_node("../BattleManager").available_units[i].progressbar.set_value(get_node("../BattleManager").available_units[i].unit_min)
+				get_node("../BattleManager").available_units[i].check_health()
 
 func group_health():
 	get_node("../Control").get_child(15).hide()
@@ -78,29 +79,28 @@ func seek_and_destroy():
 		seeker.hide()
 								
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
-	line.set_joint_mode(2)
-	var curve := Curve2D.new()
-	curve.add_point(a, Vector2.ZERO, postA)
-	curve.add_point(b, preB, Vector2.ZERO)
-	line.points = curve.get_baked_points()	
+	seeker.show()
+	var _a = get_node("../TileMap").local_to_map(a)
+	var _b = get_node("../TileMap").local_to_map(b)
+
+	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[8]
+	get_node("../TileMap").get_child(1).play()		
 	
-	get_node("../TileMap").sprite_2d.show()
-	get_node("../TileMap").sprite_2d.position = line.points[0] 
-	for i in line.points.size():
-		await get_tree().create_timer(0).timeout
-		get_node("../TileMap").sprite_2d.position = line.points[i]				
-											
-	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[4]
-	get_node("../TileMap").get_child(1).play()	
+	seeker.position = a
+	seeker.z_index = (seeker.position.x + seeker.position.y) + 1000
+	var tween: Tween = create_tween()
+	tween.tween_property(seeker, "position", b, 1).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)	
 	
-	get_node("../TileMap").sprite_2d.hide()
+	await get_tree().create_timer(1.1).timeout
+	
 	var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 	var explosion_instance = explosion.instantiate()
-	var explosion_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").sprite_2d.position) + Vector2(0,0) / 2
+	var explosion_pos = get_node("../TileMap").map_to_local(seeker.position) + Vector2(0,0) / 2
 	
-	var tile_pos = get_node("../TileMap").local_to_map(get_node("../TileMap").sprite_2d.position)		
+	var tile_pos = get_node("../TileMap").local_to_map(seeker.position)		
 	explosion_instance.set_name("explosion")
 	get_parent().add_child(explosion_instance)
-	explosion_instance.position = get_node("../TileMap").sprite_2d.position	
-	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 100
-	get_node("../Camera2D").shake(1, 30, 3)		
+	explosion_instance.position = seeker.position	
+	explosion_instance.z_index = tile_pos.x + tile_pos.y
+	get_node("../Camera2D").shake(1, 30, 3)	
+	seeker.hide()
