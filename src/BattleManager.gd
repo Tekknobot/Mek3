@@ -432,7 +432,7 @@ func on_cpu_turn_started() -> void:
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active":
-					if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18:
+					if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and user_within == false:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
@@ -592,9 +592,22 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break																
-						break		
-																													 	
+						break																																								 	
 					else:
+						user_within = true
+						break
+				else:
+					pass
+					
+			#Remove hover tiles										
+			for j in 16:
+				for k in 16:
+					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+
+			for m in USER_units.size():
+				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
+				if USER_units[m].unit_status == "Active":
+					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1 and user_within == true:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
@@ -760,14 +773,13 @@ func on_cpu_turn_started() -> void:
 										break	
 																
 						break
+					else:
+						pass
 				else:
 					pass
-					
-			#Remove hover tiles										
-			for j in 16:
-				for k in 16:
-					get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 				
+			user_within = false
+			
 			#Check range again	
 			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
 			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
@@ -963,7 +975,7 @@ func on_cpu_turn_started() -> void:
 					get_node("../BattleManager").USER_units[k].moved = false
 					get_node("../BattleManager").USER_units[k].attacked = false
 					get_node("../TileMap").moves_counter = 0
-									
+										
 					
 		elif CPU_units[n].unit_status == "Inactive":
 			for k in get_node("../BattleManager").USER_units.size():
