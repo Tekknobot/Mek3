@@ -67,6 +67,7 @@ var user_turn = false
 
 var cpu_pos
 var user_within = false
+var user_check = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -432,11 +433,12 @@ func on_cpu_turn_started() -> void:
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active":
-					if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18 and user_within == false:
+					if get_node("../TileMap").get_cell_source_id(1, user_pos) == 18:
+						user_check = true
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
-						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
+						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[0])
 
 						await get_tree().create_timer(1).timeout
 						#Erase hover tiles
@@ -592,9 +594,9 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break																
-						break																																								 						
+						break																																								 											
 					else:
-						user_within == true
+						user_within = true
 				else:
 					pass
 					
@@ -605,12 +607,12 @@ func on_cpu_turn_started() -> void:
 
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
-				if USER_units[m].unit_status == "Active":
-					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1 and user_within == true:
+				if USER_units[m].unit_status == "Active" and user_within == true and user_check == false:
+					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
 						# Find Path
-						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
+						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[0])
 
 						await get_tree().create_timer(1).timeout
 						#Erase hover tiles
@@ -776,8 +778,9 @@ func on_cpu_turn_started() -> void:
 						pass
 				else:
 					pass
-				
+					
 			user_within = false
+			user_check = false
 			
 			#Check range again	
 			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
