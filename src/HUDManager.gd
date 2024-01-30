@@ -1,6 +1,8 @@
 extends Control
 
 @export var node2D: Node2D
+@export var seeker: Area2D
+
 var projectile = preload("res://scenes/projectile.scn")
 var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 
@@ -8,6 +10,8 @@ var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 @onready var post_a = $"../postA"
 @onready var pre_b = $"../preB"
 @onready var sprite_2d = $"../Sprite2D"
+
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +22,9 @@ func _process(delta):
 	pass
 
 func _input(event):
-	pass	
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_5:
+			seek_and_destroy()
 
 func death_from_above():
 	get_node("../Control").get_child(14).hide()
@@ -49,7 +55,28 @@ func group_health():
 			get_node("../BattleManager").available_units[i].progressbar.set_value(get_node("../BattleManager").available_units[i].unit_min)
 			get_node("../BattleManager").available_units[i].check_health()						
 			
-			
+
+func seek_and_destroy():
+		seeker.show()
+		var patharray = get_node("../TileMap").astar_grid.get_point_path(Vector2i(0, 0), Vector2i(15, 15))				
+		#Erase hover tiles
+		for j in 16:
+			for k in 16:
+				get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
+		
+		# Set hover cells
+		for h in patharray.size():
+			print(patharray[h])
+			await get_tree().create_timer(0.2).timeout
+			get_node("../TileMap").set_cell(1, patharray[h], 48, Vector2i(0, 0), 0)	
+			var tile_center_position = get_node("../TileMap").map_to_local(patharray[h]) + Vector2(0,0) / 2
+			seeker.position = tile_center_position
+			seeker.z_index = seeker.position.x + seeker.position.y
+			var tween: Tween = create_tween()
+			tween.tween_property(seeker, "position", tile_center_position, 1).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)	
+		
+		seeker.hide()
+								
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	line.set_joint_mode(2)
 	var curve := Curve2D.new()

@@ -1140,32 +1140,30 @@ func spawn():
 	get_node("../TileMap").moving = true
 	
 func setLinePointsToBezierCurve(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
-	line.set_joint_mode(2)
-	var curve := Curve2D.new()
-	curve.add_point(a, Vector2.ZERO, postA)
-	curve.add_point(b, preB, Vector2.ZERO)
-	line.points = curve.get_baked_points()	
+	get_node("../Seeker").show()
+	var _a = get_node("../TileMap").local_to_map(a)
+	var _b = get_node("../TileMap").local_to_map(b)
+
+	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[8]
+	get_node("../TileMap").get_child(1).play()		
 	
-	get_node("../TileMap").sprite_2d.show()
-	get_node("../TileMap").sprite_2d.position = line.points[0] 
-	for i in line.points.size():
-		await get_tree().create_timer(0).timeout
-		get_node("../TileMap").sprite_2d.position = line.points[i]				
-											
-	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[4]
-	get_node("../TileMap").get_child(1).play()	
+	get_node("../Seeker").position = a
+	get_node("../Seeker").z_index = get_node("../Seeker").position.x + get_node("../Seeker").position.y
+	var tween: Tween = create_tween()
+	tween.tween_property(get_node("../Seeker"), "position", b, 1).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)	
+	await get_tree().create_timer(1).timeout
 	
-	get_node("../TileMap").sprite_2d.hide()
 	var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
 	var explosion_instance = explosion.instantiate()
 	var explosion_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").sprite_2d.position) + Vector2(0,0) / 2
 	
-	var tile_pos = get_node("../TileMap").local_to_map(get_node("../TileMap").sprite_2d.position)		
+	var tile_pos = get_node("../TileMap").local_to_map(get_node("../Seeker").position)		
 	explosion_instance.set_name("explosion")
 	get_parent().add_child(explosion_instance)
-	explosion_instance.position = get_node("../TileMap").sprite_2d.position	
-	explosion_instance.z_index = (tile_pos.x + tile_pos.y) + 100
-	get_node("../Camera2D").shake(1, 30, 3)			
+	explosion_instance.position = get_node("../Seeker").position	
+	explosion_instance.z_index = tile_pos.x + tile_pos.y
+	get_node("../Camera2D").shake(1, 30, 3)	
+	get_node("../Seeker").hide()		
 
 func on_tween_finished():
 	get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[8]

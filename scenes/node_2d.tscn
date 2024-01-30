@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=127 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -70,6 +70,7 @@
 [ext_resource type="Texture2D" uid="uid://ch7ttvimlhbhr" path="res://assets/ui/uiwidget/all-clear.png" id="72_j1wmd"]
 [ext_resource type="FontFile" uid="uid://0210e4fa4y75" path="res://assets/fonts/vermin_vibes_1989.ttf" id="72_rewkb"]
 [ext_resource type="FontFile" uid="uid://cjn22bf3h6axc" path="res://assets/fonts/HighWayChase1980.ttf" id="73_kib7c"]
+[ext_resource type="PackedScene" uid="uid://biahfrr8vp48w" path="res://scenes/seeker.scn" id="75_4l3ce"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -474,13 +475,14 @@ autoplay = "water"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="TileMap"]
 
-[node name="Control" parent="." node_paths=PackedStringArray("node2D") instance=ExtResource("56_yg7y2")]
+[node name="Control" parent="." node_paths=PackedStringArray("node2D", "seeker") instance=ExtResource("56_yg7y2")]
 visible = false
 offset_left = -604.0
 offset_top = 410.0
 offset_right = -604.0
 offset_bottom = 410.0
 node2D = NodePath("..")
+seeker = NodePath("../Seeker")
 
 [node name="Hover_tile" parent="." instance=ExtResource("20_6l1y3")]
 
@@ -617,6 +619,9 @@ offset_bottom = 65.0
 theme_override_fonts/font = ExtResource("72_rewkb")
 theme_override_font_sizes/font_size = 32
 text = "ALL CLEARED!"
+
+[node name="Seeker" parent="." instance=ExtResource("75_4l3ce")]
+visible = false
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
