@@ -1111,7 +1111,8 @@ func spawn():
 	team_arrays()	
 
 	await get_tree().create_timer(0).timeout	
-		
+	
+	# Find open tiles	
 	for i in 16:
 		for j in 16:
 			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
