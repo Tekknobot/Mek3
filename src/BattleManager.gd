@@ -69,6 +69,8 @@ var cpu_pos
 var user_within = false
 var user_check = false
 
+var unit_ontile_positions = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -1116,21 +1118,27 @@ func spawn():
 			var my_random_tile_y = rng.randi_range(1, 14)
 			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
 			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
-			var ontile = false
+			var onstructure = false
+			var onunit = false
 			for j in node2D.structures.size():
 				for k in get_node("../BattleManager").available_units.size():
-					if k != i and get_node("../BattleManager").available_units[k].position == tile_center_pos or node2D.structures[j].position == tile_center_pos:		
-						ontile = true				
-			if !ontile: 
+					if k != i and node2D.structures[j].position == tile_center_pos:		
+						onstructure = true	
+						print("ON_STRUCTURE")
+						for l in unit_ontile_positions.size():
+							if unit_ontile_positions[l] == get_node("../BattleManager").available_units[k].position:
+								onunit == true	
+								print("ON_UNIT")		
+			if !onstructure and !onunit: 
 				await get_tree().create_timer(0.5).timeout
 				get_node("../TileMap").unitsCoord[i] = tile_pos
 				get_node("../BattleManager").available_units[i].position = Vector2(tile_center_pos.x, tile_center_pos.y-500)
 				var tween: Tween = create_tween()
 				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-
 				#get_node("../BattleManager").available_units[i].position = tile_center_pos
 				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y	
-				tween.connect("finished", on_tween_finished)				
+				tween.connect("finished", on_tween_finished)
+				unit_ontile_positions.append(get_node("../BattleManager").available_units[i].position)
 				break
 				
 	#await get_tree().create_timer(0).timeout	
