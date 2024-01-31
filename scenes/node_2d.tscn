@@ -623,6 +623,7 @@ text = "ALL CLEARED!"
 
 [node name="Seeker" parent="." instance=ExtResource("75_4l3ce")]
 position = Vector2(0, -215)
+script = ExtResource("62_85rtn")
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
