@@ -69,7 +69,7 @@ var cpu_pos
 var user_within = false
 var user_check = false
 
-var unit_ontile_positions = []
+var open_tiles = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -1111,37 +1111,23 @@ func spawn():
 	team_arrays()	
 
 	await get_tree().create_timer(0).timeout	
-	# Randomize units at start	
+		
+	for i in 16:
+		for j in 16:
+			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+				open_tiles.append(Vector2i(i,j))
+	
+	# Drop units at start	
 	for i in get_node("../BattleManager").available_units.size():
-		while true:
-			var my_random_tile_x = rng.randi_range(1, 14)
-			var my_random_tile_y = rng.randi_range(1, 14)
-			var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
-			var tile_center_pos = get_node("../TileMap").map_to_local(tile_pos) + Vector2(0,0) / 2
-			var onstructure = false
-			var onunit = false
-			for j in node2D.structures.size():
-				for k in get_node("../BattleManager").available_units.size():
-					if k != i and node2D.structures[j].position == tile_center_pos:		
-						onstructure = true	
-						print("ON_STRUCTURE")
-						for l in unit_ontile_positions.size():
-							if unit_ontile_positions[l] == get_node("../BattleManager").available_units[k].position:
-								onunit == true	
-								print("ON_UNIT")		
-			if !onstructure and !onunit: 
-				await get_tree().create_timer(0.5).timeout
-				get_node("../TileMap").unitsCoord[i] = tile_pos
-				get_node("../BattleManager").available_units[i].position = Vector2(tile_center_pos.x, tile_center_pos.y-500)
-				var tween: Tween = create_tween()
-				tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-				#get_node("../BattleManager").available_units[i].position = tile_center_pos
-				get_node("../BattleManager").available_units[i].z_index = tile_pos.x + tile_pos.y	
-				tween.connect("finished", on_tween_finished)
-				unit_ontile_positions.append(get_node("../BattleManager").available_units[i].position)
-				break
+		var random = get_random_numbers(0, open_tiles.size())
+		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+		get_node("../BattleManager").available_units[i].position = Vector2(new_position.x, new_position.y-500)
+		var tween: Tween = create_tween()
+		tween.tween_property(get_node("../BattleManager").available_units[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+		tween.connect("finished", on_tween_finished)
+		await get_tree().create_timer(0.5).timeout
 				
-	#await get_tree().create_timer(0).timeout	
+	await get_tree().create_timer(0).timeout	
 	get_node("../TileMap").hovertile.show()
 	await get_tree().create_timer(2).timeout	
 	spawning = false
@@ -1182,3 +1168,10 @@ func end_turn():
 	get_node("../TileMap").moving = true
 	turn_button.hide()
 	get_node("../TurnManager").cpu_turn_started.emit()
+
+func get_random_numbers(from, to):
+	var arr = []
+	for i in range(from,to):
+		arr.append(i)
+	arr.shuffle()
+	return arr

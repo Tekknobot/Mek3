@@ -73,8 +73,7 @@ var users_active
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	# Check if units are on structures
-	pass										
+	pass		
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):
@@ -165,6 +164,7 @@ func _process(_delta):
 		
 	users_active = get_tree().get_nodes_in_group("USER Active")		
 	get_node("../Control").get_child(18).text = str(moves_counter) + " / " + str((users_active.size()-get_node("../BattleManager").inactive_total_user.size())*2)																	#
+
 		
 func _input(event):	
 	if event is InputEventKey:	

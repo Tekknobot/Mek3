@@ -54,7 +54,7 @@ func _ready():
 		add_child(building_inst)
 		building_inst.add_to_group("buildings")		
 		building_inst.z_index = tile_pos.x + tile_pos.y
-		building_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))	
+		building_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
 		
 	for i in 3: #stadiums
 		var my_random_tile_x = rng.randi_range(1, 14)
