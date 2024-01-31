@@ -70,6 +70,7 @@ var user_within = false
 var user_check = false
 
 var open_tiles = []
+var random = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -1118,9 +1119,10 @@ func spawn():
 			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
 				open_tiles.append(Vector2i(i,j))
 	
+	random = get_random_numbers(0, open_tiles.size())
+	
 	# Drop units at start	
-	for i in get_node("../BattleManager").available_units.size():
-		var random = get_random_numbers(0, open_tiles.size())
+	for i in get_node("../BattleManager").available_units.size():		
 		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
 		get_node("../BattleManager").available_units[i].position = Vector2(new_position.x, new_position.y-500)
 		var tween: Tween = create_tween()
