@@ -34,6 +34,8 @@ var S1 = preload("res://scenes/mek/S1.scn")
 var S2 = preload("res://scenes/mek/S2.scn")
 var S3 = preload("res://scenes/mek/S3.scn")
 
+var Z1 = preload("res://scenes/mek/Z1.scn")
+
 var mek_array = [M1, M2, M3, R1, R2, R3, R4, S1, S2, S3]
 
 #var structures: Array[Area2D]
@@ -1125,6 +1127,7 @@ func spawn_meks():
 	var M3_inst = M3.instantiate()
 	node2D.add_child(M3_inst)
 	M3_inst.add_to_group("mek_scenes")		
+	
 	
 	available_units = get_tree().get_nodes_in_group("mek_scenes")
 
