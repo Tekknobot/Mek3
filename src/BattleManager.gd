@@ -432,6 +432,7 @@ func on_cpu_turn_started() -> void:
 				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x+2, unit_target_pos.y-2), 18, Vector2i(0, 0), 0)																																								
 				get_node("../TileMap").set_cell(1, Vector2i(unit_target_pos.x-2, unit_target_pos.y+2), 18, Vector2i(0, 0), 0)
 			
+			await get_tree().create_timer(0.1).timeout
 			#Check if and else
 			for m in USER_units.size():
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
