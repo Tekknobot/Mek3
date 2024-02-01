@@ -69,15 +69,16 @@ func _process(_delta):
 	# Face towards moving direction
 	last_position = this_position
 	this_position = self.position
-	
-	if this_position.x > last_position.x:
-		scale.x = -1
-		direction = Vector2.RIGHT
-		#print("Facing RIGHT")
-	if this_position.x < last_position.x:
-		scale.x = 1	
-		direction = Vector2.LEFT
-		#print("Facing LEFT")
+
+	if get_node("../BattleManager").spawning == false:
+		if this_position.x > last_position.x:
+			scale.x = -1
+			direction = Vector2.RIGHT
+			#print("Facing RIGHT")
+		if this_position.x < last_position.x:
+			scale.x = 1	
+			direction = Vector2.LEFT
+			#print("Facing LEFT")
 		
 	var mouse_pos = get_global_mouse_position()
 	var mouse_local_pos = get_node("../TileMap").local_to_map(mouse_pos)

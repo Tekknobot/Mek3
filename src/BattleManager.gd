@@ -440,6 +440,13 @@ func on_cpu_turn_started() -> void:
 						user_check = true
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
+						var cell_available = false 
+						while cell_available == false:
+							if get_node("../TileMap").astar_grid.is_point_solid(surrounding_cells_array[target_random_cell]) == false:
+								cell_available = true
+							else:
+								target_random_cell = rng.randi_range(0, 3)
+																
 						# Find Path
 						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
@@ -615,6 +622,13 @@ func on_cpu_turn_started() -> void:
 					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
 						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
 						var target_random_cell = rng.randi_range(0, 3)
+						var cell_available = false 
+						while cell_available == false:
+							if get_node("../TileMap").astar_grid.is_point_solid(surrounding_cells_array[target_random_cell]) == false:
+								cell_available = true														
+							else:
+								target_random_cell = rng.randi_range(0, 3)
+								
 						# Find Path
 						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
@@ -1025,7 +1039,7 @@ func team_arrays():
 		available_units[i].unit_num = i
 		
 	for i in available_units.size():
-		if i <= 4:
+		if i <= (available_units.size()/2)-1:
 			available_units[i].unit_team = 1
 			available_units[i].unit_status = "Active"
 			available_units[i].unit_type = "Ranged"	
@@ -1133,9 +1147,9 @@ func spawn():
 	await get_tree().create_timer(0).timeout	
 	get_node("../TileMap").hovertile.show()
 	await get_tree().create_timer(2).timeout	
-	spawning = false
 	on_cpu_turn_started()
 	get_node("../TileMap").moving = true
+	spawning = false
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
