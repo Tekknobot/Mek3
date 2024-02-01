@@ -642,7 +642,7 @@ func on_cpu_turn_started() -> void:
 						for h in patharray.size():
 							await get_tree().create_timer(0.01).timeout
 							get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
-							if h == 4:
+							if h == CPU_units[n].unit_movement:
 								break
 						
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
