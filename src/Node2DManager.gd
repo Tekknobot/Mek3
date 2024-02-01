@@ -156,7 +156,7 @@ func generate_world():
 	# A random number generator which we will use for the noise seed
 	var tilelist = [0, 1, 2, 3, 4, 5]
 	
-	#var rng = RandomNumberGenerator.new()
+	#var rng = RandomNumberGenerator.new()zz
 	fastNoiseLite.seed = rng.randi_range(0, 256)
 	fastNoiseLite.TYPE_PERLIN
 	fastNoiseLite.fractal_octaves = tilelist.size()
