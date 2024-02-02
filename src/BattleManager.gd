@@ -2117,6 +2117,7 @@ func spawn():
 	on_cpu_turn_started()
 	get_node("../TileMap").moving = true
 	spawning = false
+	#picker.hide()
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
@@ -2161,41 +2162,71 @@ func get_random_numbers(from, to):
 	return arr
 
 func M1_picked():
-	user_keys.append("M1") 
-	picker.get_child(0).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:
+		user_keys.append("M1") 
+		picker.get_child(0).scale = Vector2(1.25, 1.25)
+		flag = true
 	
 func M2_picked():
-	user_keys.append("M2") 
-	picker.get_child(1).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:	
+		user_keys.append("M2") 
+		picker.get_child(1).scale = Vector2(1.25, 1.25)
+		flag = true
 
 func M3_picked():
-	user_keys.append("M3") 
-	picker.get_child(2).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:		
+		user_keys.append("M3") 
+		picker.get_child(2).scale = Vector2(1.25, 1.25)
+		flag = true
 	
 func R1_picked():
-	user_keys.append("R1")
-	picker.get_child(3).scale = Vector2(1.25, 1.25) 
+	var flag = false
+	if flag == false:	
+		user_keys.append("R1")
+		picker.get_child(3).scale = Vector2(1.25, 1.25)
+		flag = true 
 	
 func R2_picked():
-	user_keys.append("R2") 
-	picker.get_child(4).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:	
+		user_keys.append("R2") 
+		picker.get_child(4).scale = Vector2(1.25, 1.25)
+		flag = true
 	
 func R3_picked():
-	user_keys.append("R3") 
-	picker.get_child(5).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:	
+		user_keys.append("R3") 
+		picker.get_child(5).scale = Vector2(1.25, 1.25)
+		flag = true 
 
 func R4_picked():
-	user_keys.append("R4") 
-	picker.get_child(6).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:	
+		user_keys.append("R4") 
+		picker.get_child(6).scale = Vector2(1.25, 1.25)
+		flag = true 
 
 func S1_picked():
-	user_keys.append("S1")
-	picker.get_child(7).scale = Vector2(1.25, 1.25)
+	var flag = false
+	if flag == false:	
+		user_keys.append("S1")
+		picker.get_child(7).scale = Vector2(1.25, 1.25)
+		flag = true 
 	
 func S2_picked():
-	user_keys.append("S2")
-	picker.get_child(8).scale = Vector2(1.25, 1.25) 						
+	var flag = false
+	if flag == false:	
+		user_keys.append("S2")
+		picker.get_child(8).scale = Vector2(1.25, 1.25) 	
+		flag = true 					
 	
 func S3_picked():
-	user_keys.append("S3")
-	picker.get_child(9).scale = Vector2(1.25, 1.25)	
+	var flag = false
+	if flag == false:	
+		user_keys.append("S3")
+		picker.get_child(9).scale = Vector2(1.25, 1.25)	
+		flag = true 

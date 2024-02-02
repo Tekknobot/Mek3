@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=157 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -71,20 +71,30 @@
 [ext_resource type="FontFile" uid="uid://0210e4fa4y75" path="res://assets/fonts/vermin_vibes_1989.ttf" id="72_rewkb"]
 [ext_resource type="FontFile" uid="uid://cjn22bf3h6axc" path="res://assets/fonts/HighWayChase1980.ttf" id="73_kib7c"]
 [ext_resource type="PackedScene" uid="uid://biahfrr8vp48w" path="res://scenes/seeker.scn" id="75_4l3ce"]
+[ext_resource type="Texture2D" uid="uid://flgbmwf56qbu" path="res://assets/portraits/l0_por01.png" id="76_auhfx"]
 [ext_resource type="Texture2D" uid="uid://c3k5axfya2j1u" path="res://assets/portraits/mek_portraits/m1.png" id="76_kvwp8"]
 [ext_resource type="Texture2D" uid="uid://duqvkisrb63c3" path="res://assets/portraits/bw/m1.png" id="76_l6nt7"]
 [ext_resource type="Texture2D" uid="uid://btf4f8qdcsdtl" path="res://assets/portraits/mek_portraits/m2.png" id="77_5fwfq"]
+[ext_resource type="Texture2D" uid="uid://b5bdfdh1qt7kq" path="res://assets/portraits/l0_por02.png" id="77_uhdmv"]
 [ext_resource type="Texture2D" uid="uid://bdwftwn63dhmj" path="res://assets/portraits/bw/m2.png" id="78_63mux"]
+[ext_resource type="Texture2D" uid="uid://gqlqs845wp2q" path="res://assets/portraits/l0_por03.png" id="78_ci8vn"]
 [ext_resource type="Texture2D" uid="uid://cdmjshsx0e8bl" path="res://assets/portraits/mek_portraits/m3.png" id="78_u8ust"]
 [ext_resource type="Texture2D" uid="uid://ddxvf3fg5l4qo" path="res://assets/portraits/mek_portraits/r1.png" id="79_ldl2p"]
+[ext_resource type="Texture2D" uid="uid://lfmluokjn1j6" path="res://assets/portraits/l0_por04.png" id="79_ltwof"]
+[ext_resource type="Texture2D" uid="uid://c6cxqlyfmnl1a" path="res://assets/portraits/l0_por05.png" id="80_5g0wx"]
 [ext_resource type="Texture2D" uid="uid://dbwn4kpyullbh" path="res://assets/portraits/bw/m3.png" id="80_ltice"]
 [ext_resource type="Texture2D" uid="uid://du3scrmgdo0uq" path="res://assets/portraits/mek_portraits/r2.png" id="80_p786m"]
 [ext_resource type="Texture2D" uid="uid://d3s67lch382rk" path="res://assets/portraits/mek_portraits/r3.png" id="81_j1ugm"]
+[ext_resource type="Texture2D" uid="uid://c6nugp4n3dm8a" path="res://assets/portraits/l0_por06.png" id="81_jjpy4"]
+[ext_resource type="Texture2D" uid="uid://dd7tye4sh84h7" path="res://assets/portraits/l0_por07.png" id="82_0l6b2"]
 [ext_resource type="Texture2D" uid="uid://cc3hd28bqya3a" path="res://assets/portraits/bw/r1.png" id="82_bv0q7"]
 [ext_resource type="Texture2D" uid="uid://bygvhthawhht8" path="res://assets/portraits/mek_portraits/r4.png" id="82_l3c4p"]
+[ext_resource type="Texture2D" uid="uid://b51r4y38hvqvj" path="res://assets/portraits/l0_por08.png" id="83_0c2te"]
 [ext_resource type="Texture2D" uid="uid://ee7tubyv5eqr" path="res://assets/portraits/mek_portraits/s1.png" id="83_10clp"]
 [ext_resource type="Texture2D" uid="uid://chu20ur6upo6n" path="res://assets/portraits/bw/r2.png" id="84_2qveu"]
 [ext_resource type="Texture2D" uid="uid://beu8s26b4wob0" path="res://assets/portraits/mek_portraits/s2.png" id="84_de61t"]
+[ext_resource type="Texture2D" uid="uid://baqqcegbtc66a" path="res://assets/portraits/l0_por09.png" id="84_xmfhy"]
+[ext_resource type="Texture2D" uid="uid://ct5fmcph4qs8w" path="res://assets/portraits/l0_por10.png" id="85_02nit"]
 [ext_resource type="Texture2D" uid="uid://b4xbvy5vgjg60" path="res://assets/portraits/mek_portraits/s3.png" id="85_76ex1"]
 [ext_resource type="Texture2D" uid="uid://o4rfo2ki75j3" path="res://assets/portraits/bw/r3.png" id="86_f40vx"]
 [ext_resource type="Texture2D" uid="uid://ba84ab083rb1t" path="res://assets/portraits/bw/r4.png" id="88_mfuus"]
@@ -649,10 +659,58 @@ script = ExtResource("62_85rtn")
 [node name="Picker" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -310.0
-offset_top = 560.0
-offset_right = -270.0
-offset_bottom = 600.0
+offset_left = -287.0
+offset_top = 557.0
+offset_right = -247.0
+offset_bottom = 597.0
+
+[node name="Portraits" type="HBoxContainer" parent="Picker"]
+visible = false
+layout_mode = 0
+offset_left = -29.0
+offset_top = -33.0
+offset_right = 647.0
+offset_bottom = 31.0
+
+[node name="TextureRect" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("76_auhfx")
+
+[node name="TextureRect2" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("77_uhdmv")
+
+[node name="TextureRect3" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("78_ci8vn")
+
+[node name="TextureRect4" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("79_ltwof")
+
+[node name="TextureRect5" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("80_5g0wx")
+
+[node name="TextureRect6" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("81_jjpy4")
+
+[node name="TextureRect7" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("83_0c2te")
+
+[node name="TextureRect8" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("84_xmfhy")
+
+[node name="TextureRect9" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("85_02nit")
+
+[node name="TextureRect10" type="TextureRect" parent="Picker/Portraits"]
+layout_mode = 2
+texture = ExtResource("82_0l6b2")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Picker"]
 layout_mode = 0
