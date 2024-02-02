@@ -2102,10 +2102,12 @@ func spawn():
 		await get_tree().create_timer(0.5).timeout
 		if get_node("../BattleManager").available_units[i].unit_team == 2:
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
 		if get_node("../BattleManager").available_units[i].unit_team == 1:
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 				
@@ -2160,40 +2162,40 @@ func get_random_numbers(from, to):
 
 func M1_picked():
 	user_keys.append("M1") 
-	picker.get_child(0).hide()
+	picker.get_child(0).scale = Vector2(1.25, 1.25)
 	
 func M2_picked():
-	user_keys.append("M1") 
-	picker.get_child(1).hide()
+	user_keys.append("M2") 
+	picker.get_child(1).scale = Vector2(1.25, 1.25)
 
 func M3_picked():
-	user_keys.append("M1") 
-	picker.get_child(2).hide()
+	user_keys.append("M3") 
+	picker.get_child(2).scale = Vector2(1.25, 1.25)
 	
 func R1_picked():
 	user_keys.append("R1")
-	picker.get_child(3).hide() 
+	picker.get_child(3).scale = Vector2(1.25, 1.25) 
 	
 func R2_picked():
 	user_keys.append("R2") 
-	picker.get_child(4).hide()
+	picker.get_child(4).scale = Vector2(1.25, 1.25)
 	
 func R3_picked():
 	user_keys.append("R3") 
-	picker.get_child(5).hide()
+	picker.get_child(5).scale = Vector2(1.25, 1.25)
 
 func R4_picked():
 	user_keys.append("R4") 
-	picker.get_child(6).hide()
+	picker.get_child(6).scale = Vector2(1.25, 1.25)
 
 func S1_picked():
 	user_keys.append("S1")
-	picker.get_child(7).hide() 
+	picker.get_child(7).scale = Vector2(1.25, 1.25)
 	
 func S2_picked():
 	user_keys.append("S2")
-	picker.get_child(8).hide() 						
+	picker.get_child(8).scale = Vector2(1.25, 1.25) 						
 	
 func S3_picked():
 	user_keys.append("S3")
-	picker.get_child(9).hide()	
+	picker.get_child(9).scale = Vector2(1.25, 1.25)	
