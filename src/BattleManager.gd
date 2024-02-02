@@ -22,6 +22,7 @@ var arrays_set = false
 @export var spawn_button: Button
 @export var turn_button: Button
 @export var score: Button
+@export var picker: HBoxContainer
 
 var M1 = preload("res://scenes/mek/M1.scn")
 var M2 = preload("res://scenes/mek/M2.scn")
@@ -78,6 +79,10 @@ var cpu_check = false
 
 var open_tiles = []
 var random = []
+
+var user_keys = []
+var user_dict = {}
+var unit_tag_dict = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -1979,24 +1984,26 @@ func get_random():
 	return random_int	
 	
 func team_arrays():
-	randomize()
-	get_node("../BattleManager").available_units.shuffle()
+	#randomize()
+	#get_node("../BattleManager").available_units.shuffle()
 		
 	for i in available_units.size():
 		available_units[i].unit_num = i
-		
-	for i in available_units.size():
-		if i <= (available_units.size()/2)-1:
-			available_units[i].unit_team = 1
-			available_units[i].unit_status = "Active"
-			available_units[i].unit_type = "Ranged"	
-			available_units[i].unit_movement = 4
-		else:
+	
+	for i in user_keys.size():
+		user_dict[user_keys[i]].unit_team = 1
+		user_dict[user_keys[i]].unit_status = "Active"
+		user_dict[user_keys[i]].unit_type = "Ranged"	
+		user_dict[user_keys[i]].unit_movement = 5
+			
+	for i in available_units.size():		
+		if available_units[i].unit_team != 1:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
-			available_units[i].unit_movement = 4		
-		
+			available_units[i].unit_movement = 5	
+			
+																										
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
 			# Team color
@@ -2055,8 +2062,10 @@ func spawn_meks():
 	node2D.add_child(M3_inst)
 	M3_inst.add_to_group("mek_scenes")		
 	
-	
 	available_units = get_tree().get_nodes_in_group("mek_scenes")
+
+	user_dict = {"M1": M1_inst, "M2": M2_inst, "M3": M3_inst, "R1": R1_inst, "R2": R2_inst, "R3": R3_inst, "R4": R4_inst, "S1": S1_inst, "S2": S2_inst, "S3": S3_inst}
+	unit_tag_dict = {"M1": 0, "M2": 1, "M3": 2, "R1": 3, "R2": 4, "R3": 5, "R4": 6, "S1": 7, "S2": 8, "S3": 9}
 
 func check_health_now():
 	for z in available_units.size():
@@ -2091,6 +2100,14 @@ func spawn():
 		tween.tween_property(get_node("../BattleManager").available_units[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 		tween.connect("finished", on_tween_finished)
 		await get_tree().create_timer(0.5).timeout
+		if get_node("../BattleManager").available_units[i].unit_team == 2:
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
+		if get_node("../BattleManager").available_units[i].unit_team == 1:
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 				
 	await get_tree().create_timer(0).timeout	
 	get_node("../TileMap").hovertile.show()
@@ -2140,3 +2157,43 @@ func get_random_numbers(from, to):
 		arr.append(i)
 	arr.shuffle()
 	return arr
+
+func M1_picked():
+	user_keys.append("M1") 
+	picker.get_child(0).hide()
+	
+func M2_picked():
+	user_keys.append("M1") 
+	picker.get_child(1).hide()
+
+func M3_picked():
+	user_keys.append("M1") 
+	picker.get_child(2).hide()
+	
+func R1_picked():
+	user_keys.append("R1")
+	picker.get_child(3).hide() 
+	
+func R2_picked():
+	user_keys.append("R2") 
+	picker.get_child(4).hide()
+	
+func R3_picked():
+	user_keys.append("R3") 
+	picker.get_child(5).hide()
+
+func R4_picked():
+	user_keys.append("R4") 
+	picker.get_child(6).hide()
+
+func S1_picked():
+	user_keys.append("S1")
+	picker.get_child(7).hide() 
+	
+func S2_picked():
+	user_keys.append("S2")
+	picker.get_child(8).hide() 						
+	
+func S3_picked():
+	user_keys.append("S3")
+	picker.get_child(9).hide()	

@@ -17,6 +17,7 @@ var this_position: Vector2
 @export var unit_attack: int = 1
 @export var unit_defence: int = 1
 @export var unit_movement: int = 3
+@export var unit_tag: String
 
 @export var unit_status: String = "Active"
 
@@ -48,6 +49,8 @@ var moved = false
 var attacked = false
 
 var mek_coord: Vector2i
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
