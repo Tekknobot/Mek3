@@ -531,14 +531,14 @@ func on_cpu_turn_started() -> void:
 							var tween = create_tween()
 							var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 							get_node("../BattleManager").CPU_units[n].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
-							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
+							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.25)				
 							get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 							get_node("../TileMap").get_child(1).play()	
-							await get_tree().create_timer(0.35).timeout		
+							await get_tree().create_timer(0.25).timeout		
 													
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 						
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						get_node("../BattleManager").CPU_units[n].moved = true	
 							
 						#Erase hover tiles
@@ -722,16 +722,16 @@ func on_cpu_turn_started() -> void:
 							var tween = create_tween()
 							var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 							get_node("../BattleManager").CPU_units[n].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
-							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
+							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.25)				
 							get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 							get_node("../TileMap").get_child(1).play()	
-							await get_tree().create_timer(0.35).timeout		
+							await get_tree().create_timer(0.25).timeout		
 							if h == CPU_units[n].unit_movement:
 								break		
 												
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 						
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						get_node("../BattleManager").CPU_units[n].moved = true
 							
 						#Erase hover tiles
@@ -798,7 +798,7 @@ func on_cpu_turn_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -817,7 +817,7 @@ func on_cpu_turn_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -836,7 +836,7 @@ func on_cpu_turn_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -855,7 +855,7 @@ func on_cpu_turn_started() -> void:
 										#print("A")
 										print('CPU moved')	
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break	
@@ -1052,7 +1052,7 @@ func on_cpu_turn_started() -> void:
 				hoverflag_4 = true							 						
 				structure_flag4_ranged = true
 					
-				await get_tree().create_timer(1).timeout
+				await get_tree().create_timer(0.1).timeout
 				
 				#Remove hover tiles										
 				for j in 16:
@@ -1322,7 +1322,7 @@ func on_user_ai_started() -> void:
 			hoverflag_4 = true							 						
 			structure_flag4_ranged = true
 				
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(0.1).timeout
 			
 		#Erase hover tiles
 		for j in 16:
@@ -1466,7 +1466,7 @@ func on_user_ai_started() -> void:
 						# Find Path
 						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						#Erase hover tiles
 						for j in 16:
 							for k in 16:
@@ -1485,14 +1485,14 @@ func on_user_ai_started() -> void:
 							var tween = create_tween()
 							var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 							get_node("../BattleManager").CPU_units[n].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
-							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
+							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.25)				
 							get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 							get_node("../TileMap").get_child(1).play()	
-							await get_tree().create_timer(0.35).timeout		
+							await get_tree().create_timer(0.25).timeout		
 													
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 						
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						get_node("../BattleManager").CPU_units[n].moved = true	
 							
 						#Erase hover tiles
@@ -1559,7 +1559,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1578,7 +1578,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1597,7 +1597,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1616,7 +1616,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')	
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break																
@@ -1655,7 +1655,7 @@ func on_user_ai_started() -> void:
 						# Find Path
 						var patharray = get_node("../TileMap").astar_grid.get_point_path(unit_target_pos, surrounding_cells_array[target_random_cell])
 
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						#Erase hover tiles
 						for j in 16:
 							for k in 16:
@@ -1676,16 +1676,16 @@ func on_user_ai_started() -> void:
 							var tween = create_tween()
 							var cpu_unit_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 							get_node("../BattleManager").CPU_units[n].z_index = cpu_unit_pos.x + cpu_unit_pos.y		
-							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.35)				
+							tween.tween_property(get_node("../BattleManager").CPU_units[n], "position", tile_center_pos, 0.25)				
 							get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[2]
 							get_node("../TileMap").get_child(1).play()	
-							await get_tree().create_timer(0.35).timeout		
+							await get_tree().create_timer(0.25).timeout		
 							if h == CPU_units[n].unit_movement:
 								break		
 												
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 						
-						await get_tree().create_timer(1).timeout
+						await get_tree().create_timer(0.1).timeout
 						get_node("../BattleManager").CPU_units[n].moved = true
 							
 						#Erase hover tiles
@@ -1752,7 +1752,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1771,7 +1771,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1790,7 +1790,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
 										get_node("../BattleManager").CPU_units[n].attacked = true							
 										break
@@ -1809,7 +1809,7 @@ func on_user_ai_started() -> void:
 										#print("A")
 										print('CPU moved')	
 										check_health_now()
-										await get_tree().create_timer(1).timeout
+										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														
 										get_node("../BattleManager").CPU_units[n].attacked = true
 										break	
@@ -2006,7 +2006,7 @@ func on_user_ai_started() -> void:
 				hoverflag_4 = true							 						
 				structure_flag4_ranged = true
 					
-				await get_tree().create_timer(1).timeout
+				await get_tree().create_timer(0.1).timeout
 				
 				#Remove hover tiles										
 				for j in 16:
