@@ -104,6 +104,8 @@ var user_keys = []
 var user_dict = {}
 var unit_tag_dict = {}
 
+var meks_set = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -117,26 +119,27 @@ func _process(delta):
 	inactive_total_user = get_tree().get_nodes_in_group("USER Inactive")
 	
 	score.text = str(inactive_total_cpu.size()) + " - " + str(inactive_total_user.size())
-	
-	if inactive_total_cpu.size() >= 5 and audio_flag == false:
-		get_node("../ALL_CLEAR").show()
-		var tween: Tween = create_tween()
-		tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
-		get_node("../TileMap").get_child(1).play()	
-		get_node("../ALL_CLEAR").get_child(1).text = "ALL CLEARED!"		
-		print("YOU WIN!")
-		audio_flag = true
 
-	if inactive_total_user.size() >= 5 and audio_flag == false:
-		get_node("../ALL_CLEAR").show()
-		var tween: Tween = create_tween()
-		tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
-		get_node("../TileMap").get_child(1).play()	
-		get_node("../ALL_CLEAR").get_child(1).text = "CPU WINNER!"			
-		print("YOU WIN!")
-		audio_flag = true
+	if meks_set == true:	
+		if inactive_total_cpu.size() == CPU_units.size() and audio_flag == false:
+			get_node("../ALL_CLEAR").show()
+			var tween: Tween = create_tween()
+			tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
+			get_node("../TileMap").get_child(1).play()	
+			get_node("../ALL_CLEAR").get_child(1).text = "ALL CLEARED!"		
+			print("YOU WIN!")
+			audio_flag = true
+
+		if inactive_total_user.size() == USER_units.size() and audio_flag == false:
+			get_node("../ALL_CLEAR").show()
+			var tween: Tween = create_tween()
+			tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
+			get_node("../TileMap").get_child(1).play()	
+			get_node("../ALL_CLEAR").get_child(1).text = "CPU WINNER!"			
+			print("YOU WIN!")
+			audio_flag = true
 
 func _input(event):
 	if event is InputEventKey:
@@ -2197,11 +2200,11 @@ func spawn():
 		tween.connect("finished", on_tween_finished)
 		await get_tree().create_timer(0.5).timeout
 		if get_node("../BattleManager").available_units[i].unit_team == 2:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).hide()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
+			#picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
 		if get_node("../BattleManager").available_units[i].unit_team == 1:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).hide()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 				
@@ -2211,6 +2214,7 @@ func spawn():
 	on_cpu_turn_started()
 	get_node("../TileMap").moving = true
 	spawning = false
+	meks_set = true
 	#picker.hide()
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
@@ -2258,7 +2262,7 @@ func get_random_numbers(from, to):
 func M1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M1") 
-		picker.get_child(0).scale = Vector2(1.25, 1.25)
+		#picker.get_child(0).scale = Vector2(1.25, 1.25)
 		picker.get_child(0).texture_normal = M1_thumb_norm
 	else:
 		user_keys.remove_at(0) 
@@ -2268,7 +2272,7 @@ func M1_picked(toggled_on):
 func M2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M2") 
-		picker.get_child(1).scale = Vector2(1.25, 1.25)
+		#picker.get_child(1).scale = Vector2(1.25, 1.25)
 		picker.get_child(1).texture_normal = M2_thumb_norm
 	else:
 		user_keys.remove_at(1) 
@@ -2278,7 +2282,7 @@ func M2_picked(toggled_on):
 func M3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M3") 
-		picker.get_child(2).scale = Vector2(1.25, 1.25)
+		#picker.get_child(2).scale = Vector2(1.25, 1.25)
 		picker.get_child(2).texture_normal = M3_thumb_norm
 	else:
 		user_keys.remove_at(2) 
@@ -2288,7 +2292,7 @@ func M3_picked(toggled_on):
 func R1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R1") 
-		picker.get_child(3).scale = Vector2(1.25, 1.25)
+		#picker.get_child(3).scale = Vector2(1.25, 1.25)
 		picker.get_child(3).texture_normal = R1_thumb_norm
 	else:
 		user_keys.remove_at(3) 
@@ -2298,7 +2302,7 @@ func R1_picked(toggled_on):
 func R2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R2") 
-		picker.get_child(4).scale = Vector2(1.25, 1.25)
+		#picker.get_child(4).scale = Vector2(1.25, 1.25)
 		picker.get_child(4).texture_normal = R2_thumb_norm
 	else:
 		user_keys.remove_at(4) 
@@ -2308,7 +2312,7 @@ func R2_picked(toggled_on):
 func R3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R3") 
-		picker.get_child(5).scale = Vector2(1.25, 1.25)
+		#picker.get_child(5).scale = Vector2(1.25, 1.25)
 		picker.get_child(5).texture_normal = R3_thumb_norm
 	else:
 		user_keys.remove_at(5) 
@@ -2318,7 +2322,7 @@ func R3_picked(toggled_on):
 func R4_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R4") 
-		picker.get_child(6).scale = Vector2(1.25, 1.25)
+		#picker.get_child(6).scale = Vector2(1.25, 1.25)
 		picker.get_child(6).texture_normal = R4_thumb_norm
 	else:
 		user_keys.remove_at(6) 
@@ -2328,7 +2332,7 @@ func R4_picked(toggled_on):
 func S1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S1") 
-		picker.get_child(7).scale = Vector2(1.25, 1.25)
+		#picker.get_child(7).scale = Vector2(1.25, 1.25)
 		picker.get_child(7).texture_normal = S1_thumb_norm
 	else:
 		user_keys.remove_at(7) 
@@ -2338,7 +2342,7 @@ func S1_picked(toggled_on):
 func S2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S2") 
-		picker.get_child(8).scale = Vector2(1.25, 1.25)
+		#picker.get_child(8).scale = Vector2(1.25, 1.25)
 		picker.get_child(8).texture_normal = S2_thumb_norm
 	else:
 		user_keys.remove_at(8) 
@@ -2348,7 +2352,7 @@ func S2_picked(toggled_on):
 func S3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S3") 
-		picker.get_child(9).scale = Vector2(1.25, 1.25)
+		#picker.get_child(9).scale = Vector2(1.25, 1.25)
 		picker.get_child(9).texture_normal = S3_thumb_norm
 	else:
 		user_keys.remove_at(9) 
