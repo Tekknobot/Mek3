@@ -106,6 +106,8 @@ var unit_tag_dict = {}
 
 var meks_set = false
 
+var teampick_count = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -119,7 +121,7 @@ func _process(delta):
 	inactive_total_user = get_tree().get_nodes_in_group("USER Inactive")
 	
 	score.text = str(inactive_total_cpu.size()) + " - " + str(inactive_total_user.size())
-
+		
 	if meks_set == true:	
 		if inactive_total_cpu.size() == CPU_units.size() and audio_flag == false:
 			get_node("../ALL_CLEAR").show()
@@ -138,9 +140,9 @@ func _process(delta):
 			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
 			get_node("../TileMap").get_child(1).play()	
 			get_node("../ALL_CLEAR").get_child(1).text = "CPU WINNER!"			
-			print("YOU WIN!")
+			print("YOU LOSE!")
 			audio_flag = true
-
+		
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_SPACE:
@@ -2171,51 +2173,52 @@ func check_health_now():
 		available_units[z].check_health()		
 
 func spawn():
-	spawning = true
-	spawn_button.hide()
-	get_node("../TileMap").hovertile.hide()
-	
-	await get_tree().create_timer(0).timeout
-	spawn_meks()
-	
-	await get_tree().create_timer(0).timeout
-	team_arrays()	
+	if teampick_count == 5:		
+		spawning = true
+		spawn_button.hide()
+		picker.hide()
+		get_node("../TileMap").hovertile.hide()
+		
+		await get_tree().create_timer(0).timeout
+		spawn_meks()
+		
+		await get_tree().create_timer(0).timeout
+		team_arrays()	
 
-	await get_tree().create_timer(0).timeout	
-	
-	# Find open tiles	
-	for i in 16:
-		for j in 16:
-			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
-				open_tiles.append(Vector2i(i,j))
-	
-	random = get_random_numbers(0, open_tiles.size())
-	
-	# Drop units at start	
-	for i in get_node("../BattleManager").available_units.size():		
-		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
-		get_node("../BattleManager").available_units[i].position = Vector2(new_position.x, new_position.y-500)
-		var tween: Tween = create_tween()
-		tween.tween_property(get_node("../BattleManager").available_units[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
-		tween.connect("finished", on_tween_finished)
-		await get_tree().create_timer(0.5).timeout
-		if get_node("../BattleManager").available_units[i].unit_team == 2:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
-			#picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
-		if get_node("../BattleManager").available_units[i].unit_team == 1:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
-				
-	await get_tree().create_timer(0).timeout	
-	get_node("../TileMap").hovertile.show()
-	await get_tree().create_timer(2).timeout	
-	on_cpu_turn_started()
-	get_node("../TileMap").moving = true
-	spawning = false
-	meks_set = true
-	#picker.hide()
+		await get_tree().create_timer(0).timeout	
+		
+		# Find open tiles	
+		for i in 16:
+			for j in 16:
+				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+					open_tiles.append(Vector2i(i,j))
+		
+		random = get_random_numbers(0, open_tiles.size())
+		
+		# Drop units at start	
+		for i in get_node("../BattleManager").available_units.size():		
+			var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+			get_node("../BattleManager").available_units[i].position = Vector2(new_position.x, new_position.y-500)
+			var tween: Tween = create_tween()
+			tween.tween_property(get_node("../BattleManager").available_units[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+			tween.connect("finished", on_tween_finished)
+			await get_tree().create_timer(0.5).timeout
+			if get_node("../BattleManager").available_units[i].unit_team == 2:
+				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
+				#picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
+			if get_node("../BattleManager").available_units[i].unit_team == 1:
+				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
+				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
+					
+		await get_tree().create_timer(0).timeout	
+		get_node("../TileMap").hovertile.show()
+		await get_tree().create_timer(2).timeout	
+		on_cpu_turn_started()
+		get_node("../TileMap").moving = true
+		spawning = false
+		meks_set = true
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
@@ -2264,97 +2267,117 @@ func M1_picked(toggled_on):
 		user_keys.append("M1") 
 		#picker.get_child(0).scale = Vector2(1.25, 1.25)
 		picker.get_child(0).texture_normal = M1_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(0) 
 		picker.get_child(0).scale = Vector2(1, 1)	
 		picker.get_child(0).texture_normal = M1_thumb_bw
+		teampick_count -= 1
 	
 func M2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M2") 
 		#picker.get_child(1).scale = Vector2(1.25, 1.25)
 		picker.get_child(1).texture_normal = M2_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(1) 
 		picker.get_child(1).scale = Vector2(1, 1)	
-		picker.get_child(1).texture_normal = M2_thumb_norm	
+		picker.get_child(1).texture_normal = M2_thumb_bw
+		teampick_count -= 1
 	
 func M3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M3") 
 		#picker.get_child(2).scale = Vector2(1.25, 1.25)
 		picker.get_child(2).texture_normal = M3_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(2) 
 		picker.get_child(2).scale = Vector2(1, 1)
 		picker.get_child(2).texture_normal = M3_thumb_bw
+		teampick_count -= 1
 
 func R1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R1") 
 		#picker.get_child(3).scale = Vector2(1.25, 1.25)
 		picker.get_child(3).texture_normal = R1_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(3) 
 		picker.get_child(3).scale = Vector2(1, 1)
-		picker.get_child(3).texture_normal = R1_thumb_norm
+		picker.get_child(3).texture_normal = R1_thumb_bw
+		teampick_count -= 1
 		
 func R2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R2") 
 		#picker.get_child(4).scale = Vector2(1.25, 1.25)
 		picker.get_child(4).texture_normal = R2_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(4) 
 		picker.get_child(4).scale = Vector2(1, 1)
-		picker.get_child(4).texture_normal = R2_thumb_bw		
+		picker.get_child(4).texture_normal = R2_thumb_bw	
+		teampick_count -= 1	
 
 func R3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R3") 
 		#picker.get_child(5).scale = Vector2(1.25, 1.25)
 		picker.get_child(5).texture_normal = R3_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(5) 
 		picker.get_child(5).scale = Vector2(1, 1)	
 		picker.get_child(5).texture_normal = R3_thumb_bw
+		teampick_count -= 1
 
 func R4_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R4") 
 		#picker.get_child(6).scale = Vector2(1.25, 1.25)
 		picker.get_child(6).texture_normal = R4_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(6) 
 		picker.get_child(6).scale = Vector2(1, 1)
 		picker.get_child(6).texture_normal = R4_thumb_bw
+		teampick_count -= 1
 
 func S1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S1") 
 		#picker.get_child(7).scale = Vector2(1.25, 1.25)
 		picker.get_child(7).texture_normal = S1_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(7) 
 		picker.get_child(7).scale = Vector2(1, 1)
 		picker.get_child(7).texture_normal = S1_thumb_bw
+		teampick_count -= 1
 		
 func S2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S2") 
 		#picker.get_child(8).scale = Vector2(1.25, 1.25)
 		picker.get_child(8).texture_normal = S2_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(8) 
 		picker.get_child(8).scale = Vector2(1, 1)	
 		picker.get_child(8).texture_normal = S2_thumb_bw
+		teampick_count -= 1
 		
 func S3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("S3") 
 		#picker.get_child(9).scale = Vector2(1.25, 1.25)
 		picker.get_child(9).texture_normal = S3_thumb_norm
+		teampick_count += 1
 	else:
 		user_keys.remove_at(9) 
 		picker.get_child(9).scale = Vector2(1, 1)	
 		picker.get_child(9).texture_normal = S3_thumb_bw
+		teampick_count -= 1
