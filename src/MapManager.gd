@@ -510,7 +510,7 @@ func _input(event):
 					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 					
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false:
+		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false and get_node("../BattleManager").spawning == false:
 			#Remove hover tiles										
 			for j in grid_height:
 				for k in grid_width:

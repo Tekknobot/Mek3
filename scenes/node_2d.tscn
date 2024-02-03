@@ -450,11 +450,12 @@ script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "turn_button", "score", "picker")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "turn_button", "ai_button", "score", "picker")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
 spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
 turn_button = NodePath("../FloatingMenu/VBoxContainer/TurnButton")
+ai_button = NodePath("../FloatingMenu/VBoxContainer/AIButton")
 score = NodePath("../FloatingMenu/VBoxContainer/Score")
 picker = NodePath("../Picker/HBoxContainer")
 
@@ -594,12 +595,12 @@ text = "SPAWN"
 alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
-layout_mode = 0
+layout_mode = 2
 offset_top = 83.0
-offset_right = 336.0
-offset_bottom = 106.0
+offset_right = 102.0
+offset_bottom = 118.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
-text = "Pick Team of 5."
+text = "Pick 5"
 
 [node name="TurnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
 visible = false
@@ -607,6 +608,13 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 text = "TURN"
 alignment = 0
+
+[node name="AIButton" type="Button" parent="FloatingMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
+toggle_mode = true
+text = "A.I. MODE"
 
 [node name="Score" type="Button" parent="FloatingMenu/VBoxContainer"]
 layout_mode = 2
@@ -776,6 +784,7 @@ texture = ExtResource("76_kvwp8")
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
+[connection signal="toggled" from="FloatingMenu/VBoxContainer/AIButton" to="BattleManager" method="ai_mode"]
 [connection signal="toggled" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M2" to="BattleManager" method="M2_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M3" to="BattleManager" method="M3_picked"]

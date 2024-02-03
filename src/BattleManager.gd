@@ -21,6 +21,7 @@ var arrays_set = false
 @export var node2D: Node2D
 @export var spawn_button: Button
 @export var turn_button: Button
+@export var ai_button: Button
 @export var score: Button
 @export var picker: HBoxContainer
 
@@ -108,6 +109,8 @@ var meks_set = false
 
 var teampick_count = 0
 
+var ai_mode_bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -172,6 +175,8 @@ func on_cpu_turn_started() -> void:
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+	get_node("../TileMap").moving = true
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].moved = false
@@ -1117,16 +1122,20 @@ func on_cpu_turn_started() -> void:
 	get_node("../Control").get_child(18).show() # moves count
 	get_node("../Hover_tile").show()
 	
-	#turn_button.show()
 	get_node("../TileMap").moving = false
 	
-	on_user_ai_started()
+	if ai_mode_bool == true:
+		on_user_ai_started()
+	else:
+		turn_button.show()
 
 func on_user_ai_started() -> void:		
 	get_node("../Control").get_child(19).text = "USER Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
+	get_node("../TileMap").moving = true
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].moved = false
@@ -2216,10 +2225,11 @@ func spawn():
 		await get_tree().create_timer(0).timeout	
 		get_node("../TileMap").hovertile.show()
 		await get_tree().create_timer(2).timeout	
-		on_user_ai_started()
-		get_node("../TileMap").moving = true
+		#on_user_ai_started()
 		spawning = false
 		meks_set = true
+		turn_button.show()
+		ai_button.show()
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
 	get_node("../Seeker").show()
@@ -2252,9 +2262,10 @@ func on_tween_finished():
 	get_node("../TileMap").get_child(1).play()	
 
 func end_turn():
-	get_node("../TileMap").moving = true
+	ai_button.hide()
 	turn_button.hide()
 	get_node("../TurnManager").cpu_turn_started.emit()
+	ai_mode_bool = false
 
 func get_random_numbers(from, to):
 	var arr = []
@@ -2262,6 +2273,13 @@ func get_random_numbers(from, to):
 		arr.append(i)
 	arr.shuffle()
 	return arr
+
+func ai_mode(toggled_on):
+	on_user_ai_started()
+	ai_button.hide()
+	turn_button.hide()
+	ai_button.hide()
+	ai_mode_bool = true
 
 func M1_picked(toggled_on):
 	if toggled_on == true:
@@ -2402,3 +2420,4 @@ func S3_picked(toggled_on):
 		picker.get_child(9).scale = Vector2(1, 1)	
 		picker.get_child(9).texture_normal = S3_thumb_bw
 		teampick_count -= 1
+
