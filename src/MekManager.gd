@@ -90,8 +90,16 @@ func _process(_delta):
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
 	
-	#if moved == true and attacked == true:
-		#modulate = Color8(110, 110, 110)	
+	if self.unit_level == 1:
+		self.get_child(10).text = "."					
+	if self.unit_level == 2:
+		self.get_child(10).text = ".."
+	if self.unit_level == 3:
+		self.get_child(10).text = "..."
+	if self.unit_level == 4:
+		self.get_child(10).text = "...."
+	if self.unit_level == 5:
+		self.get_child(10).text = "....."	
 
 	if moved == true:
 		get_child(7).show()
@@ -128,6 +136,7 @@ func _process(_delta):
 			get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
 			get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
 			get_node("../Control").get_child(9).value = self.unit_min
+			get_node("../Control").get_child(9).max_value = self.unit_max
 			get_node("../Control").get_child(10).set_value(xp)
 			get_node("../Control").get_child(10).max_value = self.xp_requirements			
 			get_node("../Control").get_child(13).texture = self.mek_portrait
@@ -147,6 +156,7 @@ func _process(_delta):
 		get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
 		get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
 		get_node("../Control").get_child(9).value = self.unit_min
+		get_node("../Control").get_child(9).max_value = self.unit_max
 		get_node("../Control").get_child(10).set_value(xp)			
 		get_node("../Control").get_child(10).max_value = self.xp_requirements		
 		get_node("../Control").get_child(13).texture = self.mek_portrait
@@ -177,8 +187,8 @@ func _process(_delta):
 		self.progressbar.set_value(self.unit_min)
 		self.unit_max = self.progressbar.max_value	
 		
-		get_node("../Control").get_child(10).max_value = self.xp_requirements							
-
+		get_node("../Control").get_child(10).max_value = self.xp_requirements	
+												
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max
 	
@@ -204,8 +214,7 @@ func check_health():
 	for i in meks.size():
 		if meks[i] != self and self.position == meks[i].position:
 			self.unit_min = 0
-			meks[i].unit_min = 0
-			await get_tree().create_timer(0.5).timeout	
+			meks[i].unit_min = 0	
 			break
 				
 	# Check is off map
