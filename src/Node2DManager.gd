@@ -109,10 +109,18 @@ func _ready():
 			var towers_pos_2 = Map.local_to_map(towers[j].position)
 			if j != i and towers_pos.x == towers_pos_2.x+1 or towers_pos.x == towers_pos_2.x-1 or towers_pos.y == towers_pos_2.y+1 or towers_pos.y == towers_pos_2.y-1:
 				print("yo")
-				var my_random_tile_x = rng.randi_range(2, 13)
-				var my_random_tile_y = rng.randi_range(2, 13)
-				var tile_center_pos = Map.map_to_local(Vector2i(my_random_tile_x, my_random_tile_y)) + Vector2(0,0) / 2
-				towers[i].position = tile_center_pos
+				if towers_pos.x == towers_pos_2.x+1:
+					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x-1, towers_pos.y)) + Vector2(0,0) / 2
+					towers[i].position = tile_center_pos
+				if towers_pos.x == towers_pos_2.x-1:
+					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x+1, towers_pos.y)) + Vector2(0,0) / 2
+					towers[i].position = tile_center_pos
+				if towers_pos.y == towers_pos_2.y-1:
+					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x, towers_pos.y+1)) + Vector2(0,0) / 2
+					towers[i].position = tile_center_pos
+				if towers_pos.y == towers_pos_2.y+1:
+					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x, towers_pos.y-1)) + Vector2(0,0) / 2
+					towers[i].position = tile_center_pos
 				
 	check_duplicates(structures)		
 	generate_world()																			
