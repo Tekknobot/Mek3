@@ -118,8 +118,7 @@ func _process(_delta):
 		pass	
 	else:
 		get_child(8).hide()	
-		modulate = Color8(255, 255, 255)
-		
+		modulate = Color8(255, 255, 255)		
 		
 	#Mouse hover
 	if flag_coroutine == false:
