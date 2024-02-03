@@ -767,6 +767,7 @@ toggle_mode = true
 texture_normal = ExtResource("94_aafri")
 
 [node name="LargeFrame" type="TextureRect" parent="Picker"]
+visible = false
 layout_mode = 0
 offset_left = -274.0
 offset_top = -151.0

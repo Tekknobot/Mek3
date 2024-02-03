@@ -15,7 +15,7 @@ var this_position: Vector2
 @export var mek_portrait: Texture
 @export var unit_level: int = 1
 @export var unit_attack: int = 1
-@export var unit_defence: int = 1
+@export var unit_defence: int = 0
 @export var unit_movement: int = 3
 @export var unit_tag: String
 
@@ -33,7 +33,7 @@ var hovered_unit: int
 
 var xp = 0 
 var level = 1 
-var xp_requirements = 3
+var xp_requirements = 2
 
 @export var mek_sfx: Array[AudioStream]
 
@@ -237,7 +237,6 @@ func check_health():
 			self.add_to_group("CPU Inactive")
 		get_node("../Camera2D").shake(0.5, 50, 8)
 		self.hide()
-		await get_tree().create_timer(1).timeout
 		self.position = Vector2(1000,1000)	
 		print(self.unit_name, " DESTROYED: Team ",  get_node("../BattleManager").available_units[unit_num].unit_team, " NO. " , get_node("../BattleManager").available_units[unit_num].unit_num)
 
@@ -245,3 +244,5 @@ func check_health():
 		for l in 16:
 			for k in 16:
 				get_node("../TileMap").set_cell(1, Vector2i(l,k), -1, Vector2i(0, 0), 0)			
+		
+		await get_tree().create_timer(1).timeout

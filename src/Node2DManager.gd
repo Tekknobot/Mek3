@@ -39,8 +39,6 @@ var towers = []
 var stadiums = []
 var districts = []
 
-var objective_1_location
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
@@ -81,7 +79,7 @@ func _ready():
 		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
 		#arrow.position = Vector2(tile_center_pos.x-5, tile_center_pos.y-109) 
 		#arrow.z_index = 100
-			
+				
 	for i in 3: #districts
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
@@ -103,9 +101,20 @@ func _ready():
 	structures.append_array(towers)
 	structures.append_array(stadiums)
 	structures.append_array(districts)
-	
+
+	for i in towers.size():
+		var towers_pos = Map.local_to_map(towers[i].position)
+		print(towers_pos)
+		for j in towers.size():
+			var towers_pos_2 = Map.local_to_map(towers[j].position)
+			if j != i and towers_pos.x == towers_pos_2.x+1 or towers_pos.x == towers_pos_2.x-1 or towers_pos.y == towers_pos_2.y+1 or towers_pos.y == towers_pos_2.y-1:
+				print("yo")
+				var my_random_tile_x = rng.randi_range(2, 13)
+				var my_random_tile_y = rng.randi_range(2, 13)
+				var tile_center_pos = Map.map_to_local(Vector2i(my_random_tile_x, my_random_tile_y)) + Vector2(0,0) / 2
+				towers[i].position = tile_center_pos
+				
 	check_duplicates(structures)		
-	
 	generate_world()																			
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

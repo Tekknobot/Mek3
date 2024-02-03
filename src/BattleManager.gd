@@ -2112,7 +2112,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_attack = 1
-			get_node("../BattleManager").available_units[i].unit_defence = 1
+			get_node("../BattleManager").available_units[i].unit_defence = 0
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
@@ -2216,7 +2216,7 @@ func spawn():
 		await get_tree().create_timer(0).timeout	
 		get_node("../TileMap").hovertile.show()
 		await get_tree().create_timer(2).timeout	
-		on_cpu_turn_started()
+		on_user_ai_started()
 		get_node("../TileMap").moving = true
 		spawning = false
 		meks_set = true
