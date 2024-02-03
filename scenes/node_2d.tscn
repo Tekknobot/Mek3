@@ -1,4 +1,4 @@
-[gd_scene load_steps=157 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=147 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -72,30 +72,20 @@
 [ext_resource type="FontFile" uid="uid://cjn22bf3h6axc" path="res://assets/fonts/HighWayChase1980.ttf" id="73_kib7c"]
 [ext_resource type="PackedScene" uid="uid://biahfrr8vp48w" path="res://scenes/seeker.scn" id="75_4l3ce"]
 [ext_resource type="Texture2D" uid="uid://flgbmwf56qbu" path="res://assets/portraits/l0_por01.png" id="76_auhfx"]
-[ext_resource type="Texture2D" uid="uid://c3k5axfya2j1u" path="res://assets/portraits/mek_portraits/m1.png" id="76_kvwp8"]
 [ext_resource type="Texture2D" uid="uid://duqvkisrb63c3" path="res://assets/portraits/bw/m1.png" id="76_l6nt7"]
-[ext_resource type="Texture2D" uid="uid://btf4f8qdcsdtl" path="res://assets/portraits/mek_portraits/m2.png" id="77_5fwfq"]
 [ext_resource type="Texture2D" uid="uid://b5bdfdh1qt7kq" path="res://assets/portraits/l0_por02.png" id="77_uhdmv"]
 [ext_resource type="Texture2D" uid="uid://bdwftwn63dhmj" path="res://assets/portraits/bw/m2.png" id="78_63mux"]
 [ext_resource type="Texture2D" uid="uid://gqlqs845wp2q" path="res://assets/portraits/l0_por03.png" id="78_ci8vn"]
-[ext_resource type="Texture2D" uid="uid://cdmjshsx0e8bl" path="res://assets/portraits/mek_portraits/m3.png" id="78_u8ust"]
-[ext_resource type="Texture2D" uid="uid://ddxvf3fg5l4qo" path="res://assets/portraits/mek_portraits/r1.png" id="79_ldl2p"]
 [ext_resource type="Texture2D" uid="uid://lfmluokjn1j6" path="res://assets/portraits/l0_por04.png" id="79_ltwof"]
 [ext_resource type="Texture2D" uid="uid://c6cxqlyfmnl1a" path="res://assets/portraits/l0_por05.png" id="80_5g0wx"]
 [ext_resource type="Texture2D" uid="uid://dbwn4kpyullbh" path="res://assets/portraits/bw/m3.png" id="80_ltice"]
-[ext_resource type="Texture2D" uid="uid://du3scrmgdo0uq" path="res://assets/portraits/mek_portraits/r2.png" id="80_p786m"]
-[ext_resource type="Texture2D" uid="uid://d3s67lch382rk" path="res://assets/portraits/mek_portraits/r3.png" id="81_j1ugm"]
 [ext_resource type="Texture2D" uid="uid://c6nugp4n3dm8a" path="res://assets/portraits/l0_por06.png" id="81_jjpy4"]
 [ext_resource type="Texture2D" uid="uid://dd7tye4sh84h7" path="res://assets/portraits/l0_por07.png" id="82_0l6b2"]
 [ext_resource type="Texture2D" uid="uid://cc3hd28bqya3a" path="res://assets/portraits/bw/r1.png" id="82_bv0q7"]
-[ext_resource type="Texture2D" uid="uid://bygvhthawhht8" path="res://assets/portraits/mek_portraits/r4.png" id="82_l3c4p"]
 [ext_resource type="Texture2D" uid="uid://b51r4y38hvqvj" path="res://assets/portraits/l0_por08.png" id="83_0c2te"]
-[ext_resource type="Texture2D" uid="uid://ee7tubyv5eqr" path="res://assets/portraits/mek_portraits/s1.png" id="83_10clp"]
 [ext_resource type="Texture2D" uid="uid://chu20ur6upo6n" path="res://assets/portraits/bw/r2.png" id="84_2qveu"]
-[ext_resource type="Texture2D" uid="uid://beu8s26b4wob0" path="res://assets/portraits/mek_portraits/s2.png" id="84_de61t"]
 [ext_resource type="Texture2D" uid="uid://baqqcegbtc66a" path="res://assets/portraits/l0_por09.png" id="84_xmfhy"]
 [ext_resource type="Texture2D" uid="uid://ct5fmcph4qs8w" path="res://assets/portraits/l0_por10.png" id="85_02nit"]
-[ext_resource type="Texture2D" uid="uid://b4xbvy5vgjg60" path="res://assets/portraits/mek_portraits/s3.png" id="85_76ex1"]
 [ext_resource type="Texture2D" uid="uid://o4rfo2ki75j3" path="res://assets/portraits/bw/r3.png" id="86_f40vx"]
 [ext_resource type="Texture2D" uid="uid://ba84ab083rb1t" path="res://assets/portraits/bw/r4.png" id="88_mfuus"]
 [ext_resource type="Texture2D" uid="uid://dak1fft83lahw" path="res://assets/portraits/bw/s1.png" id="90_cjviy"]
@@ -721,92 +711,62 @@ offset_bottom = 64.0
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("76_l6nt7")
-texture_pressed = ExtResource("76_kvwp8")
-texture_hover = ExtResource("76_kvwp8")
-texture_focused = ExtResource("76_kvwp8")
 
 [node name="M2" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("78_63mux")
-texture_pressed = ExtResource("77_5fwfq")
-texture_hover = ExtResource("77_5fwfq")
-texture_focused = ExtResource("77_5fwfq")
 
 [node name="M3" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("80_ltice")
-texture_pressed = ExtResource("78_u8ust")
-texture_hover = ExtResource("78_u8ust")
-texture_focused = ExtResource("78_u8ust")
 
 [node name="R1" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("82_bv0q7")
-texture_pressed = ExtResource("79_ldl2p")
-texture_hover = ExtResource("79_ldl2p")
-texture_focused = ExtResource("79_ldl2p")
 
 [node name="R2" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("84_2qveu")
-texture_pressed = ExtResource("80_p786m")
-texture_hover = ExtResource("80_p786m")
-texture_focused = ExtResource("80_p786m")
 
 [node name="R3" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("86_f40vx")
-texture_pressed = ExtResource("81_j1ugm")
-texture_hover = ExtResource("81_j1ugm")
-texture_focused = ExtResource("81_j1ugm")
 
 [node name="R4" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("88_mfuus")
-texture_pressed = ExtResource("82_l3c4p")
-texture_hover = ExtResource("82_l3c4p")
-texture_focused = ExtResource("82_l3c4p")
 
 [node name="S1" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("90_cjviy")
-texture_pressed = ExtResource("83_10clp")
-texture_hover = ExtResource("83_10clp")
-texture_focused = ExtResource("83_10clp")
 
 [node name="S2" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("92_mwkic")
-texture_pressed = ExtResource("84_de61t")
-texture_hover = ExtResource("84_de61t")
-texture_focused = ExtResource("84_de61t")
 
 [node name="S3" type="TextureButton" parent="Picker/HBoxContainer"]
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("94_aafri")
-texture_pressed = ExtResource("85_76ex1")
-texture_hover = ExtResource("85_76ex1")
-texture_focused = ExtResource("85_76ex1")
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
-[connection signal="pressed" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/M2" to="BattleManager" method="M2_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/M3" to="BattleManager" method="M3_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/R1" to="BattleManager" method="R1_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/R2" to="BattleManager" method="R2_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/R3" to="BattleManager" method="R3_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/R4" to="BattleManager" method="R4_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/S1" to="BattleManager" method="S1_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/S2" to="BattleManager" method="S2_picked"]
-[connection signal="pressed" from="Picker/HBoxContainer/S3" to="BattleManager" method="S3_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/M2" to="BattleManager" method="M2_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/M3" to="BattleManager" method="M3_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/R1" to="BattleManager" method="R1_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/R2" to="BattleManager" method="R2_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/R3" to="BattleManager" method="R3_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/R4" to="BattleManager" method="R4_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/S1" to="BattleManager" method="S1_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/S2" to="BattleManager" method="S2_picked"]
+[connection signal="toggled" from="Picker/HBoxContainer/S3" to="BattleManager" method="S3_picked"]

@@ -39,7 +39,27 @@ var Z1 = preload("res://scenes/mek/Z1.scn")
 
 var mek_array = [M1, M2, M3, R1, R2, R3, R4, S1, S2, S3]
 
-#var structures: Array[Area2D]
+var M1_thumb_bw = preload("res://assets/portraits/bw/m1.png")
+var M2_thumb_bw = preload("res://assets/portraits/bw/m2.png")
+var M3_thumb_bw = preload("res://assets/portraits/bw/m3.png")
+var R1_thumb_bw = preload("res://assets/portraits/bw/r1.png")
+var R2_thumb_bw = preload("res://assets/portraits/bw/r2.png")
+var R3_thumb_bw = preload("res://assets/portraits/bw/r3.png")
+var R4_thumb_bw = preload("res://assets/portraits/bw/r4.png")
+var S1_thumb_bw = preload("res://assets/portraits/bw/s1.png")
+var S2_thumb_bw = preload("res://assets/portraits/bw/s2.png")
+var S3_thumb_bw = preload("res://assets/portraits/bw/s3.png")
+
+var M1_thumb_norm = preload("res://assets/portraits/mek_portraits/m1.png")
+var M2_thumb_norm = preload("res://assets/portraits/mek_portraits/m2.png")
+var M3_thumb_norm = preload("res://assets/portraits/mek_portraits/m3.png")
+var R1_thumb_norm = preload("res://assets/portraits/mek_portraits/r1.png")
+var R2_thumb_norm = preload("res://assets/portraits/mek_portraits/r2.png")
+var R3_thumb_norm = preload("res://assets/portraits/mek_portraits/r3.png")
+var R4_thumb_norm = preload("res://assets/portraits/mek_portraits/r4.png")
+var S1_thumb_norm = preload("res://assets/portraits/mek_portraits/s1.png")
+var S2_thumb_norm = preload("res://assets/portraits/mek_portraits/s2.png")
+var S3_thumb_norm = preload("res://assets/portraits/mek_portraits/s3.png")
 
 var hoverflag_1 = true
 var hoverflag_2 = true
@@ -2084,16 +2104,16 @@ func team_arrays():
 		if available_units[i].unit_team == 1:
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
-			get_node("../BattleManager").available_units[i].unit_level = 2
-			get_node("../BattleManager").available_units[i].unit_attack = 2
-			get_node("../BattleManager").available_units[i].unit_defence = 2
+			get_node("../BattleManager").available_units[i].unit_level = 3
+			get_node("../BattleManager").available_units[i].unit_attack = 3
+			get_node("../BattleManager").available_units[i].unit_defence = 3
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
 				get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
-				get_node("../BattleManager").available_units[i].unit_level = 2
-				get_node("../BattleManager").available_units[i].unit_attack = 2
-				get_node("../BattleManager").available_units[i].unit_defence = 2
+				get_node("../BattleManager").available_units[i].unit_level = 3
+				get_node("../BattleManager").available_units[i].unit_attack = 3
+				get_node("../BattleManager").available_units[i].unit_defence = 3
 														
 	arrays_set = true
 	
@@ -2177,14 +2197,12 @@ func spawn():
 		tween.connect("finished", on_tween_finished)
 		await get_tree().create_timer(0.5).timeout
 		if get_node("../BattleManager").available_units[i].unit_team == 2:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).hide()
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 110, 255)
 		if get_node("../BattleManager").available_units[i].unit_team == 1:
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
+			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).hide()
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
-			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).button_pressed = true
 			picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 				
 	await get_tree().create_timer(0).timeout	
@@ -2237,72 +2255,102 @@ func get_random_numbers(from, to):
 	arr.shuffle()
 	return arr
 
-func M1_picked():
-	var flag = false
-	if flag == false:
+func M1_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("M1") 
 		picker.get_child(0).scale = Vector2(1.25, 1.25)
-		flag = true
+		picker.get_child(0).texture_normal = M1_thumb_norm
+	else:
+		user_keys.remove_at(0) 
+		picker.get_child(0).scale = Vector2(1, 1)	
+		picker.get_child(0).texture_normal = M1_thumb_bw
 	
-func M2_picked():
-	var flag = false
-	if flag == false:	
+func M2_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("M2") 
 		picker.get_child(1).scale = Vector2(1.25, 1.25)
-		flag = true
-
-func M3_picked():
-	var flag = false
-	if flag == false:		
+		picker.get_child(1).texture_normal = M2_thumb_norm
+	else:
+		user_keys.remove_at(1) 
+		picker.get_child(1).scale = Vector2(1, 1)	
+		picker.get_child(1).texture_normal = M2_thumb_norm	
+	
+func M3_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("M3") 
 		picker.get_child(2).scale = Vector2(1.25, 1.25)
-		flag = true
-	
-func R1_picked():
-	var flag = false
-	if flag == false:	
-		user_keys.append("R1")
+		picker.get_child(2).texture_normal = M3_thumb_norm
+	else:
+		user_keys.remove_at(2) 
+		picker.get_child(2).scale = Vector2(1, 1)
+		picker.get_child(2).texture_normal = M3_thumb_bw
+
+func R1_picked(toggled_on):
+	if toggled_on == true:
+		user_keys.append("R1") 
 		picker.get_child(3).scale = Vector2(1.25, 1.25)
-		flag = true 
-	
-func R2_picked():
-	var flag = false
-	if flag == false:	
+		picker.get_child(3).texture_normal = R1_thumb_norm
+	else:
+		user_keys.remove_at(3) 
+		picker.get_child(3).scale = Vector2(1, 1)
+		picker.get_child(3).texture_normal = R1_thumb_norm
+		
+func R2_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("R2") 
 		picker.get_child(4).scale = Vector2(1.25, 1.25)
-		flag = true
-	
-func R3_picked():
-	var flag = false
-	if flag == false:	
+		picker.get_child(4).texture_normal = R2_thumb_norm
+	else:
+		user_keys.remove_at(4) 
+		picker.get_child(4).scale = Vector2(1, 1)
+		picker.get_child(4).texture_normal = R2_thumb_bw		
+
+func R3_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("R3") 
 		picker.get_child(5).scale = Vector2(1.25, 1.25)
-		flag = true 
+		picker.get_child(5).texture_normal = R3_thumb_norm
+	else:
+		user_keys.remove_at(5) 
+		picker.get_child(5).scale = Vector2(1, 1)	
+		picker.get_child(5).texture_normal = R3_thumb_bw
 
-func R4_picked():
-	var flag = false
-	if flag == false:	
+func R4_picked(toggled_on):
+	if toggled_on == true:
 		user_keys.append("R4") 
 		picker.get_child(6).scale = Vector2(1.25, 1.25)
-		flag = true 
+		picker.get_child(6).texture_normal = R4_thumb_norm
+	else:
+		user_keys.remove_at(6) 
+		picker.get_child(6).scale = Vector2(1, 1)
+		picker.get_child(6).texture_normal = R4_thumb_bw
 
-func S1_picked():
-	var flag = false
-	if flag == false:	
-		user_keys.append("S1")
+func S1_picked(toggled_on):
+	if toggled_on == true:
+		user_keys.append("S1") 
 		picker.get_child(7).scale = Vector2(1.25, 1.25)
-		flag = true 
-	
-func S2_picked():
-	var flag = false
-	if flag == false:	
-		user_keys.append("S2")
-		picker.get_child(8).scale = Vector2(1.25, 1.25) 	
-		flag = true 					
-	
-func S3_picked():
-	var flag = false
-	if flag == false:	
-		user_keys.append("S3")
-		picker.get_child(9).scale = Vector2(1.25, 1.25)	
-		flag = true 
+		picker.get_child(7).texture_normal = S1_thumb_norm
+	else:
+		user_keys.remove_at(7) 
+		picker.get_child(7).scale = Vector2(1, 1)
+		picker.get_child(7).texture_normal = S1_thumb_bw
+		
+func S2_picked(toggled_on):
+	if toggled_on == true:
+		user_keys.append("S2") 
+		picker.get_child(8).scale = Vector2(1.25, 1.25)
+		picker.get_child(8).texture_normal = S2_thumb_norm
+	else:
+		user_keys.remove_at(8) 
+		picker.get_child(8).scale = Vector2(1, 1)	
+		picker.get_child(8).texture_normal = S2_thumb_bw
+		
+func S3_picked(toggled_on):
+	if toggled_on == true:
+		user_keys.append("S3") 
+		picker.get_child(9).scale = Vector2(1.25, 1.25)
+		picker.get_child(9).texture_normal = S3_thumb_norm
+	else:
+		user_keys.remove_at(9) 
+		picker.get_child(9).scale = Vector2(1, 1)	
+		picker.get_child(9).texture_normal = S3_thumb_bw
