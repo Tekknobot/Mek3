@@ -205,7 +205,7 @@ func check_health():
 		if meks[i] != self and self.position == meks[i].position:
 			self.unit_min = 0
 			meks[i].unit_min = 0
-			#check_health()	
+			await get_tree().create_timer(0.5).timeout	
 			break
 				
 	# Check is off map
@@ -213,8 +213,7 @@ func check_health():
 		var unit_center_position = get_node("../BattleManager").available_units[i].position
 		var unit_position = get_node("../TileMap").local_to_map(unit_center_position)		
 		if unit_pos.x < 0 or unit_pos.x > 15 or unit_pos.y < 0 or unit_pos.y > 15:
-			self.unit_min = 0
-			#check_health()											
+			self.unit_min = 0											
 			break
 				
 	#Check health
