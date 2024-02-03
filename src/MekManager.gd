@@ -22,6 +22,7 @@ var this_position: Vector2
 @export var unit_status: String = "Active"
 
 @export var progressbar: ProgressBar
+@export var Levelprogressbar: ProgressBar
 
 var flag_coroutine = false
 
@@ -100,6 +101,9 @@ func _process(_delta):
 		self.get_child(10).text = "...."
 	if self.unit_level == 5:
 		self.get_child(10).text = "....."	
+	
+	self.Levelprogressbar.max_value = self.xp_requirements	
+	self.Levelprogressbar.set_value(self.xp)
 
 	if moved == true:
 		get_child(7).show()
@@ -186,6 +190,8 @@ func _process(_delta):
 		self.unit_min = self.progressbar.max_value
 		self.progressbar.set_value(self.unit_min)
 		self.unit_max = self.progressbar.max_value	
+		
+		self.Levelprogressbar.max_value += 1
 		
 		get_node("../Control").get_child(10).max_value = self.xp_requirements	
 												
