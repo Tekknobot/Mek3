@@ -33,7 +33,7 @@ var hovered_unit: int
 
 var xp = 0 
 var level = 1 
-var xp_requirements = 5
+var xp_requirements = 3
 
 @export var mek_sfx: Array[AudioStream]
 
@@ -160,7 +160,7 @@ func _process(_delta):
 	self.z_index = tile_pos.x + tile_pos.y
 		
 	if self.xp >= self.xp_requirements:
-		self.xp_requirements += 5
+		self.xp_requirements += 1
 		var tween: Tween = create_tween()
 		tween.tween_property(self, "modulate:v", 1, 1.75).from(3.75)							
 		

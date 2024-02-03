@@ -123,7 +123,7 @@ func _process(delta):
 	score.text = str(inactive_total_cpu.size()) + " - " + str(inactive_total_user.size())
 		
 	if meks_set == true:	
-		if inactive_total_cpu.size() == CPU_units.size() and audio_flag == false:
+		if inactive_total_cpu.size() == 5 and audio_flag == false:
 			get_node("../ALL_CLEAR").show()
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -133,7 +133,7 @@ func _process(delta):
 			print("YOU WIN!")
 			audio_flag = true
 
-		if inactive_total_user.size() == USER_units.size() and audio_flag == false:
+		if inactive_total_user.size() == 5 and audio_flag == false:
 			get_node("../ALL_CLEAR").show()
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -143,7 +143,6 @@ func _process(delta):
 			print("YOU LOSE!")
 			audio_flag = true
 	
-	print(user_keys.size())
 		
 func _input(event):
 	if event is InputEventKey:
@@ -2097,30 +2096,30 @@ func team_arrays():
 		user_dict[user_keys[i]].unit_team = 1
 		user_dict[user_keys[i]].unit_status = "Active"
 		user_dict[user_keys[i]].unit_type = "Ranged"	
-		user_dict[user_keys[i]].unit_movement = 5
+		#user_dict[user_keys[i]].unit_movement = 5
 			
 	for i in available_units.size():		
 		if available_units[i].unit_team != 1:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
-			available_units[i].unit_movement = 5	
+			#available_units[i].unit_movement = 5	
 			
 																										
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
-			get_node("../BattleManager").available_units[i].unit_level = 3
-			get_node("../BattleManager").available_units[i].unit_attack = 3
-			get_node("../BattleManager").available_units[i].unit_defence = 3
+			get_node("../BattleManager").available_units[i].unit_level = 1
+			get_node("../BattleManager").available_units[i].unit_attack = 1
+			get_node("../BattleManager").available_units[i].unit_defence = 1
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
 				get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
-				get_node("../BattleManager").available_units[i].unit_level = 3
-				get_node("../BattleManager").available_units[i].unit_attack = 3
-				get_node("../BattleManager").available_units[i].unit_defence = 3
+				get_node("../BattleManager").available_units[i].unit_level = 1
+				get_node("../BattleManager").available_units[i].unit_attack = 1
+				get_node("../BattleManager").available_units[i].unit_defence = 1
 														
 	arrays_set = true
 	

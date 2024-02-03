@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=148 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -72,6 +72,7 @@
 [ext_resource type="FontFile" uid="uid://cjn22bf3h6axc" path="res://assets/fonts/HighWayChase1980.ttf" id="73_kib7c"]
 [ext_resource type="PackedScene" uid="uid://biahfrr8vp48w" path="res://scenes/seeker.scn" id="75_4l3ce"]
 [ext_resource type="Texture2D" uid="uid://flgbmwf56qbu" path="res://assets/portraits/l0_por01.png" id="76_auhfx"]
+[ext_resource type="Texture2D" uid="uid://c3k5axfya2j1u" path="res://assets/portraits/mek_portraits/m1.png" id="76_kvwp8"]
 [ext_resource type="Texture2D" uid="uid://duqvkisrb63c3" path="res://assets/portraits/bw/m1.png" id="76_l6nt7"]
 [ext_resource type="Texture2D" uid="uid://b5bdfdh1qt7kq" path="res://assets/portraits/l0_por02.png" id="77_uhdmv"]
 [ext_resource type="Texture2D" uid="uid://bdwftwn63dhmj" path="res://assets/portraits/bw/m2.png" id="78_63mux"]
@@ -764,6 +765,14 @@ texture_normal = ExtResource("92_mwkic")
 layout_mode = 2
 toggle_mode = true
 texture_normal = ExtResource("94_aafri")
+
+[node name="LargeFrame" type="TextureRect" parent="Picker"]
+layout_mode = 0
+offset_left = -274.0
+offset_top = -151.0
+offset_right = -30.0
+offset_bottom = 69.0
+texture = ExtResource("76_kvwp8")
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
