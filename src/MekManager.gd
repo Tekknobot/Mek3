@@ -51,7 +51,9 @@ var attacked = false
 
 var mek_coord: Vector2i
 
-
+var pos : Vector2;
+var old_pos : Vector2;
+var moving : bool;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,9 +68,21 @@ func _ready():
 	structures.append_array(towers)
 	structures.append_array(stadiums)
 	structures.append_array(districts)	
-	
+
+	old_pos = global_position;
+	pos = global_position;
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
+	#set pos to current position
+	pos = global_position;
+	if pos - old_pos:
+		moving = true;
+	else:
+		moving = false;
+	#create old pos from pos
+	old_pos = pos;
+		
 	await get_tree().create_timer(0.1).timeout
 	# Face towards moving direction
 	last_position = this_position
@@ -125,11 +139,16 @@ func _process(_delta):
 		await get_tree().create_timer(0).timeout
 		flag_coroutine = true
 
+	if moving == true:
+		get_node("../Profile").get_child(1).texture = self.unit_portrait
+		get_node("../Profile").get_child(3).text = unit_name		
+
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
 		self.get_child(0).set_use_parent_material(false)
 		if !get_node("../TileMap").get_child(1).is_playing() and audio_flag:
 			audio_flag = false
 			get_node("../Profile").show()
+			get_node("../Profile").get_child(2).show()
 			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
 			get_node("../TileMap").get_child(1).play()	
 			get_node("../Profile").get_child(1).texture = self.unit_portrait
@@ -152,6 +171,7 @@ func _process(_delta):
 	if tile_pos == mouse_local_pos and self.unit_team == 2:
 		audio_flag = false	
 		get_node("../Profile").show()
+		get_node("../Profile").get_child(2).hide()
 		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
 		get_node("../TileMap").get_child(1).play()	
 		get_node("../Profile").get_child(1).texture = self.unit_portrait
