@@ -112,15 +112,19 @@ func _ready():
 				if towers_pos.x == towers_pos_2.x+1:
 					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x-1, towers_pos.y)) + Vector2(0,0) / 2
 					towers[i].position = tile_center_pos
+					towers[i].z_index = towers_pos.x-1 + towers_pos.y
 				if towers_pos.x == towers_pos_2.x-1:
 					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x+1, towers_pos.y)) + Vector2(0,0) / 2
 					towers[i].position = tile_center_pos
+					towers[i].z_index = towers_pos.x+1 + towers_pos.y
 				if towers_pos.y == towers_pos_2.y-1:
 					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x, towers_pos.y+1)) + Vector2(0,0) / 2
 					towers[i].position = tile_center_pos
+					towers[i].z_index = towers_pos.x + towers_pos.y+1
 				if towers_pos.y == towers_pos_2.y+1:
 					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x, towers_pos.y-1)) + Vector2(0,0) / 2
 					towers[i].position = tile_center_pos
+					towers[i].z_index = towers_pos.x + towers_pos.y-1
 				
 	check_duplicates(structures)		
 	generate_world()																			

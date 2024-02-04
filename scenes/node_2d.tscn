@@ -867,6 +867,14 @@ offset_right = 154.0
 theme_override_fonts/normal_font = ExtResource("72_rewkb")
 text = "NAME"
 
+[node name="MekPortrait" type="TextureRect" parent="Profile"]
+layout_mode = 0
+offset_left = -50.2222
+offset_top = 46.6667
+offset_right = 13.7778
+offset_bottom = 110.667
+scale = Vector2(0.5, 0.5)
+
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
