@@ -1123,6 +1123,9 @@ func on_cpu_turn_started() -> void:
 	get_node("../Hover_tile").show()
 	
 	get_node("../TileMap").moving = false
+
+	for i in available_units.size():
+		available_units[i].check_health()
 	
 	if ai_mode_bool == true:
 		on_user_ai_started()
@@ -2083,6 +2086,9 @@ func on_user_ai_started() -> void:
 	#turn_button.show()
 	get_node("../TileMap").moving = false
 
+	for i in available_units.size():
+		available_units[i].check_health()
+
 	on_cpu_turn_started()
 			
 func on_turn_over() -> void:	
@@ -2105,14 +2111,14 @@ func team_arrays():
 		user_dict[user_keys[i]].unit_team = 1
 		user_dict[user_keys[i]].unit_status = "Active"
 		user_dict[user_keys[i]].unit_type = "Ranged"	
-		#user_dict[user_keys[i]].unit_movement = 5
+		user_dict[user_keys[i]].unit_movement = rng.randi_range(1, 5)
 			
 	for i in available_units.size():		
 		if available_units[i].unit_team != 1:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
-			#available_units[i].unit_movement = 5	
+			available_units[i].unit_movement = rng.randi_range(1, 5)	
 			
 																										
 	for i in available_units.size():

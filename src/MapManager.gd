@@ -678,3 +678,22 @@ func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: V
 	for j in grid_height:
 		for k in grid_width:
 			set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
+
+
+func _on_pressed_plus():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_movement >= 5:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_movement += 1
+				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_movement)
+				
+func _on_pressed_minus():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_movement <= 1:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_movement -= 1
+				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_movement)
