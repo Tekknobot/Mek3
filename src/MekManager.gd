@@ -129,11 +129,11 @@ func _process(_delta):
 		self.get_child(0).set_use_parent_material(false)
 		if !get_node("../TileMap").get_child(1).is_playing() and audio_flag:
 			audio_flag = false
-			get_node("../Control").hide()
+			get_node("../Profile").show()
 			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
 			get_node("../TileMap").get_child(1).play()	
-			get_node("../Control").get_child(3).texture = self.unit_portrait
-			get_node("../Control").get_child(4).text = unit_name
+			get_node("../Profile").get_child(1).texture = self.unit_portrait
+			get_node("../Profile").get_child(3).text = unit_name
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
 			get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
@@ -151,9 +151,11 @@ func _process(_delta):
 
 	if tile_pos == mouse_local_pos and self.unit_team == 2:
 		audio_flag = false	
-		get_node("../Control").hide()
-		get_node("../Control").get_child(3).texture = self.unit_portrait
-		get_node("../Control").get_child(4).text = unit_name
+		get_node("../Profile").show()
+		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
+		get_node("../TileMap").get_child(1).play()	
+		get_node("../Profile").get_child(1).texture = self.unit_portrait
+		get_node("../Profile").get_child(3).text = unit_name
 		get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 		get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
 		get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
