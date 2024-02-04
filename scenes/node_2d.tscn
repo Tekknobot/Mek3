@@ -614,7 +614,7 @@ visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 toggle_mode = true
-text = "A.I. MODE"
+text = "CPU MODE"
 
 [node name="Score" type="Button" parent="FloatingMenu/VBoxContainer"]
 layout_mode = 2

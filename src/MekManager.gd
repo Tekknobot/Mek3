@@ -34,7 +34,7 @@ var hovered_unit: int
 
 var xp = 0 
 var level = 1 
-var xp_requirements = 2
+var xp_requirements = 3
 
 @export var mek_sfx: Array[AudioStream]
 

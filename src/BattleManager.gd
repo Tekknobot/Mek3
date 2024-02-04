@@ -2121,7 +2121,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_attack = 1
-			get_node("../BattleManager").available_units[i].unit_defence = 0
+			get_node("../BattleManager").available_units[i].unit_defence = 1
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
