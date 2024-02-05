@@ -673,9 +673,9 @@ script = ExtResource("62_85rtn")
 [node name="Picker" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -307.0
+offset_left = -145.0
 offset_top = 548.0
-offset_right = -267.0
+offset_right = -105.0
 offset_bottom = 588.0
 
 [node name="Portraits" type="HBoxContainer" parent="Picker"]
@@ -803,11 +803,11 @@ texture = ExtResource("76_kvwp8")
 [node name="Profile" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -531.0
-offset_top = 431.0
-offset_right = -491.0
-offset_bottom = 471.0
-scale = Vector2(2.25, 2.25)
+offset_left = -398.0
+offset_top = 450.0
+offset_right = -358.0
+offset_bottom = 490.0
+scale = Vector2(2, 2)
 
 [node name="Main" type="ColorRect" parent="Profile"]
 layout_mode = 0
