@@ -2111,14 +2111,12 @@ func team_arrays():
 		user_dict[user_keys[i]].unit_team = 1
 		user_dict[user_keys[i]].unit_status = "Active"
 		user_dict[user_keys[i]].unit_type = "Ranged"	
-		user_dict[user_keys[i]].unit_movement = 1
 			
 	for i in available_units.size():		
 		if available_units[i].unit_team != 1:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
-			available_units[i].unit_movement = 1
 			
 																										
 	for i in available_units.size():
@@ -2126,16 +2124,23 @@ func team_arrays():
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
-			get_node("../BattleManager").available_units[i].unit_attack = 1
+			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
 			get_node("../BattleManager").available_units[i].unit_defence = 0
+			var unit_min_max = rng.randi_range(3, 5)
+			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
+			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			
 		elif available_units[i].unit_team == 2:
-				# Team color
-				get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
-				get_node("../BattleManager").available_units[i].unit_level = 1
-				get_node("../BattleManager").available_units[i].unit_attack = 1
-				get_node("../BattleManager").available_units[i].unit_defence = 0
-														
+			# Team color
+			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
+			get_node("../BattleManager").available_units[i].unit_level = 1
+			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
+			get_node("../BattleManager").available_units[i].unit_defence = 0
+			get_node("../BattleManager").available_units[i].unit_min = rng.randi_range(3, 5)
+			var unit_min_max = rng.randi_range(3, 5)
+			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
+			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
+																		
 	arrays_set = true
 	
 func spawn_meks():
@@ -2277,7 +2282,7 @@ func get_random_numbers(from, to):
 	return arr
 
 func ai_mode(toggled_on):
-	on_user_ai_started()
+	on_cpu_turn_started()
 	ai_button.hide()
 	turn_button.hide()
 	ai_button.hide()

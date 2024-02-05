@@ -150,12 +150,14 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)
+			get_node("../Profile").get_child(13).text = str(self.unit_min)
 		else:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait			 
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)			
+			get_node("../Profile").get_child(6).text = str(self.unit_level)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min)		
 			
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
 		self.get_child(0).set_use_parent_material(false)
@@ -172,7 +174,8 @@ func _process(_delta):
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait		
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)				
+			get_node("../Profile").get_child(6).text = str(self.unit_level)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min)			
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -203,7 +206,8 @@ func _process(_delta):
 			get_node("../Profile").get_child(2).text = unit_name
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)			
+			get_node("../Profile").get_child(6).text = str(self.unit_level)		
+			get_node("../Profile").get_child(13).text = str(self.unit_min)	
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -234,9 +238,26 @@ func _process(_delta):
 		get_child(5).play()			
 		
 		self.xp = 0
-		self.unit_level += 1	
-		self.unit_attack += 1
-		self.unit_defence += 1	
+		if self.unit_level >= 5:
+			return
+		else:
+			self.unit_level += 1	
+			
+		if self.unit_attack >= 5:
+			return
+		else:		
+			self.unit_attack += 1
+			
+		if self.unit_defence >= 5:	
+			return		
+		else:
+			self.unit_defence += 1	
+			
+		if self.unit_movement >= 5:				
+			return
+		else:
+			self.unit_movement += 1
+			
 		
 		self.progressbar.max_value += 1
 		self.unit_min = self.progressbar.max_value

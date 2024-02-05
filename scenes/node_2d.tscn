@@ -927,6 +927,13 @@ offset_bottom = 79.4444
 text = "-
 "
 
+[node name="HP" type="RichTextLabel" parent="Profile"]
+layout_mode = 0
+offset_left = 64.4444
+offset_right = 104.444
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("73_kib7c")
+
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
