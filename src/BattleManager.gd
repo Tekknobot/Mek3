@@ -2449,13 +2449,16 @@ func spawn_again():
 		get_node("../BattleManager").inactive_total_cpu[i].add_to_group("CPU Active")
 		get_node("../BattleManager").inactive_total_cpu[i].unit_status = "Active"
 		get_node("../BattleManager").inactive_total_cpu[i].show()
-
+			
 		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
 		get_node("../BattleManager").inactive_total_cpu[i].position = Vector2(new_position.x, new_position.y-500)
 		var tween: Tween = create_tween()
 		tween.tween_property(get_node("../BattleManager").inactive_total_cpu[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 		tween.connect("finished", on_tween_finished)
 		await get_tree().create_timer(0.5).timeout		
+	
+	for node in get_tree().get_nodes_in_group("CPU Inactive"):
+		node.remove_from_group("CPU Inactive")	
 	
 	await get_tree().create_timer(1).timeout
 	spawnagain_button.hide()

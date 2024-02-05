@@ -305,8 +305,7 @@ func check_health():
 			break
 				
 	#Check health
-	if self.unit_min <= 0 and only_once:
-		only_once = false
+	if self.unit_min <= 0:
 		var unit_center_pos = self.position		
 		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
 		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
