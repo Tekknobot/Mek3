@@ -2463,9 +2463,8 @@ func spawn_again():
 
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
-			available_units[i].unit_max += 1
 			available_units[i].unit_min = available_units[i].unit_max
-			available_units[i].unit_level += 1
+			available_units[i].xp += 100
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
 		

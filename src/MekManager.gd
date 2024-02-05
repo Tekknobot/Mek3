@@ -249,15 +249,14 @@ func _process(_delta):
 		self.unit_level += 1	
 		self.unit_attack += 1
 		self.unit_defence += 1	
-		self.unit_min += 1
 		self.progressbar.max_value += 1
-			
+		self.unit_min = self.progressbar.max_value	
+		
 		if self.unit_movement >= 5:				
 			return
 		else:
 			self.unit_movement += 1
 		
-		self.unit_min = self.progressbar.max_value
 		self.progressbar.set_value(self.unit_min)
 		self.unit_max = self.progressbar.max_value	
 		
