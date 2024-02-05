@@ -20,10 +20,12 @@ var arrays_set = false
 
 @export var node2D: Node2D
 @export var spawn_button: Button
+@export var spawnagain_button: Button
 @export var turn_button: Button
 @export var ai_button: Button
 @export var score: Button
 @export var picker: HBoxContainer
+
 
 var M1 = preload("res://scenes/mek/M1.scn")
 var M2 = preload("res://scenes/mek/M2.scn")
@@ -127,14 +129,7 @@ func _process(delta):
 		
 	if meks_set == true:	
 		if inactive_total_cpu.size() == 5 and audio_flag == false:
-			get_node("../ALL_CLEAR").show()
-			var tween: Tween = create_tween()
-			tween.tween_property(get_node("../ALL_CLEAR"), "position", Vector2(200, -150), 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[9]
-			get_node("../TileMap").get_child(1).play()	
-			get_node("../ALL_CLEAR").get_child(1).text = "ALL CLEARED!"		
-			print("YOU WIN!")
-			audio_flag = true
+			spawnagain_button.show()
 
 		if inactive_total_user.size() == 5 and audio_flag == false:
 			get_node("../ALL_CLEAR").show()
@@ -2089,7 +2084,10 @@ func on_user_ai_started() -> void:
 	for i in available_units.size():
 		available_units[i].check_health()
 
-	on_cpu_turn_started()
+	if inactive_total_cpu.size() == 5:
+		return
+	else:
+		on_cpu_turn_started()
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
@@ -2129,6 +2127,8 @@ func team_arrays():
 			var unit_min_max = rng.randi_range(3, 5)
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
+			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
+			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
 			
 		elif available_units[i].unit_team == 2:
 			# Team color
@@ -2140,6 +2140,8 @@ func team_arrays():
 			var unit_min_max = rng.randi_range(3, 5)
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
+			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
+			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
 																		
 	arrays_set = true
 	
@@ -2274,6 +2276,9 @@ func end_turn():
 	get_node("../TurnManager").cpu_turn_started.emit()
 	ai_mode_bool = false
 
+func end_user_turn():
+	get_node("../TurnManager").cpu_turn_started.emit()
+
 func get_random_numbers(from, to):
 	var arr = []
 	for i in range(from,to):
@@ -2282,7 +2287,8 @@ func get_random_numbers(from, to):
 	return arr
 
 func ai_mode(toggled_on):
-	on_cpu_turn_started()
+	#on_cpu_turn_started()
+	on_user_ai_started()
 	ai_button.hide()
 	turn_button.hide()
 	ai_button.hide()
@@ -2428,3 +2434,29 @@ func S3_picked(toggled_on):
 		picker.get_child(9).texture_normal = S3_thumb_bw
 		teampick_count -= 1
 
+func spawn_again():
+	for i in inactive_total_cpu.size():
+		get_node("../BattleManager").inactive_total_cpu[i].get_child(0).modulate = Color8(255, 110, 255)
+		get_node("../BattleManager").inactive_total_cpu[i].unit_level += 1
+		get_node("../BattleManager").inactive_total_cpu[i].unit_movement = rng.randi_range(3, 5)
+		get_node("../BattleManager").inactive_total_cpu[i].unit_defence = 0
+		get_node("../BattleManager").inactive_total_cpu[i].unit_min = rng.randi_range(3, 5)
+		var unit_min_max = rng.randi_range(3, 5)
+		get_node("../BattleManager").inactive_total_cpu[i].unit_min = unit_min_max
+		get_node("../BattleManager").inactive_total_cpu[i].unit_max = unit_min_max
+		get_node("../BattleManager").inactive_total_cpu[i].progressbar.max_value = unit_min_max
+		get_node("../BattleManager").inactive_total_cpu[i].xp_requirements = unit_min_max
+		get_node("../BattleManager").inactive_total_cpu[i].add_to_group("CPU Active")
+		get_node("../BattleManager").inactive_total_cpu[i].unit_status = "Active"
+		get_node("../BattleManager").inactive_total_cpu[i].show()
+
+		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+		get_node("../BattleManager").inactive_total_cpu[i].position = Vector2(new_position.x, new_position.y-500)
+		var tween: Tween = create_tween()
+		tween.tween_property(get_node("../BattleManager").inactive_total_cpu[i], "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+		tween.connect("finished", on_tween_finished)
+		await get_tree().create_timer(0.5).timeout		
+	
+	await get_tree().create_timer(1).timeout
+	spawnagain_button.hide()
+	on_cpu_turn_started()	

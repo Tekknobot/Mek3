@@ -459,10 +459,11 @@ script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "turn_button", "ai_button", "score", "picker")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "spawnagain_button", "turn_button", "ai_button", "score", "picker")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
 spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
+spawnagain_button = NodePath("../FloatingMenu/VBoxContainer/SpawnAgain")
 turn_button = NodePath("../FloatingMenu/VBoxContainer/TurnButton")
 ai_button = NodePath("../FloatingMenu/VBoxContainer/AIButton")
 score = NodePath("../FloatingMenu/VBoxContainer/Score")
@@ -610,6 +611,14 @@ offset_right = 102.0
 offset_bottom = 118.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 text = "Pick 5"
+
+[node name="SpawnAgain" type="Button" parent="FloatingMenu/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
+theme_override_font_sizes/font_size = 16
+text = "AGAIN"
+alignment = 0
 
 [node name="TurnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
 visible = false
@@ -936,6 +945,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnAgain" to="BattleManager" method="spawn_again"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
 [connection signal="toggled" from="FloatingMenu/VBoxContainer/AIButton" to="BattleManager" method="ai_mode"]
 [connection signal="toggled" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]

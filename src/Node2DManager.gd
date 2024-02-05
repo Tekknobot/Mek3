@@ -108,7 +108,6 @@ func _ready():
 		for j in towers.size():
 			var towers_pos_2 = Map.local_to_map(towers[j].position)
 			if j != i and towers_pos.x == towers_pos_2.x+1 or towers_pos.x == towers_pos_2.x-1 or towers_pos.y == towers_pos_2.y+1 or towers_pos.y == towers_pos_2.y-1:
-				print("yo")
 				if towers_pos.x == towers_pos_2.x+1:
 					var tile_center_pos = Map.map_to_local(Vector2i(towers_pos.x-1, towers_pos.y)) + Vector2(0,0) / 2
 					towers[i].position = tile_center_pos

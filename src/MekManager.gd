@@ -150,14 +150,14 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)
-			get_node("../Profile").get_child(13).text = str(self.unit_min)
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)
 		else:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait			 
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min)		
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)		
 			
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
 		self.get_child(0).set_use_parent_material(false)
@@ -175,7 +175,7 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min)			
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)			
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -207,7 +207,7 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)		
-			get_node("../Profile").get_child(13).text = str(self.unit_min)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)	
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
