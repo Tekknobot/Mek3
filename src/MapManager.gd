@@ -687,7 +687,7 @@ func _on_pressed_plus():
 				return
 			else:
 				get_node("../BattleManager").available_units[i].unit_movement += 1
-				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_movement)
+				get_node("../Profile").get_child(4).text = str(get_node("../BattleManager").available_units[i].unit_movement)
 				
 func _on_pressed_minus():
 	for i in get_node("../BattleManager").available_units.size():		
@@ -696,4 +696,43 @@ func _on_pressed_minus():
 				return
 			else:
 				get_node("../BattleManager").available_units[i].unit_movement -= 1
-				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_movement)
+				get_node("../Profile").get_child(4).text = str(get_node("../BattleManager").available_units[i].unit_movement)
+
+
+func _on_pressed_plus_def():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_defence >= 5:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_defence += 1
+				get_node("../Profile").get_child(5).text = str(get_node("../BattleManager").available_units[i].unit_defence)
+				
+func _on_pressed_minus_def():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_defence <= 0:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_defence -= 1
+				get_node("../Profile").get_child(5).text = str(get_node("../BattleManager").available_units[i].unit_defence)
+
+
+
+func _on_pressed_plus_level():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_level >= 5:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_level += 1
+				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_level)
+				
+func _on_pressed_minus_level():
+	for i in get_node("../BattleManager").available_units.size():		
+		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
+			if get_node("../BattleManager").available_units[i].unit_level <= 1:
+				return
+			else:
+				get_node("../BattleManager").available_units[i].unit_level -= 1
+				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_level)

@@ -29,6 +29,7 @@ var flag_coroutine = false
 @export var only_once : bool = true
 
 var audio_flag = true
+var audio_flag_2 = true
 
 var hovered_unit: int
 
@@ -83,7 +84,6 @@ func _process(_delta):
 	#create old pos from pos
 	old_pos = pos;
 		
-	await get_tree().create_timer(0.1).timeout
 	# Face towards moving direction
 	last_position = this_position
 	this_position = self.position
@@ -119,6 +119,7 @@ func _process(_delta):
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
+	#Focus thumbs on the moving
 	if moved == true:
 		get_child(7).show()
 		pass
@@ -139,17 +140,22 @@ func _process(_delta):
 		await get_tree().create_timer(0).timeout
 		flag_coroutine = true
 
+	#Thumbs
 	if moving == true:
 		get_node("../Profile").get_child(1).texture = self.unit_portrait
 		get_node("../Profile").get_child(2).text = unit_name
 		if self.unit_team == 2:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 110, 255) #mek portrait
-			get_node("../Profile").get_child(6).text = str(self.unit_movement)
+			get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			get_node("../Profile").get_child(6).text = str(self.unit_level)
 		else:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait			 
-			get_node("../Profile").get_child(6).text = str(self.unit_movement)
+			get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			get_node("../Profile").get_child(6).text = str(self.unit_level)			
 			
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
 		self.get_child(0).set_use_parent_material(false)
@@ -164,7 +170,9 @@ func _process(_delta):
 			get_node("../Profile").get_child(2).text = unit_name
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait		
-			get_node("../Profile").get_child(6).text = str(self.unit_movement)	
+			get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			get_node("../Profile").get_child(6).text = str(self.unit_level)				
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -182,31 +190,35 @@ func _process(_delta):
 		self.get_child(0).set_use_parent_material(true)
 
 	if tile_pos == mouse_local_pos and self.unit_team == 2:
-		audio_flag = false	
-		get_node("../Profile").show()
-		get_node("../Profile").get_child(4).hide()
-		get_node("../Profile").get_child(5).hide()
-		get_node("../Profile").get_child(3).texture = self.mek_portrait		
-		get_node("../Profile").get_child(3).modulate = Color8(255, 110, 255) #mek portrait		
-
-		get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
-		get_node("../TileMap").get_child(1).play()	
-		get_node("../Profile").get_child(1).texture = self.unit_portrait
-		get_node("../Profile").get_child(2).text = unit_name
-		get_node("../Profile").get_child(6).text = str(self.unit_movement)
+		if !get_node("../TileMap").get_child(1).is_playing() and audio_flag_2:
+			audio_flag_2 = false	
+			get_node("../Profile").show()
+			get_node("../Profile").get_child(4).show()
+			get_node("../Profile").get_child(5).show()
+			get_node("../Profile").get_child(3).texture = self.mek_portrait		
+			get_node("../Profile").get_child(3).modulate = Color8(255, 110, 255) #mek portrait		
+			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[6]
+			get_node("../TileMap").get_child(1).play()	
+			get_node("../Profile").get_child(1).texture = self.unit_portrait
+			get_node("../Profile").get_child(2).text = unit_name
+			get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			get_node("../Profile").get_child(6).text = str(self.unit_level)			
+			
+			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
+			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
+			get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
+			get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
+			get_node("../Control").get_child(9).value = self.unit_min
+			get_node("../Control").get_child(9).max_value = self.unit_max
+			get_node("../Control").get_child(10).set_value(xp)			
+			get_node("../Control").get_child(10).max_value = self.xp_requirements		
+			get_node("../Control").get_child(13).texture = self.mek_portrait
+			get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
+			#hovered_unit = unit_num
+	else:
+		audio_flag_2 = true
 		
-		get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
-		get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
-		get_node("../Control").get_child(7).text = "ATK " + str(unit_attack)
-		get_node("../Control").get_child(8).text = "DEF " + str(unit_defence)
-		get_node("../Control").get_child(9).value = self.unit_min
-		get_node("../Control").get_child(9).max_value = self.unit_max
-		get_node("../Control").get_child(10).set_value(xp)			
-		get_node("../Control").get_child(10).max_value = self.xp_requirements		
-		get_node("../Control").get_child(13).texture = self.mek_portrait
-		get_node("../Control").get_child(13).modulate = Color8(255, 110, 255) #mek portrait
-		#hovered_unit = unit_num
-
 	#Mek Coordinates
 	mek_coord = get_node("../TileMap").local_to_map(self.position)
 		

@@ -261,7 +261,7 @@ func on_cpu_turn_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 							
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -302,7 +302,7 @@ func on_cpu_turn_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -343,7 +343,7 @@ func on_cpu_turn_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -384,7 +384,7 @@ func on_cpu_turn_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -631,7 +631,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -650,7 +650,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -669,7 +669,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -688,7 +688,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')	
@@ -824,7 +824,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -843,7 +843,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -862,7 +862,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -881,7 +881,7 @@ func on_cpu_turn_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')	
@@ -945,7 +945,7 @@ func on_cpu_turn_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 								
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -986,7 +986,7 @@ func on_cpu_turn_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -1027,7 +1027,7 @@ func on_cpu_turn_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -1068,7 +1068,7 @@ func on_cpu_turn_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -1222,7 +1222,7 @@ func on_user_ai_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 							
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -1263,7 +1263,7 @@ func on_user_ai_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -1304,7 +1304,7 @@ func on_user_ai_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -1345,7 +1345,7 @@ func on_user_ai_started() -> void:
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+							get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 							CPU_units[n].xp += 1
 							get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 							
@@ -1592,7 +1592,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1611,7 +1611,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1630,7 +1630,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1649,7 +1649,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')	
@@ -1785,7 +1785,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1804,7 +1804,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1823,7 +1823,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')
@@ -1842,7 +1842,7 @@ func on_user_ai_started() -> void:
 										var tween: Tween = create_tween()
 										tween.tween_property(USER_units[j], "modulate:v", 1, 0.50).from(5)
 										get_node("../BattleManager").CPU_units[n].xp += 1										
-										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level
+										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
 										print('CPU moved')	
@@ -1906,7 +1906,7 @@ func on_user_ai_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 								
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -1947,7 +1947,7 @@ func on_user_ai_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -1988,7 +1988,7 @@ func on_user_ai_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -2029,7 +2029,7 @@ func on_user_ai_started() -> void:
 								var tween: Tween = create_tween()
 								tween.tween_property(get_node("../BattleManager").USER_units[m], "modulate:v", 1, 0.50).from(5)							
 
-								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level
+								get_node("../BattleManager").USER_units[m].unit_min -= CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 								CPU_units[n].xp += 1
 								get_node("../BattleManager").USER_units[m].progressbar.set_value(get_node("../BattleManager").USER_units[m].unit_min)							
 								
@@ -2111,14 +2111,14 @@ func team_arrays():
 		user_dict[user_keys[i]].unit_team = 1
 		user_dict[user_keys[i]].unit_status = "Active"
 		user_dict[user_keys[i]].unit_type = "Ranged"	
-		user_dict[user_keys[i]].unit_movement = rng.randi_range(1, 5)
+		user_dict[user_keys[i]].unit_movement = 1
 			
 	for i in available_units.size():		
 		if available_units[i].unit_team != 1:
 			available_units[i].unit_team = 2
 			available_units[i].unit_status = "Active"		
 			available_units[i].unit_type = "Ranged"	
-			available_units[i].unit_movement = rng.randi_range(1, 5)	
+			available_units[i].unit_movement = 1
 			
 																										
 	for i in available_units.size():
@@ -2127,14 +2127,14 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_attack = 1
-			get_node("../BattleManager").available_units[i].unit_defence = 1
+			get_node("../BattleManager").available_units[i].unit_defence = 0
 			
 		elif available_units[i].unit_team == 2:
 				# Team color
 				get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
 				get_node("../BattleManager").available_units[i].unit_level = 1
 				get_node("../BattleManager").available_units[i].unit_attack = 1
-				get_node("../BattleManager").available_units[i].unit_defence = 1
+				get_node("../BattleManager").available_units[i].unit_defence = 0
 														
 	arrays_set = true
 	
@@ -2193,7 +2193,6 @@ func spawn():
 		spawning = true
 		spawn_button.hide()
 		picker.hide()
-		get_node("../TileMap").hovertile.hide()
 		
 		await get_tree().create_timer(0).timeout
 		spawn_meks()
@@ -2228,10 +2227,7 @@ func spawn():
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 					
-		await get_tree().create_timer(0).timeout	
-		get_node("../TileMap").hovertile.show()
-		await get_tree().create_timer(2).timeout	
-		#on_user_ai_started()
+	
 		spawning = false
 		meks_set = true
 		turn_button.show()
