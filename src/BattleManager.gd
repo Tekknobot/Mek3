@@ -2122,7 +2122,7 @@ func team_arrays():
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
-			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
+			get_node("../BattleManager").available_units[i].unit_movement = 3
 			get_node("../BattleManager").available_units[i].unit_defence = 0
 			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
@@ -2134,7 +2134,7 @@ func team_arrays():
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
-			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
+			get_node("../BattleManager").available_units[i].unit_movement = 3
 			get_node("../BattleManager").available_units[i].unit_defence = 0
 			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
@@ -2437,15 +2437,7 @@ func spawn_again():
 	spawning = true
 	for i in inactive_total_cpu.size():
 		get_node("../BattleManager").inactive_total_cpu[i].get_child(0).modulate = Color8(255, 110, 255)
-		get_node("../BattleManager").inactive_total_cpu[i].unit_level += 1
-		get_node("../BattleManager").inactive_total_cpu[i].unit_movement = rng.randi_range(3, 5)
-		get_node("../BattleManager").inactive_total_cpu[i].unit_defence = 0
-		get_node("../BattleManager").inactive_total_cpu[i].unit_min = rng.randi_range(3, 5)
-		var unit_min_max = rng.randi_range(3, 5)
-		get_node("../BattleManager").inactive_total_cpu[i].unit_min = unit_min_max
-		get_node("../BattleManager").inactive_total_cpu[i].unit_max = unit_min_max
-		get_node("../BattleManager").inactive_total_cpu[i].progressbar.max_value = unit_min_max
-		get_node("../BattleManager").inactive_total_cpu[i].xp_requirements = unit_min_max
+		get_node("../BattleManager").inactive_total_cpu[i].xp += 100
 		get_node("../BattleManager").inactive_total_cpu[i].add_to_group("CPU Active")
 		get_node("../BattleManager").inactive_total_cpu[i].unit_status = "Active"
 		get_node("../BattleManager").inactive_total_cpu[i].show()
@@ -2463,7 +2455,6 @@ func spawn_again():
 
 	for i in available_units.size():
 		if available_units[i].unit_team == 1:
-			available_units[i].unit_min = available_units[i].unit_max
 			available_units[i].xp += 100
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
