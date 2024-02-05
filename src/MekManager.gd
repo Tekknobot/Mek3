@@ -52,9 +52,11 @@ var attacked = false
 
 var mek_coord: Vector2i
 
-var pos : Vector2;
-var old_pos : Vector2;
-var moving : bool;
+var pos : Vector2
+var old_pos : Vector2
+var moving : bool
+
+var sub = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -116,10 +118,12 @@ func _process(_delta):
 	if self.unit_level == 5:
 		self.get_child(10).text = "....."	
 	
+	self.get_child(10).text = str(self.unit_level)
+	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
-	#Focus thumbs on the moving
+
 	if moved == true:
 		get_child(7).show()
 		pass
@@ -140,7 +144,7 @@ func _process(_delta):
 		await get_tree().create_timer(0).timeout
 		flag_coroutine = true
 
-	#Thumbs
+	#Thumbs while moving
 	if moving == true:
 		get_node("../Profile").get_child(1).texture = self.unit_portrait
 		get_node("../Profile").get_child(2).text = unit_name
@@ -150,14 +154,16 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)
+			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 		else:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait			 
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)		
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)
+			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)		
 			
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
 		self.get_child(0).set_use_parent_material(false)
@@ -175,7 +181,8 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)			
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)			
+			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -207,7 +214,8 @@ func _process(_delta):
 			get_node("../Profile").get_child(4).text = str(self.unit_movement)
 			get_node("../Profile").get_child(5).text = str(self.unit_defence)
 			get_node("../Profile").get_child(6).text = str(self.unit_level)		
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.unit_max)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)	
+			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -238,40 +246,28 @@ func _process(_delta):
 		get_child(5).play()			
 		
 		self.xp = 0
-		if self.unit_level >= 5:
-			return
-		else:
-			self.unit_level += 1	
-			
-		if self.unit_attack >= 5:
-			return
-		else:		
-			self.unit_attack += 1
-			
-		if self.unit_defence >= 5:	
-			return		
-		else:
-			self.unit_defence += 1	
+		self.unit_level += 1	
+		self.unit_attack += 1
+		self.unit_defence += 1	
+		self.unit_min += 1
+		self.progressbar.max_value += 1
 			
 		if self.unit_movement >= 5:				
 			return
 		else:
 			self.unit_movement += 1
-			
 		
-		self.progressbar.max_value += 1
 		self.unit_min = self.progressbar.max_value
 		self.progressbar.set_value(self.unit_min)
 		self.unit_max = self.progressbar.max_value	
 		
 		self.Levelprogressbar.max_value += 1
-		
-		get_node("../Control").get_child(10).max_value = self.xp_requirements	
 												
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max
 	
-	self.progressbar.set_value(self.unit_min)
+	self.progressbar.set_value(self.unit_min)	
+	
 	
 func check_health():
 	var unit_global_position = self.position
@@ -305,7 +301,8 @@ func check_health():
 			break
 				
 	#Check health
-	if self.unit_min <= 0:
+	if self.unit_min <= 0 and only_once:
+		only_once = false
 		var unit_center_pos = self.position		
 		var unit_cell_center_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
 		var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")

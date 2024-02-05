@@ -2124,7 +2124,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = rng.randi_range(3, 5)
+			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
@@ -2136,8 +2136,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = rng.randi_range(3, 5)
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			get_node("../BattleManager").available_units[i].unit_min = rng.randi_range(3, 5)
-			var unit_min_max = rng.randi_range(3, 5)
+			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
@@ -2435,6 +2434,7 @@ func S3_picked(toggled_on):
 		teampick_count -= 1
 
 func spawn_again():
+	spawning = true
 	for i in inactive_total_cpu.size():
 		get_node("../BattleManager").inactive_total_cpu[i].get_child(0).modulate = Color8(255, 110, 255)
 		get_node("../BattleManager").inactive_total_cpu[i].unit_level += 1
@@ -2449,6 +2449,7 @@ func spawn_again():
 		get_node("../BattleManager").inactive_total_cpu[i].add_to_group("CPU Active")
 		get_node("../BattleManager").inactive_total_cpu[i].unit_status = "Active"
 		get_node("../BattleManager").inactive_total_cpu[i].show()
+		get_node("../BattleManager").inactive_total_cpu[i].only_once = true
 			
 		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
 		get_node("../BattleManager").inactive_total_cpu[i].position = Vector2(new_position.x, new_position.y-500)
@@ -2459,7 +2460,16 @@ func spawn_again():
 	
 	for node in get_tree().get_nodes_in_group("CPU Inactive"):
 		node.remove_from_group("CPU Inactive")	
-	
+
+	for i in available_units.size():
+		if available_units[i].unit_team == 1:
+			available_units[i].unit_max += 1
+			available_units[i].unit_min = available_units[i].unit_max
+			available_units[i].unit_level += 1
+			var tween: Tween = create_tween()
+			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
+		
 	await get_tree().create_timer(1).timeout
 	spawnagain_button.hide()
 	on_cpu_turn_started()	
+	spawning = false
