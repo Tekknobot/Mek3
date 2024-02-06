@@ -123,6 +123,12 @@ func _process(_delta):
 		self.get_child(10).text = "......."
 	if self.unit_level == 8:
 		self.get_child(10).text = "........"
+	if self.unit_level == 9:
+		self.get_child(10).text = "........."
+	if self.unit_level == 10:
+		self.get_child(10).text = ".........."
+	if self.unit_level == 11:
+		self.get_child(10).text = "..........."				
 	
 	#self.get_child(10).text = str(self.unit_level)
 	
