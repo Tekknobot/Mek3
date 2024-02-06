@@ -739,6 +739,7 @@ func on_cpu_turn_started() -> void:
 							get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
 							if h == CPU_units[n].unit_movement:
 								break
+								#pass
 						
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
 						
@@ -1700,6 +1701,7 @@ func on_user_ai_started() -> void:
 							get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
 							if h == CPU_units[n].unit_movement:
 								break
+								#pass
 						
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
 						
@@ -2444,6 +2446,8 @@ func spawn_again():
 		get_node("../BattleManager").inactive_total_cpu[i].show()
 		get_node("../BattleManager").inactive_total_cpu[i].only_once = true
 
+		open_tiles.clear()
+		
 		# Find open tiles	
 		for k in 16:
 			for j in 16:
@@ -2461,11 +2465,12 @@ func spawn_again():
 		node.remove_from_group("CPU Inactive")	
 
 	for i in available_units.size():
-		if available_units[i].unit_team == 1:
+		if available_units[i].unit_team == 1 and available_units[i].unit_status == "Active":
 			available_units[i].xp += 100
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
-		
+			await get_tree().create_timer(0.5).timeout	
+			
 	await get_tree().create_timer(1).timeout
 	spawnagain_button.hide()
 	on_cpu_turn_started()	
