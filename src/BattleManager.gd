@@ -708,7 +708,7 @@ func on_cpu_turn_started() -> void:
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active" and user_within == true and user_check == false:
 					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
-						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(USER_units[m].get_closest_player_or_null_CPU().position))
+						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(CPU_units[n].get_closest_player_or_null_CPU().position))
 						var target_random_cell = rng.randi_range(0, surrounding_cells_array.size())
 						
 						if target_random_cell >= 4:
@@ -738,8 +738,8 @@ func on_cpu_turn_started() -> void:
 							await get_tree().create_timer(0.01).timeout
 							get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
 							if h == CPU_units[n].unit_movement:
-								break
-								#pass
+								get_node("../TileMap").set_cell(1, patharray[h], 6, Vector2i(0, 0), 0)	
+								#break
 						
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
 						
@@ -1670,7 +1670,7 @@ func on_user_ai_started() -> void:
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active" and user_within == true and user_check == false:
 					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
-						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(USER_units[m].get_closest_player_or_null_USER().position))
+						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(CPU_units[n].get_closest_player_or_null_USER().position))
 						var target_random_cell = rng.randi_range(0, surrounding_cells_array.size())
 						
 						if target_random_cell >= 4:
@@ -1700,8 +1700,8 @@ func on_user_ai_started() -> void:
 							await get_tree().create_timer(0.01).timeout
 							get_node("../TileMap").set_cell(1, patharray[h], 18, Vector2i(0, 0), 0)	
 							if h == CPU_units[n].unit_movement:
-								break
-								#pass
+								get_node("../TileMap").set_cell(1, patharray[h], 6, Vector2i(0, 0), 0)	
+								#break
 						
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("move")
 						
