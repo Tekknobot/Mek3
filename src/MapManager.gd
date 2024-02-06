@@ -727,6 +727,7 @@ func _on_pressed_plus_level():
 			else:
 				get_node("../BattleManager").available_units[i].unit_level += 1
 				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_level)
+				get_node("../Profile").get_child(14).text = "Level " + str(get_node("../BattleManager").available_units[i].unit_level)
 				
 func _on_pressed_minus_level():
 	for i in get_node("../BattleManager").available_units.size():		
@@ -736,3 +737,5 @@ func _on_pressed_minus_level():
 			else:
 				get_node("../BattleManager").available_units[i].unit_level -= 1
 				get_node("../Profile").get_child(6).text = str(get_node("../BattleManager").available_units[i].unit_level)
+				get_node("../Profile").get_child(14).text = "Level " + str(get_node("../BattleManager").available_units[i].unit_level)
+				

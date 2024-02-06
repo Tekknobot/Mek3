@@ -137,7 +137,6 @@ func _process(_delta):
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
-
 	if moved == true:
 		get_child(7).show()
 		pass
