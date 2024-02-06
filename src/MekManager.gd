@@ -74,9 +74,11 @@ func _ready():
 
 	old_pos = global_position;
 	pos = global_position;
+	
+	
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):	
+func _process(_delta):		
 	#set pos to current position
 	pos = global_position;
 	if pos - old_pos:
@@ -340,3 +342,33 @@ func check_health():
 				get_node("../TileMap").set_cell(1, Vector2i(l,k), -1, Vector2i(0, 0), 0)			
 		
 		await get_tree().create_timer(1).timeout
+
+
+func get_closest_player_or_null_CPU():
+	var all_players = get_tree().get_nodes_in_group("USER_Team")
+	var closest_player = null
+ 
+	if (all_players.size() > 0):
+		closest_player = all_players[0]
+		for player in all_players:
+			var distance_to_this_player = global_position.distance_squared_to(player.global_position)	
+			var distance_to_closest_player = global_position.distance_squared_to(closest_player.global_position)
+			if (distance_to_this_player < distance_to_closest_player):
+				closest_player = player
+				
+	return closest_player
+
+
+func get_closest_player_or_null_USER():
+	var all_players = get_tree().get_nodes_in_group("CPU_Team")
+	var closest_player = null
+ 
+	if (all_players.size() > 0):
+		closest_player = all_players[0]
+		for player in all_players:
+			var distance_to_this_player = global_position.distance_squared_to(player.global_position)	
+			var distance_to_closest_player = global_position.distance_squared_to(closest_player.global_position)
+			if (distance_to_this_player < distance_to_closest_player):
+				closest_player = player
+				
+	return closest_player

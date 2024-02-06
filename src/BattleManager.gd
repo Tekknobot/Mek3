@@ -708,7 +708,7 @@ func on_cpu_turn_started() -> void:
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active" and user_within == true and user_check == false:
 					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
-						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
+						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(USER_units[m].get_closest_player_or_null_CPU().position))
 						var target_random_cell = rng.randi_range(0, surrounding_cells_array.size())
 						
 						if target_random_cell >= 4:
@@ -1669,7 +1669,7 @@ func on_user_ai_started() -> void:
 				var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)
 				if USER_units[m].unit_status == "Active" and user_within == true and user_check == false:
 					if get_node("../TileMap").get_cell_source_id(1, user_pos) == -1:
-						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(user_pos)
+						var surrounding_cells_array = get_node("../TileMap").get_surrounding_cells(get_node("../TileMap").local_to_map(USER_units[m].get_closest_player_or_null_USER().position))
 						var target_random_cell = rng.randi_range(0, surrounding_cells_array.size())
 						
 						if target_random_cell >= 4:
@@ -2104,6 +2104,7 @@ func team_arrays():
 		
 	for i in available_units.size():
 		available_units[i].unit_num = i
+		available_units[i].add_to_group("ALL UNITS")
 	
 	for i in user_keys.size():
 		user_dict[user_keys[i]].unit_team = 1
@@ -2469,3 +2470,6 @@ func spawn_again():
 	spawnagain_button.hide()
 	on_cpu_turn_started()	
 	spawning = false
+
+
+
