@@ -933,6 +933,15 @@ offset_right = 117.0
 offset_bottom = 40.5
 theme_override_font_sizes/normal_font_size = 12
 
+[node name="Round" type="RichTextLabel" parent="Profile"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = 84.0
+offset_right = 107.0
+offset_bottom = 109.0
+theme_override_fonts/normal_font = ExtResource("73_kib7c")
+theme_override_font_sizes/normal_font_size = 8
+
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnAgain" to="BattleManager" method="spawn_again"]

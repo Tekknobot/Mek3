@@ -113,6 +113,8 @@ var teampick_count = 0
 
 var ai_mode_bool = false
 
+var round = 1
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("../TurnManager").user_turn_started.connect(on_user_turn_started)
@@ -2476,5 +2478,7 @@ func spawn_again():
 	on_cpu_turn_started()	
 	spawning = false
 
+	round += 1
+	get_node("../Profile").get_child(15).text = "Round " + str(round)
 
 
