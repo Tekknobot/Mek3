@@ -117,8 +117,14 @@ func _process(_delta):
 		self.get_child(10).text = "...."
 	if self.unit_level == 5:
 		self.get_child(10).text = "....."	
+	if self.unit_level == 6:
+		self.get_child(10).text = "......"
+	if self.unit_level == 7:
+		self.get_child(10).text = "......."
+	if self.unit_level == 8:
+		self.get_child(10).text = "........"
 	
-	self.get_child(10).text = str(self.unit_level)
+	#self.get_child(10).text = str(self.unit_level)
 	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
@@ -260,6 +266,7 @@ func _process(_delta):
 			return
 		else:
 			self.unit_movement += 1
+			
 												
 	if self.unit_min >= self.unit_max:
 		self.unit_min = self.unit_max

@@ -2442,6 +2442,12 @@ func spawn_again():
 		get_node("../BattleManager").inactive_total_cpu[i].unit_status = "Active"
 		get_node("../BattleManager").inactive_total_cpu[i].show()
 		get_node("../BattleManager").inactive_total_cpu[i].only_once = true
+
+		# Find open tiles	
+		for k in 16:
+			for j in 16:
+				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(k,j)) == false:			
+					open_tiles.append(Vector2i(k,j))
 			
 		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
 		get_node("../BattleManager").inactive_total_cpu[i].position = Vector2(new_position.x, new_position.y-500)
