@@ -2122,7 +2122,7 @@ func team_arrays():
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 255, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
-			get_node("../BattleManager").available_units[i].unit_movement = 3
+			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
 			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
@@ -2134,7 +2134,7 @@ func team_arrays():
 			# Team color
 			get_node("../BattleManager").available_units[i].get_child(0).modulate = Color8(255, 110, 255)
 			get_node("../BattleManager").available_units[i].unit_level = 1
-			get_node("../BattleManager").available_units[i].unit_movement = 3
+			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
 			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
@@ -2300,8 +2300,8 @@ func M1_picked(toggled_on):
 		picker.get_child(0).texture_normal = M1_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "M1":
+		for i in user_keys.size():
+			if user_keys[i-1] == "M1":
 				user_keys.remove_at(i)		
 		picker.get_child(0).scale = Vector2(1, 1)	
 		picker.get_child(0).texture_normal = M1_thumb_bw
@@ -2314,8 +2314,8 @@ func M2_picked(toggled_on):
 		picker.get_child(1).texture_normal = M2_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "M2":
+		for i in user_keys.size():
+			if user_keys[i-1] == "M2":
 				user_keys.remove_at(i)			
 		picker.get_child(1).scale = Vector2(1, 1)	
 		picker.get_child(1).texture_normal = M2_thumb_bw
@@ -2328,8 +2328,8 @@ func M3_picked(toggled_on):
 		picker.get_child(2).texture_normal = M3_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "M3":
+		for i in user_keys.size():
+			if user_keys[i-1] == "M3":
 				user_keys.remove_at(i)			
 		picker.get_child(2).scale = Vector2(1, 1)
 		picker.get_child(2).texture_normal = M3_thumb_bw
@@ -2342,8 +2342,8 @@ func R1_picked(toggled_on):
 		picker.get_child(3).texture_normal = R1_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "R1":
+		for i in user_keys.size():
+			if user_keys[i-1] == "R1":
 				user_keys.remove_at(i)			 
 		picker.get_child(3).scale = Vector2(1, 1)
 		picker.get_child(3).texture_normal = R1_thumb_bw
@@ -2356,8 +2356,8 @@ func R2_picked(toggled_on):
 		picker.get_child(4).texture_normal = R2_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "R2":
+		for i in user_keys.size():
+			if user_keys[i-1] == "R2":
 				user_keys.remove_at(i)			
 		picker.get_child(4).scale = Vector2(1, 1)
 		picker.get_child(4).texture_normal = R2_thumb_bw	
@@ -2370,8 +2370,8 @@ func R3_picked(toggled_on):
 		picker.get_child(5).texture_normal = R3_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "R3":
+		for i in user_keys.size():
+			if user_keys[i-1] == "R3":
 				user_keys.remove_at(i)			
 		picker.get_child(5).scale = Vector2(1, 1)	
 		picker.get_child(5).texture_normal = R3_thumb_bw
@@ -2384,8 +2384,8 @@ func R4_picked(toggled_on):
 		picker.get_child(6).texture_normal = R4_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "R4":
+		for i in user_keys.size():
+			if user_keys[i-1] == "R4":
 				user_keys.remove_at(i)			
 		picker.get_child(6).scale = Vector2(1, 1)
 		picker.get_child(6).texture_normal = R4_thumb_bw
@@ -2398,8 +2398,8 @@ func S1_picked(toggled_on):
 		picker.get_child(7).texture_normal = S1_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "S1":
+		for i in user_keys.size():
+			if user_keys[i-1] == "S1":
 				user_keys.remove_at(i)			
 		picker.get_child(7).scale = Vector2(1, 1)
 		picker.get_child(7).texture_normal = S1_thumb_bw
@@ -2412,8 +2412,8 @@ func S2_picked(toggled_on):
 		picker.get_child(8).texture_normal = S2_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "S2":
+		for i in user_keys.size():
+			if user_keys[i-1] == "S2":
 				user_keys.remove_at(i)			
 		picker.get_child(8).scale = Vector2(1, 1)	
 		picker.get_child(8).texture_normal = S2_thumb_bw
@@ -2426,8 +2426,8 @@ func S3_picked(toggled_on):
 		picker.get_child(9).texture_normal = S3_thumb_norm
 		teampick_count += 1
 	else:
-		for i in user_keys.size()-1:
-			if user_keys[i] == "S3":
+		for i in user_keys.size():
+			if user_keys[i-1] == "S3":
 				user_keys.remove_at(i)			
 		picker.get_child(9).scale = Vector2(1, 1)	
 		picker.get_child(9).texture_normal = S3_thumb_bw
