@@ -24,7 +24,7 @@ config/windows_native_icon="res://icon.ico"
 
 window/size/viewport_width=1024
 window/size/viewport_height=640
-window/size/mode=4
+window/size/mode=2
 window/canvas_textures/default_texture_filter=1
 
 [rendering]
