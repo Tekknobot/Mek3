@@ -58,6 +58,8 @@ var moving : bool
 
 var sub = 0
 
+var tile_id = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	buildings = get_tree().get_nodes_in_group("buildings")
@@ -132,7 +134,10 @@ func _process(_delta):
 	if self.unit_level == 11:
 		self.get_child(10).text = "..........."				
 	
-	#self.get_child(10).text = str(self.unit_level)
+	#Get cell id
+	tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
+	if tile_id == 0:
+		unit_level = 5
 	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)

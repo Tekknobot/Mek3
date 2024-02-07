@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=149 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -93,6 +93,7 @@
 [ext_resource type="Texture2D" uid="uid://cx3im8p63kp10" path="res://assets/portraits/bw/s2.png" id="92_mwkic"]
 [ext_resource type="Texture2D" uid="uid://8nl3dxtur6to" path="res://assets/portraits/bw/s3.png" id="94_aafri"]
 [ext_resource type="Script" path="res://src/TerrainWidget.gd" id="96_tqgs1"]
+[ext_resource type="Script" path="res://src/StructureWidget.gd" id="97_euhx2"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -946,9 +947,9 @@ theme_override_font_sizes/normal_font_size = 8
 [node name="TerrainWidget" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -346.0
+offset_left = -261.0
 offset_top = -80.0
-offset_right = -306.0
+offset_right = -221.0
 offset_bottom = -40.0
 script = ExtResource("96_tqgs1")
 
@@ -992,6 +993,44 @@ offset_bottom = 71.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
+
+[node name="StructureWidget" type="Control" parent="." node_paths=PackedStringArray("node2D")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 242.0
+offset_top = -80.0
+offset_right = 282.0
+offset_bottom = -40.0
+script = ExtResource("97_euhx2")
+node2D = NodePath("..")
+
+[node name="WhiteBorder" type="ColorRect" parent="StructureWidget"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 118.0
+offset_bottom = 117.0
+
+[node name="BlackBG" type="ColorRect" parent="StructureWidget"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 115.0
+offset_bottom = 114.0
+color = Color(0, 0, 0, 1)
+
+[node name="StructurePic" type="TextureRect" parent="StructureWidget"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 115.0
+offset_bottom = 114.0
+
+[node name="StructureName" type="RichTextLabel" parent="StructureWidget"]
+layout_mode = 0
+offset_top = -27.0
+offset_right = 170.0
+offset_bottom = 13.0
+theme_override_fonts/normal_font = ExtResource("73_kib7c")
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
