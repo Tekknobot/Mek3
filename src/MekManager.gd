@@ -57,8 +57,8 @@ var old_pos : Vector2
 var moving : bool
 
 var sub = 0
-
 var tile_id = 0
+var can_attack = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -110,7 +110,9 @@ func _process(_delta):
 
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
-	
+
+	if self.unit_level <= 0:
+		self.get_child(10).text = " "	
 	if self.unit_level == 1:
 		self.get_child(10).text = "."					
 	if self.unit_level == 2:
@@ -136,8 +138,10 @@ func _process(_delta):
 	
 	#Get cell id
 	tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if tile_id == 0:
-		unit_level = 5
+	if tile_id != 0:
+		self.can_attack = true
+	else:
+		self.can_attack = false
 	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)

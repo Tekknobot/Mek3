@@ -245,7 +245,7 @@ func on_cpu_turn_started() -> void:
 							#print("4")
 														
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -285,7 +285,7 @@ func on_cpu_turn_started() -> void:
 							structure_flag2_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -326,7 +326,7 @@ func on_cpu_turn_started() -> void:
 							structure_flag3_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -367,7 +367,7 @@ func on_cpu_turn_started() -> void:
 							structure_flag4_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -581,7 +581,7 @@ func on_cpu_turn_started() -> void:
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
 							var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
 							for i in 4:
-								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i] and CPU_units[n].can_attack == true:
 									var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
 									
 									if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
@@ -775,7 +775,7 @@ func on_cpu_turn_started() -> void:
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
 							var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
 							for i in 4:
-								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i] and CPU_units[n].can_attack == true:
 									var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
 									
 									if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
@@ -930,7 +930,7 @@ func on_cpu_turn_started() -> void:
 								#print("4")
 															
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -970,7 +970,7 @@ func on_cpu_turn_started() -> void:
 								structure_flag2_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -998,7 +998,7 @@ func on_cpu_turn_started() -> void:
 				
 				hoverflag_2 = true	
 				structure_flag2_ranged = true											
-				for j in 15:	
+				for j in 16:	
 					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 					if hoverflag_3 == true and structure_flag3_ranged == true:
 						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x+j, cpu_pos.y), 48, Vector2i(0, 0), 0)
@@ -1011,7 +1011,7 @@ func on_cpu_turn_started() -> void:
 								structure_flag3_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1052,7 +1052,7 @@ func on_cpu_turn_started() -> void:
 								structure_flag4_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1207,7 +1207,7 @@ func on_user_ai_started() -> void:
 							#print("4")
 														
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1247,7 +1247,7 @@ func on_user_ai_started() -> void:
 							structure_flag2_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1288,7 +1288,7 @@ func on_user_ai_started() -> void:
 							structure_flag3_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1329,7 +1329,7 @@ func on_user_ai_started() -> void:
 							structure_flag4_ranged = false
 					for m in USER_units.size():
 						var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+						if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 							await get_tree().create_timer(0.7).timeout
 							get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1865,7 +1865,7 @@ func on_user_ai_started() -> void:
 			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()																		
-				for j in 15:	
+				for j in 16:	
 					get_node("../TileMap").set_cell(1, cpu_pos, -1, Vector2i(0, 0), 0)
 					if hoverflag_1 == true and structure_flag1_ranged == true:
 						get_node("../TileMap").set_cell(1, Vector2i(cpu_pos.x-j, cpu_pos.y), 48, Vector2i(0, 0), 0)
@@ -1892,7 +1892,7 @@ func on_user_ai_started() -> void:
 								#print("4")
 															
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1932,7 +1932,7 @@ func on_user_ai_started() -> void:
 								structure_flag2_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -1973,7 +1973,7 @@ func on_user_ai_started() -> void:
 								structure_flag3_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			
@@ -2014,7 +2014,7 @@ func on_user_ai_started() -> void:
 								structure_flag4_ranged = false
 						for m in USER_units.size():
 							var user_pos = get_node("../TileMap").local_to_map(USER_units[m].position)	
-							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false:
+							if get_node("../TileMap").get_cell_source_id(1, user_pos) == 48 and CPU_units[n].attacked == false and CPU_units[n].can_attack == true:
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("attack")	
 								await get_tree().create_timer(0.7).timeout
 								get_node("../BattleManager").CPU_units[n].get_child(0).play("default")			

@@ -30,7 +30,7 @@ func _process(delta):
 	if tile_id == 1:
 		get_child(2).texture = sandstone
 		get_child(3).text = "sandstone"
-		get_child(4).text = "+1 ATK"
+		get_child(4).text = "No Effect"
 	if tile_id == 2:
 		get_child(2).texture = dirt
 		get_child(3).text = "dirt"
@@ -42,11 +42,11 @@ func _process(delta):
 	if tile_id == 4:
 		get_child(2).texture = snow
 		get_child(3).text = "snow"
-		get_child(4).text = "-1 DEF"
+		get_child(4).text = "No Effect"
 	if tile_id == 5:
 		get_child(2).texture = ice	
 		get_child(3).text = "ice"
-		get_child(4).text = "-1 DEF"						
+		get_child(4).text = "-No Effect"						
 	if tile_id == 41:
 		get_child(2).texture = road	
 		get_child(3).text = "road"	
