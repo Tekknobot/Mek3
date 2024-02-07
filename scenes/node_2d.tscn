@@ -466,7 +466,7 @@ picker = NodePath("../Picker/HBoxContainer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
-zoom = Vector2(2.45, 2.45)
+zoom = Vector2(2.35, 2.35)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
@@ -600,10 +600,11 @@ alignment = 0
 [node name="RichTextLabel" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
 layout_mode = 2
 offset_top = 83.0
-offset_right = 102.0
-offset_bottom = 118.0
-theme_override_fonts/normal_font = ExtResource("73_kib7c")
-text = "Pick 5"
+offset_right = 125.0
+offset_bottom = 144.0
+theme_override_fonts/normal_font = ExtResource("72_rewkb")
+theme_override_font_sizes/normal_font_size = 64
+text = "Mek"
 
 [node name="SpawnAgain" type="Button" parent="FloatingMenu/VBoxContainer"]
 visible = false
@@ -675,9 +676,9 @@ script = ExtResource("62_85rtn")
 [node name="Picker" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -145.0
+offset_left = -204.0
 offset_top = 548.0
-offset_right = -105.0
+offset_right = -164.0
 offset_bottom = 588.0
 
 [node name="Portraits" type="HBoxContainer" parent="Picker"]
@@ -972,7 +973,7 @@ color = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 6.0
 offset_top = 7.0
-offset_right = 70.0
+offset_right = 72.0
 offset_bottom = 71.0
 
 [node name="TileName" type="RichTextLabel" parent="TerrainWidget"]

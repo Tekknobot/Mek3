@@ -15,7 +15,6 @@ var intersection = preload("res://assets/iso_tiles/roads/16.png")
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var mouse_pos = get_global_mouse_position()
@@ -46,7 +45,7 @@ func _process(delta):
 	if tile_id == 5:
 		get_child(2).texture = ice	
 		get_child(3).text = "ice"
-		get_child(4).text = "-No Effect"						
+		get_child(4).text = "No Effect"						
 	if tile_id == 41:
 		get_child(2).texture = road	
 		get_child(3).text = "road"	

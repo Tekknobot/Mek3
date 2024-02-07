@@ -146,7 +146,6 @@ func _process(_delta):
 		self.can_attack = false	
 		self.skew = 0	
 
-	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
