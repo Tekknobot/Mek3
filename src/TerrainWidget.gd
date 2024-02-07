@@ -26,7 +26,7 @@ func _process(delta):
 	if tile_id == 0:
 		get_child(2).texture = water
 		get_child(3).text = "water"
-		get_child(4).text = "-1 ATK"
+		get_child(4).text = "Cannot attack from water."
 	if tile_id == 1:
 		get_child(2).texture = sandstone
 		get_child(3).text = "sandstone"

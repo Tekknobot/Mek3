@@ -42,7 +42,7 @@ var districts = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
-	for i in 21: #buildings
+	for i in 16: #buildings
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
 		var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)
@@ -203,25 +203,25 @@ func generate_roads_and_tiles():
 		var structure_pos = Map.local_to_map(structure_global_pos)
 		map_pos = structure_pos
 		
-		for i in 8:
+		for i in 2:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 8:
+		for i in 2:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 8:
+		for i in 2:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 8:
+		for i in 2:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					

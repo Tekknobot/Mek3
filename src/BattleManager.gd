@@ -1543,7 +1543,7 @@ func on_user_ai_started() -> void:
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
 							var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
 							for i in 4:
-								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i] and CPU_units[n].can_attack == true:
 									var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
 									
 									if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
@@ -1737,7 +1737,7 @@ func on_user_ai_started() -> void:
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
 							var user_surrounding_cells = get_node("../TileMap").get_surrounding_cells(user_target_pos)			
 							for i in 4:
-								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i]:
+								if get_node("../TileMap").local_to_map(CPU_units[n].position) == user_surrounding_cells[i] and CPU_units[n].can_attack == true:
 									var attack_center_pos = get_node("../TileMap").map_to_local(get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)) + Vector2(0,0) / 2	
 									
 									if CPU_units[n].scale.x == 1 and CPU_units[n].position.x > attack_center_pos.x:
