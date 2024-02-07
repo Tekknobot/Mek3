@@ -139,7 +139,7 @@ func _process(_delta):
 	
 	#Get cell id skew
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if self.tile_id != 0 and self.unit_name != "Wurmz":
+	if self.tile_id != 0:
 		self.can_attack = true
 		tween_loop()		
 	elif self.tile_id == 0:

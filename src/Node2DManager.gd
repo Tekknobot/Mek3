@@ -203,25 +203,25 @@ func generate_roads_and_tiles():
 		var structure_pos = Map.local_to_map(structure_global_pos)
 		map_pos = structure_pos
 		
-		for i in 2:
+		for i in 4:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 2:
+		for i in 4:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 2:
+		for i in 4:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 2:
+		for i in 4:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
