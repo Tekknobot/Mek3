@@ -59,6 +59,7 @@ var moving : bool
 var sub = 0
 var tile_id = 0
 var can_attack = false
+var in_water = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -136,12 +137,24 @@ func _process(_delta):
 	if self.unit_level == 11:
 		self.get_child(10).text = "..........."				
 	
-	#Get cell id
-	tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
+	#Get cell id skew
+	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
 	if tile_id != 0:
-		self.can_attack = true
+		self.can_attack = true	
+		var tween := create_tween().set_loops()
+		tween.tween_property(self, "skew", -0.1, 1).from(0.1)
+		tween.tween_property(self, "skew", 0.1, 1).from(-0.1)			
 	else:
 		self.can_attack = false
+		self.skew = 0
+		
+
+	#Get cell id no skew
+	tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
+	if tile_id != 0 and self.unit_name == "Wurmz":
+		self.can_attack = false
+	else:
+		self.can_attack = true
 	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
