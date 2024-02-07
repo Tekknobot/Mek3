@@ -141,9 +141,7 @@ func _process(_delta):
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
 	if self.tile_id != 0 and self.unit_name != "Wurmz":
 		self.can_attack = true
-		var tween := create_tween().set_loops()
-		tween.tween_property(self, "skew", -0.1, 1).from(0.1)
-		tween.tween_property(self, "skew", 0.1, 1).from(-0.1)		
+		tween_loop()		
 	elif self.tile_id == 0:
 		self.can_attack = false	
 		self.skew = 0	
@@ -383,6 +381,10 @@ func get_closest_player_or_null_USER():
 			var distance_to_this_player = global_position.distance_squared_to(player.global_position)	
 			var distance_to_closest_player = global_position.distance_squared_to(closest_player.global_position)
 			if (distance_to_this_player < distance_to_closest_player):
-				closest_player = player
-				
+				closest_player = player				
 	return closest_player
+
+func tween_loop():
+	var tween := create_tween().set_loops()
+	tween.tween_property(self, "skew", -0.1, 1).from(0.1)
+	tween.tween_property(self, "skew", 0.1, 1).from(-0.1)		
