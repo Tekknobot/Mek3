@@ -60,7 +60,6 @@ var sub = 0
 var tile_id = 0
 var can_attack = false
 var in_water = false
-var tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -385,6 +384,6 @@ func get_closest_player_or_null_USER():
 	return closest_player
 
 func tween_loop():
-	tween = create_tween().set_loops(10)
-	tween.tween_property(self, "skew", -0.1, 1).from(0.1)
-	tween.tween_property(self, "skew", 0.1, 1).from(-0.1)		
+	var tween = create_tween().set_loops(20)
+	tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+	tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)		
