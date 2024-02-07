@@ -947,9 +947,9 @@ theme_override_font_sizes/normal_font_size = 8
 [node name="TerrainWidget" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -261.0
+offset_left = -431.0
 offset_top = -80.0
-offset_right = -221.0
+offset_right = -391.0
 offset_bottom = -40.0
 script = ExtResource("96_tqgs1")
 

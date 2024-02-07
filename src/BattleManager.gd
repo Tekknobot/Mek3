@@ -2241,7 +2241,7 @@ func spawn():
 	
 		spawning = false
 		meks_set = true
-		turn_button.show()
+		#turn_button.show()
 		ai_button.show()
 	
 func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):

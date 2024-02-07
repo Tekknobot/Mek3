@@ -139,22 +139,15 @@ func _process(_delta):
 	
 	#Get cell id skew
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if tile_id != 0:
-		self.can_attack = true	
+	if self.tile_id != 0 and self.unit_name != "Wurmz":
+		self.can_attack = true
 		var tween := create_tween().set_loops()
 		tween.tween_property(self, "skew", -0.1, 1).from(0.1)
-		tween.tween_property(self, "skew", 0.1, 1).from(-0.1)			
-	else:
-		self.can_attack = false
-		self.skew = 0
-		
+		tween.tween_property(self, "skew", 0.1, 1).from(-0.1)		
+	elif self.tile_id == 0:
+		self.can_attack = false	
+		self.skew = 0	
 
-	#Get cell id no skew
-	tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if tile_id != 0 and self.unit_name == "Wurmz":
-		self.can_attack = false
-	else:
-		self.can_attack = true
 	
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
