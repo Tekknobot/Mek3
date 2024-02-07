@@ -996,7 +996,6 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 
 [node name="StructureWidget" type="Control" parent="." node_paths=PackedStringArray("node2D")]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 242.0

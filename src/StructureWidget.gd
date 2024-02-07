@@ -20,13 +20,19 @@ func _process(delta):
 	var buildings = get_tree().get_nodes_in_group("buildings")
 	var towers = get_tree().get_nodes_in_group("towers")
 	var stadiums = get_tree().get_nodes_in_group("stadiums")
-	var districts = get_tree().get_nodes_in_group("districts")		
+	var districts = get_tree().get_nodes_in_group("districts")
+	
+	for i in node2D.structures.size():
+		var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[i].position)
+		if mouse_local_pos != structure_pos:
+			get_child(2).texture = null
+			get_child(3).text = " "				
 	
 	for i in buildings.size():
 		var building_local_pos = get_node("../TileMap").local_to_map(buildings[i].position)
 		if mouse_local_pos == building_local_pos:
 			get_child(2).texture = building
-			get_child(3).text = "building"
+			get_child(3).text = "building"		
 
 	for i in towers.size():
 		var towers_local_pos = get_node("../TileMap").local_to_map(towers[i].position)

@@ -385,6 +385,6 @@ func get_closest_player_or_null_USER():
 	return closest_player
 
 func tween_loop():
-	tween = create_tween().set_loops()
+	tween = create_tween().set_loops(10)
 	tween.tween_property(self, "skew", -0.1, 1).from(0.1)
 	tween.tween_property(self, "skew", 0.1, 1).from(-0.1)		
