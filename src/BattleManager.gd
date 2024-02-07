@@ -2475,7 +2475,7 @@ func spawn_again():
 			
 	await get_tree().create_timer(1).timeout
 	spawnagain_button.hide()
-	on_cpu_turn_started()	
+	on_user_ai_started()	
 	spawning = false
 
 	round += 1

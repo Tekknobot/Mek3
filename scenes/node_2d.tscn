@@ -1,4 +1,4 @@
-[gd_scene load_steps=147 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=148 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -92,6 +92,7 @@
 [ext_resource type="Texture2D" uid="uid://dak1fft83lahw" path="res://assets/portraits/bw/s1.png" id="90_cjviy"]
 [ext_resource type="Texture2D" uid="uid://cx3im8p63kp10" path="res://assets/portraits/bw/s2.png" id="92_mwkic"]
 [ext_resource type="Texture2D" uid="uid://8nl3dxtur6to" path="res://assets/portraits/bw/s3.png" id="94_aafri"]
+[ext_resource type="Script" path="res://src/TerrainWidget.gd" id="96_tqgs1"]
 [ext_resource type="Script" path="res://src/TurnManager.gd" id="200_rvj2l"]
 [ext_resource type="Script" path="res://src/BattleManager.gd" id="201_3h84r"]
 [ext_resource type="Script" path="res://src/TurnStack.gd" id="202_u6wjo"]
@@ -570,9 +571,9 @@ script = ExtResource("69_f7tns")
 [node name="FloatingMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -564.0
+offset_left = -579.0
 offset_top = -111.0
-offset_right = -430.0
+offset_right = -445.0
 offset_bottom = -56.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FloatingMenu"]
@@ -941,6 +942,56 @@ offset_right = 107.0
 offset_bottom = 109.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 8
+
+[node name="TerrainWidget" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -346.0
+offset_top = -80.0
+offset_right = -306.0
+offset_bottom = -40.0
+script = ExtResource("96_tqgs1")
+
+[node name="WhiteBorder" type="ColorRect" parent="TerrainWidget"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 79.0
+offset_bottom = 79.0
+
+[node name="BalckBG" type="ColorRect" parent="TerrainWidget"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 77.0
+offset_bottom = 77.0
+color = Color(0, 0, 0, 1)
+
+[node name="Tile" type="TextureRect" parent="TerrainWidget"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 70.0
+offset_bottom = 71.0
+
+[node name="TileName" type="RichTextLabel" parent="TerrainWidget"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -27.0
+offset_right = 258.0
+offset_bottom = 13.0
+theme_override_fonts/normal_font = ExtResource("73_kib7c")
+bbcode_enabled = true
+
+[node name="TileDescription" type="RichTextLabel" parent="TerrainWidget"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 9.0
+offset_right = 254.0
+offset_bottom = 71.0
+theme_override_fonts/normal_font = ExtResource("73_kib7c")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
 
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/GenerateButton" to="." method="reload_scene"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnButton" to="BattleManager" method="spawn"]
