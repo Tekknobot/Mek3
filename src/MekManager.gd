@@ -61,6 +61,8 @@ var tile_id = 0
 var can_attack = false
 var in_water = false
 
+var tween
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	buildings = get_tree().get_nodes_in_group("buildings")
@@ -141,10 +143,13 @@ func _process(_delta):
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
 	if self.tile_id != 0:
 		self.can_attack = true
-		tween_loop()		
+		tween = create_tween().set_loops()
+		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
 	elif self.tile_id == 0:
 		self.can_attack = false	
 		self.skew = 0	
+		tween.kill()
 
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
@@ -382,8 +387,3 @@ func get_closest_player_or_null_USER():
 			if (distance_to_this_player < distance_to_closest_player):
 				closest_player = player				
 	return closest_player
-
-func tween_loop():
-	var tween = create_tween().set_loops(20)
-	tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
-	tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)		
