@@ -127,12 +127,13 @@ func _ready():
 				
 	check_duplicates(structures)	
 	
-	var biome = rng.randi_range(0, 1)	
+	var biome = rng.randi_range(0, 2)	
 	if biome == 0:		
 		generate_world()
 	if biome == 1:		
 		generate_mars()
-																					
+	if biome == 2:		
+		generate_moon()																					
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
@@ -141,11 +142,12 @@ func _process(_delta):
 func _input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_1:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)			
-			get_tree().reload_current_scene()		
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)			
+			#get_tree().reload_current_scene()	
+			pass	
 			
 		if event.pressed and event.keycode == KEY_2:
-			generate_mars()																	
+			pass															
 
 func move(dir):
 	map_pos += moves[dir]
@@ -155,8 +157,7 @@ func move(dir):
 func generate_tile(cell):
 		var _cells = find_valid_tiles(cell)
 		Map.set_cell(0, map_pos, -1, Vector2i(0, 0), 0)
-		Map.set_cell(0, map_pos, tile_id, Vector2i(0, 0), 0)
-		
+		Map.set_cell(0, map_pos, tile_id, Vector2i(0, 0), 0)		
 		
 func find_valid_tiles(cell):
 	var valid_tiles = []
@@ -219,6 +220,27 @@ func generate_mars():
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
 			
 	generate_roads_and_tiles_mars()
+
+func generate_moon():
+	# A random number generator which we will use for the noise seed
+	var tilelist = [55, 56, 57, 58, 59, 60]
+	
+	#var rng = RandomNumberGenerator.new()zz
+	fastNoiseLite.seed = rng.randi_range(0, 256)
+	fastNoiseLite.TYPE_PERLIN
+	fastNoiseLite.fractal_octaves = tilelist.size()
+	fastNoiseLite.fractal_gain = 0
+	
+	for x in grid_width:
+		grid.append([])
+		for y in grid_height:
+			grid[x].append(0)
+			# We get the noise coordinate as an absolute value (which represents the gradient - or layer)	
+			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
+			var tiletoplace = int(floor((absNoise * tilelist.size())))
+			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
+			
+	generate_roads_and_tiles_moon()
 			
 func generate_roads_and_tiles():
 	var tile_random_id = rng.randi_range(3, 5)
@@ -365,6 +387,80 @@ func generate_roads_and_tiles_mars():
 					for k in 4:
 						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
 							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)			
+
+func generate_roads_and_tiles_moon():
+	var tile_random_id = rng.randi_range(58, 60)
+	# Tiles
+	for h in structures.size():
+		var structure_group = get_tree().get_nodes_in_group("structure")
+		var structure_global_pos = structure_group[h].position
+		var structure_pos = Map.local_to_map(structure_global_pos)
+		map_pos = structure_pos
+		
+		for i in 4:
+			tile_id = tile_random_id
+			var size = moves.size()
+			var random_key = moves.keys()[randi() % size]					
+			move(random_key)
+		map_pos = structure_pos
+		for i in 4:
+			tile_id = tile_random_id
+			var size = moves.size()
+			var random_key = moves.keys()[randi() % size]					
+			move(random_key)
+		map_pos = structure_pos
+		for i in 4:
+			tile_id = tile_random_id
+			var size = moves.size()
+			var random_key = moves.keys()[randi() % size]					
+			move(random_key)
+		map_pos = structure_pos
+		for i in 4:
+			tile_id = tile_random_id
+			var size = moves.size()
+			var random_key = moves.keys()[randi() % size]					
+			move(random_key)	
+			
+	# Roads		
+	for h in 3:
+		var structure_group = get_tree().get_nodes_in_group("towers")
+		var structure_global_pos = structure_group[h].position
+		var structure_pos = Map.local_to_map(structure_global_pos)
+		map_pos = structure_pos
+				
+		for i in grid_width:
+			tile_id = 42
+			move(E)
+		map_pos = structure_pos	
+		for i in grid_width:
+			tile_id = 41
+			move(S)
+		map_pos = structure_pos
+		for i in grid_width:
+			tile_id = 42
+			move(W)
+		map_pos = structure_pos
+		for i in grid_width:
+			tile_id = 41
+			move(N)	
+					
+		# Intersection		
+		for i in grid_width:
+			for j in grid_height:
+				if Map.get_cell_source_id(0, Vector2i(i,j)) == 41:
+					var surrounding_cells = Map.get_surrounding_cells(Vector2i(i,j))
+					for k in 4:
+						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
+							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)														
+			
+		for i in grid_width:
+			for j in grid_height:
+				if Map.get_cell_source_id(0, Vector2i(i,j)) == 42:
+					var surrounding_cells = Map.get_surrounding_cells(Vector2i(i,j))
+					for k in 4:
+						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
+							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)			
+	
 			
 func check_duplicates(a):
 	var is_dupe = false
