@@ -145,32 +145,32 @@ func _process(_delta):
 	#Check cell ID
 	if get_tree().root.get_child(0).world == true:	
 		if tile_id != 0: #world
-			var tween = create_tween().set_loops(50)
+			var tween = create_tween().set_loops(0)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
-			self.can_attack = false	
-		else:
 			self.can_attack = true	
+		else:
+			self.can_attack = false	
 			self.skew = 0	
 
 	if get_tree().root.get_child(0).mars == true:	
 		if tile_id != 49: #mars
-			var tween = create_tween().set_loops(50)
+			var tween = create_tween().set_loops(0)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
-			self.can_attack = false	
-		else:
 			self.can_attack = true	
+		else:
+			self.can_attack = false	
 			self.skew = 0	
 			
 	if get_tree().root.get_child(0).moon == true:	
 		if tile_id != 55: #moon
-			var tween = create_tween().set_loops(50)
+			var tween = create_tween().set_loops(0)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
-			self.can_attack = false	
-		else:
 			self.can_attack = true	
+		else:
+			self.can_attack = false	
 			self.skew = 0	
 					
 	self.Levelprogressbar.max_value = self.xp_requirements	
