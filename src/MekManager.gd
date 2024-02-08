@@ -145,7 +145,7 @@ func _process(_delta):
 	#Check cell ID
 	if get_tree().root.get_child(0).world == true:	
 		if tile_id != 0: #world
-			var tween = create_tween().set_loops(0)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
@@ -155,7 +155,7 @@ func _process(_delta):
 
 	if get_tree().root.get_child(0).mars == true:	
 		if tile_id != 49: #mars
-			var tween = create_tween().set_loops(0)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
@@ -165,7 +165,7 @@ func _process(_delta):
 			
 	if get_tree().root.get_child(0).moon == true:	
 		if tile_id != 55: #moon
-			var tween = create_tween().set_loops(0)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	

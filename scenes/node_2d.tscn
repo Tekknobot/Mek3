@@ -1094,6 +1094,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 8
 
 [node name="TileID" type="RichTextLabel" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -18.0
 offset_top = -40.0
@@ -1150,6 +1151,7 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 
 [node name="StructureWidget" type="Control" parent="." node_paths=PackedStringArray("node2D")]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 242.0
