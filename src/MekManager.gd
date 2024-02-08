@@ -143,7 +143,7 @@ func _process(_delta):
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
 	if self.tile_id != 0:
 		self.can_attack = true
-		tween = create_tween().set_loops()
+		tween = create_tween().set_loops(50)
 		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
 	elif self.tile_id == 0:
