@@ -141,12 +141,12 @@ func _process(_delta):
 	
 	#Get cell id Skew Earth
 	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if self.tile_id != 0 or self.tile_id != 49:
+	if self.tile_id != 0:
 		self.can_attack = true
 		tween = create_tween().set_loops(50)
 		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
-	elif self.tile_id == 0 or self.tile_id == 49:
+	elif self.tile_id == 0:
 		self.can_attack = false	
 		self.skew = 0	
 		tween.kill()
@@ -159,6 +159,18 @@ func _process(_delta):
 		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
 	elif self.tile_id == 49:
+		self.can_attack = false	
+		self.skew = 0	
+		tween.kill()
+
+	#Get cell id Skew Moon
+	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
+	if self.tile_id != 55:
+		self.can_attack = true
+		tween = create_tween().set_loops(50)
+		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
+	elif self.tile_id == 55:
 		self.can_attack = false	
 		self.skew = 0	
 		tween.kill()

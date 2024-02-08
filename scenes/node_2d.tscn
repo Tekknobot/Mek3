@@ -614,7 +614,7 @@ picker = NodePath("../Picker/HBoxContainer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
-zoom = Vector2(2.35, 2.35)
+zoom = Vector2(1.35, 1.35)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
