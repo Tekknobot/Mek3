@@ -7,6 +7,13 @@ var grass = preload("res://assets/iso_tiles/grass_default.png")
 var sandstone = preload("res://assets/iso_tiles/sandstone.png")
 var water = preload("res://assets/iso_tiles/water_single.png")
 
+var dirt_mars = preload("res://assets/iso_tiles/mars/dirt_mars.png")
+var snow_mars = preload("res://assets/iso_tiles/mars/grass_snow_mars.png")
+var ice_mars = preload("res://assets/iso_tiles/mars/ice_mars_single.png")
+var grass_mars = preload("res://assets/iso_tiles/mars/grass_mars.png")
+var sandstone_mars = preload("res://assets/iso_tiles/mars/sandstone_mars.png")
+var water_mars = preload("res://assets/iso_tiles/mars/water_mars_single.png")
+
 var road = preload("res://assets/iso_tiles/roads/17.png")
 var road2 = preload("res://assets/iso_tiles/roads/18.png")
 var intersection = preload("res://assets/iso_tiles/roads/16.png")
@@ -58,3 +65,32 @@ func _process(delta):
 		get_child(2).texture = intersection	
 		get_child(3).text = "intersection"		
 		get_child(4).text = "No Effect"	
+		
+
+		
+	if tile_id == 49:
+		get_child(2).texture = water_mars
+		get_child(3).text = "water"
+		get_child(4).text = "Cannot attack from water."
+	if tile_id == 50:
+		get_child(2).texture = sandstone_mars
+		get_child(3).text = "sandstone"
+		get_child(4).text = "No Effect"
+	if tile_id == 51:
+		get_child(2).texture = dirt_mars
+		get_child(3).text = "dirt"
+		get_child(4).text = "No effect"
+	if tile_id == 52:
+		get_child(2).texture = grass_mars
+		get_child(3).text = "grass"
+		get_child(4).text = "No effect"		
+	if tile_id == 53:
+		get_child(2).texture = snow_mars
+		get_child(3).text = "snow"
+		get_child(4).text = "No Effect"
+	if tile_id == 54:
+		get_child(2).texture = ice_mars
+		get_child(3).text = "ice"
+		get_child(4).text = "No Effect"						
+
+		
