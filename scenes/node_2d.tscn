@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=161 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -48,8 +48,14 @@
 [ext_resource type="Texture2D" uid="uid://ugl0bgj6fcfo" path="res://assets/iso_tiles/roads/17.png" id="36_dtjoj"]
 [ext_resource type="Texture2D" uid="uid://cuf7qotnb45lt" path="res://assets/iso_tiles/roads/18.png" id="37_d2yjk"]
 [ext_resource type="Texture2D" uid="uid://6xil7xbbe3vx" path="res://assets/iso_tiles/ui/tile_hover_red.png" id="38_p2fqq"]
+[ext_resource type="Texture2D" uid="uid://0vlsepqeekda" path="res://assets/iso_tiles/mars/water_mars.png" id="43_c407a"]
+[ext_resource type="Texture2D" uid="uid://i1y3w2pgwkr1" path="res://assets/iso_tiles/mars/sandstone_mars.png" id="45_7j3td"]
+[ext_resource type="Texture2D" uid="uid://ejq7clmk13d8" path="res://assets/iso_tiles/mars/dirt_mars.png" id="46_00gaa"]
+[ext_resource type="Texture2D" uid="uid://3xk23s102gqm" path="res://assets/iso_tiles/mars/grass_mars.png" id="47_r85xf"]
+[ext_resource type="Texture2D" uid="uid://ycgpa26sudh" path="res://assets/iso_tiles/mars/grass_snow_mars.png" id="48_2mn03"]
 [ext_resource type="AudioStream" uid="uid://dj3d7h858nj8j" path="res://audio/sfx/Retro Beeep 06.wav" id="48_p3eoj"]
 [ext_resource type="AudioStream" uid="uid://nifpkejfxi50" path="res://audio/sfx/Retro Blop StereoUP 09.wav" id="49_c461k"]
+[ext_resource type="Texture2D" uid="uid://coh3wwnduxer3" path="res://assets/iso_tiles/mars/ice_mars.png" id="49_pf4rj"]
 [ext_resource type="AudioStream" uid="uid://c7wah0i8xrgkm" path="res://audio/sfx/Retro FootStep 03.wav" id="50_odnt0"]
 [ext_resource type="AudioStream" uid="uid://bfx7t85alyu3y" path="res://audio/sfx/Retro Magic 06.wav" id="51_rba5x"]
 [ext_resource type="AudioStream" uid="uid://b00ewitnpxw0b" path="res://audio/sfx/Retro Weapon Electric 05.wav" id="52_tcha0"]
@@ -299,6 +305,21 @@ texture = ExtResource("38_p2fqq")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xdvfa"]
+texture = ExtResource("43_c407a")
+texture_region_size = Vector2i(64, 64)
+0:0/animation_columns = 4
+0:0/animation_speed = 8.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vr3ps"]
 texture = ExtResource("6_guxk0")
 texture_region_size = Vector2i(64, 64)
@@ -313,6 +334,53 @@ texture_region_size = Vector2i(64, 64)
 0:0/animation_frame_6/duration = 1.0
 0:0/animation_frame_7/duration = 1.0
 0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6x3lp"]
+texture = ExtResource("45_7j3td")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8521f"]
+texture = ExtResource("46_00gaa")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h3fc3"]
+texture = ExtResource("47_r85xf")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qm1fd"]
+texture = ExtResource("48_2mn03")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v4evk"]
+texture = ExtResource("49_pf4rj")
+texture_region_size = Vector2i(64, 64)
+0:0/animation_columns = 8
+0:0/animation_speed = 8.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5dpym"]
 texture = ExtResource("7_0rgik")
@@ -382,6 +450,12 @@ sources/48 = SubResource("TileSetAtlasSource_prruo")
 sources/22 = SubResource("TileSetAtlasSource_l380b")
 sources/23 = SubResource("TileSetAtlasSource_qg5yc")
 sources/24 = SubResource("TileSetAtlasSource_73byi")
+sources/49 = SubResource("TileSetAtlasSource_xdvfa")
+sources/50 = SubResource("TileSetAtlasSource_6x3lp")
+sources/51 = SubResource("TileSetAtlasSource_8521f")
+sources/52 = SubResource("TileSetAtlasSource_h3fc3")
+sources/53 = SubResource("TileSetAtlasSource_qm1fd")
+sources/54 = SubResource("TileSetAtlasSource_v4evk")
 
 [sub_resource type="Animation" id="Animation_ctgyr"]
 resource_name = "water"
