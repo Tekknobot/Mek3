@@ -57,11 +57,11 @@ var old_pos : Vector2
 var moving : bool
 
 var sub = 0
-var tile_id = 0
-var can_attack = false
+var tile_id
+var can_attack = true
 var in_water = false
 
-var tween
+var tile_pos
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -109,7 +109,7 @@ func _process(_delta):
 		
 	var mouse_pos = get_global_mouse_position()
 	var mouse_local_pos = get_node("../TileMap").local_to_map(mouse_pos)
-	var tile_pos = get_node("../TileMap").local_to_map(self.position)	
+	self.tile_pos = get_node("../TileMap").local_to_map(self.position)	
 
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
@@ -140,41 +140,39 @@ func _process(_delta):
 		self.get_child(10).text = "..........."				
 	
 	#Get cell id Skew Earth
-	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if self.tile_id != 0:
-		self.can_attack = true
-		tween = create_tween().set_loops(50)
-		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
-		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
-	elif self.tile_id == 0:
-		self.can_attack = false	
-		self.skew = 0	
-		tween.kill()
+	tile_id = get_node("../TileMap").get_cell_source_id(0, mek_coord) 
 
-	#Get cell id Skew Mars
-	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if self.tile_id != 49:
-		self.can_attack = true
-		tween = create_tween().set_loops(50)
-		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
-		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
-	elif self.tile_id == 49:
-		self.can_attack = false	
-		self.skew = 0	
-		tween.kill()
+	#Check cell ID
+	if get_tree().root.get_child(0).world == true:	
+		if tile_id != 0: #world
+			var tween = create_tween().set_loops(50)
+			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
+			self.can_attack = false	
+		else:
+			self.can_attack = true	
+			self.skew = 0	
 
-	#Get cell id Skew Moon
-	self.tile_id = get_node("../TileMap").get_cell_source_id(0, tile_pos) 
-	if self.tile_id != 55:
-		self.can_attack = true
-		tween = create_tween().set_loops(50)
-		tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
-		tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)			
-	elif self.tile_id == 55:
-		self.can_attack = false	
-		self.skew = 0	
-		tween.kill()
-
+	if get_tree().root.get_child(0).mars == true:	
+		if tile_id != 49: #mars
+			var tween = create_tween().set_loops(50)
+			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
+			self.can_attack = false	
+		else:
+			self.can_attack = true	
+			self.skew = 0	
+			
+	if get_tree().root.get_child(0).moon == true:	
+		if tile_id != 55: #moon
+			var tween = create_tween().set_loops(50)
+			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
+			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
+			self.can_attack = false	
+		else:
+			self.can_attack = true	
+			self.skew = 0	
+					
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
@@ -237,6 +235,7 @@ func _process(_delta):
 			get_node("../Profile").get_child(6).text = str(self.unit_level)	
 			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)			
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
+			get_node("../Profile").get_child(16).text = str(self.tile_id)
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)
@@ -270,6 +269,7 @@ func _process(_delta):
 			get_node("../Profile").get_child(6).text = str(self.unit_level)		
 			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)	
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
+			get_node("../Profile").get_child(16).text = str(self.tile_id)
 			
 			get_node("../Control").get_child(5).text = "LV. " + str(unit_level)
 			get_node("../Control").get_child(6).text = "HP. " + str(unit_min)

@@ -614,7 +614,7 @@ picker = NodePath("../Picker/HBoxContainer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(30, 250)
-zoom = Vector2(1.35, 1.35)
+zoom = Vector2(2.35, 2.35)
 position_smoothing_speed = 1.0
 script = ExtResource("1_3hx5s")
 
@@ -1092,6 +1092,12 @@ offset_right = 107.0
 offset_bottom = 109.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 8
+
+[node name="TileID" type="RichTextLabel" parent="Profile"]
+layout_mode = 0
+offset_left = -18.0
+offset_top = -40.0
+offset_right = 22.0
 
 [node name="TerrainWidget" type="Control" parent="."]
 layout_mode = 3

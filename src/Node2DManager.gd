@@ -39,6 +39,10 @@ var towers = []
 var stadiums = []
 var districts = []
 
+var world = false
+var mars = false
+var moon = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
@@ -130,10 +134,13 @@ func _ready():
 	var biome = rng.randi_range(0, 2)	
 	if biome == 0:		
 		generate_world()
+		world = true
 	if biome == 1:		
 		generate_mars()
+		mars = true
 	if biome == 2:		
-		generate_moon()																					
+		generate_moon()	
+		moon = true																				
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):	
