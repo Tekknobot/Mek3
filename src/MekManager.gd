@@ -113,31 +113,13 @@ func _process(_delta):
 
 	#A star
 	get_node("../TileMap").astar_grid.set_point_solid(tile_pos, true)
-
-	if self.unit_level <= 0:
-		self.get_child(10).text = " "	
-	if self.unit_level == 1:
-		self.get_child(10).text = "."					
-	if self.unit_level == 2:
-		self.get_child(10).text = ".."
-	if self.unit_level == 3:
-		self.get_child(10).text = "..."
-	if self.unit_level == 4:
-		self.get_child(10).text = "...."
-	if self.unit_level == 5:
-		self.get_child(10).text = "....."	
-	if self.unit_level == 6:
-		self.get_child(10).text = "......"
-	if self.unit_level == 7:
-		self.get_child(10).text = "......."
-	if self.unit_level == 8:
-		self.get_child(10).text = "........"
-	if self.unit_level == 9:
-		self.get_child(10).text = "........."
-	if self.unit_level == 10:
-		self.get_child(10).text = ".........."
-	if self.unit_level == 11:
-		self.get_child(10).text = "..........."				
+	
+	if scale.x == 1:
+		self.get_child(10).text = "LV." + str(self.unit_level)
+		self.get_child(10).scale.x = 1
+	else:
+		self.get_child(10).text = "LV." + str(self.unit_level)
+		self.get_child(10).scale.x = -1
 	
 	#Get cell id Skew Earth
 	tile_id = get_node("../TileMap").get_cell_source_id(0, mek_coord) 

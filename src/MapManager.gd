@@ -702,7 +702,7 @@ func _on_pressed_minus():
 func _on_pressed_plus_def():
 	for i in get_node("../BattleManager").available_units.size():		
 		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
-			if get_node("../BattleManager").available_units[i].unit_defence >= 5:
+			if get_node("../BattleManager").available_units[i].unit_defence >= 9:
 				return
 			else:
 				get_node("../BattleManager").available_units[i].unit_defence += 1
@@ -722,7 +722,7 @@ func _on_pressed_minus_def():
 func _on_pressed_plus_level():
 	for i in get_node("../BattleManager").available_units.size():		
 		if get_node("../BattleManager").available_units[i].unit_name == get_node("../Profile").get_child(2).text:
-			if get_node("../BattleManager").available_units[i].unit_level >= 5:
+			if get_node("../BattleManager").available_units[i].unit_level >= 9:
 				return
 			else:
 				get_node("../BattleManager").available_units[i].unit_level += 1

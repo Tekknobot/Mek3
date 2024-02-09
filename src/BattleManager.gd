@@ -2449,6 +2449,7 @@ func spawn_again():
 		get_node("../BattleManager").inactive_total_cpu[i].only_once = true
 
 		open_tiles.clear()
+		await get_tree().create_timer(0.1).timeout	
 		
 		# Find open tiles	
 		for k in 16:
