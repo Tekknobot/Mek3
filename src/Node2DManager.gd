@@ -467,8 +467,7 @@ func generate_roads_and_tiles_moon():
 					for k in 4:
 						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
 							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)			
-	
-			
+				
 func check_duplicates(a):
 	var is_dupe = false
 	var found_dupe = false 

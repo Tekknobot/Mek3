@@ -122,39 +122,40 @@ func _process(_delta):
 		self.get_child(10).scale.x = -1
 	
 	#Get cell id Skew Earth
-	tile_id = get_node("../TileMap").get_cell_source_id(0, mek_coord) 
+	self.tile_id = get_node("../TileMap").get_cell_source_id(0, mek_coord) 
 
 	#Check cell ID
 	if get_tree().root.get_child(0).world == true:	
-		if tile_id != 0: #world
-			var tween = create_tween().set_loops(100)
+		if tile_id == 0: #moon
+			self.skew = deg_to_rad(-0)	
+			self.can_attack = false
+		if tile_id != 0:
+			var tween = create_tween().set_loops(25)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
-		else:
-			self.can_attack = false	
-			self.skew = 0	
 
 	if get_tree().root.get_child(0).mars == true:	
-		if tile_id != 49: #mars
-			var tween = create_tween().set_loops(100)
+		if tile_id == 49: #moon
+			self.skew = deg_to_rad(-0)	
+			self.can_attack = false
+		if tile_id != 49:
+			var tween = create_tween().set_loops(25)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
-		else:
-			self.can_attack = false	
-			self.skew = 0	
 			
 	if get_tree().root.get_child(0).moon == true:	
-		if tile_id != 55: #moon
-			var tween = create_tween().set_loops(100)
+		if tile_id == 55: #moon
+			self.skew = deg_to_rad(-0)	
+			self.can_attack = false
+		if tile_id != 55:
+			var tween = create_tween().set_loops(25)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
-			self.can_attack = true	
-		else:
-			self.can_attack = false	
-			self.skew = 0	
-					
+			self.can_attack = true		
+	
+						
 	self.Levelprogressbar.max_value = self.xp_requirements	
 	self.Levelprogressbar.set_value(self.xp)
 
