@@ -678,6 +678,8 @@ func SetLinePoints(line: Line2D, a: Vector2, postA: Vector2, preB: Vector2, b: V
 	for j in grid_height:
 		for k in grid_width:
 			set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)	
+			
+	hovertile.offset.y = 0		
 
 
 func _on_pressed_plus():
