@@ -187,7 +187,7 @@ func _input(event):
 				for h in get_node("../BattleManager").available_units.size():					
 					var clicked_center_pos = map_to_local(clicked_pos) + Vector2(0,0) / 2
 						
-					if clicked_center_pos == get_node("../BattleManager").available_units[h].position and get_cell_source_id(1, tile_pos) == 48 and right_clicked_unit.unit_type == "Ranged" and get_node("../BattleManager").available_units[h].attacked == false:
+					if clicked_center_pos == get_node("../BattleManager").available_units[h].position and get_cell_source_id(1, tile_pos) == 48 and right_clicked_unit.unit_type == "Ranged" and right_clicked_unit.can_attack == true:
 						only_once = false
 						
 						var attack_center_pos = map_to_local(clicked_pos) + Vector2(0,0) / 2	
@@ -210,7 +210,7 @@ func _input(event):
 							right_clicked_unit.attacked = true	
 							right_clicked_unit.attacked = true	
 						
-						await get_tree().create_timer(0.5).timeout
+						await get_tree().create_timer(0.1).timeout
 						right_clicked_unit.get_child(0).play("default")		
 						
 						var _bumpedvector = clicked_pos
@@ -476,7 +476,7 @@ func _input(event):
 						get_node("../BattleManager").available_units[i].z_index = unit_pos.x + unit_pos.y
 						get_child(1).stream = map_sfx[2]
 						get_child(1).play()				
-						await get_tree().create_timer(0.35).timeout
+						await get_tree().create_timer(0.25).timeout
 					
 					# Remove hover cells
 					for h in patharray.size():
@@ -497,7 +497,7 @@ func _input(event):
 						for k in grid_width:
 							set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)				
 											
-					await get_tree().create_timer(1).timeout
+					await get_tree().create_timer(0.1).timeout
 					
 					hovertile.show()
 					moving = false					

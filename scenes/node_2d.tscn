@@ -747,9 +747,9 @@ alignment = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
 layout_mode = 2
-offset_top = 83.0
+offset_top = 113.0
 offset_right = 125.0
-offset_bottom = 144.0
+offset_bottom = 174.0
 theme_override_fonts/normal_font = ExtResource("72_rewkb")
 theme_override_font_sizes/normal_font_size = 64
 text = "Mek"
@@ -757,9 +757,9 @@ text = "Mek"
 [node name="RichTextLabel2" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
 layout_mode = 0
 offset_left = -2.0
-offset_top = 165.0
+offset_top = 195.0
 offset_right = 206.0
-offset_bottom = 205.0
+offset_bottom = 235.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 text = "Pick 5 units."
 
@@ -772,7 +772,6 @@ text = "AGAIN"
 alignment = 0
 
 [node name="TurnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 text = "TURN"

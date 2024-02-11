@@ -2293,7 +2293,6 @@ func get_random_numbers(from, to):
 func ai_mode(toggled_on):
 	#on_cpu_turn_started()
 	on_user_ai_started()
-	ai_button.hide()
 	turn_button.hide()
 	ai_button.hide()
 	ai_mode_bool = true
@@ -2476,7 +2475,7 @@ func spawn_again():
 			
 	await get_tree().create_timer(1).timeout
 	spawnagain_button.hide()
-	on_user_ai_started()	
+	#on_user_ai_started()	
 	spawning = false
 
 	round += 1
