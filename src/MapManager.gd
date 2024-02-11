@@ -235,7 +235,7 @@ func _input(event):
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
 							#await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
+							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level - get_node("../BattleManager").available_units[h].unit_defence
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
 							#get_node("../TurnManager").cpu_turn_started.emit()
@@ -254,7 +254,7 @@ func _input(event):
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)										
 							#await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
+							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level - get_node("../BattleManager").available_units[h].unit_defence
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)				
 							#get_node("../TurnManager").cpu_turn_started.emit()
@@ -272,7 +272,7 @@ func _input(event):
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)	
 							#await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
+							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level - get_node("../BattleManager").available_units[h].unit_defence
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
 							#get_node("../TurnManager").cpu_turn_started.emit()
@@ -290,7 +290,7 @@ func _input(event):
 							var tween: Tween = create_tween()
 							tween.tween_property(get_node("../BattleManager").available_units[h], "modulate:v", 1, 0.50).from(5)
 							#await get_tree().create_timer(1).timeout
-							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level
+							get_node("../BattleManager").available_units[h].unit_min -= right_clicked_unit.unit_level - get_node("../BattleManager").available_units[h].unit_defence
 							right_clicked_unit.xp += 1
 							get_node("../BattleManager").available_units[h].progressbar.set_value(get_node("../BattleManager").available_units[h].unit_min)
 							#get_node("../TurnManager").cpu_turn_started.emit()
