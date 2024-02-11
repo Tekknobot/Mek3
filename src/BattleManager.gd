@@ -2129,7 +2129,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 3
+			var unit_min_max = 2
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
@@ -2141,7 +2141,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 3
+			var unit_min_max = 2
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
