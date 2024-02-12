@@ -2300,7 +2300,6 @@ func ai_mode(toggled_on):
 func M1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M1") 
-		#picker.get_child(0).scale = Vector2(1.25, 1.25)
 		picker.get_child(0).texture_normal = M1_thumb_norm
 		teampick_count += 1
 	else:
@@ -2314,7 +2313,6 @@ func M1_picked(toggled_on):
 func M2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M2") 
-		#picker.get_child(1).scale = Vector2(1.25, 1.25)
 		picker.get_child(1).texture_normal = M2_thumb_norm
 		teampick_count += 1
 	else:
@@ -2328,7 +2326,6 @@ func M2_picked(toggled_on):
 func M3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("M3") 
-		#picker.get_child(2).scale = Vector2(1.25, 1.25)
 		picker.get_child(2).texture_normal = M3_thumb_norm
 		teampick_count += 1
 	else:
@@ -2342,7 +2339,6 @@ func M3_picked(toggled_on):
 func R1_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R1") 
-		#picker.get_child(3).scale = Vector2(1.25, 1.25)
 		picker.get_child(3).texture_normal = R1_thumb_norm
 		teampick_count += 1
 	else:
@@ -2356,7 +2352,6 @@ func R1_picked(toggled_on):
 func R2_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R2") 
-		#picker.get_child(4).scale = Vector2(1.25, 1.25)
 		picker.get_child(4).texture_normal = R2_thumb_norm
 		teampick_count += 1
 	else:
@@ -2370,7 +2365,6 @@ func R2_picked(toggled_on):
 func R3_picked(toggled_on):
 	if toggled_on == true:
 		user_keys.append("R3") 
-		#picker.get_child(5).scale = Vector2(1.25, 1.25)
 		picker.get_child(5).texture_normal = R3_thumb_norm
 		teampick_count += 1
 	else:

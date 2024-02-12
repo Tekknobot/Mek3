@@ -130,7 +130,7 @@ func _process(_delta):
 			self.skew = deg_to_rad(-0)	
 			self.can_attack = false
 		if tile_id != 0:
-			var tween = create_tween().set_loops(25)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
@@ -140,7 +140,7 @@ func _process(_delta):
 			self.skew = deg_to_rad(-0)	
 			self.can_attack = false
 		if tile_id != 49:
-			var tween = create_tween().set_loops(25)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true	
@@ -150,7 +150,7 @@ func _process(_delta):
 			self.skew = deg_to_rad(-0)	
 			self.can_attack = false
 		if tile_id != 55:
-			var tween = create_tween().set_loops(25)
+			var tween = create_tween().set_loops(100)
 			tween.tween_property(self, "skew", -0.1, 0.5).from(0.1)
 			tween.tween_property(self, "skew", 0.1, 0.5).from(-0.1)	
 			self.can_attack = true		
