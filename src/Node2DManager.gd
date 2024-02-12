@@ -43,6 +43,8 @@ var world = false
 var mars = false
 var moon = false
 
+var tile_num = 4
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Randomize structures at start	
@@ -258,25 +260,25 @@ func generate_roads_and_tiles():
 		var structure_pos = Map.local_to_map(structure_global_pos)
 		map_pos = structure_pos
 		
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
@@ -331,25 +333,25 @@ func generate_roads_and_tiles_mars():
 		var structure_pos = Map.local_to_map(structure_global_pos)
 		map_pos = structure_pos
 		
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
@@ -404,25 +406,25 @@ func generate_roads_and_tiles_moon():
 		var structure_pos = Map.local_to_map(structure_global_pos)
 		map_pos = structure_pos
 		
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 		map_pos = structure_pos
-		for i in 4:
+		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
@@ -479,7 +481,7 @@ func check_duplicates(a):
 			if a[j].position == a[i].position && i != j:
 				#is_dupe = true
 				found_dupe = true
-				print("duplicate")
+				#print("duplicate")
 				var j_pos = Map.local_to_map(a[j].position)	
 				var j_global = Map.map_to_local(Vector2i(j_pos.x, j_pos.y)) + Vector2(0,0) / 2	
 				a[j].position = j_global
