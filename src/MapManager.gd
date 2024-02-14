@@ -469,7 +469,7 @@ func _input(event):
 					for h in patharray.size():
 						var tile_center_pos = map_to_local(patharray[h]) + Vector2(0,0) / 2
 						var tween = create_tween()
-						tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 0.35)
+						tween.tween_property(get_node("../BattleManager").available_units[i], "position", tile_center_pos, 0.25)
 						unitsCoord[i] = tile_pos
 						var unit_pos = local_to_map(get_node("../BattleManager").available_units[i].position)
 						
