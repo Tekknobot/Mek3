@@ -2244,7 +2244,8 @@ func spawn():
 			for j in 16:
 				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
 					open_tiles.append(Vector2i(i,j))
-							
+		
+		random.clear()	#<---------				
 		random = get_random_numbers(0, open_tiles.size())
 		for i in 5:
 			var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
