@@ -45,6 +45,8 @@ var towers = []
 var stadiums = []
 var districts = []
 
+var coins = []
+
 var meks = []
 
 var moved = false
@@ -79,9 +81,7 @@ func _ready():
 
 	old_pos = global_position;
 	pos = global_position;
-	
-	
-		
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):		
 	#set pos to current position
@@ -304,11 +304,24 @@ func _process(_delta):
 	
 	self.progressbar.set_value(self.unit_min)	
 	
-	
 func check_health():
 	var unit_global_position = self.position
 	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
 	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
+
+	#Coin collisions
+	coins = get_tree().get_nodes_in_group("coins")			
+	for i in coins.size():
+		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
+		var coin_pos = get_node("../TileMap").local_to_map(coins[i].position)
+		if unit_center_pos == coin_pos:
+			self.unit_min += 1
+			coins[i].position.y = -500
+			var tween: Tween = create_tween()
+			tween.tween_property(self, "modulate:v", 1, 1).from(3.75)
+			get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[7]
+			get_node("../TileMap").get_child(1).play()						
+			break
 						
 	#Structure collisions			
 	for i in structures.size():

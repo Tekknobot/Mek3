@@ -64,6 +64,8 @@ var S1_thumb_norm = preload("res://assets/portraits/mek_portraits/s1.png")
 var S2_thumb_norm = preload("res://assets/portraits/mek_portraits/s2.png")
 var S3_thumb_norm = preload("res://assets/portraits/mek_portraits/s3.png")
 
+var coin = preload("res://prefab/vfx/coin.scn")
+
 var hoverflag_1 = true
 var hoverflag_2 = true
 var hoverflag_3 = true
@@ -108,11 +110,8 @@ var user_dict = {}
 var unit_tag_dict = {}
 
 var meks_set = false
-
 var teampick_count = 0
-
 var ai_mode_bool = false
-
 var round = 1
 
 # Called when the node enters the scene tree for the first time.
@@ -2237,8 +2236,30 @@ func spawn():
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).show()
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
-					
-	
+		
+		
+		# Drop coin		
+		# Find open tiles	
+		for i in 16:
+			for j in 16:
+				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+					open_tiles.append(Vector2i(i,j))
+							
+		random = get_random_numbers(0, open_tiles.size())
+		for i in 5:
+			var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+			var new_position_local = open_tiles[random[i]]
+			var coin_inst = coin.instantiate()
+			node2D.add_child(coin_inst)
+			coin_inst.add_to_group("coins")
+			coin_inst.position = Vector2(new_position.x, new_position.y-500)						
+			var tween: Tween = create_tween()
+			tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+			tween.connect("finished", on_tween_finished)
+			coin_inst.get_child(0).set_offset(Vector2(0,-32))
+			coin_inst.z_index = new_position_local.x + new_position_local.y
+			await get_tree().create_timer(0.5).timeout
+				
 		spawning = false
 		meks_set = true
 		#turn_button.show()
@@ -2449,7 +2470,8 @@ func spawn_again():
 			for j in 16:
 				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(k,j)) == false:			
 					open_tiles.append(Vector2i(k,j))
-			
+					
+		random = get_random_numbers(0, open_tiles.size())	
 		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
 		get_node("../BattleManager").inactive_total_cpu[i].position = Vector2(new_position.x, new_position.y-500)
 		var tween: Tween = create_tween()
@@ -2466,13 +2488,40 @@ func spawn_again():
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
 			await get_tree().create_timer(0.5).timeout	
+
+
+	# Drop coin		
+	# Find open tiles	
+	for i in 16:
+		for j in 16:
+			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+				open_tiles.append(Vector2i(i,j))
+	
+	random.clear()	#<--------				
+	random = get_random_numbers(0, open_tiles.size())
+	for i in 5:
+		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+		var new_position_local = open_tiles[random[i]]
+		var coin_inst = coin.instantiate()
+		node2D.add_child(coin_inst)
+		coin_inst.add_to_group("coins")
+		coin_inst.position = Vector2(new_position.x, new_position.y-500)						
+		var tween: Tween = create_tween()
+		tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+		tween.connect("finished", on_tween_finished)
+		coin_inst.get_child(0).set_offset(Vector2(0,-32))
+		coin_inst.z_index = new_position_local.x + new_position_local.y
+		await get_tree().create_timer(0.5).timeout
+
 			
 	await get_tree().create_timer(1).timeout
+	
 	spawnagain_button.hide()
 	#on_user_ai_started()	
 	spawning = false
 
 	round += 1
 	get_node("../Profile").get_child(15).text = "Round " + str(round)
+	
 
 
