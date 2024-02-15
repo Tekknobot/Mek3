@@ -46,6 +46,7 @@ var stadiums = []
 var districts = []
 
 var coins = []
+var mines = []
 
 var meks = []
 
@@ -309,6 +310,23 @@ func check_health():
 	var unit_pos = get_node("../TileMap").local_to_map(unit_global_position)
 	get_node("../TileMap").astar_grid.set_point_solid(unit_pos, true)
 
+	#Mine collisions
+	mines = get_tree().get_nodes_in_group("mines")			
+	for i in mines.size():
+		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
+		var mine_pos = get_node("../TileMap").local_to_map(mines[i].position)
+		if unit_center_pos == mine_pos:
+			self.unit_min -= 1		
+			mines[i].position.y = -500	
+			var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
+			var explosion_instance = explosion.instantiate()
+			var explosion_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
+			explosion_instance.set_name("explosion")
+			get_parent().add_child(explosion_instance)
+			explosion_instance.position = self.position	
+			explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 1000						
+			break
+
 	#Coin collisions
 	coins = get_tree().get_nodes_in_group("coins")			
 	for i in coins.size():
@@ -360,7 +378,7 @@ func check_health():
 		explosion_instance.set_name("explosion")
 		get_parent().add_child(explosion_instance)
 		explosion_instance.position = self.position	
-		explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 100
+		explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 1000
 		self.unit_status = "Inactive"
 		self.add_to_group("Inactive")
 		if self.unit_team == 1:

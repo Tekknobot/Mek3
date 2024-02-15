@@ -65,6 +65,7 @@ var S2_thumb_norm = preload("res://assets/portraits/mek_portraits/s2.png")
 var S3_thumb_norm = preload("res://assets/portraits/mek_portraits/s3.png")
 
 var coin = preload("res://prefab/vfx/coin.scn")
+var landmine = preload("res://prefab/vfx/landmine.scn")
 
 var hoverflag_1 = true
 var hoverflag_2 = true
@@ -2260,6 +2261,28 @@ func spawn():
 			coin_inst.get_child(0).set_offset(Vector2(0,-32))
 			coin_inst.z_index = new_position_local.x + new_position_local.y
 			await get_tree().create_timer(0.5).timeout
+
+		# Drop mine		
+		# Find open tiles	
+		for i in 16:
+			for j in 16:
+				if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+					open_tiles.append(Vector2i(i,j))
+		
+		random.clear()	#<---------				
+		random = get_random_numbers(0, open_tiles.size())
+		for i in 5:
+			var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+			var new_position_local = open_tiles[random[i]]
+			var mine_inst = landmine.instantiate()
+			node2D.add_child(mine_inst)
+			mine_inst.add_to_group("mines")
+			mine_inst.position = Vector2(new_position.x, new_position.y-500)						
+			var tween: Tween = create_tween()
+			tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+			tween.connect("finished", on_tween_finished)
+			mine_inst.z_index = new_position_local.x + new_position_local.y
+			await get_tree().create_timer(0.5).timeout
 				
 		spawning = false
 		meks_set = true
@@ -2514,6 +2537,28 @@ func spawn_again():
 		coin_inst.z_index = new_position_local.x + new_position_local.y
 		await get_tree().create_timer(0.5).timeout
 
+
+	# Drop mine		
+	# Find open tiles	
+	for i in 16:
+		for j in 16:
+			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+				open_tiles.append(Vector2i(i,j))
+	
+	random.clear()	#<---------				
+	random = get_random_numbers(0, open_tiles.size())
+	for i in 5:
+		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+		var new_position_local = open_tiles[random[i]]
+		var mine_inst = landmine.instantiate()
+		node2D.add_child(mine_inst)
+		mine_inst.add_to_group("mines")
+		mine_inst.position = Vector2(new_position.x, new_position.y-500)						
+		var tween: Tween = create_tween()
+		tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+		tween.connect("finished", on_tween_finished)
+		mine_inst.z_index = new_position_local.x + new_position_local.y
+		await get_tree().create_timer(0.5).timeout
 			
 	await get_tree().create_timer(1).timeout
 	
