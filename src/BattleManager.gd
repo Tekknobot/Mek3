@@ -2576,6 +2576,7 @@ func spawn_again():
 	await get_tree().create_timer(1).timeout
 	
 	spawnagain_button.hide()
+	turn_button.show()
 	ai_button.show()
 	#on_user_ai_started()	
 	spawning = false

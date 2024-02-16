@@ -298,9 +298,8 @@ func _process(_delta):
 			return
 		else:
 			self.unit_movement += 1
-			
-												
-	if self.unit_min >= self.unit_max:
+														
+	if self.unit_min > self.unit_max:
 		self.unit_min = self.unit_max
 	
 	self.progressbar.set_value(self.unit_min)	
