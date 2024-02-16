@@ -168,6 +168,7 @@ func on_user_turn_started() -> void:
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
 func on_cpu_turn_started() -> void:		
+	
 	get_node("../Control").get_child(19).text = "CPU Moving..."
 	get_node("../Control").get_child(18).hide() # moves count
 	get_node("../TileMap").hovertile.hide()
@@ -208,6 +209,7 @@ func on_cpu_turn_started() -> void:
 
 	# CPU Check Attack Range
 	for n in CPU_units.size():
+		check_health_now()
 		cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 
 		var current_unit = get_node("../BattleManager").CPU_units[n]
@@ -900,7 +902,8 @@ func on_cpu_turn_started() -> void:
 			
 			#Check range again	
 			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
-			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
+			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:
+				check_health_now()	
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()																		
 				for j in 16:	
@@ -1171,6 +1174,7 @@ func on_user_ai_started() -> void:
 
 	# CPU Check Attack Range
 	for n in CPU_units.size():
+		check_health_now()
 		cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)
 
 		var current_unit = get_node("../BattleManager").CPU_units[n]
@@ -1862,7 +1866,8 @@ func on_user_ai_started() -> void:
 			
 			#Check range again	
 			cpu_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").CPU_units[n].position)	
-			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:	
+			if unit_type == "Ranged" and CPU_units[n].unit_status == "Active" and CPU_units[n].attacked == false:
+				check_health_now()	
 				get_node("../TileMap").get_child(1).stream = get_node("../TileMap").map_sfx[1]
 				get_node("../TileMap").get_child(1).play()																		
 				for j in 16:	
@@ -2571,6 +2576,7 @@ func spawn_again():
 	await get_tree().create_timer(1).timeout
 	
 	spawnagain_button.hide()
+	ai_button.show()
 	#on_user_ai_started()	
 	spawning = false
 
