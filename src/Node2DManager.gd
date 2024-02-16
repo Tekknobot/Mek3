@@ -130,8 +130,6 @@ func spawn_structures():
 		tower_inst.add_to_group("towers")	
 		tower_inst.z_index = tile_pos.x + tile_pos.y
 		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
-		#arrow.position = Vector2(tile_center_pos.x-5, tile_center_pos.y-109) 
-		#arrow.z_index = 100
 
 func spawn_towers():	
 	towers = get_tree().get_nodes_in_group("towers")
@@ -203,15 +201,14 @@ func generate_world():
 	
 	for x in grid_width:
 		grid.append([])
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 		for y in grid_height:
 			grid[x].append(0)
 			# We get the noise coordinate as an absolute value (which represents the gradient - or layer)	
 			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
-			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
-			
-		
+			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)		
+
 	_on_map_pressed()
 			
 func generate_mars():
@@ -387,22 +384,22 @@ func generate_roads():
 		for i in grid_width:
 			tile_id = 42
 			move(E)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos	
 		for i in grid_width:
 			tile_id = 41
 			move(S)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in grid_width:
 			tile_id = 42
 			move(W)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in grid_width:
 			tile_id = 41
 			move(N)	
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 					
 		# Intersection		
 		for i in grid_width:
