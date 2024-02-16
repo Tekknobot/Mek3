@@ -74,7 +74,7 @@ func spawn_structures():
 		building_inst.position = Vector2(tile_center_pos.x, tile_center_pos.y-500)						
 		var tween: Tween = create_tween()
 		tween.tween_property(building_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 		
 	for i in 3: #stadiums
 		var my_random_tile_x = rng.randi_range(1, 14)
@@ -90,7 +90,7 @@ func spawn_structures():
 		stadium_inst.position = Vector2(tile_center_pos.x, tile_center_pos.y-500)						
 		var tween: Tween = create_tween()
 		tween.tween_property(stadium_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 			
 	for i in 3: #districts
 		var my_random_tile_x = rng.randi_range(1, 14)
@@ -106,7 +106,7 @@ func spawn_structures():
 		district_inst.position = Vector2(tile_center_pos.x, tile_center_pos.y-500)						
 		var tween: Tween = create_tween()
 		tween.tween_property(district_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 			
 					
 	buildings = get_tree().get_nodes_in_group("buildings")
