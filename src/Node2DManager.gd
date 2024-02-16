@@ -46,6 +46,8 @@ var mars = false
 var moon = false
 
 var tile_num = 4
+var my_odd_x: int
+var my_odd_y: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -117,12 +119,14 @@ func spawn_structures():
 	structures.append_array(stadiums)
 	structures.append_array(districts)
 	
-	check_duplicates(structures)
-		
-	var my_random_tile_x = get_random_numbers(1, 14)
-	var my_random_tile_y = get_random_numbers(1, 14)				
+	check_duplicates(structures)	
+				
 	for i in 3: #towers
-		var tile_pos = Vector2i(my_random_tile_x[i], my_random_tile_y[i])
+		var my_random_tile_x = rng.randi_range(1, 13)
+		var my_random_tile_y = rng.randi_range(1, 13)	
+		my_odd_x = my_random_tile_x + ((my_random_tile_x+1)%2 * sign(my_random_tile_x-my_odd_x))	
+		my_odd_y = my_random_tile_y + ((my_random_tile_y+1)%2 * sign(my_random_tile_y-my_odd_y))	
+		var tile_pos = Vector2i(my_odd_x, my_odd_y)
 		var tile_center_pos = Map.map_to_local(tile_pos) + Vector2(0,0) / 2		
 		var tower_inst = tower.instantiate()
 		tower_inst.position = tile_center_pos
