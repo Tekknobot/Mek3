@@ -469,7 +469,7 @@ func _on_map_pressed():
 		await generate_roads_and_tiles_moon()	
 		generate_roads()	
 	
-	hovertile.show()		
+	hovertile.show()	
 
 	
 func get_random_numbers(from, to):

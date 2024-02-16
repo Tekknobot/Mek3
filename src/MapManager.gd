@@ -99,13 +99,6 @@ func _process(_delta):
 	towers = get_tree().get_nodes_in_group("towers")
 	stadiums = get_tree().get_nodes_in_group("stadiums")
 	districts = get_tree().get_nodes_in_group("districts")
-
-	if only_once_structures == true:
-		only_once_structures = false
-		structures.append_array(buildings)
-		structures.append_array(towers)
-		structures.append_array(stadiums)
-		structures.append_array(districts)
 		
 	for i in structures.size():
 		var structure_pos = local_to_map(structures[i].position)
@@ -153,9 +146,10 @@ func _process(_delta):
 	for h in 16:
 		for i in 16:
 			set_cell(1, Vector2i(h+16, i+16), -1, Vector2i(0, 0), 0)	
+	
 			
-	for i in structures.size():
-		var structure_pos = local_to_map(structures[i].position)
+	for i in node2D.structures.size():
+		var structure_pos = local_to_map(node2D.structures[i].position)
 		structureCoord[i] = structure_pos		
 
 	for i in get_node("../BattleManager").available_units.size():
@@ -513,8 +507,9 @@ func _input(event):
 				for k in grid_width:
 					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 					
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0 and moving == false and get_node("../BattleManager").spawning == false:
+	if event is InputEventMouseButton and moving == false and get_node("../BattleManager").spawning == false:
+		if event.button_index == MOUSE_BUTTON_RIGHT and hovertile.offset.y == 0:
+			
 			#Remove hover tiles										
 			for j in grid_height:
 				for k in grid_width:
@@ -598,8 +593,8 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_1 == true:
-									for k in structures.size():
-										if tile_pos.x-j >= 0:
+									for k in node2D.structures.size():
+										if tile_pos.x-j >= 0:	
 											set_cell(1, Vector2i(tile_pos.x-j, tile_pos.y), 48, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x-j, tile_pos.y):
 												hoverflag_1 = false
@@ -610,7 +605,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_2 == true:											
-									for k in structures.size():																						
+									for k in node2D.structures.size():																						
 										if tile_pos.y+j <= 15:
 											set_cell(1, Vector2i(tile_pos.x, tile_pos.y+j), 48, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y+j):
@@ -622,7 +617,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_3 == true:											
-									for k in structures.size():																													
+									for k in node2D.structures.size():																													
 										if tile_pos.x+j <= 15:
 											set_cell(1, Vector2i(tile_pos.x+j, tile_pos.y), 48, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x+j, tile_pos.y):
@@ -634,7 +629,7 @@ func _input(event):
 							for j in 15:	
 								set_cell(1, tile_pos, -1, Vector2i(0, 0), 0)
 								if hoverflag_4 == true:											
-									for k in structures.size():																											
+									for k in node2D.structures.size():																											
 										if tile_pos.y-j >= 0:									
 											set_cell(1, Vector2i(tile_pos.x, tile_pos.y-j), 48, Vector2i(0, 0), 0)
 											if structureCoord[k] == Vector2i(tile_pos.x, tile_pos.y-j):
