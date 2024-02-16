@@ -795,6 +795,7 @@ text = "0 - 0"
 alignment = 0
 
 [node name="Map" type="Button" parent="FloatingMenu/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 text = "Map"

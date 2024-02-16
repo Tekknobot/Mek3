@@ -212,7 +212,7 @@ func generate_world():
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
 			
 		
-	generate_roads_and_tiles()
+	_on_map_pressed()
 			
 func generate_mars():
 	# A random number generator which we will use for the noise seed
@@ -235,7 +235,7 @@ func generate_mars():
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
 			
 	
-	generate_roads_and_tiles_mars()
+	_on_map_pressed()
 
 func generate_moon():
 	# A random number generator which we will use for the noise seed
@@ -257,7 +257,7 @@ func generate_moon():
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
 	
-	generate_roads_and_tiles_moon()
+	_on_map_pressed()
 			
 func generate_roads_and_tiles():
 	var tile_random_id = rng.randi_range(3, 5)
@@ -273,28 +273,28 @@ func generate_roads_and_tiles():
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 	
 	await spawn_towers()			
 	
@@ -312,28 +312,28 @@ func generate_roads_and_tiles_mars():
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 
 	await spawn_towers()
 
@@ -351,28 +351,28 @@ func generate_roads_and_tiles_moon():
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
 			var size = moves.size()
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
-			await get_tree().create_timer(0.01).timeout
+			await get_tree().create_timer(0).timeout
 	
 	await spawn_towers()
 
