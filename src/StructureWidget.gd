@@ -7,6 +7,9 @@ var tower = preload("res://assets/structures/pics/tower_pic.png")
 var stadium = preload("res://assets/structures/pics/stadium_pic.png")
 var district = preload("res://assets/structures/pics/district_pic.png")
 
+var coin = preload("res://assets/vfx/coin/coin_pic.png")
+var mine = preload("res://assets/vfx/landmine/landmine_pic.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -21,6 +24,8 @@ func _process(delta):
 	var towers = get_tree().get_nodes_in_group("towers")
 	var stadiums = get_tree().get_nodes_in_group("stadiums")
 	var districts = get_tree().get_nodes_in_group("districts")
+	var coins = get_tree().get_nodes_in_group("coins")
+	var mines = get_tree().get_nodes_in_group("mines")
 	
 	for i in node2D.structures.size():
 		var structure_pos = get_node("../TileMap").local_to_map(node2D.structures[i].position)
@@ -56,3 +61,17 @@ func _process(delta):
 			get_child(2).texture = district		
 			get_child(3).text = "district"			
 			self.show()		
+			
+	for i in coins.size():
+		var coins_local_pos = get_node("../TileMap").local_to_map(coins[i].position)
+		if mouse_local_pos == coins_local_pos:
+			get_child(2).texture = coin		
+			get_child(3).text = "+1HP"			
+			self.show()	
+			
+	for i in mines.size():
+		var mines_local_pos = get_node("../TileMap").local_to_map(mines[i].position)
+		if mouse_local_pos == mines_local_pos:
+			get_child(2).texture = mine		
+			get_child(3).text = "Landmine"			
+			self.show()								
