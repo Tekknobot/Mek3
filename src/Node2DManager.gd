@@ -117,11 +117,11 @@ func spawn_structures():
 	structures.append_array(stadiums)
 	structures.append_array(districts)
 	
-	check_duplicates(structures)	
-				
+	check_duplicates(structures)
+		
+	var my_random_tile_x = get_random_numbers(1, 14)
+	var my_random_tile_y = get_random_numbers(1, 14)				
 	for i in 3: #towers
-		var my_random_tile_x = get_random_numbers(1, 14)
-		var my_random_tile_y = get_random_numbers(1, 14)
 		var tile_pos = Vector2i(my_random_tile_x[i], my_random_tile_y[i])
 		var tile_center_pos = Map.map_to_local(tile_pos) + Vector2(0,0) / 2		
 		var tower_inst = tower.instantiate()

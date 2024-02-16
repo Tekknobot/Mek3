@@ -344,12 +344,11 @@ func check_health():
 	#Structure collisions			
 	for i in structures.size():
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
-		var structure_pos = get_node("../TileMap").local_to_map(structures[i].position)
+		var structure_pos = get_node("../TileMap").local_to_map(get_node("/root/Node2D").structures[i].position)
 		if unit_center_pos == structure_pos:
 			self.unit_min = 0		
-			get_node("../TileMap").structures[i].get_child(0).play("demolished")
-			get_node("../TileMap").structures[i].get_child(0).modulate = Color8(255, 255, 255) 	
-			#check_health()
+			get_node("/root/Node2D").structures[i].get_child(0).play("demolished")
+			get_node("/root/Node2D").structures[i].get_child(0).modulate = Color8(255, 255, 255) 	
 			break
 			
 	# Check for Mek collisions	
