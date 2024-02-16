@@ -595,10 +595,12 @@ gravity = Vector3(2.08165e-12, 18, 2.08165e-12)
 scale_min = 4.0
 scale_max = 4.0
 
-[node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile", "arrow")]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("hovertile", "arrow", "mapbutton", "spawnbutton")]
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
+mapbutton = NodePath("FloatingMenu/VBoxContainer/Map")
+spawnbutton = NodePath("FloatingMenu/VBoxContainer/SpawnButton")
 
 [node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "spawnagain_button", "turn_button", "ai_button", "score", "picker")]
 script = ExtResource("201_3h84r")
@@ -658,6 +660,7 @@ node2D = NodePath("..")
 seeker = NodePath("../Seeker")
 
 [node name="Hover_tile" parent="." instance=ExtResource("20_6l1y3")]
+visible = false
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("200_rvj2l")
@@ -739,6 +742,7 @@ text = "RESET"
 alignment = 0
 
 [node name="SpawnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 theme_override_font_sizes/font_size = 16
@@ -788,6 +792,12 @@ text = "CPU MODE"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 text = "0 - 0"
+alignment = 0
+
+[node name="Map" type="Button" parent="FloatingMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
+text = "Map"
 alignment = 0
 
 [node name="ParticleSystem" type="Node2D" parent="."]
@@ -1202,6 +1212,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnAgain" to="BattleManager" method="spawn_again"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
 [connection signal="toggled" from="FloatingMenu/VBoxContainer/AIButton" to="BattleManager" method="ai_mode"]
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/Map" to="." method="_on_map_pressed"]
 [connection signal="toggled" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M2" to="BattleManager" method="M2_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M3" to="BattleManager" method="M3_picked"]

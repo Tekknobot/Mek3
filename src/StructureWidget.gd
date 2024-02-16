@@ -73,5 +73,5 @@ func _process(delta):
 		var mines_local_pos = get_node("../TileMap").local_to_map(mines[i].position)
 		if mouse_local_pos == mines_local_pos:
 			get_child(2).texture = mine		
-			get_child(3).text = "Landmine"			
+			get_child(3).text = "Mine"			
 			self.show()								
