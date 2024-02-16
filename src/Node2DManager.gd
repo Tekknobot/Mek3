@@ -227,7 +227,7 @@ func generate_mars():
 	
 	for x in grid_width:
 		grid.append([])
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 		for y in grid_height:
 			grid[x].append(0)
 			# We get the noise coordinate as an absolute value (which represents the gradient - or layer)	
@@ -250,7 +250,7 @@ func generate_moon():
 	
 	for x in grid_width:
 		grid.append([])
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0).timeout
 		for y in grid_height:
 			grid[x].append(0)
 			# We get the noise coordinate as an absolute value (which represents the gradient - or layer)	
