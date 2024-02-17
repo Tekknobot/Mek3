@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=3 uid="uid://upo7euw1qtjq"]
+[gd_scene load_steps=174 format=3 uid="uid://upo7euw1qtjq"]
 
 [ext_resource type="Script" path="res://src/CameraManager.gd" id="1_3hx5s"]
 [ext_resource type="Script" path="res://src/Node2DManager.gd" id="1_fooa0"]
@@ -99,6 +99,7 @@
 [ext_resource type="Texture2D" uid="uid://chu20ur6upo6n" path="res://assets/portraits/bw/r2.png" id="84_2qveu"]
 [ext_resource type="Texture2D" uid="uid://baqqcegbtc66a" path="res://assets/portraits/l0_por09.png" id="84_xmfhy"]
 [ext_resource type="Texture2D" uid="uid://ct5fmcph4qs8w" path="res://assets/portraits/l0_por10.png" id="85_02nit"]
+[ext_resource type="Script" path="res://src/MapProgressBar.gd" id="85_lc47u"]
 [ext_resource type="Texture2D" uid="uid://o4rfo2ki75j3" path="res://assets/portraits/bw/r3.png" id="86_f40vx"]
 [ext_resource type="Texture2D" uid="uid://ba84ab083rb1t" path="res://assets/portraits/bw/r4.png" id="88_mfuus"]
 [ext_resource type="Texture2D" uid="uid://dak1fft83lahw" path="res://assets/portraits/bw/s1.png" id="90_cjviy"]
@@ -599,7 +600,7 @@ scale_max = 4.0
 script = ExtResource("1_fooa0")
 hovertile = NodePath("Hover_tile")
 arrow = NodePath("Arrow")
-mapbutton = NodePath("FloatingMenu/VBoxContainer/Map")
+mapbutton = NodePath("FloatingMenu/VBoxContainer/MapButton")
 spawnbutton = NodePath("FloatingMenu/VBoxContainer/SpawnButton")
 
 [node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "spawnagain_button", "turn_button", "ai_button", "score", "picker")]
@@ -794,12 +795,20 @@ theme_override_fonts/font = ExtResource("73_kib7c")
 text = "0 - 0"
 alignment = 0
 
-[node name="Map" type="Button" parent="FloatingMenu/VBoxContainer"]
+[node name="MapButton" type="Button" parent="FloatingMenu/VBoxContainer"]
 visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 text = "Map"
 alignment = 0
+
+[node name="MapProgressBar" type="ProgressBar" parent="FloatingMenu/VBoxContainer" node_paths=PackedStringArray("node2D")]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+max_value = 1025.0
+step = 1.0
+script = ExtResource("85_lc47u")
+node2D = NodePath("../../..")
 
 [node name="ParticleSystem" type="Node2D" parent="."]
 visible = false
@@ -1213,7 +1222,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/SpawnAgain" to="BattleManager" method="spawn_again"]
 [connection signal="pressed" from="FloatingMenu/VBoxContainer/TurnButton" to="BattleManager" method="end_turn"]
 [connection signal="toggled" from="FloatingMenu/VBoxContainer/AIButton" to="BattleManager" method="ai_mode"]
-[connection signal="pressed" from="FloatingMenu/VBoxContainer/Map" to="." method="_on_map_pressed"]
+[connection signal="pressed" from="FloatingMenu/VBoxContainer/MapButton" to="." method="_on_map_pressed"]
 [connection signal="toggled" from="Picker/HBoxContainer/M1" to="BattleManager" method="M1_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M2" to="BattleManager" method="M2_picked"]
 [connection signal="toggled" from="Picker/HBoxContainer/M3" to="BattleManager" method="M3_picked"]

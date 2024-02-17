@@ -49,6 +49,8 @@ var tile_num = 6
 var my_odd_x: int
 var my_odd_y: int
 
+var progresscount: int
+
 # Called when the node enters the scene tree for the first time.
 func _ready():	
 	select_biome()	
@@ -75,6 +77,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(building_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		progresscount += 1
 		
 	for i in 3: #stadiums
 		var my_random_tile_x = rng.randi_range(1, 14)
@@ -91,6 +94,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(stadium_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		progresscount += 1
 			
 	for i in 3: #districts
 		var my_random_tile_x = rng.randi_range(1, 14)
@@ -107,6 +111,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(district_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		progresscount += 1
 			
 					
 	buildings = get_tree().get_nodes_in_group("buildings")
@@ -134,6 +139,7 @@ func spawn_structures():
 		tower_inst.add_to_group("towers")	
 		tower_inst.z_index = tile_pos.x + tile_pos.y
 		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
+		progresscount += 1
 
 func spawn_towers():	
 	towers = get_tree().get_nodes_in_group("towers")
@@ -211,7 +217,8 @@ func generate_world():
 			# We get the noise coordinate as an absolute value (which represents the gradient - or layer)	
 			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
-			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)		
+			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)	
+			progresscount += 1	
 
 	_on_map_pressed()
 			
@@ -234,6 +241,7 @@ func generate_mars():
 			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
+			progresscount += 1
 			
 	
 	_on_map_pressed()
@@ -257,6 +265,7 @@ func generate_moon():
 			var absNoise = abs(fastNoiseLite.get_noise_2d(x,y))
 			var tiletoplace = int(floor((absNoise * tilelist.size())))
 			Map.set_cell(0, Vector2i(x,y), tilelist[tiletoplace], Vector2i(0, 0), 0)
+			progresscount += 1
 	
 	_on_map_pressed()
 			
@@ -275,6 +284,7 @@ func generate_roads_and_tiles():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -282,6 +292,7 @@ func generate_roads_and_tiles():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -289,6 +300,7 @@ func generate_roads_and_tiles():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -296,6 +308,7 @@ func generate_roads_and_tiles():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 	
 	await spawn_towers()			
 	
@@ -314,6 +327,7 @@ func generate_roads_and_tiles_mars():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -321,6 +335,7 @@ func generate_roads_and_tiles_mars():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -328,6 +343,7 @@ func generate_roads_and_tiles_mars():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -335,6 +351,7 @@ func generate_roads_and_tiles_mars():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 
 	await spawn_towers()
 
@@ -353,6 +370,7 @@ func generate_roads_and_tiles_moon():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -360,6 +378,7 @@ func generate_roads_and_tiles_moon():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -367,6 +386,7 @@ func generate_roads_and_tiles_moon():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in tile_num:
 			tile_id = tile_random_id
@@ -374,6 +394,7 @@ func generate_roads_and_tiles_moon():
 			var random_key = moves.keys()[randi() % size]					
 			move(random_key)	
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 	
 	await spawn_towers()
 
@@ -389,21 +410,25 @@ func generate_roads():
 			tile_id = 42
 			move(E)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos	
 		for i in grid_width:
 			tile_id = 41
 			move(S)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in grid_width:
 			tile_id = 42
 			move(W)
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 		map_pos = structure_pos
 		for i in grid_width:
 			tile_id = 41
 			move(N)	
 			await get_tree().create_timer(0).timeout
+			progresscount += 1
 					
 		# Intersection		
 		for i in grid_width:
@@ -412,7 +437,8 @@ func generate_roads():
 					var surrounding_cells = Map.get_surrounding_cells(Vector2i(i,j))
 					for k in 4:
 						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
-							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)														
+							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)		
+							progresscount += 1												
 			
 		for i in grid_width:
 			for j in grid_height:
@@ -420,8 +446,10 @@ func generate_roads():
 					var surrounding_cells = Map.get_surrounding_cells(Vector2i(i,j))
 					for k in 4:
 						if Map.get_cell_source_id(0, surrounding_cells[0]) == 42 and Map.get_cell_source_id(0, surrounding_cells[1]) == 41 and Map.get_cell_source_id(0, surrounding_cells[2]) == 42 and Map.get_cell_source_id(0, surrounding_cells[3]) == 41:
-							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)			
-			
+							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)
+							progresscount += 1			
+		
+		print(progresscount)	
 func check_duplicates(a):
 	var is_dupe = false
 	var found_dupe = false 
