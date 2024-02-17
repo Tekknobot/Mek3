@@ -45,7 +45,7 @@ var world = false
 var mars = false
 var moon = false
 
-var tile_num = 4
+var tile_num = 6
 var my_odd_x: int
 var my_odd_y: int
 
