@@ -2291,7 +2291,7 @@ func spawn():
 			var tween: Tween = create_tween()
 			tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 			tween.connect("finished", on_tween_finished)
-			mine_inst.z_index = new_position_local.x + new_position_local.y
+			mine_inst.z_index = (new_position_local.x + new_position_local.y) -1
 			get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 			await get_tree().create_timer(0.5).timeout
 				
@@ -2569,7 +2569,7 @@ func spawn_again():
 		var tween: Tween = create_tween()
 		tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 		tween.connect("finished", on_tween_finished)
-		mine_inst.z_index = new_position_local.x + new_position_local.y
+		mine_inst.z_index = (new_position_local.x + new_position_local.y) - 1
 		get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 		await get_tree().create_timer(0.5).timeout
 			
