@@ -449,7 +449,8 @@ func generate_roads():
 							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)
 							progresscount += 1			
 		
-		print(progresscount)	
+		#print(progresscount)	
+		
 func check_duplicates(a):
 	var is_dupe = false
 	var found_dupe = false 

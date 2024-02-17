@@ -743,30 +743,27 @@ text = "RESET"
 alignment = 0
 
 [node name="SpawnButton" type="Button" parent="FloatingMenu/VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("73_kib7c")
 theme_override_font_sizes/font_size = 16
 text = "SPAWN"
 alignment = 0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
+[node name="Logo" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
 layout_mode = 2
 offset_top = 113.0
-offset_right = 125.0
-offset_bottom = 174.0
+offset_right = 87.0
+offset_bottom = 155.0
 theme_override_fonts/normal_font = ExtResource("72_rewkb")
-theme_override_font_sizes/normal_font_size = 64
-text = "Mek"
+theme_override_font_sizes/normal_font_size = 47
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
+[node name="Info" type="RichTextLabel" parent="FloatingMenu/VBoxContainer/SpawnButton"]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 195.0
-offset_right = 206.0
-offset_bottom = 235.0
+offset_right = 235.0
+offset_bottom = 471.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
-text = "Pick 5 units."
 
 [node name="SpawnAgain" type="Button" parent="FloatingMenu/VBoxContainer"]
 visible = false
@@ -805,6 +802,7 @@ alignment = 0
 [node name="MapProgressBar" type="ProgressBar" parent="FloatingMenu/VBoxContainer" node_paths=PackedStringArray("node2D")]
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("73_kib7c")
 max_value = 1025.0
 step = 1.0
 script = ExtResource("85_lc47u")

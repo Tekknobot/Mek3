@@ -11,5 +11,5 @@ func _ready():
 func _process(delta):
 	self.value = node2D.progresscount
 		
-	if self.value >= 1025:
+	if self.value >= 1000:
 		self.hide()
