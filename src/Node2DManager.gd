@@ -51,6 +51,8 @@ var my_odd_x: int
 var my_odd_y: int
 
 var progresscount: int
+var biome
+var foundation_tile
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
@@ -62,6 +64,13 @@ func _process(_delta):
 	
 # Called when the node enters the scene tree for the first time.
 func spawn_structures():	
+	if biome == 0:
+		foundation_tile = 2
+	if biome == 1:
+		foundation_tile = 51
+	if biome == 2:
+		foundation_tile = 57
+						
 	# Randomize structures at start	
 	for i in 16: #buildings
 		var my_random_tile_x = rng.randi_range(1, 14)
@@ -78,6 +87,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(building_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		Map.set_cell(0, Vector2i(my_random_tile_x, my_random_tile_y), foundation_tile, Vector2i(0, 0), 0)
 		progresscount += 1
 		
 	for i in 3: #stadiums
@@ -95,6 +105,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(stadium_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		Map.set_cell(0, Vector2i(my_random_tile_x, my_random_tile_y), foundation_tile, Vector2i(0, 0), 0)
 		progresscount += 1
 			
 	for i in 3: #districts
@@ -112,6 +123,7 @@ func spawn_structures():
 		var tween: Tween = create_tween()
 		tween.tween_property(district_inst, "position", tile_center_pos, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)				
 		await get_tree().create_timer(0).timeout
+		Map.set_cell(0, Vector2i(my_random_tile_x, my_random_tile_y), foundation_tile, Vector2i(0, 0), 0)
 		progresscount += 1
 			
 					
@@ -140,6 +152,7 @@ func spawn_structures():
 		tower_inst.add_to_group("towers")	
 		tower_inst.z_index = tile_pos.x + tile_pos.y
 		tower_inst.get_child(0).modulate = Color8(rng.randi_range(150, 255), rng.randi_range(150, 255), rng.randi_range(150, 255))		
+		Map.set_cell(0, Vector2i(my_random_tile_x, my_random_tile_y), foundation_tile, Vector2i(0, 0), 0)
 		progresscount += 1
 
 func spawn_towers():	
@@ -149,7 +162,7 @@ func spawn_towers():
 	await get_tree().create_timer(1).timeout
 
 func select_biome():	
-	var biome = rng.randi_range(0, 2)	
+	biome = rng.randi_range(0, 2)	
 	if biome == 0:		
 		generate_world()
 		world = true

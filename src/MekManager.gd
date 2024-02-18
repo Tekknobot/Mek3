@@ -109,6 +109,7 @@ func _process(_delta):
 			#print("Facing LEFT")
 		
 	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y += 16
 	var mouse_local_pos = get_node("../TileMap").local_to_map(mouse_pos)
 	self.tile_pos = get_node("../TileMap").local_to_map(self.position)	
 

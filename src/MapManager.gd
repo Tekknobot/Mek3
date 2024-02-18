@@ -73,12 +73,13 @@ var users_active
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	pass		
+	hovertile.offset.y = 0			
 				
 # Called every frame. 'delta' is the elapsed time since the previous frame..
 func _process(_delta):
 	# Tile hover
 	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y += 16
 	var tile_pos = local_to_map(mouse_pos)
 	var tile_center_pos = map_to_local(tile_pos) + Vector2(0,0) / 2
 
@@ -86,7 +87,7 @@ func _process(_delta):
 
 	if tile_data is TileData:					
 		hovertile.position = tile_center_pos
-		hovertile.z_index = (tile_pos.x + tile_pos.y)-1
+		hovertile.z_index = tile_pos.x + tile_pos.y
 		#print(tile_pos);
 
 	astar_grid.size = Vector2i(16, 16)
@@ -170,11 +171,11 @@ func _input(event):
 	# Click and drag to move unit	
 	if event is InputEventMouseButton and moving == false and get_node("../BattleManager").spawning == false:			
 		if event.button_index == MOUSE_BUTTON_LEFT and hovertile.offset.y == 0:	
-
 			for i in get_node("../BattleManager").available_units.size():
 				get_node("../BattleManager").available_units[i].check_health()
 									
 			var mouse_pos = get_global_mouse_position()
+			mouse_pos.y += 16
 			var tile_pos = local_to_map(mouse_pos)	
 			var tile_data = get_cell_tile_data(0, tile_pos)
 			
@@ -435,11 +436,11 @@ func _input(event):
 								set_cell(1, Vector2i(unit_pos.x+3, unit_pos.y+2), 18, Vector2i(0, 0), 0)																																								
 								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y-3), 18, Vector2i(0, 0), 0)															
 								set_cell(1, Vector2i(unit_pos.x+3, unit_pos.y-2), 18, Vector2i(0, 0), 0)																																								
-								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+3), 18, Vector2i(0, 0), 0)
-																		
+								set_cell(1, Vector2i(unit_pos.x-2, unit_pos.y+3), 18, Vector2i(0, 0), 0)																					
 		# Drop unit on mouse up																					
 		elif hovertile.offset.y == -10:	
 			var mouse_pos = get_global_mouse_position()
+			mouse_pos.y += 16
 			var tile_pos = local_to_map(mouse_pos)	
 				
 			hovertile.set_offset(Vector2(0,0))
@@ -516,6 +517,7 @@ func _input(event):
 					set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)
 																			
 			var mouse_pos = get_global_mouse_position()
+			mouse_pos.y += 16
 			var tile_pos = local_to_map(mouse_pos)		
 
 			var tile_data = get_cell_tile_data(0, tile_pos)

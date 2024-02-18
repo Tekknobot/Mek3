@@ -4,3 +4,4 @@
 
 [node name="Hover_tile" type="Sprite2D"]
 texture = ExtResource("1_sniij")
+offset = Vector2(2.08165e-12, 2.08165e-12)
