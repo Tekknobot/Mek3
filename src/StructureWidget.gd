@@ -66,7 +66,7 @@ func _process(delta):
 		var coins_local_pos = get_node("../TileMap").local_to_map(coins[i].position)
 		if mouse_local_pos == coins_local_pos:
 			get_child(2).texture = coin		
-			get_child(3).text = "+1HP"			
+			get_child(3).text = "MAX HP"			
 			self.show()	
 			
 	for i in mines.size():

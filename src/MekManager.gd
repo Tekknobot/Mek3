@@ -325,7 +325,7 @@ func check_health():
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
 		var coin_pos = get_node("../TileMap").local_to_map(coins[i].position)
 		if unit_center_pos == coin_pos:
-			self.unit_min == self.unit_max
+			self.unit_min += self.unit_max
 			coins[i].position.y = -500
 			var tween: Tween = create_tween()
 			tween.tween_property(self, "modulate:v", 1, 1).from(3.75)
