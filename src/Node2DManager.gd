@@ -72,7 +72,7 @@ func spawn_structures():
 		foundation_tile = 57
 						
 	# Randomize structures at start	
-	for i in 16: #buildings
+	for i in 9: #buildings
 		var my_random_tile_x = rng.randi_range(1, 14)
 		var my_random_tile_y = rng.randi_range(1, 14)
 		var tile_pos = Vector2i(my_random_tile_x, my_random_tile_y)

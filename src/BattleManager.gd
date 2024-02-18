@@ -2603,6 +2603,11 @@ func spawn_again():
 	
 	for i in get_node("../BattleManager").available_units.size():
 		get_node("../BattleManager").available_units[i].check_health()	
+
+	for k in get_node("../BattleManager").available_units.size():
+		get_node("../BattleManager").available_units[k].moved = false
+		get_node("../BattleManager").available_units[k].attacked = false
+		get_node("../TileMap").moves_counter = 0
 	
 	profile.show()	
 
