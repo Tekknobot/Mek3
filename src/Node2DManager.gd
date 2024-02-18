@@ -19,6 +19,7 @@ var moves = {N: Vector2i(0, -1),
 @export var structureCoord: Array[Vector2i]
 @export var mapbutton: Button
 @export var spawnbutton: Button
+@export var mapprogressbar: ProgressBar
 
 var map_pos = Vector2(0,0)
 var road_pos = Vector2(0,0)
@@ -269,7 +270,7 @@ func generate_moon():
 	
 	_on_map_pressed()
 			
-func generate_roads_and_tiles():
+func foundation_tiles():
 	var tile_random_id = rng.randi_range(3, 5)
 	# Tiles
 	for h in structures.size():
@@ -312,7 +313,7 @@ func generate_roads_and_tiles():
 	
 	await spawn_towers()			
 	
-func generate_roads_and_tiles_mars():
+func foundation_tiles_mars():
 	var tile_random_id = rng.randi_range(52, 54)
 	# Tiles
 	for h in structures.size():
@@ -355,7 +356,7 @@ func generate_roads_and_tiles_mars():
 
 	await spawn_towers()
 
-func generate_roads_and_tiles_moon():
+func foundation_tiles_moon():
 	var tile_random_id = rng.randi_range(58, 60)
 	# Tiles
 	for h in structures.size():
@@ -449,7 +450,8 @@ func generate_roads():
 							Map.set_cell(0, Vector2i(i,j), 43, Vector2i(0, 0), 0)
 							progresscount += 1			
 		
-		#print(progresscount)	
+	#print(progresscount)	
+	mapprogressbar.hide()
 		
 func check_duplicates(a):
 	var is_dupe = false
@@ -488,23 +490,15 @@ func _on_map_pressed():
 		
 	if world == true:
 		await spawn_structures()
-		await generate_roads_and_tiles()		
+		await foundation_tiles()		
 		generate_roads()
 	if mars == true:
 		await spawn_structures()
-		await generate_roads_and_tiles_mars()		
+		await foundation_tiles_mars()		
 		generate_roads()	
 	if moon == true:
 		await spawn_structures()
-		await generate_roads_and_tiles_moon()	
+		await foundation_tiles_moon()	
 		generate_roads()	
 	
 	hovertile.show()	
-
-	
-func get_random_numbers(from, to):
-	var arr = []
-	for i in range(from,to):
-		arr.append(i)
-	arr.shuffle()
-	return arr	

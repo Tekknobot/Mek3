@@ -160,10 +160,10 @@ func _input(event):
 			on_user_ai_started()		
 							
 func on_user_turn_started() -> void:
-	print("USER turn")
-	print('awaiting action')
+	#print("USER turn")
+	#print('awaiting action')
 	await get_node("../TileMap").unit_used_turn == true
-	print('USER acted')
+	#print('USER acted')
 	await get_tree().create_timer(0.1).timeout
 	get_node("../TurnManager").cpu_turn_started.emit()
 	
@@ -196,7 +196,7 @@ func on_cpu_turn_started() -> void:
 		for k in 16:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 	
-	print('CPU turn')	
+	#print('CPU turn')	
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 2:
@@ -827,7 +827,7 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -846,7 +846,7 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -865,7 +865,7 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -884,7 +884,7 @@ func on_cpu_turn_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')	
+										#print('CPU moved')	
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														
@@ -1161,7 +1161,7 @@ func on_user_ai_started() -> void:
 		for k in 16:
 			get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 	
-	print('USER turn')	
+	#print('USER turn')	
 	
 	for i in available_units.size():
 		if available_units[i].unit_team == 2:
@@ -1597,7 +1597,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1616,7 +1616,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1635,7 +1635,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1654,7 +1654,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')	
+										#print('CPU moved')	
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														
@@ -1791,7 +1791,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1810,7 +1810,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1829,7 +1829,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')
+										#print('CPU moved')
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()
@@ -1848,7 +1848,7 @@ func on_user_ai_started() -> void:
 										get_node("../BattleManager").USER_units[j].unit_min -= get_node("../BattleManager").CPU_units[n].unit_level - get_node("../BattleManager").USER_units[m].unit_defence
 										get_node("../BattleManager").USER_units[j].progressbar.set_value(get_node("../BattleManager").USER_units[j].unit_min)
 										#print("A")
-										print('CPU moved')	
+										#print('CPU moved')	
 										check_health_now()
 										await get_tree().create_timer(0.1).timeout
 										get_node("../BattleManager").check_health_now()														

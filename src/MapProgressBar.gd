@@ -10,6 +10,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	self.value = node2D.progresscount
-		
-	if self.value >= 1000:
-		self.hide()
