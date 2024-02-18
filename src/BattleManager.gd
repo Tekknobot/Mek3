@@ -2134,11 +2134,11 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 2
+			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
-			get_node("../BattleManager").available_units[i].xp_requirements = 3
+			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
 			
 		elif available_units[i].unit_team == 2:
 			# Team color
@@ -2146,11 +2146,11 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 2
+			var unit_min_max = 3
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
-			get_node("../BattleManager").available_units[i].xp_requirements = 3
+			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
 																		
 	arrays_set = true
 	
@@ -2267,7 +2267,7 @@ func spawn():
 			tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 			tween.connect("finished", on_tween_finished)
 			coin_inst.get_child(0).set_offset(Vector2(0,-32))
-			coin_inst.z_index = new_position_local.x + new_position_local.y
+			coin_inst.z_index = (new_position_local.x + new_position_local.y) + 1
 			get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 			await get_tree().create_timer(0.5).timeout
 
@@ -2545,7 +2545,7 @@ func spawn_again():
 		tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 		tween.connect("finished", on_tween_finished)
 		coin_inst.get_child(0).set_offset(Vector2(0,-32))
-		coin_inst.z_index = new_position_local.x + new_position_local.y
+		coin_inst.z_index = (new_position_local.x + new_position_local.y) + 1
 		get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 		await get_tree().create_timer(0.5).timeout
 
