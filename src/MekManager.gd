@@ -273,7 +273,7 @@ func _process(_delta):
 	mek_coord = get_node("../TileMap").local_to_map(self.position)
 		
 	# Z index layering
-	self.z_index = tile_pos.x + tile_pos.y
+	self.z_index = (tile_pos.x + tile_pos.y) + 1
 		
 	if self.xp >= self.xp_requirements:
 		self.xp_requirements += 1
@@ -316,14 +316,7 @@ func check_health():
 		var mine_pos = get_node("../TileMap").local_to_map(mines[i].position)
 		if unit_center_pos == mine_pos:
 			self.unit_min = 0		
-			mines[i].position.y = -500	
-			#var explosion = preload("res://prefab/vfx/explosion_area_2d.tscn")
-			#var explosion_instance = explosion.instantiate()
-			#var explosion_pos = get_node("../TileMap").map_to_local(unit_center_pos) + Vector2(0,0) / 2
-			#explosion_instance.set_name("explosion")
-			#get_parent().add_child(explosion_instance)
-			#explosion_instance.position = self.position	
-			#explosion_instance.z_index = (unit_center_pos.x + unit_center_pos.y) + 1000						
+			mines[i].position.y = -500							
 			break
 
 	#Coin collisions
@@ -332,7 +325,7 @@ func check_health():
 		var unit_center_pos = get_node("../TileMap").local_to_map(self.position)
 		var coin_pos = get_node("../TileMap").local_to_map(coins[i].position)
 		if unit_center_pos == coin_pos:
-			self.unit_min += 1
+			self.unit_min == self.unit_max
 			coins[i].position.y = -500
 			var tween: Tween = create_tween()
 			tween.tween_property(self, "modulate:v", 1, 1).from(3.75)

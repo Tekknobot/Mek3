@@ -2138,7 +2138,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
-			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
+			get_node("../BattleManager").available_units[i].xp_requirements = 3
 			
 		elif available_units[i].unit_team == 2:
 			# Team color
@@ -2150,7 +2150,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
-			get_node("../BattleManager").available_units[i].xp_requirements = unit_min_max
+			get_node("../BattleManager").available_units[i].xp_requirements = 3
 																		
 	arrays_set = true
 	
@@ -2218,7 +2218,7 @@ func spawn():
 
 		await get_tree().create_timer(0).timeout	
 		
-		# Find open tiles\
+		# Find open tiles
 		open_tiles.clear()	
 		for i in 16:
 			for j in 16:
@@ -2246,31 +2246,6 @@ func spawn():
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).scale = Vector2(1,1)
 				picker.get_child(unit_tag_dict[get_node("../BattleManager").available_units[i].unit_tag]).modulate = Color8(255, 255, 255)
 
-		## Drop coin		
-		## Find open tiles	
-		#open_tiles.clear()
-		#for i in 16:
-			#for j in 16:
-				#if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
-					#open_tiles.append(Vector2i(i,j))
-		#
-		#random.clear()	#<---------				
-		#random = get_random_numbers(0, open_tiles.size())
-		#for i in 5:
-			#var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
-			#var new_position_local = open_tiles[random[i]]
-			#var coin_inst = coin.instantiate()
-			#node2D.add_child(coin_inst)
-			#coin_inst.add_to_group("coins")
-			#coin_inst.position = Vector2(new_position.x, new_position.y-500)						
-			#var tween: Tween = create_tween()
-			#tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
-			#tween.connect("finished", on_tween_finished)
-			#coin_inst.get_child(0).set_offset(Vector2(0,-32))
-			#coin_inst.z_index = new_position_local.x + new_position_local.y
-			#get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
-			#await get_tree().create_timer(0.5).timeout
-
 		# Drop mine		
 		# Find open tiles	
 		open_tiles.clear()
@@ -2291,7 +2266,7 @@ func spawn():
 			var tween: Tween = create_tween()
 			tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 			tween.connect("finished", on_tween_finished)
-			mine_inst.z_index = (new_position_local.x + new_position_local.y) -1
+			mine_inst.z_index = new_position_local.x + new_position_local.y
 			get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 			await get_tree().create_timer(0.5).timeout
 				
@@ -2523,31 +2498,32 @@ func spawn_again():
 			var tween: Tween = create_tween()
 			tween.tween_property(get_node("../BattleManager").available_units[i], "modulate:v", 1, 0.50).from(5)	
 			await get_tree().create_timer(0.5).timeout	
+			pass
 
-	## Drop coin		
-	## Find open tiles	
-	#open_tiles.clear()	
-	#for i in 16:
-		#for j in 16:
-			#if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
-				#open_tiles.append(Vector2i(i,j))
-	#
-	#random.clear()	#<--------				
-	#random = get_random_numbers(0, open_tiles.size())
-	#for i in 5:
-		#var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
-		#var new_position_local = open_tiles[random[i]]
-		#var coin_inst = coin.instantiate()
-		#node2D.add_child(coin_inst)
-		#coin_inst.add_to_group("coins")
-		#coin_inst.position = Vector2(new_position.x, new_position.y-500)						
-		#var tween: Tween = create_tween()
-		#tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
-		#tween.connect("finished", on_tween_finished)
-		#coin_inst.get_child(0).set_offset(Vector2(0,-32))
-		#coin_inst.z_index = new_position_local.x + new_position_local.y
-		#get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
-		#await get_tree().create_timer(0.5).timeout
+	# Drop coin		
+	# Find open tiles	
+	open_tiles.clear()	
+	for i in 16:
+		for j in 16:
+			if get_node("../TileMap").astar_grid.is_point_solid(Vector2i(i,j)) == false:			
+				open_tiles.append(Vector2i(i,j))
+	
+	random.clear()	#<--------				
+	random = get_random_numbers(0, open_tiles.size())
+	for i in 5:
+		var new_position = get_node("../TileMap").map_to_local(open_tiles[random[i]]) + Vector2(0,0) / 2
+		var new_position_local = open_tiles[random[i]]
+		var coin_inst = coin.instantiate()
+		node2D.add_child(coin_inst)
+		coin_inst.add_to_group("coins")
+		coin_inst.position = Vector2(new_position.x, new_position.y-500)						
+		var tween: Tween = create_tween()
+		tween.tween_property(coin_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
+		tween.connect("finished", on_tween_finished)
+		coin_inst.get_child(0).set_offset(Vector2(0,-32))
+		coin_inst.z_index = new_position_local.x + new_position_local.y
+		get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
+		await get_tree().create_timer(0.5).timeout
 
 	# Drop mine		
 	# Find open tiles	
@@ -2569,7 +2545,7 @@ func spawn_again():
 		var tween: Tween = create_tween()
 		tween.tween_property(mine_inst, "position", new_position, 1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)	
 		tween.connect("finished", on_tween_finished)
-		mine_inst.z_index = (new_position_local.x + new_position_local.y) - 1
+		mine_inst.z_index = new_position_local.x + new_position_local.y
 		get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 		await get_tree().create_timer(0.5).timeout
 			
