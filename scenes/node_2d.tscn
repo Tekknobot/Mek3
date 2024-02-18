@@ -605,7 +605,7 @@ mapbutton = NodePath("FloatingMenu/VBoxContainer/MapButton")
 spawnbutton = NodePath("FloatingMenu/VBoxContainer/SpawnButton")
 mapprogressbar = NodePath("FloatingMenu/VBoxContainer/MapProgressBar")
 
-[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "spawnagain_button", "turn_button", "ai_button", "score", "picker")]
+[node name="BattleManager" type="Node2D" parent="." node_paths=PackedStringArray("node2D", "spawn_button", "spawnagain_button", "turn_button", "ai_button", "score", "picker", "profile")]
 script = ExtResource("201_3h84r")
 node2D = NodePath("..")
 spawn_button = NodePath("../FloatingMenu/VBoxContainer/SpawnButton")
@@ -614,6 +614,7 @@ turn_button = NodePath("../FloatingMenu/VBoxContainer/TurnButton")
 ai_button = NodePath("../FloatingMenu/VBoxContainer/AIButton")
 score = NodePath("../FloatingMenu/VBoxContainer/Score")
 picker = NodePath("../Picker/HBoxContainer")
+profile = NodePath("../Profile")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
@@ -852,9 +853,9 @@ script = ExtResource("62_85rtn")
 [node name="Picker" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -204.0
+offset_left = -311.0
 offset_top = 548.0
-offset_right = -164.0
+offset_right = -271.0
 offset_bottom = 588.0
 
 [node name="Portraits" type="HBoxContainer" parent="Picker"]
@@ -970,11 +971,12 @@ offset_bottom = 69.0
 texture = ExtResource("76_kvwp8")
 
 [node name="Profile" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
-offset_left = -398.0
+offset_left = -540.0
 offset_top = 450.0
-offset_right = -358.0
+offset_right = -500.0
 offset_bottom = 490.0
 scale = Vector2(2, 2)
 
@@ -1018,6 +1020,7 @@ offset_bottom = 111.111
 scale = Vector2(0.5, 0.5)
 
 [node name="MOV" type="RichTextLabel" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -84.0
 offset_right = -44.0
@@ -1027,6 +1030,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 12
 
 [node name="DEF" type="RichTextLabel" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -62.2222
 offset_right = -22.2222
@@ -1036,6 +1040,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 12
 
 [node name="LEV" type="RichTextLabel" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -38.6667
 offset_top = 0.444443
@@ -1046,6 +1051,7 @@ theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 12
 
 [node name="Move Up" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -89.7778
 offset_top = 13.7778
@@ -1054,6 +1060,7 @@ offset_bottom = 44.7778
 text = "+"
 
 [node name="Move Down" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -89.7778
 offset_top = 48.4444
@@ -1063,6 +1070,7 @@ text = "-
 "
 
 [node name="Def Up" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -66.2222
 offset_top = 13.7778
@@ -1071,6 +1079,7 @@ offset_bottom = 44.7778
 text = "+"
 
 [node name="Def Down" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -66.2222
 offset_top = 48.4444
@@ -1080,6 +1089,7 @@ text = "-
 "
 
 [node name="Level Up" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -43.5555
 offset_top = 13.7778
@@ -1088,6 +1098,7 @@ offset_bottom = 44.7778
 text = "+"
 
 [node name="Level Down" type="Button" parent="Profile"]
+visible = false
 layout_mode = 0
 offset_left = -43.5555
 offset_top = 48.4444
@@ -1098,8 +1109,8 @@ text = "-
 
 [node name="HP" type="RichTextLabel" parent="Profile"]
 layout_mode = 0
-offset_left = 64.4444
-offset_right = 104.444
+offset_left = 64.0
+offset_right = 122.0
 offset_bottom = 40.0
 theme_override_fonts/normal_font = ExtResource("73_kib7c")
 theme_override_font_sizes/normal_font_size = 8

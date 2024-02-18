@@ -188,18 +188,18 @@ func _process(_delta):
 		if self.unit_team == 2:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 110, 255) #mek portrait
-			get_node("../Profile").get_child(4).text = str(self.unit_movement)
-			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)
+			#get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			#get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			#get_node("../Profile").get_child(6).text = str(self.unit_level)
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value) + " HP"
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 		else:
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait			 
-			get_node("../Profile").get_child(4).text = str(self.unit_movement)
-			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)
+			#get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			#get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			#get_node("../Profile").get_child(6).text = str(self.unit_level)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value) + " HP"
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)		
 			
 	if tile_pos == mouse_local_pos and self.unit_team == 1:
@@ -215,10 +215,10 @@ func _process(_delta):
 			get_node("../Profile").get_child(2).text = unit_name
 			get_node("../Profile").get_child(3).texture = self.mek_portrait		
 			get_node("../Profile").get_child(3).modulate = Color8(255, 255, 255) #mek portrait		
-			get_node("../Profile").get_child(4).text = str(self.unit_movement)
-			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)	
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)			
+			#get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			#get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			#get_node("../Profile").get_child(6).text = str(self.unit_level)	
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value) + " HP"	
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 			get_node("../Profile").get_child(16).text = str(self.tile_id)
 			
@@ -249,10 +249,10 @@ func _process(_delta):
 			get_node("../TileMap").get_child(1).play()	
 			get_node("../Profile").get_child(1).texture = self.unit_portrait
 			get_node("../Profile").get_child(2).text = unit_name
-			get_node("../Profile").get_child(4).text = str(self.unit_movement)
-			get_node("../Profile").get_child(5).text = str(self.unit_defence)
-			get_node("../Profile").get_child(6).text = str(self.unit_level)		
-			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value)	
+			#get_node("../Profile").get_child(4).text = str(self.unit_movement)
+			#get_node("../Profile").get_child(5).text = str(self.unit_defence)
+			#get_node("../Profile").get_child(6).text = str(self.unit_level)		
+			get_node("../Profile").get_child(13).text = str(self.unit_min) + "/" + str(self.progressbar.max_value) + " HP"	
 			get_node("../Profile").get_child(14).text = "Level " + str(self.unit_level)
 			get_node("../Profile").get_child(16).text = str(self.tile_id)
 			
@@ -289,7 +289,9 @@ func _process(_delta):
 		self.unit_attack += 1
 		self.unit_defence += 1	
 		self.progressbar.max_value += 1
-		self.unit_min = self.progressbar.max_value	
+		
+		if self.unit_team == 2:
+			self.unit_min = self.progressbar.max_value	
 		
 		self.progressbar.set_value(self.unit_min)
 		self.unit_max = self.progressbar.max_value			

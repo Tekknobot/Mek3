@@ -32,6 +32,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y += 16
 	var mouse_local_pos = get_node("../TileMap").local_to_map(mouse_pos)	
 	
 	var tile_id = get_node("../TileMap").get_cell_source_id(0, mouse_local_pos) 

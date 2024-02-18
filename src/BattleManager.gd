@@ -25,6 +25,7 @@ var arrays_set = false
 @export var ai_button: Button
 @export var score: Button
 @export var picker: HBoxContainer
+@export var profile: Control
 
 
 var M1 = preload("res://scenes/mek/M1.scn")
@@ -578,6 +579,9 @@ func on_cpu_turn_started() -> void:
 
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
+						for i in get_node("../BattleManager").available_units.size():
+							get_node("../BattleManager").available_units[i].check_health()	
+
 						# Attacks
 						for j in USER_units.size():
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
@@ -771,6 +775,9 @@ func on_cpu_turn_started() -> void:
 								get_node("../TileMap").set_cell(1, Vector2i(j,k), -1, Vector2i(0, 0), 0)		
 
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
+
+						for i in get_node("../BattleManager").available_units.size():
+							get_node("../BattleManager").available_units[i].check_health()	
 
 						# Attacks
 						for j in USER_units.size():
@@ -1542,6 +1549,9 @@ func on_user_ai_started() -> void:
 
 						get_node("../BattleManager").CPU_units[n].get_child(0).play("default")	
 
+						for i in get_node("../BattleManager").available_units.size():
+							get_node("../BattleManager").available_units[i].check_health()	
+
 						# Attacks
 						for j in USER_units.size():
 							var user_target_pos = get_node("../TileMap").local_to_map(get_node("../BattleManager").USER_units[j].position)
@@ -2097,6 +2107,8 @@ func on_user_ai_started() -> void:
 		return
 	else:
 		on_cpu_turn_started()
+		
+	profile.show()		
 			
 func on_turn_over() -> void:	
 	get_node("../TurnManager").advance_turn()	
@@ -2134,7 +2146,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 3
+			var unit_min_max = 2
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
@@ -2146,7 +2158,7 @@ func team_arrays():
 			get_node("../BattleManager").available_units[i].unit_level = 1
 			get_node("../BattleManager").available_units[i].unit_movement = 5
 			get_node("../BattleManager").available_units[i].unit_defence = 0
-			var unit_min_max = 3
+			var unit_min_max = 2
 			get_node("../BattleManager").available_units[i].unit_min = unit_min_max
 			get_node("../BattleManager").available_units[i].unit_max = unit_min_max
 			get_node("../BattleManager").available_units[i].progressbar.max_value = unit_min_max
@@ -2205,6 +2217,7 @@ func check_health_now():
 		available_units[z].check_health()		
 
 func spawn():
+	profile.hide()	
 	if teampick_count == 5:		
 		spawning = true
 		spawn_button.hide()
@@ -2294,6 +2307,9 @@ func spawn():
 			mine_inst.z_index = new_position_local.x + new_position_local.y
 			get_node("../TileMap").astar_grid.set_point_solid(new_position, true)
 			await get_tree().create_timer(0.5).timeout
+
+		for i in get_node("../BattleManager").available_units.size():
+			get_node("../BattleManager").available_units[i].check_health()
 				
 		spawning = false
 		meks_set = true
@@ -2347,8 +2363,8 @@ func get_random_numbers(from, to):
 	return arr
 
 func ai_mode(toggled_on):
-	#on_cpu_turn_started()
-	on_user_ai_started()
+	on_cpu_turn_started()
+	#on_user_ai_started()
 	turn_button.hide()
 	ai_button.hide()
 	ai_mode_bool = true
@@ -2488,6 +2504,7 @@ func S3_picked(toggled_on):
 		teampick_count -= 1
 
 func spawn_again():
+	profile.hide()	
 	spawning = true
 	for i in inactive_total_cpu.size():
 		get_node("../BattleManager").inactive_total_cpu[i].get_child(0).modulate = Color8(255, 110, 255)
@@ -2584,5 +2601,8 @@ func spawn_again():
 	round += 1
 	get_node("../Profile").get_child(15).text = "Round " + str(round)
 	
-
+	for i in get_node("../BattleManager").available_units.size():
+		get_node("../BattleManager").available_units[i].check_health()	
+	
+	profile.show()	
 
